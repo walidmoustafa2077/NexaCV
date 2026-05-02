@@ -1,0 +1,282 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ─── Fonts ─────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-manrope);
+  /* Named font-family utilities to match HTML mockup class names */
+  --font-h1: var(--font-manrope), ui-sans-serif, sans-serif;
+  --font-h2: var(--font-manrope), ui-sans-serif, sans-serif;
+  --font-body-base: var(--font-inter), ui-sans-serif, sans-serif;
+  --font-body-sm: var(--font-inter), ui-sans-serif, sans-serif;
+  --font-label-caps: var(--font-inter), ui-sans-serif, sans-serif;
+  --font-input-text: var(--font-inter), ui-sans-serif, sans-serif;
+
+  /* ─── Typography scale (from HTML mockups) ───────────────────── */
+  --text-h1: 30px;
+  --text-h1--line-height: 36px;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
+  --text-h2: 24px;
+  --text-h2--line-height: 32px;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 600;
+  --text-body-base: 16px;
+  --text-body-base--line-height: 24px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 16px;
+  --text-label-caps--letter-spacing: 0.05em;
+  --text-label-caps--font-weight: 600;
+  --text-input-text: 15px;
+  --text-input-text--line-height: 24px;
+
+  /* ─── Shadcn semantic tokens → Tailwind utilities ────────────── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ─── Radius scale ───────────────────────────────────────────── */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  /* ─── NexaCV MD3 color system (all tokens from UI mockups) ───── */
+  --color-surface: var(--md-surface);
+  --color-surface-bright: var(--md-surface-bright);
+  --color-surface-dim: var(--md-surface-dim);
+  --color-surface-tint: var(--md-surface-tint);
+  --color-surface-variant: var(--md-surface-variant);
+  --color-on-surface: var(--md-on-surface);
+  --color-on-surface-variant: var(--md-on-surface-variant);
+  --color-surface-container-lowest: var(--md-surface-container-lowest);
+  --color-surface-container-low: var(--md-surface-container-low);
+  --color-surface-container: var(--md-surface-container);
+  --color-surface-container-high: var(--md-surface-container-high);
+  --color-surface-container-highest: var(--md-surface-container-highest);
+  --color-on-primary: var(--md-on-primary);
+  --color-primary-container: var(--md-primary-container);
+  --color-on-primary-container: var(--md-on-primary-container);
+  --color-primary-fixed: var(--md-primary-fixed);
+  --color-primary-fixed-dim: var(--md-primary-fixed-dim);
+  --color-on-primary-fixed: var(--md-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--md-on-primary-fixed-variant);
+  --color-on-secondary: var(--md-on-secondary);
+  --color-secondary-container: var(--md-secondary-container);
+  --color-on-secondary-container: var(--md-on-secondary-container);
+  --color-secondary-fixed: var(--md-secondary-fixed);
+  --color-secondary-fixed-dim: var(--md-secondary-fixed-dim);
+  --color-on-secondary-fixed: var(--md-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--md-on-secondary-fixed-variant);
+  --color-tertiary: var(--md-tertiary);
+  --color-on-tertiary: var(--md-on-tertiary);
+  --color-tertiary-container: var(--md-tertiary-container);
+  --color-on-tertiary-container: var(--md-on-tertiary-container);
+  --color-tertiary-fixed: var(--md-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--md-tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--md-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--md-on-tertiary-fixed-variant);
+  --color-error: var(--md-error);
+  --color-on-error: var(--md-on-error);
+  --color-error-container: var(--md-error-container);
+  --color-on-error-container: var(--md-on-error-container);
+  --color-outline: var(--md-outline);
+  --color-outline-variant: var(--md-outline-variant);
+  --color-inverse-surface: var(--md-inverse-surface);
+  --color-inverse-on-surface: var(--md-inverse-on-surface);
+  --color-inverse-primary: var(--md-inverse-primary);
+}
+
+:root {
+  /* ── Shadcn semantic tokens (NexaCV light theme) ────────────── */
+  --background: #f9f9ff;
+  --foreground: #1a1b20;
+  --card: #ffffff;
+  --card-foreground: #1a1b20;
+  --popover: #ffffff;
+  --popover-foreground: #1a1b20;
+  --primary: #3a59a1;
+  --primary-foreground: #ffffff;
+  --secondary: #545e7c;
+  --secondary-foreground: #ffffff;
+  --muted: #ededf4;
+  --muted-foreground: #444651;
+  --accent: #cfd9fd;
+  --accent-foreground: #545e7d;
+  --destructive: #ba1a1a;
+  --border: #c4c6d2;
+  --input: #c4c6d2;
+  --ring: #3a59a1;
+  --radius: 0.5rem;
+  --sidebar: #f3f3fa;
+  --sidebar-foreground: #1a1b20;
+  --sidebar-primary: #3a59a1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ededf4;
+  --sidebar-accent-foreground: #1a1b20;
+  --sidebar-border: #c4c6d2;
+  --sidebar-ring: #3a59a1;
+
+  /* ── NexaCV MD3 color system ────────────────────────────────── */
+  --md-surface: #f9f9ff;
+  --md-surface-bright: #f9f9ff;
+  --md-surface-dim: #d9d9e0;
+  --md-surface-tint: #3d5ca4;
+  --md-surface-variant: #e2e2e9;
+  --md-on-surface: #1a1b20;
+  --md-on-surface-variant: #444651;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #f3f3fa;
+  --md-surface-container: #ededf4;
+  --md-surface-container-high: #e8e7ee;
+  --md-surface-container-highest: #e2e2e9;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #5472bc;
+  --md-on-primary-container: #fefcff;
+  --md-primary-fixed: #dae2ff;
+  --md-primary-fixed-dim: #b1c5ff;
+  --md-on-primary-fixed: #001947;
+  --md-on-primary-fixed-variant: #22438a;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #cfd9fd;
+  --md-on-secondary-container: #545e7d;
+  --md-secondary-fixed: #dae2ff;
+  --md-secondary-fixed-dim: #bcc6e9;
+  --md-on-secondary-fixed: #101a36;
+  --md-on-secondary-fixed-variant: #3c4663;
+  --md-tertiary: #864f02;
+  --md-on-tertiary: #ffffff;
+  --md-tertiary-container: #a4671e;
+  --md-on-tertiary-container: #fffbff;
+  --md-tertiary-fixed: #ffdcbd;
+  --md-tertiary-fixed-dim: #ffb86e;
+  --md-on-tertiary-fixed: #2c1600;
+  --md-on-tertiary-fixed-variant: #693c00;
+  --md-error: #ba1a1a;
+  --md-on-error: #ffffff;
+  --md-error-container: #ffdad6;
+  --md-on-error-container: #93000a;
+  --md-outline: #747782;
+  --md-outline-variant: #c4c6d2;
+  --md-inverse-surface: #2f3035;
+  --md-inverse-on-surface: #f0f0f7;
+  --md-inverse-primary: #b1c5ff;
+}
+
+.dark {
+  /* ── Shadcn semantic tokens (NexaCV dark theme) ─────────────── */
+  --background: #1a1b20;
+  --foreground: #f0f0f7;
+  --card: #2f3035;
+  --card-foreground: #f0f0f7;
+  --popover: #2f3035;
+  --popover-foreground: #f0f0f7;
+  --primary: #b1c5ff;
+  --primary-foreground: #001947;
+  --secondary: #444651;
+  --secondary-foreground: #e2e2e9;
+  --muted: #2f3035;
+  --muted-foreground: #c4c6d2;
+  --accent: #3c4663;
+  --accent-foreground: #cfd9fd;
+  --destructive: #ff897d;
+  --border: #444651;
+  --input: #444651;
+  --ring: #b1c5ff;
+  --sidebar: #2f3035;
+  --sidebar-foreground: #f0f0f7;
+  --sidebar-primary: #b1c5ff;
+  --sidebar-primary-foreground: #001947;
+  --sidebar-accent: #3c4663;
+  --sidebar-accent-foreground: #f0f0f7;
+  --sidebar-border: #444651;
+  --sidebar-ring: #b1c5ff;
+
+  /* ── NexaCV MD3 dark color system ───────────────────────────── */
+  --md-surface: #1a1b20;
+  --md-surface-bright: #36373c;
+  --md-surface-dim: #1a1b20;
+  --md-surface-tint: #b1c5ff;
+  --md-surface-variant: #444651;
+  --md-on-surface: #e2e2e9;
+  --md-on-surface-variant: #c4c6d2;
+  --md-surface-container-lowest: #0f1015;
+  --md-surface-container-low: #22232a;
+  --md-surface-container: #262830;
+  --md-surface-container-high: #313239;
+  --md-surface-container-highest: #3c3d44;
+  --md-on-primary: #001947;
+  --md-primary-container: #22438a;
+  --md-on-primary-container: #dae2ff;
+  --md-primary-fixed: #dae2ff;
+  --md-primary-fixed-dim: #b1c5ff;
+  --md-on-primary-fixed: #001947;
+  --md-on-primary-fixed-variant: #22438a;
+  --md-on-secondary: #1f2a46;
+  --md-secondary-container: #3c4663;
+  --md-on-secondary-container: #dae2ff;
+  --md-secondary-fixed: #dae2ff;
+  --md-secondary-fixed-dim: #bcc6e9;
+  --md-on-secondary-fixed: #101a36;
+  --md-on-secondary-fixed-variant: #3c4663;
+  --md-tertiary: #ffb86e;
+  --md-on-tertiary: #472900;
+  --md-tertiary-container: #6b3c00;
+  --md-on-tertiary-container: #ffdcbd;
+  --md-tertiary-fixed: #ffdcbd;
+  --md-tertiary-fixed-dim: #ffb86e;
+  --md-on-tertiary-fixed: #2c1600;
+  --md-on-tertiary-fixed-variant: #693c00;
+  --md-error: #ffb4ab;
+  --md-on-error: #690005;
+  --md-error-container: #93000a;
+  --md-on-error-container: #ffdad6;
+  --md-outline: #8e9099;
+  --md-outline-variant: #444651;
+  --md-inverse-surface: #e2e2e9;
+  --md-inverse-on-surface: #2f3035;
+  --md-inverse-primary: #3a59a1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
