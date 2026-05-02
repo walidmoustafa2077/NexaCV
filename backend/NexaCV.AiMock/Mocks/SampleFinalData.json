@@ -1,0 +1,92 @@
+{
+    "_comment": "The finalDataJson value stored in Resume.FinalData after AI generation. Same { settings, content } structure as rawData but with summary and experience descriptions professionally rewritten. This is NOT the HTTP response envelope — see SampleGenerateResponse.json for that.",
+    "settings": {
+        "summaryType": "Summary",
+        "descriptionFormat": "Bulleted"
+    },
+    "content": {
+        "personal": {
+            "firstName": "John",
+            "middleName": "Alexander",
+            "lastName": "Doe",
+            "email": "john.doe@example.com",
+            "phone": "+201012345678",
+            "location": "Cairo, Egypt",
+            "zipCode": "11511",
+            "dateOfBirth": "1995-05-15",
+            "linkedinUrl": "linkedin.com/in/johndoe"
+        },
+        "summary": "AI-Polished: Results-driven Senior Software Engineer with 5+ years of expertise delivering high-availability backend systems and microservices. Proven ability to lead engineering teams, architect scalable .NET solutions, and drive measurable performance improvements in cloud-native environments.",
+        "experience": [
+            {
+                "id": "exp_001",
+                "title": "Senior Software Engineer",
+                "company": "TechFlow Systems",
+                "startDate": "2021-03",
+                "endDate": "2023-10",
+                "description": "AI-Polished: Spearheaded the migration of a monolithic REST API portfolio to ASP.NET Core microservices, improving system uptime from 98.2% to 99.9% and cutting average response latency by 40%. Mentored a team of four engineers and established code-review standards that reduced post-release defects by 30%."
+            },
+            {
+                "id": "exp_002",
+                "title": "Software Developer",
+                "company": "Nexus Digital",
+                "startDate": "2019-07",
+                "endDate": "2021-02",
+                "description": "AI-Polished: Designed and shipped 12 RESTful API endpoints consumed by 3 client applications, optimised critical SQL queries to reduce dashboard load time by 25%, and contributed to bi-weekly code reviews that improved overall codebase coverage to 85%."
+            }
+        ],
+        "education": [
+            {
+                "id": "edu_001",
+                "institution": "Cairo University",
+                "degree": "B.Sc. in Computer Science",
+                "fieldOfStudy": "Computer Science",
+                "grade": "3.7 / 4.0",
+                "startDate": "2015-09",
+                "endDate": "2019-06"
+            }
+        ],
+        "courses": [
+            {
+                "id": "crs_001",
+                "name": "Cloud Computing Architecture",
+                "provider": "Coursera",
+                "date": "2023-01"
+            },
+            {
+                "id": "crs_002",
+                "name": "Advanced React Patterns",
+                "provider": "Frontend Masters",
+                "date": "2022-08"
+            }
+        ],
+        "skills": [
+            "C#",
+            ".NET 9",
+            "ASP.NET Core",
+            "React",
+            "SQL Server",
+            "Azure",
+            "Docker"
+        ]
+    }
+}
+                "institution": "Cairo University",
+"startDate": "2018-09",
+"endDate": "2022-06"
+}
+],
+"skills": [
+{
+"id": "sk_1",
+"name": "C#",
+"level": "Intermediate"
+},
+{
+"id": "sk_2",
+"name": "ASP.NET Core",
+"level": "Intermediate"
+}
+]
+}
+}

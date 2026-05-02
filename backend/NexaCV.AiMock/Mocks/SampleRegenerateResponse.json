@@ -1,0 +1,23 @@
+{
+    "_comment": [
+        "HTTP response envelopes from POST /api/ai/regenerate for each scenario.",
+        "UpdatedContent is a raw string — RegenerationService patches it into content[sectionIdentifier]",
+        "via: content[req.SectionIdentifier] = JsonValue.Create(result.UpdatedContent)",
+        "So for simple string sections (summary) it replaces the string value directly.",
+        "For complex sections (experience, skills) it replaces the whole node with a string."
+    ],
+    "SCENARIO_1_summary_response": {
+        "updatedContent": "AI-Polished [summary]: Cloud-focused Senior Software Engineer with 5+ years architecting high-availability .NET microservices on Azure. Delivered systems at 99.9% uptime, cut latency by 40%, and led teams of up to 6 engineers — results over résumé fluff.",
+        "aiAvailable": true
+    },
+    "SCENARIO_2_experience_response": {
+        "updatedContent": "AI-Polished [experience]: Rewrite all experience descriptions with stronger action verbs and quantified outcomes.",
+        "aiAvailable": true,
+        "_note": "In the current mock implementation UpdatedContent is a plain string. RegenerationService stores it verbatim into content['experience'], replacing the array with a string. A real AI would return a JSON array string here."
+    },
+    "SCENARIO_3_skills_response": {
+        "updatedContent": "AI-Polished [skills]: Reorder by relevance for a backend .NET role. Group related technologies.",
+        "aiAvailable": true,
+        "_note": "After patching, content['skills'] becomes a string instead of an array. Frontend must handle both shapes, or the regenerate endpoint must be extended to handle structured sections."
+    }
+}
