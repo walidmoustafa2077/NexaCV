@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d9d9e0",
+                    "secondary": "#545e7c",
+                    "on-secondary-container": "#545e7d",
+                    "surface-variant": "#e2e2e9",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1a1b20",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#864f02",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#ededf4",
+                    "outline-variant": "#c4c6d2",
+                    "secondary-container": "#cfd9fd",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2f3035",
+                    "on-primary-container": "#fefcff",
+                    "on-secondary-fixed": "#101a36",
+                    "inverse-on-surface": "#f0f0f7",
+                    "background": "#f9f9ff",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#5472bc",
+                    "on-surface-variant": "#444651",
+                    "on-tertiary-fixed": "#2c1600",
+                    "outline": "#747782",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "primary": "#3a59a1",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "inverse-primary": "#b1c5ff",
+                    "surface-tint": "#3d5ca4",
+                    "on-primary-fixed-variant": "#22438a",
+                    "on-background": "#1a1b20",
+                    "tertiary-container": "#a4671e",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container-high": "#e8e7ee",
+                    "on-primary-fixed": "#001947",
+                    "surface-container-low": "#f3f3fa",
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "secondary-fixed": "#dae2ff",
+                    "primary-fixed": "#dae2ff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "surface-container-highest": "#e2e2e9",
+                    "tertiary-fixed-dim": "#ffb86e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "input-padding-x": "12px",
+                    "base-unit": "4px",
+                    "input-padding-y": "10px",
+                    "section-margin": "48px",
+                    "form-gap": "24px",
+                    "container-max-width": "768px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "input-text": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "h1": ["Manrope"],
+                    "h2": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md dark:bg-slate-950/80 border-b border-slate-200/60 dark:border-slate-800/60">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<span class="text-xl font-black text-indigo-600 dark:text-indigo-400 tracking-tighter">StructureFlow</span>
+<div class="hidden md:flex items-center gap-8 font-['Manrope'] text-sm font-medium tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors" href="#">Features</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors" href="#">Pricing</a>
+<a class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-1" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 font-['Manrope'] text-sm font-medium hover:text-primary transition-all">Sign In</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-['Manrope'] text-sm font-semibold hover:bg-primary-container transition-all active:scale-95">Start Building</button>
+</div>
+</div>
+</nav>
+<main class="mt-24">
+<!-- Hero / Mission Section -->
+<section class="max-w-[768px] mx-auto px-6 mb-[48px]">
+<div class="py-16 text-center space-y-6">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest bg-secondary-container/30 px-3 py-1 rounded-full">Our Purpose</span>
+<h1 class="font-h1 text-h1 text-on-surface lg:text-5xl lg:leading-tight">
+                    Our mission is to help professionals present their best selves through structured, high-quality design.
+                </h1>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-xl mx-auto">
+                    We believe your focus should be on your achievements, not on fighting with a design canvas. StructureFlow handles the precision, you handle the progress.
+                </p>
+</div>
+<div class="h-64 md:h-96 w-full rounded-xl overflow-hidden shadow-sm">
+<img alt="Clean modern office space" class="w-full h-full object-cover" data-alt="Modern minimalist bright office interior with light wood furniture, clean white walls, and professional atmosphere with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsENKbmAYswllT2chpk-sj8ekCZKxkRIubZiAOUMtwwK8uV_NcOUH5UvxrjNjLMWMzaJFonE6GAF9UjSvh2LbMVwndfeEGUBVpdmm1uYQJaRLGjOZ7KtYB3yvFJkL0EOL4v1KN2wOJkGH3TFnDRQ68a6JxjjmyEKeTzyDJI8WnNt5BHIgfX16Aibhb02hJFkOarw0p-eoBC4PSIxyRoVYgMDdxoTGCjAaB5FSXv5Pe2Z4nUHdGfjvnEXfGWEPmfLCp6hjG-QDDLAmo"/>
+</div>
+</section>
+<!-- The Problem Section (Asymmetric Layout) -->
+<section class="bg-surface-container-low py-20 mb-[48px]">
+<div class="max-w-[768px] mx-auto px-6">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div>
+<span class="font-label-caps text-label-caps text-error mb-4 block">The Fatigue</span>
+<h2 class="font-h2 text-h2 text-on-surface mb-6">Why 'Canvas' editors fail high-integrity professionals.</h2>
+<div class="space-y-4 font-body-base text-body-base text-on-surface-variant">
+<p>Most editors force you to act as a graphic designer. Dragging boxes, aligning margins, and choosing fonts leads to visual fatigue and "analysis paralysis."</p>
+<ul class="space-y-3">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-lg" data-icon="close">close</span>
+<span>Messy, inconsistent layouts that lack professional polish.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-lg" data-icon="close">close</span>
+<span>Wasted hours on minute pixel adjustments.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-lg" data-icon="close">close</span>
+<span>Loss of focus on the content that actually matters.</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="bg-surface-container-highest p-8 rounded-xl border border-outline-variant/30">
+<div class="flex flex-col gap-4">
+<div class="h-4 w-3/4 bg-error-container/40 rounded"></div>
+<div class="h-4 w-full bg-error-container/40 rounded"></div>
+<div class="h-4 w-5/6 bg-error-container/40 rounded"></div>
+<div class="flex gap-4 mt-4">
+<div class="w-12 h-12 bg-error/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="error_med">error_med</span>
+</div>
+<div class="flex-1 space-y-2">
+<div class="h-3 w-1/2 bg-on-surface-variant/20 rounded"></div>
+<div class="h-3 w-full bg-on-surface-variant/20 rounded"></div>
+</div>
+</div>
+</div>
+<p class="mt-8 text-center font-label-caps text-[10px] text-on-surface-variant uppercase">Visual chaos simulation</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Solution Section (Bento Inspired) -->
+<section class="max-w-[768px] mx-auto px-6 mb-[48px]">
+<div class="text-center mb-12">
+<span class="font-label-caps text-label-caps text-primary mb-4 block">The Evolution</span>
+<h2 class="font-h2 text-h2 text-on-surface">The 'Form-Only' Philosophy.</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<!-- Large Feature -->
+<div class="md:col-span-2 bg-surface-container p-8 rounded-xl border border-outline-variant/20 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="edit_note">edit_note</span>
+<h3 class="font-h2 text-[20px] text-on-surface mb-2">Structured Input</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Instead of a blank canvas, we provide intentional fields. You provide the raw data; our engine provides the expert design logic.</p>
+</div>
+<div class="mt-8 flex gap-2">
+<div class="h-2 w-12 bg-primary rounded-full"></div>
+<div class="h-2 w-12 bg-outline-variant rounded-full"></div>
+<div class="h-2 w-12 bg-outline-variant rounded-full"></div>
+</div>
+</div>
+<!-- Small Feature -->
+<div class="bg-primary text-on-primary p-8 rounded-xl flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-4xl mb-4" data-icon="bolt" data-weight="fill">bolt</span>
+<h3 class="font-h2 text-[18px] mb-2">Instant Flow</h3>
+<p class="text-xs opacity-90">Auto-layout updates as you type. Real-time professional rendering.</p>
+</div>
+<!-- Small Feature -->
+<div class="bg-secondary-container text-on-secondary-container p-8 rounded-xl border border-outline-variant/20">
+<span class="material-symbols-outlined text-2xl mb-2" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-h2 text-[18px] mb-2">Precision</h3>
+<p class="text-xs">Grid-perfect alignment in every export.</p>
+</div>
+<!-- Medium Feature -->
+<div class="md:col-span-2 bg-surface-container-high p-8 rounded-xl border border-outline-variant/20 flex items-center gap-6">
+<div class="flex-1">
+<h3 class="font-h2 text-[18px] text-on-surface mb-2">Typography First</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Curated pairings that ensure readability across all mediums.</p>
+</div>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant opacity-30" data-icon="text_fields">text_fields</span>
+</div>
+</div>
+</section>
+<!-- Team/Story Section -->
+<section class="max-w-[768px] mx-auto px-6 mb-[48px] py-12">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="w-full md:w-1/3">
+<div class="relative">
+<div class="absolute inset-0 bg-primary/10 rounded-xl translate-x-4 translate-y-4"></div>
+<img alt="Design team working" class="relative z-10 w-full rounded-xl shadow-lg aspect-square object-cover" data-alt="A diverse group of designers and engineers collaborating around a large wooden table in a bright modern studio with sketches on the wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg0IXRcl4KYhSJjG78cvXOKO6pQBU2airY27VV8fNdQV2yUuwJh5Z7LfDLlYHHU8uI_RhOP7zWK4rxHxHxwKxA6-DgLK95lcJVgfwhl5fiQhuKa7Q8q9Y2MF01pnvJVugtrcqRBYd4uQ3rZsBNxaHM4iMJQe7uUbMN8UVKf9bmC1k_GMxXZB7PdOSaLEU3gsvuAHVt_7tEmSs3EerPUYJv6QZ8fhjawX_DvxNThbpSdc3h_oGc06tGyiBwYQbqMHFEoap8pNzsOnlw"/>
+</div>
+</div>
+<div class="flex-1 space-y-6">
+<h2 class="font-h2 text-h2 text-on-surface">Design-First Approach.</h2>
+<p class="font-body-base text-body-base text-on-surface-variant">
+                        StructureFlow was born from a simple realization: the best tools don't give you infinite choices; they give you the *right* choices. Our team of product designers and developers obsessed over the spacing, the scales, and the constraints so you don't have to.
+                    </p>
+<p class="font-body-base text-body-base text-on-surface-variant">
+                        Based in the tech-hubs where precision matters most, we're dedicated to evolving how professional documentation is built—one field at a time.
+                    </p>
+<div class="pt-4">
+<button class="flex items-center gap-2 text-primary font-semibold hover:gap-4 transition-all">
+                            Meet the founders
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-[768px] mx-auto px-6 mb-24">
+<div class="bg-inverse-surface text-inverse-on-surface p-12 rounded-2xl text-center space-y-6">
+<h2 class="font-h2 text-h2">Ready for a better workflow?</h2>
+<p class="opacity-80 max-w-sm mx-auto">Join 10,000+ professionals building high-integrity documents with StructureFlow.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-bold">Start Building</button>
+<button class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-lg font-bold border border-white/20">View Pricing</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="col-span-1 lg:col-span-1">
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100 block mb-4">StructureFlow</span>
+<p class="font-['Manrope'] text-xs uppercase tracking-widest font-semibold text-slate-500 dark:text-slate-500">
+                    © 2024 StructureFlow AI. Precision-engineered resume builder.
+                </p>
+</div>
+<div class="space-y-4">
+<h4 class="font-['Manrope'] text-xs uppercase tracking-widest font-bold text-slate-900 dark:text-slate-100">Product</h4>
+<ul class="space-y-2 font-['Manrope'] text-xs uppercase tracking-widest font-semibold">
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:underline transition-all" href="#">Features</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:underline transition-all" href="#">Pricing</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-['Manrope'] text-xs uppercase tracking-widest font-bold text-slate-900 dark:text-slate-100">Company</h4>
+<ul class="space-y-2 font-['Manrope'] text-xs uppercase tracking-widest font-semibold">
+<li><a class="text-indigo-600 dark:text-indigo-400 font-bold hover:underline transition-all" href="#">About</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:underline transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-['Manrope'] text-xs uppercase tracking-widest font-bold text-slate-900 dark:text-slate-100">Contact</h4>
+<ul class="space-y-2 font-['Manrope'] text-xs uppercase tracking-widest font-semibold">
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:underline transition-all" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:underline transition-all" href="#">Support</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

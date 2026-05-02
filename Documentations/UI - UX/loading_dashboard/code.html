@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Dashboard Loading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#5472bc",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#101a36",
+                        "surface-container-high": "#e8e7ee",
+                        "tertiary-container": "#a4671e",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "secondary": "#545e7c",
+                        "surface-variant": "#e2e2e9",
+                        "on-secondary-container": "#545e7d",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "secondary-container": "#cfd9fd",
+                        "primary-fixed": "#dae2ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container": "#ededf4",
+                        "secondary-fixed": "#dae2ff",
+                        "inverse-primary": "#b1c5ff",
+                        "background": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d9d9e0",
+                        "surface-container-highest": "#e2e2e9",
+                        "outline": "#747782",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-tint": "#3d5ca4",
+                        "on-primary-fixed": "#001947",
+                        "on-tertiary-fixed": "#2c1600",
+                        "surface": "#f9f9ff",
+                        "outline-variant": "#c4c6d2",
+                        "on-primary-container": "#fefcff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f3f3fa",
+                        "primary": "#3a59a1",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "on-primary-fixed-variant": "#22438a",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#864f02",
+                        "on-background": "#1a1b20",
+                        "on-surface": "#1a1b20",
+                        "tertiary-fixed": "#ffdcbd",
+                        "inverse-surface": "#2f3035",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f0f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "input-padding-y": "10px",
+                        "section-margin": "48px",
+                        "form-gap": "24px",
+                        "input-padding-x": "12px",
+                        "container-max-width": "768px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "input-text": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .skeleton {
+            background: linear-gradient(90deg, #ededf4 25%, #e2e2e9 50%, #ededf4 75%);
+            background-size: 200% 100%;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-base text-on-background min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 top-0 h-full w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 z-50 flex flex-col justify-between py-8 px-4">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-slate-900 dark:text-white leading-none">StructureFlow</h1>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Pro Builder</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Dashboard is Active -->
+<a class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-3 py-2 px-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg transform transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-manrope text-[14px] leading-relaxed">Dashboard</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center gap-3 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transform transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-manrope text-[14px] leading-relaxed">Editor</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center gap-3 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transform transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-manrope text-[14px] leading-relaxed">Analysis</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center gap-3 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transform transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-manrope text-[14px] leading-relaxed">Files</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center gap-3 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transform transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-[14px] leading-relaxed">Settings</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="bg-primary-container rounded-xl p-4 text-on-primary-container shadow-sm">
+<p class="text-[12px] font-bold mb-2 opacity-90 uppercase">Upgrade to Premium</p>
+<p class="text-[11px] mb-3 leading-tight opacity-80">Get unlimited resume templates and AI analysis.</p>
+<button class="w-full py-2 bg-white text-primary text-[12px] font-bold rounded-lg">Upgrade Now</button>
+</div>
+<div class="flex flex-col gap-1">
+<a class="text-slate-600 dark:text-slate-400 flex items-center gap-3 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-manrope text-[14px] leading-relaxed">Support</span>
+</a>
+<a class="text-slate-600 dark:text-slate-400 flex items-center gap-3 py-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-manrope text-[14px] leading-relaxed">Log out</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 z-40">
+<div class="flex justify-between items-center h-full px-8 max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-8">
+<nav class="flex items-center gap-6 font-manrope text-sm font-medium tracking-tight">
+<a class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-2 transition-colors duration-200" href="#">My Resumes</a>
+<a class="text-slate-500 dark:text-slate-400 pb-2 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors duration-200" href="#">Templates</a>
+<a class="text-slate-500 dark:text-slate-400 pb-2 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors duration-200" href="#">Tips</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 pr-4 border-r border-slate-200 dark:border-slate-800">
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-indigo-600 transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-manrope text-sm font-medium transition-opacity active:opacity-70">
+                    Export PDF
+                </button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up portrait of a professional man in a clean studio setting with soft lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeDZMBybH-L-Wrz7fMgPkO4kj-aWIt9YmtNFhGSNYGcZoBLVRlTs0KjS8iceNgeCvEIUZGIvt8GbGnRdyE_NBa3hoctRP9WuRLI807i02PxqbMgm7O4rxFXS7f6F-ZvstKSrAgV4M7NE3vGIonlMTyD8P5LjnRJPYG3x16EIU2bDUEp0CDUjIptImpGa5VZP36jhLHLXftSICU-cBbtQN6DEtif8sKKM4ID_0euSOZ7UQ6CpLpoDTQRVCQZxZv-FEFK_en8JFOWHHL"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-8 min-h-[calc(100vh-64px)]">
+<div class="max-w-[1200px] mx-auto space-y-12">
+<!-- Header Skeleton -->
+<section class="flex justify-between items-end">
+<div class="space-y-3">
+<div class="h-10 w-64 skeleton rounded-lg"></div>
+<div class="h-4 w-96 skeleton rounded-md opacity-60"></div>
+</div>
+<div class="h-12 w-40 skeleton rounded-lg"></div>
+</section>
+<!-- Stats Bento Grid Skeleton -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="p-6 bg-white rounded-xl border border-outline-variant/30 space-y-4">
+<div class="w-10 h-10 skeleton rounded-lg"></div>
+<div class="space-y-2">
+<div class="h-4 w-20 skeleton rounded"></div>
+<div class="h-8 w-16 skeleton rounded"></div>
+</div>
+</div>
+<div class="p-6 bg-white rounded-xl border border-outline-variant/30 space-y-4">
+<div class="w-10 h-10 skeleton rounded-lg"></div>
+<div class="space-y-2">
+<div class="h-4 w-24 skeleton rounded"></div>
+<div class="h-8 w-12 skeleton rounded"></div>
+</div>
+</div>
+<div class="p-6 bg-white rounded-xl border border-outline-variant/30 space-y-4">
+<div class="w-10 h-10 skeleton rounded-lg"></div>
+<div class="space-y-2">
+<div class="h-4 w-28 skeleton rounded"></div>
+<div class="h-8 w-20 skeleton rounded"></div>
+</div>
+</div>
+<div class="p-6 bg-white rounded-xl border border-outline-variant/30 space-y-4">
+<div class="w-10 h-10 skeleton rounded-lg"></div>
+<div class="space-y-2">
+<div class="h-4 w-20 skeleton rounded"></div>
+<div class="h-8 w-24 skeleton rounded"></div>
+</div>
+</div>
+</section>
+<!-- Resume List Skeleton -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="h-6 w-48 skeleton rounded"></div>
+<div class="h-4 w-24 skeleton rounded opacity-50"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Resume Card Skeleton 1 -->
+<div class="bg-white p-6 rounded-2xl border border-outline-variant/20 flex gap-6 shadow-sm">
+<div class="w-32 h-44 skeleton rounded-lg flex-shrink-0"></div>
+<div class="flex-grow space-y-4 py-2">
+<div class="space-y-2">
+<div class="h-6 w-3/4 skeleton rounded"></div>
+<div class="h-4 w-1/2 skeleton rounded opacity-60"></div>
+</div>
+<div class="flex gap-2">
+<div class="h-6 w-16 skeleton rounded-full"></div>
+<div class="h-6 w-20 skeleton rounded-full"></div>
+</div>
+<div class="pt-4 flex gap-3">
+<div class="h-10 w-24 skeleton rounded-lg"></div>
+<div class="h-10 w-10 skeleton rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- Resume Card Skeleton 2 -->
+<div class="bg-white p-6 rounded-2xl border border-outline-variant/20 flex gap-6 shadow-sm">
+<div class="w-32 h-44 skeleton rounded-lg flex-shrink-0"></div>
+<div class="flex-grow space-y-4 py-2">
+<div class="space-y-2">
+<div class="h-6 w-2/3 skeleton rounded"></div>
+<div class="h-4 w-1/3 skeleton rounded opacity-60"></div>
+</div>
+<div class="flex gap-2">
+<div class="h-6 w-16 skeleton rounded-full"></div>
+</div>
+<div class="pt-4 flex gap-3">
+<div class="h-10 w-24 skeleton rounded-lg"></div>
+<div class="h-10 w-10 skeleton rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- Resume Card Skeleton 3 -->
+<div class="bg-white p-6 rounded-2xl border border-outline-variant/20 flex gap-6 shadow-sm">
+<div class="w-32 h-44 skeleton rounded-lg flex-shrink-0"></div>
+<div class="flex-grow space-y-4 py-2">
+<div class="space-y-2">
+<div class="h-6 w-4/5 skeleton rounded"></div>
+<div class="h-4 w-1/2 skeleton rounded opacity-60"></div>
+</div>
+<div class="flex gap-2">
+<div class="h-6 w-16 skeleton rounded-full"></div>
+<div class="h-6 w-24 skeleton rounded-full"></div>
+</div>
+<div class="pt-4 flex gap-3">
+<div class="h-10 w-24 skeleton rounded-lg"></div>
+<div class="h-10 w-10 skeleton rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- Resume Card Skeleton 4 -->
+<div class="bg-white p-6 rounded-2xl border border-outline-variant/20 flex gap-6 shadow-sm">
+<div class="w-32 h-44 skeleton rounded-lg flex-shrink-0"></div>
+<div class="flex-grow space-y-4 py-2">
+<div class="space-y-2">
+<div class="h-6 w-1/2 skeleton rounded"></div>
+<div class="h-4 w-2/3 skeleton rounded opacity-60"></div>
+</div>
+<div class="flex gap-2">
+<div class="h-6 w-12 skeleton rounded-full"></div>
+</div>
+<div class="pt-4 flex gap-3">
+<div class="h-10 w-24 skeleton rounded-lg"></div>
+<div class="h-10 w-10 skeleton rounded-lg"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Analysis Preview Skeleton -->
+<section class="p-8 bg-surface-container-low rounded-3xl border border-outline-variant/10">
+<div class="flex flex-col md:flex-row gap-12">
+<div class="w-full md:w-1/3 space-y-6">
+<div class="h-8 w-48 skeleton rounded"></div>
+<div class="space-y-2">
+<div class="h-4 w-full skeleton rounded opacity-60"></div>
+<div class="h-4 w-5/6 skeleton rounded opacity-60"></div>
+<div class="h-4 w-4/6 skeleton rounded opacity-60"></div>
+</div>
+<div class="h-12 w-40 skeleton rounded-lg"></div>
+</div>
+<div class="w-full md:w-2/3 grid grid-cols-2 gap-4">
+<div class="h-48 skeleton rounded-2xl opacity-40"></div>
+<div class="h-48 skeleton rounded-2xl opacity-40"></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button Suppression - Not rendered per instruction for Dashboard -->
+</body></html>

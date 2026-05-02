@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#f9f9ff",
+            "tertiary-fixed": "#ffdcbd",
+            "outline-variant": "#c4c6d2",
+            "on-tertiary-fixed-variant": "#693c00",
+            "tertiary": "#864f02",
+            "surface-tint": "#3d5ca4",
+            "surface-bright": "#f9f9ff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#3c4663",
+            "outline": "#747782",
+            "on-background": "#1a1b20",
+            "primary-fixed": "#dae2ff",
+            "surface-container-highest": "#e2e2e9",
+            "inverse-surface": "#2f3035",
+            "tertiary-fixed-dim": "#ffb86e",
+            "secondary-fixed-dim": "#bcc6e9",
+            "primary-fixed-dim": "#b1c5ff",
+            "surface-dim": "#d9d9e0",
+            "tertiary-container": "#a4671e",
+            "surface-container-high": "#e8e7ee",
+            "surface-container": "#ededf4",
+            "background": "#f9f9ff",
+            "error-container": "#ffdad6",
+            "surface-variant": "#e2e2e9",
+            "secondary": "#545e7c",
+            "on-primary-fixed-variant": "#22438a",
+            "primary-container": "#5472bc",
+            "on-tertiary-fixed": "#2c1600",
+            "on-secondary-fixed": "#101a36",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#fefcff",
+            "on-surface-variant": "#444651",
+            "secondary-container": "#cfd9fd",
+            "inverse-primary": "#b1c5ff",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#dae2ff",
+            "on-tertiary-container": "#fffbff",
+            "on-error-container": "#93000a",
+            "inverse-on-surface": "#f0f0f7",
+            "on-surface": "#1a1b20",
+            "primary": "#3a59a1",
+            "on-primary-fixed": "#001947",
+            "on-tertiary": "#ffffff",
+            "surface-container-low": "#f3f3fa",
+            "on-secondary-container": "#545e7d"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "form-gap": "24px",
+            "section-margin": "48px",
+            "input-padding-y": "10px",
+            "container-max-width": "768px",
+            "base-unit": "4px",
+            "input-padding-x": "12px"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "body-base": ["Inter"],
+            "label-caps": ["Inter"],
+            "h1": ["Manrope"],
+            "input-text": ["Inter"],
+            "h2": ["Manrope"]
+          },
+          "fontSize": {
+            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-base text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-screen w-64 border-r bg-slate-50 border-slate-200 flex flex-col py-6 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-black text-slate-900 tracking-tight">StructureFlow</h1>
+<p class="text-xs text-slate-500 font-manrope">Resume Builder</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-slate-600 px-4 py-3 flex items-center gap-3 hover:text-[#5775bf] hover:bg-slate-100 transition-all cursor-pointer scale-100 active:scale-98">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-manrope text-sm">Personal Info</span>
+</div>
+<!-- Active State for Education -->
+<div class="text-[#5775bf] font-bold border-r-2 border-[#5775bf] bg-white px-4 py-3 flex items-center gap-3 cursor-pointer scale-100 active:scale-98">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-manrope text-sm">Education</span>
+</div>
+<div class="text-slate-600 px-4 py-3 flex items-center gap-3 hover:text-[#5775bf] hover:bg-slate-100 transition-all cursor-pointer scale-100 active:scale-98">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-manrope text-sm">Experience</span>
+</div>
+<div class="text-slate-600 px-4 py-3 flex items-center gap-3 hover:text-[#5775bf] hover:bg-slate-100 transition-all cursor-pointer scale-100 active:scale-98">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-manrope text-sm">Summary &amp; Skills</span>
+</div>
+<div class="text-slate-600 px-4 py-3 flex items-center gap-3 hover:text-[#5775bf] hover:bg-slate-100 transition-all cursor-pointer scale-100 active:scale-98">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+<span class="font-manrope text-sm">Review</span>
+</div>
+</nav>
+<div class="px-4 mt-auto space-y-1 border-t border-slate-200 pt-6">
+<div class="text-slate-600 px-4 py-3 flex items-center gap-3 hover:text-[#5775bf] hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-manrope text-sm">Settings</span>
+</div>
+<div class="text-slate-600 px-4 py-3 flex items-center gap-3 hover:text-[#5775bf] hover:bg-slate-100 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-manrope text-sm">Support</span>
+</div>
+<button class="w-full mt-4 bg-[#5775bf] text-white py-2.5 rounded-lg font-manrope text-sm font-semibold shadow-sm hover:bg-opacity-90 active:scale-95 transition-all">
+        Export PDF
+      </button>
+</div>
+</aside>
+<!-- TopAppBar Anchor -->
+<header class="sticky top-0 z-40 flex items-center justify-between w-full px-6 py-3 bg-white border-b border-slate-200 md:pl-72">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold text-[#5775bf] tracking-tight font-manrope">StructureFlow</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden cursor-pointer active:opacity-80">
+<img alt="User Profile Avatar" data-alt="close-up professional headshot of a person with friendly expression and clean studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuMe05cTr06atzYdS_5syvXjV2dYpwlJ9D2NfdS7jNtNxQN77cWEU_yiGzsZtZLMsueGCxqS6sP78ZOC0lrqi2PxwEfCFxrcvh26xvSUAaBVZK8_9P4drjAoNqHhcbuGbebGouql0u-vPloG9Jp9ni3W9nObRjOipJ3QVKjkoKHABEtqD7APl9ZDfYJoUNkkSTe9bSxb-Y8cm4DNN82nvnv7kUtW0st0mvAdmJPok02PhPYOsDZLvRr00u29fXgFhXTyh98ervjHWj"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="md:ml-64 p-6 min-h-[calc(100vh-116px)]">
+<div class="max-w-[768px] mx-auto">
+<!-- Stepped Progress Bar -->
+<div class="mb-section-margin">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-caps text-primary uppercase">Step 2 of 5</span>
+<span class="font-label-caps text-secondary">40% Complete</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/5 transition-all duration-500"></div>
+</div>
+</div>
+<!-- Header Section -->
+<div class="mb-section-margin text-center">
+<h2 class="font-h1 text-h1 text-on-surface mb-2">Education Background</h2>
+<p class="font-body-base text-secondary">List your academic achievements and qualifications to build a strong profile.</p>
+</div>
+<!-- Education Form -->
+<form class="space-y-section-margin">
+<!-- Entry 1 -->
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/30 relative group">
+<button class="absolute top-4 right-4 p-2 text-error hover:bg-error-container/20 rounded-full transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-form-gap">
+<div class="md:col-span-2">
+<label class="block font-label-caps text-on-surface-variant mb-2">INSTITUTION NAME</label>
+<input class="w-full h-11 px-input-padding-x py-input-padding-y border border-outline-variant rounded-lg bg-white font-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g. Stanford University" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">DEGREE / QUALIFICATION</label>
+<input class="w-full h-11 px-input-padding-x py-input-padding-y border border-outline-variant rounded-lg bg-white font-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g. Bachelor of Science" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">FIELD OF STUDY</label>
+<input class="w-full h-11 px-input-padding-x py-input-padding-y border border-outline-variant rounded-lg bg-white font-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g. Computer Science" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">START DATE</label>
+<div class="relative">
+<input class="w-full h-11 px-input-padding-x py-input-padding-y border border-outline-variant rounded-lg bg-white font-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="month"/>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">GRADUATION DATE (OR EXPECTED)</label>
+<div class="relative">
+<input class="w-full h-11 px-input-padding-x py-input-padding-y border border-outline-variant rounded-lg bg-white font-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="month"/>
+</div>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-caps text-on-surface-variant mb-2">DESCRIPTION / HONORS (OPTIONAL)</label>
+<textarea class="w-full px-input-padding-x py-input-padding-y border border-outline-variant rounded-lg bg-white font-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" placeholder="Describe your relevant coursework, achievements, or GPA" rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Add Entry Button -->
+<button class="w-full py-form-gap border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center gap-3 text-secondary hover:border-primary hover:text-primary hover:bg-primary-container/5 transition-all group" type="button">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="add_circle">add_circle</span>
+<span class="font-manrope font-semibold">Add another education entry</span>
+</button>
+<!-- Form Navigation -->
+<div class="flex items-center justify-between pt-form-gap">
+<button class="px-8 py-3 rounded-lg border border-outline text-secondary font-manrope font-bold hover:bg-surface-container transition-all active:scale-95" type="button">
+            Back
+          </button>
+<button class="px-10 py-3 rounded-lg bg-primary text-on-primary font-manrope font-bold shadow-md hover:shadow-lg active:scale-95 transition-all" type="submit">
+            Save &amp; Continue
+          </button>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer Anchor -->
+<footer class="md:ml-64 bg-white border-t border-slate-100">
+<div class="w-full max-w-3xl mx-auto py-8 px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-manrope text-xs text-slate-500">© 2024 StructureFlow SaaS. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="font-manrope text-xs text-slate-400 hover:text-slate-900 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs text-slate-400 hover:text-slate-900 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-manrope text-xs text-slate-400 hover:text-slate-900 transition-colors duration-200" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</body></html>

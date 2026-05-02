@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - AI Resume Generator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e7ee",
+                        "secondary-fixed": "#dae2ff",
+                        "surface": "#f9f9ff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "surface-dim": "#d9d9e0",
+                        "surface-bright": "#f9f9ff",
+                        "on-secondary-container": "#545e7d",
+                        "surface-container-low": "#f3f3fa",
+                        "error": "#ba1a1a",
+                        "on-background": "#1a1b20",
+                        "primary-fixed": "#dae2ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#101a36",
+                        "primary-container": "#5472bc",
+                        "inverse-primary": "#b1c5ff",
+                        "inverse-surface": "#2f3035",
+                        "outline-variant": "#c4c6d2",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "secondary-container": "#cfd9fd",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-variant": "#e2e2e9",
+                        "on-tertiary-container": "#fffbff",
+                        "primary": "#3a59a1",
+                        "secondary": "#545e7c",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f0f7",
+                        "surface-container-highest": "#e2e2e9",
+                        "on-primary-fixed-variant": "#22438a",
+                        "on-primary-fixed": "#001947",
+                        "on-surface": "#1a1b20",
+                        "outline": "#747782",
+                        "on-tertiary-fixed": "#2c1600",
+                        "tertiary": "#864f02",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdcbd",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "on-primary-container": "#fefcff",
+                        "surface-tint": "#3d5ca4",
+                        "tertiary-container": "#a4671e",
+                        "surface-container": "#ededf4",
+                        "on-surface-variant": "#444651"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base-unit": "4px",
+                        "container-max-width": "768px",
+                        "section-margin": "48px",
+                        "input-padding-x": "12px",
+                        "input-padding-y": "10px",
+                        "form-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "body-base": ["Inter"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "input-text": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .loading-shimmer {
+            background: linear-gradient(90deg, #f3f3fa 25%, #e8e7ee 50%, #f3f3fa 75%);
+            background-size: 200% 100%;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-base text-on-background min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col p-4 gap-2 h-screen w-64 left-0 border-r border-slate-200/60 bg-slate-50 sticky top-0">
+<div class="flex flex-col gap-1 mb-8 px-4">
+<h1 class="text-lg font-black text-slate-900 font-h1">StructureFlow</h1>
+<p class="text-xs font-medium text-slate-500 font-body-sm">Precision Resume Builder</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-indigo-600 bg-white rounded-lg shadow-sm font-manrope text-sm font-semibold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-manrope text-sm font-semibold hover:text-indigo-500 hover:bg-white/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>My Resumes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-manrope text-sm font-semibold hover:text-indigo-500 hover:bg-white/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span>Templates</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-primary-fixed/30 rounded-xl">
+<p class="text-xs font-semibold text-on-primary-fixed-variant mb-2">PRO PLAN</p>
+<p class="text-xs text-slate-600 mb-3">Unlimited AI generations &amp; premium templates.</p>
+<button class="w-full py-2 bg-primary text-white text-xs font-bold rounded-lg shadow-sm">Upgrade Now</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-white border-b border-slate-200/60 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="md:hidden text-xl font-bold tracking-tight text-indigo-600 font-h1">StructureFlow</span>
+<nav class="hidden md:flex gap-6">
+<span class="text-indigo-600 font-bold font-manrope text-sm">AI Builder</span>
+<span class="text-slate-600 font-medium font-manrope text-sm hover:text-indigo-600 transition-colors cursor-pointer">Live Preview</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a professional man in a business casual shirt with a clean minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEDU60NuTHlPuhwSTrWBHJfK7Yj_7G9ClCtq8GXRLYsmCbB7ZWxm-Uc6HN4NbpmqJHR1LLfLMRYSSzgNJ-p_jStufnXOehJ3YEfSAFnRBmWr1zDq9UsfoeSVf0ZVo41QM68VruKw_pXKbOTHnvTI0ilIiKp0JPPRquZC8IjBA4k-VGkDQsdUD7_KIdm_IvjjxG_oc8rah3rK0rpXUkzea9wb8NWwQv85Wxref1vjaunqISbHQ0MookPOkGu3JdV6u0AIdjpuCmKyNe"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto bg-surface flex justify-center py-12 px-6">
+<div class="w-full max-w-[768px] flex flex-col gap-section-margin">
+<!-- Stepped Progress (Custom Component) -->
+<div class="flex items-center justify-between w-full max-w-md mx-auto mb-4">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold ring-4 ring-primary-fixed">1</div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Describe</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-4 -mt-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant text-xs font-bold">2</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Refine</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant mx-4 -mt-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant text-xs font-bold">3</div>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Finish</span>
+</div>
+</div>
+<!-- Hero Header -->
+<div class="text-center flex flex-col gap-4">
+<h2 class="font-h1 text-h1 text-on-background">Craft your perfect story.</h2>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-lg mx-auto">
+                        Tell StructureFlow about your experience and the role you're targeting. Our AI will handle the formatting and optimization.
+                    </p>
+</div>
+<!-- Main Entry Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm p-8 flex flex-col gap-form-gap">
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-secondary-fixed-variant uppercase" for="ai-prompt">The Prompt</label>
+<div class="relative group">
+<textarea class="w-full p-4 rounded-lg border border-outline-variant bg-surface-bright font-input-text text-input-text focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none" id="ai-prompt" placeholder="Describe your ideal role and background... (e.g. Senior Frontend Engineer with 6 years experience in Fintech, seeking a leadership role in a remote-first startup.)" rows="6"></textarea>
+<div class="absolute bottom-4 right-4 flex gap-2">
+<span class="bg-surface-container-high px-2 py-1 rounded text-[10px] font-bold text-on-surface-variant">MIN 50 CHARS</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="attach_file">attach_file</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="mic">mic</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-lg font-h2 text-[16px] shadow-lg hover:shadow-primary-container/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>Generate Draft</span>
+</button>
+</div>
+</section>
+<!-- Magic Loading State / Illustration Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-secondary-container/20 rounded-xl p-8 border border-secondary-container/40 flex flex-col items-center justify-center text-center gap-6 overflow-hidden relative">
+<!-- Abstract Magic Illustration -->
+<div class="relative w-48 h-48 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 grid grid-cols-2 gap-4">
+<div class="w-16 h-20 bg-white rounded shadow-sm border border-outline-variant/30 p-2 flex flex-col gap-1.5 transform -rotate-12 translate-x-4">
+<div class="w-full h-2 bg-slate-100 rounded"></div>
+<div class="w-3/4 h-1 bg-slate-50 rounded"></div>
+<div class="w-1/2 h-1 bg-slate-50 rounded"></div>
+</div>
+<div class="w-16 h-20 bg-white rounded shadow-md border border-indigo-200 p-2 flex flex-col gap-1.5 transform rotate-6 -translate-x-2">
+<div class="w-full h-2 bg-indigo-100 rounded"></div>
+<div class="w-3/4 h-1 bg-indigo-50 rounded"></div>
+<div class="w-1/2 h-1 bg-indigo-50 rounded"></div>
+<span class="material-symbols-outlined text-indigo-400 text-[12px] absolute -top-2 -right-2" data-icon="sparkles" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-h2 text-[18px] text-primary">Magic Analysis</h3>
+<p class="font-body-sm text-body-sm text-on-secondary-container max-w-xs">Our AI scans 5,000+ top-performing resumes to extract the best keywords for your profile.</p>
+</div>
+</div>
+<!-- Side Feature Bento -->
+<div class="bg-surface-container rounded-xl p-6 flex flex-col gap-4 border border-outline-variant/20">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<h4 class="font-h2 text-[16px] text-on-surface">Privacy First</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Your data is never used to train global models. Everything stays within your StructureFlow vault.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/30">
+<a class="text-[12px] font-bold text-primary flex items-center gap-1 group" href="#">
+                                Learn about encryption
+                                <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Footer Hint -->
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant opacity-60 italic">
+                    Tip: Be as specific as possible about the tech stack or soft skills you want to highlight.
+                </p>
+</div>
+</div>
+</main>
+<!-- Mobile Navigation (Shared Component Logic) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200/60 flex items-center justify-around z-50">
+<a class="flex flex-col items-center gap-1 text-indigo-600" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">Dash</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-[10px] font-medium">Resumes</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-[10px] font-medium">Templates</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

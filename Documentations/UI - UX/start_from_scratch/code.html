@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Step 1: Personal Info</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e8e7ee",
+                    "secondary-fixed": "#dae2ff",
+                    "surface": "#f9f9ff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "surface-dim": "#d9d9e0",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary-container": "#545e7d",
+                    "surface-container-low": "#f3f3fa",
+                    "error": "#ba1a1a",
+                    "on-background": "#1a1b20",
+                    "primary-fixed": "#dae2ff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#101a36",
+                    "primary-container": "#5472bc",
+                    "inverse-primary": "#b1c5ff",
+                    "inverse-surface": "#2f3035",
+                    "outline-variant": "#c4c6d2",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "secondary-container": "#cfd9fd",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "surface-variant": "#e2e2e9",
+                    "on-tertiary-container": "#fffbff",
+                    "primary": "#3a59a1",
+                    "secondary": "#545e7c",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f0f0f7",
+                    "surface-container-highest": "#e2e2e9",
+                    "on-primary-fixed-variant": "#22438a",
+                    "on-primary-fixed": "#001947",
+                    "on-surface": "#1a1b20",
+                    "outline": "#747782",
+                    "on-tertiary-fixed": "#2c1600",
+                    "tertiary": "#864f02",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdcbd",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "on-primary-container": "#fefcff",
+                    "surface-tint": "#3d5ca4",
+                    "tertiary-container": "#a4671e",
+                    "surface-container": "#ededf4",
+                    "on-surface-variant": "#444651"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base-unit": "4px",
+                    "container-max-width": "768px",
+                    "section-margin": "48px",
+                    "input-padding-x": "12px",
+                    "input-padding-y": "10px",
+                    "form-gap": "24px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "body-base": ["Inter"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "input-text": ["Inter"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="hidden md:flex flex-col p-4 gap-2 h-screen w-64 left-0 border-r border-slate-200/60 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-900 transition-all duration-200 ease-in-out">
+<div class="mb-8 px-4 py-2">
+<h1 class="text-lg font-black text-slate-900 dark:text-white font-manrope">StructureFlow</h1>
+<p class="text-xs text-slate-500 font-semibold">Precision Resume Builder</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 font-manrope text-sm font-semibold hover:text-indigo-500 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 rounded-lg shadow-sm font-manrope text-sm font-semibold transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                My Resumes
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 font-manrope text-sm font-semibold hover:text-indigo-500 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+                Templates
+            </a>
+</nav>
+<div class="mt-auto p-4 bg-surface-container rounded-xl">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">JD</div>
+<div>
+<p class="text-sm font-bold text-on-surface">John Doe</p>
+<p class="text-[10px] text-on-surface-variant">Pro Account</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-y-auto">
+<!-- TopNavBar (Authority: JSON) -->
+<header class="flex justify-between items-center px-6 h-16 w-full border-b border-slate-200/60 dark:border-slate-800/60 bg-white dark:bg-slate-950 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-slate-600">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="h-2 w-32 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/6"></div>
+</div>
+<span class="text-xs font-label-caps text-on-surface-variant uppercase tracking-widest">Step 1 of 6</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="User Profile Avatar" data-alt="professional headshot of a person with a friendly expression in a clean studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFf2Ts7Ks7a1jPTTAQfPWcNf_KWF0Asn4HD1wl7f-hatdoNQ8jIwYG_xUH1yFQ3V0cqTTGFzb8stoMZl3yrPIKNw516XVrD5e8nFlAfvVzMAVozCGLlQ42Ai90N5lAEmb8Fwd9iUOkGo6xKWI2ekhLPPCKYESwNB9rTeZeMeqmi81pnsgGtatheEdBVIa_R2GuhcKWV09DfCPA27JCNg4AISqOnWIb8kYgwq-EIIqtgm2jTkxM8ovugFb1qNT8xUGcE1BqkAckw1tK"/>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="flex-1 w-full max-w-[768px] mx-auto px-6 py-12">
+<!-- Page Header -->
+<div class="mb-section-margin">
+<h2 class="font-h1 text-h1 text-on-background mb-2">Personal Information</h2>
+<p class="font-body-base text-body-base text-on-surface-variant">Tell us who you are. This information will appear at the top of your resume header.</p>
+</div>
+<!-- Wizard Content Card (Shadcn/UI Card Pattern) -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-8 shadow-sm">
+<div class="space-y-form-gap">
+<!-- Avatar Upload Area -->
+<div class="flex items-center gap-6 pb-6 border-b border-surface-container">
+<div class="h-24 w-24 rounded-xl bg-surface-container-high flex flex-col items-center justify-center text-on-surface-variant border-2 border-dashed border-outline-variant group cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="add_a_photo">add_a_photo</span>
+<span class="text-[10px] font-label-caps uppercase">Upload</span>
+</div>
+<div class="flex-1">
+<h3 class="font-h2 text-body-base font-bold text-on-surface">Profile Photo</h3>
+<p class="text-body-sm text-on-surface-variant">Recommended: Square image, at least 400x400px.</p>
+</div>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-form-gap">
+<!-- Full Name -->
+<div class="space-y-2">
+<label class="block font-label-caps text-on-surface-variant uppercase">Full Name</label>
+<input class="w-full bg-surface-container-low border-outline-variant/40 rounded-lg px-input-padding-x py-input-padding-y font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="e.g. Alexander Hamilton" type="text"/>
+</div>
+<!-- Professional Title -->
+<div class="space-y-2">
+<label class="block font-label-caps text-on-surface-variant uppercase">Job Title</label>
+<input class="w-full bg-surface-container-low border-outline-variant/40 rounded-lg px-input-padding-x py-input-padding-y font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="e.g. Senior Software Architect" type="text"/>
+</div>
+<!-- Email Address -->
+<div class="space-y-2">
+<label class="block font-label-caps text-on-surface-variant uppercase">Email Address</label>
+<input class="w-full bg-surface-container-low border-outline-variant/40 rounded-lg px-input-padding-x py-input-padding-y font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="alex@structureflow.io" type="email"/>
+</div>
+<!-- Phone Number -->
+<div class="space-y-2">
+<label class="block font-label-caps text-on-surface-variant uppercase">Phone Number</label>
+<input class="w-full bg-surface-container-low border-outline-variant/40 rounded-lg px-input-padding-x py-input-padding-y font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<!-- Location -->
+<div class="space-y-2 md:col-span-2">
+<label class="block font-label-caps text-on-surface-variant uppercase">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="location_on">location_on</span>
+<input class="w-full bg-surface-container-low border-outline-variant/40 rounded-lg pl-10 pr-input-padding-x py-input-padding-y font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="New York, NY" type="text"/>
+</div>
+</div>
+<!-- Professional Summary -->
+<div class="space-y-2 md:col-span-2">
+<div class="flex justify-between items-center">
+<label class="block font-label-caps text-on-surface-variant uppercase">Professional Summary</label>
+<button class="text-[10px] text-primary font-bold uppercase hover:underline" type="button">Use AI Suggestion</button>
+</div>
+<textarea class="w-full bg-surface-container-low border-outline-variant/40 rounded-lg px-input-padding-x py-input-padding-y font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none" placeholder="Briefly describe your professional background and key achievements..." rows="4"></textarea>
+</div>
+</form>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-12 flex justify-between items-center">
+<button class="flex items-center gap-2 px-6 py-3 text-slate-600 font-bold hover:bg-slate-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                    Cancel
+                </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-bold shadow-lg shadow-primary/20 hover:bg-primary-container active:scale-95 transition-all flex items-center gap-2">
+                    Save &amp; Continue
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Decorative Assistant Tip -->
+<div class="mt-section-margin p-6 bg-secondary-fixed text-on-secondary-fixed rounded-2xl flex gap-4 items-start border border-secondary-container">
+<div class="bg-white p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="lightbulb" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Expert Tip: Keep it Concise</h4>
+<p class="text-sm opacity-80 leading-relaxed">Your professional summary should be no more than 3-4 sentences. Focus on your most relevant achievements and what you bring to the table.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB (Suppressed per rules: Task-focused screen) -->
+</body></html>

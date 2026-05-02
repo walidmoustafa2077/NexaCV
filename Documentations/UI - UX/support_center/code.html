@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9ff",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container": "#ededf4",
+                    "outline": "#747782",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "surface-variant": "#e2e2e9",
+                    "surface-container-highest": "#e2e2e9",
+                    "on-tertiary-container": "#fffbff",
+                    "on-surface": "#1a1b20",
+                    "secondary-fixed": "#dae2ff",
+                    "on-primary-container": "#fefcff",
+                    "outline-variant": "#c4c6d2",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-container": "#cfd9fd",
+                    "tertiary-container": "#a4671e",
+                    "primary-fixed": "#dae2ff",
+                    "tertiary": "#864f02",
+                    "surface-container-high": "#e8e7ee",
+                    "on-secondary-container": "#545e7d",
+                    "surface-tint": "#3d5ca4",
+                    "surface-container-low": "#f3f3fa",
+                    "error": "#ba1a1a",
+                    "primary": "#3a59a1",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "inverse-on-surface": "#f0f0f7",
+                    "surface-dim": "#d9d9e0",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "secondary": "#545e7c",
+                    "on-secondary-fixed": "#101a36",
+                    "on-surface-variant": "#444651",
+                    "on-primary-fixed": "#001947",
+                    "on-tertiary-fixed": "#2c1600",
+                    "on-primary-fixed-variant": "#22438a",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#b1c5ff",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1a1b20",
+                    "inverse-surface": "#2f3035",
+                    "primary-container": "#5472bc",
+                    "background": "#f9f9ff",
+                    "secondary-fixed-dim": "#bcc6e9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "form-gap": "24px",
+                    "container-max-width": "768px",
+                    "input-padding-y": "10px",
+                    "input-padding-x": "12px",
+                    "section-margin": "48px",
+                    "base-unit": "4px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "h1": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "input-text": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-base text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 fixed top-0 z-50 w-full">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto font-manrope antialiased tracking-tight">
+<div class="text-xl font-extrabold tracking-tighter text-indigo-600 dark:text-indigo-400">StructureFlow</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-500 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-500 transition-colors" href="#">Resumes</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-500 transition-colors" href="#">Templates</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-500 transition-colors" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition-all active:scale-95 text-body-sm">Contact Support</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-20">
+<!-- Hero Section -->
+<section class="max-w-[768px] mx-auto px-4 text-center mb-section-margin">
+<h1 class="font-h1 text-h1 text-on-surface mb-6">How can we help you?</h1>
+<div class="relative max-w-xl mx-auto">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-transparent outline-none font-input-text text-input-text transition-all shadow-sm" placeholder="Search for articles, guides, or features..." type="text"/>
+</div>
+</section>
+<!-- Help Categories Grid -->
+<section class="max-w-[768px] mx-auto px-4 mb-section-margin">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-form-gap">
+<!-- Getting Started -->
+<div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-4 text-on-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2">Getting Started</h3>
+<p class="font-body-sm text-on-surface-variant">Learn the basics of creating your first high-integrity resume with StructureFlow.</p>
+</div>
+<!-- Account & Billing -->
+<div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center mb-4 text-on-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2">Account &amp; Billing</h3>
+<p class="font-body-sm text-on-surface-variant">Manage your subscription, update payment methods, and handle profile settings.</p>
+</div>
+<!-- Resume Editor -->
+<div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-4 text-on-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2">Resume Editor</h3>
+<p class="font-body-sm text-on-surface-variant">Tips and tricks for using our structured data-entry interface effectively.</p>
+</div>
+<!-- AI Features -->
+<div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-lg flex items-center justify-center mb-4 text-on-tertiary-fixed group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2">AI Features</h3>
+<p class="font-body-sm text-on-surface-variant">How to leverage our professional AI assistant for content refinement.</p>
+</div>
+<!-- Exporting -->
+<div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-xl hover:border-primary/50 transition-all cursor-pointer group md:col-span-2">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center text-on-secondary-container group-hover:scale-110 transition-transform flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<h3 class="font-h2 text-h2 mb-1">Exporting</h3>
+<p class="font-body-sm text-on-surface-variant">Everything about PDF generation, ATS compatibility, and sharing links.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-[768px] mx-auto px-4 mb-section-margin">
+<h2 class="font-h1 text-h1 mb-8 text-center">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<!-- Accordion Item 1 -->
+<div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest">
+<button class="w-full flex items-center justify-between p-5 text-left hover:bg-surface-container-low transition-colors group">
+<span class="font-body-base font-semibold">How do I export my resume to PDF?</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">expand_more</span>
+</button>
+<div class="px-5 pb-5 pt-0 text-on-surface-variant font-body-sm leading-relaxed border-t border-outline-variant/10 mt-2">
+                        You can export your resume by clicking the "Export" button in the top right corner of the editor. We support high-quality PDF downloads that are 100% ATS-friendly.
+                    </div>
+</div>
+<!-- Accordion Item 2 -->
+<div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest">
+<button class="w-full flex items-center justify-between p-5 text-left hover:bg-surface-container-low transition-colors group">
+<span class="font-body-base font-semibold">Can I use StructureFlow for free?</span>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</button>
+</div>
+<!-- Accordion Item 3 -->
+<div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest">
+<button class="w-full flex items-center justify-between p-5 text-left hover:bg-surface-container-low transition-colors group">
+<span class="font-body-base font-semibold">Is my data secure?</span>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</button>
+</div>
+<!-- Accordion Item 4 -->
+<div class="border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest">
+<button class="w-full flex items-center justify-between p-5 text-left hover:bg-surface-container-low transition-colors group">
+<span class="font-body-base font-semibold">How does the AI content generator work?</span>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Contact Options -->
+<section class="max-w-[768px] mx-auto px-4 mb-section-margin">
+<div class="bg-primary-container/10 border border-primary/20 rounded-2xl p-8 text-center">
+<h2 class="font-h2 text-h2 mb-2">Still need help?</h2>
+<p class="text-on-surface-variant font-body-base mb-8">Our support team is available 24/7 to assist with your technical questions.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a class="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-semibold hover:opacity-90 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+                        Email Support
+                    </a>
+<a class="flex items-center justify-center gap-2 px-6 py-3 bg-secondary text-on-secondary rounded-xl font-semibold hover:opacity-90 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                        Live Chat
+                    </a>
+<a class="flex items-center justify-center gap-2 px-6 py-3 border border-outline text-on-surface rounded-xl font-semibold hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+                        Documentation
+                    </a>
+</div>
+</div>
+</section>
+<!-- Visual Anchor (Bento Style Sub-section) -->
+<section class="max-w-[768px] mx-auto px-4 mb-section-margin">
+<div class="grid grid-cols-12 gap-4 h-[300px]">
+<div class="col-span-8 relative rounded-2xl overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern collaborative workspace with clean desks, plants, and natural light reflecting off glass surfaces for a professional atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwZtxly7isWb9ZYISnj5fmMtAkOf_shZXMl6_k00jJbC4XoULKfsilX5vJh8TEPK1iCp1fhHKd-dr9Ko-WRY4XCFn9Vpq5R94_RPyoHtLhMg7edMl8Oi0_2LNGQiuED_kXwn9tdLtc_9oJIRpaI4OE8qnbnk0RItZc6nNEzGo8pe1ljToYyD-ZSChKokBighVqZ6-7Vpss7so77-BJdmWyVpO4u0CkWyAO4yQqFKkzxy3wEqq65qw6XTquuu8QiPdNlAZ_V60JyS6k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6">
+<div class="text-white">
+<p class="text-label-caps uppercase font-label-caps mb-2 opacity-80">Community Forum</p>
+<h3 class="text-h2 font-h2">Join 10k+ professionals</h3>
+</div>
+</div>
+</div>
+<div class="col-span-4 bg-tertiary-fixed-dim rounded-2xl p-6 flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl text-on-tertiary-fixed">school</span>
+<div>
+<h4 class="font-h2 text-lg text-on-tertiary-fixed">Video Tutorials</h4>
+<p class="text-body-sm text-on-tertiary-fixed opacity-80">Watch and learn at your own pace.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 w-full mt-auto py-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[768px] mx-auto px-4">
+<div>
+<div class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">StructureFlow</div>
+<p class="font-manrope text-sm text-slate-500 dark:text-slate-400">© 2024 StructureFlow Resume Systems</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<ul class="space-y-2">
+<li><a class="font-manrope text-sm text-slate-500 hover:underline hover:text-indigo-600 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-manrope text-sm text-slate-500 hover:underline hover:text-indigo-600 transition-colors" href="#">Terms of Use</a></li>
+<li><a class="font-manrope text-sm text-slate-500 hover:underline hover:text-indigo-600 transition-colors" href="#">Documentation</a></li>
+</ul>
+<ul class="space-y-2">
+<li><a class="font-manrope text-sm text-slate-500 hover:underline hover:text-indigo-600 transition-colors" href="#">API Status</a></li>
+<li><a class="font-manrope text-sm text-slate-500 hover:underline hover:text-indigo-600 transition-colors" href="#">Community</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

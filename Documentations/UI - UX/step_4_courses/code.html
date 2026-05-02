@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resume Wizard - Courses</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#22438a",
+                    "on-background": "#1a1b20",
+                    "primary-fixed": "#dae2ff",
+                    "surface-container-low": "#f3f3fa",
+                    "on-tertiary-fixed": "#2c1600",
+                    "outline": "#747782",
+                    "on-surface-variant": "#444651",
+                    "inverse-surface": "#2f3035",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "on-primary-container": "#fefcff",
+                    "surface-variant": "#e2e2e9",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1a1b20",
+                    "surface-bright": "#f9f9ff",
+                    "on-tertiary-container": "#fffbff",
+                    "secondary-fixed": "#dae2ff",
+                    "on-primary": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "secondary": "#545e7c",
+                    "on-primary-fixed": "#001947",
+                    "on-secondary-container": "#545e7d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e8e7ee",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "primary": "#3a59a1",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#5472bc",
+                    "inverse-primary": "#b1c5ff",
+                    "tertiary-fixed": "#ffdcbd",
+                    "inverse-on-surface": "#f0f0f7",
+                    "outline-variant": "#c4c6d2",
+                    "surface-container": "#ededf4",
+                    "tertiary-container": "#a4671e",
+                    "surface-dim": "#d9d9e0",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "error": "#ba1a1a",
+                    "tertiary": "#864f02",
+                    "on-secondary-fixed": "#101a36",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "surface-tint": "#3d5ca4",
+                    "surface-container-highest": "#e2e2e9",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "secondary-container": "#cfd9fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base-unit": "4px",
+                    "input-padding-y": "10px",
+                    "input-padding-x": "12px",
+                    "form-gap": "24px",
+                    "container-max-width": "768px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "input-text": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h1": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-base text-on-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-white border-b border-slate-200">
+<div class="text-xl font-bold text-blue-600 font-manrope">StructureFlow</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-50 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined text-slate-600">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="professional headshot of a person with a friendly expression in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO0PxQ9znZJqaMWR-S6ajqj4cbo75GuyJx5nP8KgAOLDZnVCOAYD6aKrCas3-fHQVaa-G4p4eaPazC9VLHA8PruX2-v2F4Op4FO7WXJdMCq8mbNvHa-yKKm0X38KF2uU0thVQ8bgi-Nz6hJ7OHKWH5yjvqT4Nvle4LURxqyLDw0dzokoYgrkhZ2UHmbjhWcOkSax_kvCXkS98OTYyp1p_q5lcgxgB2XGix9M49z7J8GJ--gvYAL5oKnpP1nN7jrQ_9vHTx1egt5uHc"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-16 bottom-0 w-64 flex flex-col py-8 bg-slate-50 border-r border-slate-200 font-manrope text-sm">
+<div class="px-6 mb-8">
+<h2 class="text-slate-900 font-bold">Resume Wizard</h2>
+<p class="text-slate-500 text-xs mt-1">Progress Tracking</p>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 hover:text-blue-500 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Personal Info</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 hover:text-blue-500 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Education</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 hover:text-blue-500 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">work</span>
+<span>Experience</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-blue-600 font-bold border-r-4 border-blue-600 bg-blue-50/50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Courses</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 hover:text-blue-500 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span>Summary &amp; Skills</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-slate-500 hover:text-blue-500 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span>Review</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 pt-16 min-h-screen">
+<div class="max-w-[768px] mx-auto px-6 py-12">
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-high h-1 mb-12 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[66%] transition-all duration-500"></div>
+</div>
+<!-- Main Form Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 shadow-sm">
+<div class="mb-8">
+<h1 class="font-h1 text-h1 text-on-background mb-2">Certifications &amp; Coursework</h1>
+<p class="font-body-base text-on-surface-variant">List your relevant professional development.</p>
+</div>
+<!-- Form Sections -->
+<div class="flex flex-col gap-8">
+<!-- Course Entry 1 -->
+<div class="p-6 rounded-lg bg-surface-container-low border border-outline-variant relative group">
+<button class="absolute top-4 right-4 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-form-gap">
+<div class="md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">COURSE/CERTIFICATION NAME</label>
+<input class="w-full px-input-padding-x py-input-padding-y rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:outline-none font-input-text text-input-text transition-shadow" type="text" value="Advanced System Architecture"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">INSTITUTION/PLATFORM</label>
+<input class="w-full px-input-padding-x py-input-padding-y rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:outline-none font-input-text text-input-text transition-shadow" type="text" value="Coursera / Stanford University"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">COMPLETION DATE</label>
+<div class="relative">
+<input class="w-full px-input-padding-x py-input-padding-y rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:outline-none font-input-text text-input-text transition-shadow" type="text" value="March 2023"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline text-sm">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Entry 2 -->
+<div class="p-6 rounded-lg bg-surface-container-low border border-outline-variant relative group">
+<button class="absolute top-4 right-4 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-form-gap">
+<div class="md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">COURSE/CERTIFICATION NAME</label>
+<input class="w-full px-input-padding-x py-input-padding-y rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:outline-none font-input-text text-input-text transition-shadow" placeholder="e.g. AWS Certified Solutions Architect" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">INSTITUTION/PLATFORM</label>
+<input class="w-full px-input-padding-x py-input-padding-y rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:outline-none font-input-text text-input-text transition-shadow" placeholder="e.g. Amazon Web Services" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">COMPLETION DATE</label>
+<div class="relative">
+<input class="w-full px-input-padding-x py-input-padding-y rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-primary focus:outline-none font-input-text text-input-text transition-shadow" placeholder="MM/YYYY" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline text-sm">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Another Button -->
+<button class="w-full py-6 border-2 border-dashed border-outline-variant rounded-lg flex items-center justify-center gap-2 text-on-surface-variant hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">add_circle</span>
+<span class="font-body-base font-semibold">Add another course</span>
+</button>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-12 pt-8 border-t border-outline-variant flex items-center justify-between">
+<button class="flex items-center gap-2 px-6 py-2 rounded-lg font-semibold text-secondary hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                        Back
+                    </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-primary-container transition-all active:scale-[0.98]">
+                        Save &amp; Continue
+                    </button>
+</div>
+</div>
+<!-- Help/Tip Section -->
+<div class="mt-8 flex items-start gap-4 p-4 rounded-xl bg-secondary-container/30">
+<span class="material-symbols-outlined text-secondary">lightbulb</span>
+<p class="text-body-sm text-secondary font-body-sm">
+<strong>Pro Tip:</strong> Only include certifications that are relevant to the role you're applying for. Focus on recent professional development within the last 5 years.
+                </p>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9ff",
+                    "tertiary-fixed": "#ffdcbd",
+                    "outline-variant": "#c4c6d2",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "tertiary": "#864f02",
+                    "surface-tint": "#3d5ca4",
+                    "surface-bright": "#f9f9ff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "outline": "#747782",
+                    "on-background": "#1a1b20",
+                    "primary-fixed": "#dae2ff",
+                    "surface-container-highest": "#e2e2e9",
+                    "inverse-surface": "#2f3035",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "surface-dim": "#d9d9e0",
+                    "tertiary-container": "#a4671e",
+                    "surface-container-high": "#e8e7ee",
+                    "surface-container": "#ededf4",
+                    "background": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e2e2e9",
+                    "secondary": "#545e7c",
+                    "on-primary-fixed-variant": "#22438a",
+                    "primary-container": "#5472bc",
+                    "on-tertiary-fixed": "#2c1600",
+                    "on-secondary-fixed": "#101a36",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#fefcff",
+                    "on-surface-variant": "#444651",
+                    "secondary-container": "#cfd9fd",
+                    "inverse-primary": "#b1c5ff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#dae2ff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f0f0f7",
+                    "on-surface": "#1a1b20",
+                    "primary": "#3a59a1",
+                    "on-primary-fixed": "#001947",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f3f3fa",
+                    "on-secondary-container": "#545e7d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "form-gap": "24px",
+                    "section-margin": "48px",
+                    "input-padding-y": "10px",
+                    "container-max-width": "768px",
+                    "base-unit": "4px",
+                    "input-padding-x": "12px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h1": ["Manrope"],
+                    "input-text": ["Inter"],
+                    "h2": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .resume-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            opacity: 0.05;
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-base text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-6 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-black text-slate-900 dark:text-white font-h1">StructureFlow</h1>
+<p class="text-xs text-slate-500 font-body-sm">Resume Builder</p>
+</div>
+<div class="flex-1 space-y-1">
+<a class="text-slate-600 dark:text-slate-400 px-4 py-3 flex items-center gap-3 font-manrope text-sm hover:text-[#5775bf] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all scale-100 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                Personal Info
+            </a>
+<a class="text-slate-600 dark:text-slate-400 px-4 py-3 flex items-center gap-3 font-manrope text-sm hover:text-[#5775bf] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all scale-100 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+                Education
+            </a>
+<a class="text-slate-600 dark:text-slate-400 px-4 py-3 flex items-center gap-3 font-manrope text-sm hover:text-[#5775bf] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all scale-100 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+                Experience
+            </a>
+<a class="text-slate-600 dark:text-slate-400 px-4 py-3 flex items-center gap-3 font-manrope text-sm hover:text-[#5775bf] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all scale-100 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+                Summary &amp; Skills
+            </a>
+<a class="text-[#5775bf] font-bold border-r-2 border-[#5775bf] bg-white dark:bg-slate-900 px-4 py-3 flex items-center gap-3 font-manrope text-sm transition-all scale-100 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+                Review
+            </a>
+</div>
+<div class="mt-auto px-4 space-y-1">
+<a class="text-slate-600 dark:text-slate-400 px-4 py-3 flex items-center gap-3 font-manrope text-sm hover:text-[#5775bf] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="text-slate-600 dark:text-slate-400 px-4 py-3 flex items-center gap-3 font-manrope text-sm hover:text-[#5775bf] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<div class="px-4 pt-4">
+<button class="w-full bg-[#5775bf] text-white py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 active:scale-95 transition-all">
+                    Export PDF
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-40 flex items-center justify-between w-full px-8 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-[#5775bf] tracking-tight font-h1">Final Review</span>
+<span class="bg-primary-container text-on-primary px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest">Step 5 of 5</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full bg-slate-200 border border-slate-300 overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="professional headshot of a smiling man in a business suit with neutral office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTunOtsrfSVURLeU-w9DKPOoaGpgqmXzEMcLmW-LqA_FUMmyXCx3v78EhdG5qzSk62_K42fqB5Bmg8LXSubqNW862egu4rdw0HLWXuc0HJncbPkMFfkH9oA2qIp9zf2QBnH6OiAVe1iAOWgr1-vs4yse1jX8llCBWUosvFUoVVCxxfoVQ7aM6Zjw_n6-R3jwMwKyEnvoDx6nfubQCyR48h7Ha5nkCJoQgVs31LRWMOpPSeCAj-HyVOeOEyWEOGpHNAxwNKFVlkrVTH"/>
+</div>
+</div>
+</header>
+<!-- Form Canvas -->
+<div class="max-w-[1024px] mx-auto px-8 py-10">
+<div class="flex flex-col lg:flex-row gap-10">
+<!-- Left: Preview Section -->
+<div class="flex-1 space-y-6">
+<h2 class="font-h2 text-h2 text-on-surface">Resume Preview</h2>
+<div class="relative bg-white border border-outline-variant rounded-xl overflow-hidden resume-shadow aspect-[1/1.414] p-12">
+<!-- Preview Content (Simulated) -->
+<div class="space-y-8 select-none">
+<div class="border-b-4 border-[#5775bf] pb-6">
+<h3 class="text-2xl font-bold text-slate-900 font-h1">ALEXANDER R. THOMPSON</h3>
+<p class="text-slate-600 font-body-sm mt-1">Senior Product Designer | New York, NY | alex.thompson@email.com</p>
+</div>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-[#5775bf] uppercase tracking-widest">Professional Summary</h4>
+<p class="text-slate-700 text-sm leading-relaxed">Dedicated Product Designer with over 8 years of experience in creating user-centered digital products. Proven track record of improving user engagement by 40% through innovative UI/UX solutions and data-driven design strategies.</p>
+</div>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-[#5775bf] uppercase tracking-widest">Work Experience</h4>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between font-bold text-slate-900 text-sm">
+<span>Lead UI/UX Designer, TechFlow Systems</span>
+<span>2019 — Present</span>
+</div>
+<p class="text-slate-500 text-xs italic mb-2">Manhattan, NY</p>
+<ul class="text-slate-700 text-sm list-disc pl-4 space-y-1">
+<li>Led a team of 5 designers to overhaul the core SaaS platform.</li>
+<li>Implemented a new design system that reduced dev time by 25%.</li>
+</ul>
+</div>
+<div>
+<div class="flex justify-between font-bold text-slate-900 text-sm">
+<span>Visual Designer, Creative Pulse Agency</span>
+<span>2016 — 2019</span>
+</div>
+<p class="text-slate-500 text-xs italic mb-2">Brooklyn, NY</p>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-[#5775bf] uppercase tracking-widest">Education</h4>
+<div class="flex justify-between font-bold text-slate-900 text-sm">
+<span>BFA in Interaction Design, School of Visual Arts</span>
+<span>2012 — 2016</span>
+</div>
+</div>
+</div>
+<!-- Watermark for Preview -->
+<div class="watermark text-6xl font-black text-slate-900">
+                            PREVIEW ONLY • PREVIEW ONLY • PREVIEW ONLY
+                        </div>
+<div class="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2">
+<div class="bg-slate-900/90 text-white px-6 py-3 rounded-full flex items-center gap-3 backdrop-blur-md">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span class="text-xs font-medium uppercase tracking-wider">Unlock high-quality PDF to download</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Summary & Checkout Section -->
+<div class="w-full lg:w-[380px] space-y-8">
+<!-- Order Summary Card -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-6 space-y-6">
+<h3 class="font-h2 text-lg text-on-surface">Order Summary</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+</div>
+<div>
+<p class="text-sm font-bold">Premium Resume</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-tighter">Professional Template</p>
+</div>
+</div>
+<span class="font-bold text-[#5775bf]">$14.99</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm text-slate-600">
+<span>Subtotal</span>
+<span>$14.99</span>
+</div>
+<div class="flex justify-between text-sm text-slate-600">
+<span>Taxes</span>
+<span>$1.20</span>
+</div>
+<div class="flex justify-between items-center pt-2 mt-2 border-t border-slate-200">
+<span class="font-bold">Total Amount</span>
+<span class="text-xl font-black text-[#5775bf]">$16.19</span>
+</div>
+</div>
+</div>
+<!-- Payment Form -->
+<div class="space-y-4">
+<label class="block">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-2 block">Card Number</span>
+<div class="relative">
+<input class="w-full h-11 px-4 bg-white border border-outline-variant rounded-lg font-input-text text-input-text focus:ring-2 focus:ring-[#5775bf] focus:border-transparent outline-none transition-all" placeholder="**** **** **** 4421" type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
+<div class="w-8 h-5 bg-slate-200 rounded-sm"></div>
+<div class="w-8 h-5 bg-slate-200 rounded-sm"></div>
+</div>
+</div>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="block">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-2 block">Expiry Date</span>
+<input class="w-full h-11 px-4 bg-white border border-outline-variant rounded-lg font-input-text text-input-text focus:ring-2 focus:ring-[#5775bf] outline-none transition-all" placeholder="MM/YY" type="text"/>
+</label>
+<label class="block">
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-2 block">CVC</span>
+<input class="w-full h-11 px-4 bg-white border border-outline-variant rounded-lg font-input-text text-input-text focus:ring-2 focus:ring-[#5775bf] outline-none transition-all" placeholder="***" type="text"/>
+</label>
+</div>
+<button class="w-full bg-[#5775bf] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-[#4a63a3] transition-all active:scale-95 shadow-lg shadow-[#5775bf]/20">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                                Complete &amp; Download
+                            </button>
+<p class="text-center text-[11px] text-slate-500 px-4">
+                                Secure payment powered by Stripe. You'll receive a high-res PDF and access to unlimited edits.
+                            </p>
+</div>
+</div>
+<!-- Testimonial/Trust Badge -->
+<div class="bg-white border border-outline-variant rounded-xl p-4 flex items-center gap-4">
+<div class="flex -space-x-2">
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white" data-alt="close up of a woman with curly hair smiling outdoors in soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMiujkN9v4soSs-AWfNlCvQ9Ajpg5ncm25R-ONhEcXdBcfKXqshAHZBDxE52HiyIs1c0XO_trSTO4HjBUWv0WEuX6jRPvDgP63WyNCHq0RzVvQCjdRiDXPG0IenPZdijgNG3IM_4hr2mXoUBOyv5CyBtWgnnGAysqrPhsIFGVP0gELGgoY5DswUScpBzOfjzFE3dKQG6hlLRT26kxUQ7UEXZzzdoS1k4I3Nijy1g05whZVdnOiL-aYLinU_J-HFt-cRVZizR2EDcvt"/>
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white" data-alt="smiling man in blue shirt with professional blurred office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWU2Rbmp8rlqfbhLjrBNSey3ED21w9yPm-ZhsWERHA883IwNyV2fwYe6CSa6hUlySd_DvCATaIpwEvNIaOuFCdE_m7lvxXGuYlEvH5Y9Qv_8djgagLG2sP12lp4EezvdBqRSKEYALGOGH_SZ4NiIgoB31CJKMFaW-8RTO_muod-rVs16GmCYfdq_Mub2rXN2eyxhT2CFVF1s_4D9p03f227qAGHkF0mvtdMWO4Ai-LWDvWutqnSAtk_uoFqAsvh8Cllm-n2GjAolLJ"/>
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional man in a grey sweater smiling confidently at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD84THqg0Afe8smzWvfr4Q6VSZ3ceXeFx0SCGw7Tc8BtjoOCB02RXPQWbcvWumX-USdz1drRWIXJCnrS3Jr_OhGS7MhTreTMLRSoOd2jBpC8Av4j-oHv6hcEeqA5us-XAQYV41DQO7eX_oWB6sm0wagQRbfPqmaGm7_HLyIcdlLkBRXjA3Zk4pkV43i0HSG6qhFrlLdTQCE4XBIBKGahGJQmFqekCCPtwfLA5-Ojx_eoIfYCGaeOs9NpRWfPyq9fJkGEZ8npke3JjYh"/>
+</div>
+<div>
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-[10px] font-bold text-slate-900 uppercase">Trusted by 12,000+ professionals</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full max-w-3xl mx-auto py-8 px-4 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-100 dark:border-slate-800">
+<p class="font-manrope text-xs text-slate-500">© 2024 StructureFlow SaaS. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="font-manrope text-xs text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-manrope text-xs text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200" href="#">Help Center</a>
+</div>
+</footer>
+</main>
+</body></html>

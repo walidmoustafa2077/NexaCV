@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In | StructureFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#5472bc",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#101a36",
+                        "surface-container-high": "#e8e7ee",
+                        "tertiary-container": "#a4671e",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "secondary": "#545e7c",
+                        "surface-variant": "#e2e2e9",
+                        "on-secondary-container": "#545e7d",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "secondary-container": "#cfd9fd",
+                        "primary-fixed": "#dae2ff",
+                        "on-surface-variant": "#444651",
+                        "surface-container": "#ededf4",
+                        "secondary-fixed": "#dae2ff",
+                        "inverse-primary": "#b1c5ff",
+                        "background": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d9d9e0",
+                        "surface-container-highest": "#e2e2e9",
+                        "outline": "#747782",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-tint": "#3d5ca4",
+                        "on-primary-fixed": "#001947",
+                        "on-tertiary-fixed": "#2c1600",
+                        "surface": "#f9f9ff",
+                        "outline-variant": "#c4c6d2",
+                        "on-primary-container": "#fefcff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f3f3fa",
+                        "primary": "#3a59a1",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "on-primary-fixed-variant": "#22438a",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#864f02",
+                        "on-background": "#1a1b20",
+                        "on-surface": "#1a1b20",
+                        "tertiary-fixed": "#ffdcbd",
+                        "inverse-surface": "#2f3035",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f0f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "input-padding-y": "10px",
+                        "section-margin": "48px",
+                        "form-gap": "24px",
+                        "input-padding-x": "12px",
+                        "container-max-width": "768px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "input-text": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "input-text": ["15px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Auth Container -->
+<div class="w-full max-w-[container-max-width] mx-auto flex flex-col items-center">
+<!-- Logo - Using exact product name from JSON -->
+<div class="mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="architecture">architecture</span>
+<span class="font-h1 text-h2 text-primary">StructureFlow</span>
+</div>
+<!-- Main Auth Card -->
+<div class="w-full max-w-[480px] bg-surface-container-low p-8 md:p-10 rounded-xl border border-outline-variant shadow-sm transition-all duration-300">
+<div class="mb-section-margin text-center">
+<h1 class="font-h1 text-h1 text-on-surface mb-2">Welcome Back</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Access your high-integrity resume builder workspace.</p>
+</div>
+<form class="space-y-form-gap">
+<!-- Email Field -->
+<div class="space-y-1.5">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block" for="email">Email Address</label>
+<div class="relative group">
+<input class="w-full px-input-padding-x py-input-padding-y bg-surface-container-lowest border border-outline-variant rounded-lg font-input-text text-input-text focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all placeholder:text-outline-variant" id="email" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block" for="password">Password</label>
+<a class="font-body-sm text-body-sm text-primary hover:underline transition-all" href="#">Forgot password?</a>
+</div>
+<div class="relative group">
+<input class="w-full px-input-padding-x py-input-padding-y bg-surface-container-lowest border border-outline-variant rounded-lg font-input-text text-input-text focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 text-primary bg-surface-container-lowest border-outline-variant rounded focus:ring-primary" id="remember" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" for="remember">Keep me logged in</label>
+</div>
+<!-- Sign In Button -->
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-6 rounded-lg font-h2 text-body-base transition-all transform active:scale-[0.98] shadow-sm" type="submit">
+                    Sign In
+                </button>
+</form>
+<!-- Divider -->
+<div class="relative my-8">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-label-caps">
+<span class="px-3 bg-surface-container-low text-on-surface-variant uppercase">Or continue with</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:bg-surface-container transition-all active:scale-[0.98]">
+<img alt="Google" class="w-4 h-4" data-alt="Official Google logo icon with its distinctive colorful G branding on a clean white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB-Ah8LFwIGzkSNlcoRR7YAYsJaQd5Vk41yNnRJY7tntDIljn8gRboqygxjsw3VJ81dZymxp6jE5KnPiooc40r_FPN6Zn8wZ-368ywbAk7pbX5k7IqgQN6VhtjTp9_WN6tPTQnjYqyNEeXUJi0p9jqbVCGyhnh8M2_cn3yPj0Y5adItIZi7MJwVMW6_XsGHRoo3PX3i0-FHCc4VtHYypXIIn09FhbOTiTXsvNFDHN2zvkvx5PkWYLciQsHQsbCYJp2AosZ6UfjNjwl"/>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-2.5 px-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:bg-surface-container transition-all active:scale-[0.98]">
+<img alt="LinkedIn" class="w-4 h-4" data-alt="LinkedIn professional networking logo icon in blue and white colors for social authentication" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD2t3fT6QriZV1fj8Ff_wlqqDqkKnY6Hys5A3XTAcieUv00PngFrrhwndVmn6a-zvd0c4c17Elz6smjhB852zC7-frD5HWjVWPeswDofCwXPh5uTUuyWp_Q7ji91_tpnue4Vj87VXCj-W6bO662MfvsCjcU0sSpvo-T6lE_jeCt1ToBBWSdP-toWlwBBXim6SKfsOnuI_OWVgd_wJOtvjavSosBypbicL2rJXB8WK0eWrr041lyuh3uwPnlt1BrmtJc2IaRyPRAmQM"/>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">LinkedIn</span>
+</button>
+</div>
+</div>
+<!-- Footer Link -->
+<div class="mt-8 text-center">
+<p class="font-body-base text-body-sm text-on-surface-variant">
+                Don't have an account? 
+                <a class="text-primary font-semibold hover:underline" href="#">Start building for free</a>
+</p>
+</div>
+<!-- Trust Indicator -->
+<div class="mt-section-margin flex items-center justify-center gap-6 opacity-60">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-sm" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-caps text-label-caps uppercase">Bank-grade security</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-body-sm" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-caps text-label-caps uppercase">Privacy focused</span>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+<div class="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-primary opacity-[0.03] rounded-full blur-[120px]"></div>
+<div class="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] bg-tertiary opacity-[0.03] rounded-full blur-[120px]"></div>
+</div>
+</body></html>

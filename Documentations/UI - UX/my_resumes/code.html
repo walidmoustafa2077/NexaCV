@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-fixed": "#dae2ff",
+                "inverse-surface": "#2f3035",
+                "on-surface-variant": "#444651",
+                "secondary-fixed-dim": "#bcc6e9",
+                "inverse-on-surface": "#f0f0f7",
+                "primary-container": "#5472bc",
+                "on-error-container": "#93000a",
+                "on-primary-fixed": "#001947",
+                "on-primary-container": "#fefcff",
+                "on-surface": "#1a1b20",
+                "surface": "#f9f9ff",
+                "on-tertiary-container": "#fffbff",
+                "on-tertiary-fixed": "#2c1600",
+                "on-primary": "#ffffff",
+                "surface-container-highest": "#e2e2e9",
+                "tertiary-fixed": "#ffdcbd",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed-variant": "#693c00",
+                "on-background": "#1a1b20",
+                "on-secondary-fixed-variant": "#3c4663",
+                "tertiary-container": "#a4671e",
+                "tertiary": "#864f02",
+                "outline-variant": "#c4c6d2",
+                "surface-tint": "#3d5ca4",
+                "surface-dim": "#d9d9e0",
+                "surface-variant": "#e2e2e9",
+                "outline": "#747782",
+                "error": "#ba1a1a",
+                "primary": "#3a59a1",
+                "on-error": "#ffffff",
+                "inverse-primary": "#b1c5ff",
+                "surface-container-low": "#f3f3fa",
+                "surface-container": "#ededf4",
+                "surface-bright": "#f9f9ff",
+                "on-secondary-container": "#545e7d",
+                "primary-fixed-dim": "#b1c5ff",
+                "on-primary-fixed-variant": "#22438a",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-high": "#e8e7ee",
+                "secondary": "#545e7c",
+                "on-secondary": "#ffffff",
+                "secondary-fixed": "#dae2ff",
+                "tertiary-fixed-dim": "#ffb86e",
+                "secondary-container": "#cfd9fd",
+                "on-secondary-fixed": "#101a36",
+                "background": "#f9f9ff",
+                "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "base-unit": "4px",
+                "section-margin": "48px",
+                "input-padding-y": "10px",
+                "input-padding-x": "12px",
+                "container-max-width": "768px",
+                "form-gap": "24px"
+            },
+            "fontFamily": {
+                "label-caps": ["Inter"],
+                "h2": ["Manrope"],
+                "h1": ["Manrope"],
+                "body-sm": ["Inter"],
+                "body-base": ["Inter"],
+                "input-text": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+        }
+    </style>
+</head>
+<body class="font-body-base text-on-background min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col p-4 gap-2 bg-slate-50 border-r border-slate-200 h-screen w-64 fixed left-0 z-40">
+<div class="flex flex-col gap-1 mb-8 px-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">architecture</span>
+</div>
+<h1 class="text-lg font-bold text-slate-900 font-h2">StructureFlow</h1>
+</div>
+<p class="text-slate-500 font-body-sm">Resume Architect</p>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-all duration-150 font-manrope antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active Navigation: My Resumes -->
+<a class="flex items-center gap-3 px-3 py-2 text-blue-600 font-semibold bg-blue-50 rounded-lg transition-all duration-150 font-manrope antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>My Resumes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-all duration-150 font-manrope antialiased" href="#">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+<span>Templates</span>
+</a>
+</nav>
+<div class="mt-auto p-2">
+<button class="w-full py-3 px-4 bg-primary text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:opacity-90 active:translate-x-1 duration-150 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Create New Resume
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 h-screen overflow-y-auto">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between px-6 h-16 w-full sticky top-0 z-50 bg-white border-b border-slate-200 font-manrope text-sm tracking-tight">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-black text-blue-600 md:hidden">StructureFlow</h2>
+<div class="hidden md:flex items-center bg-slate-100 rounded-full px-3 py-1.5 gap-2 border border-slate-200 w-64 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full text-on-surface" placeholder="Search resumes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200 cursor-pointer hover:ring-2 hover:ring-primary/20 transition-all">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional headshot of a smiling man in a business casual attire with a soft office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtehYhcOtHViE-2-OHi8mzaSVeFg15Aq9fcplebNv5j_FB5Db6Y-P-r-7kamNaGIpOFsS-owc9OPJO2D9UntNmVTXzhlbjmleCeC6y1IrFtSfB4Gydy74Wxnoajn0Eu3ci1bRkntGdwEuCKHgpimteLYdXKsJYm2FLuBJgKpliz1ZCmq1phobjaKH9FNShgZAYjijDRxdpP6ypVX3l_5AerDEbefYymlHLlO9qTIaOiZS-u5GmpMYwJ9yD0NZ231PqIbM8orK2jGJ2"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="p-8 max-w-[1200px] mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div class="space-y-1">
+<h1 class="font-h1 text-h1 text-on-surface">My Resumes</h1>
+<p class="font-body-base text-on-surface-variant">Manage and organize your professional profiles.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex p-1 bg-surface-container rounded-lg">
+<button class="p-2 bg-white rounded-md shadow-sm text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-slate-700">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg font-semibold text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Sort by: Recent
+                    </button>
+</div>
+</div>
+<!-- Bento Grid of Resumes -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Create New Card -->
+<div class="group relative flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-xl p-8 hover:border-primary/50 hover:bg-primary-fixed/10 transition-all cursor-pointer h-[400px]">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<span class="font-h2 text-primary">Create New Resume</span>
+<p class="font-body-sm text-on-surface-variant text-center mt-2 px-6">Start with a professional template or from scratch.</p>
+</div>
+<!-- Resume Card 1 -->
+<div class="group relative bg-white rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all flex flex-col h-[400px]">
+<div class="flex-1 bg-slate-100 rounded-t-xl overflow-hidden relative">
+<img alt="Resume Preview" class="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="neatly organized modern resume document template with clean typography and blue accents on a light background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBql7KEyhkaFb0OMYRdC-NkThHCUTLcW5oAKMc2b0ggbrCwEhxA9bh3eeibWQP12sHhRhkKf34TJoIPvHmRWddO9TfuRncPx8kWfsqpRcnDsdP3TiLI4GBpgnl1_Z_GPrAYZHBiY_2PYCISpPdkfh-NqK6NKwAtxcyQGiHsIgoEjFujCbKKbPXVHWx-71x9TH31dS8qDLR45l1CwOs8hPT7yn3t_-SZbrbJXhqSSiBAT6nW1XO4QYg59UOdgJdk6hTJ_UaKJ65n46i"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 shadow-lg hover:bg-primary/90">
+<span class="material-symbols-outlined text-lg">edit</span>
+                                Edit
+                            </button>
+</div>
+<div class="absolute top-3 right-3">
+<button class="p-1.5 bg-white/90 backdrop-blur-sm rounded-lg border border-slate-200 hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-slate-700">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-5 bg-white rounded-b-xl border-t border-slate-100">
+<div class="flex items-start justify-between mb-2">
+<h3 class="font-h2 text-lg text-on-surface group-hover:text-primary transition-colors">Senior Product Designer</h3>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold uppercase tracking-wider">Default</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs font-body-sm">Edited 2h ago</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span class="text-xs font-body-sm">42 Views</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Resume Card 2 -->
+<div class="group relative bg-white rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all flex flex-col h-[400px]">
+<div class="flex-1 bg-slate-100 rounded-t-xl overflow-hidden relative">
+<img alt="Resume Preview" class="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="minimalist white resume template with grey text blocks and a professional sidebar layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLl3yoYaocBDPt2BzfU2CjQN8URsOsZYm3PXp6oqyyM9TwiSD2TkZojQiEqTaGPx7JdAbe1Gxyl-qTdAF6y1JhF3_i7mBKJNUydPysN_KQv8aGMRk5B5dzi3zkb5UlkX-f94ygfpADT4u3Evnv-UNEzxz-dYAlTOlUbV3QOKS16Y4zqE524Hs8f5mJ8gXUKsXiLGyluPV7mqEfp64GJ4QgtJSyQj10GHaRnS73GeVVOyfz4oIyuc_jJoSIEfM1mvXFkFkcTkH49R5A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 shadow-lg hover:bg-primary/90">
+<span class="material-symbols-outlined text-lg">edit</span>
+                                Edit
+                            </button>
+</div>
+<div class="absolute top-3 right-3">
+<button class="p-1.5 bg-white/90 backdrop-blur-sm rounded-lg border border-slate-200 hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-slate-700">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-5 bg-white rounded-b-xl border-t border-slate-100">
+<div class="flex items-start justify-between mb-2">
+<h3 class="font-h2 text-lg text-on-surface group-hover:text-primary transition-colors">Front-end Developer</h3>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs font-body-sm">Edited Oct 12</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span class="text-xs font-body-sm">12 Views</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Resume Card 3 -->
+<div class="group relative bg-white rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all flex flex-col h-[400px]">
+<div class="flex-1 bg-slate-100 rounded-t-xl overflow-hidden relative">
+<img alt="Resume Preview" class="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="elegant executive resume design with sophisticated serif typography and dark navy divider lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnhdMCpISSmBAKdlsFfCjYQNhcDK3oTAqefg-1U1qr4nY4Lz1ihX40H2sbj_V6av1MaPsDnxBm9cGDG93LkpFetbFbrYF7XXkDJ5w5hCu4hU9b0HjuJjzpYOGmlKkyJuiO3npehBunyHY6NqToY6MsdsZlRMhIXcdUKZ4uUkMSFijQ-ZEMHiRzWDZQ3SWngqH8wHJfykDNbqkTmVVaxVE-i019sn5cZ8Ut7IAuZ4Fukdp_eBx26g5jEz6FOdxMiv5ki7NWTlNQHpO-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 shadow-lg hover:bg-primary/90">
+<span class="material-symbols-outlined text-lg">edit</span>
+                                Edit
+                            </button>
+</div>
+<div class="absolute top-3 right-3">
+<button class="p-1.5 bg-white/90 backdrop-blur-sm rounded-lg border border-slate-200 hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-slate-700">more_vert</span>
+</button>
+</div>
+</div>
+<div class="p-5 bg-white rounded-b-xl border-t border-slate-100">
+<div class="flex items-start justify-between mb-2">
+<h3 class="font-h2 text-lg text-on-surface group-hover:text-primary transition-colors">Marketing Strategist</h3>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Reviewing</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs font-body-sm">Edited Sep 28</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span class="text-xs font-body-sm">156 Views</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats/Insight Section using Bento Style -->
+<section class="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-2 bg-primary-container p-6 rounded-2xl text-white flex flex-col justify-between shadow-lg shadow-primary-container/20">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-4xl opacity-50">auto_awesome</span>
+<span class="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold">Pro Feature</span>
+</div>
+<div class="mt-8">
+<h4 class="font-h2 text-xl mb-2">Optimize Your Resumes</h4>
+<p class="font-body-sm text-white/80 max-w-sm mb-4">Use our AI-powered ATS scanner to see how your resumes rank against top job descriptions.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-lg font-bold hover:bg-surface-bright transition-colors">Scan Resume</button>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-2xl border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="text-4xl font-bold text-primary mb-1">84%</span>
+<p class="font-label-caps text-on-surface-variant">Avg. Profile Strength</p>
+<div class="w-full bg-outline-variant h-1.5 rounded-full mt-4">
+<div class="bg-primary h-1.5 rounded-full w-[84%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-2xl border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="text-4xl font-bold text-primary mb-1">12</span>
+<p class="font-label-caps text-on-surface-variant">Export Credits Left</p>
+<button class="mt-4 text-xs font-bold text-primary hover:underline">Get more</button>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200 flex items-center justify-around z-50">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-600 font-bold">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] font-bold">Resumes</span>
+</button>
+<div class="relative -top-6">
+<button class="w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white ring-4 ring-white">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">style</span>
+<span class="text-[10px] font-medium">Templates</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+</body></html>

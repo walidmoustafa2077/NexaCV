@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Import PDF | StructureFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#e8e7ee",
+            "secondary-fixed": "#dae2ff",
+            "surface": "#f9f9ff",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#ffb86e",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "background": "#f9f9ff",
+            "surface-dim": "#d9d9e0",
+            "surface-bright": "#f9f9ff",
+            "on-secondary-container": "#545e7d",
+            "surface-container-low": "#f3f3fa",
+            "error": "#ba1a1a",
+            "on-background": "#1a1b20",
+            "primary-fixed": "#dae2ff",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#101a36",
+            "primary-container": "#5472bc",
+            "inverse-primary": "#b1c5ff",
+            "inverse-surface": "#2f3035",
+            "outline-variant": "#c4c6d2",
+            "on-secondary-fixed-variant": "#3c4663",
+            "secondary-fixed-dim": "#bcc6e9",
+            "secondary-container": "#cfd9fd",
+            "on-tertiary-fixed-variant": "#693c00",
+            "surface-variant": "#e2e2e9",
+            "on-tertiary-container": "#fffbff",
+            "primary": "#3a59a1",
+            "secondary": "#545e7c",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#f0f0f7",
+            "surface-container-highest": "#e2e2e9",
+            "on-primary-fixed-variant": "#22438a",
+            "on-primary-fixed": "#001947",
+            "on-surface": "#1a1b20",
+            "outline": "#747782",
+            "on-tertiary-fixed": "#2c1600",
+            "tertiary": "#864f02",
+            "on-error": "#ffffff",
+            "tertiary-fixed": "#ffdcbd",
+            "primary-fixed-dim": "#b1c5ff",
+            "on-primary-container": "#fefcff",
+            "surface-tint": "#3d5ca4",
+            "tertiary-container": "#a4671e",
+            "surface-container": "#ededf4",
+            "on-surface-variant": "#444651"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "base-unit": "4px",
+            "container-max-width": "768px",
+            "section-margin": "48px",
+            "input-padding-x": "12px",
+            "input-padding-y": "10px",
+            "form-gap": "24px"
+          },
+          "fontFamily": {
+            "h2": ["Manrope"],
+            "body-base": ["Inter"],
+            "h1": ["Manrope"],
+            "body-sm": ["Inter"],
+            "label-caps": ["Inter"],
+            "input-text": ["Inter"]
+          },
+          "fontSize": {
+            "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #e2e2e9;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-base text-on-surface">
+<!-- Shell Wrapper -->
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col bg-slate-50 dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800/60 h-screen w-64 left-0 z-40">
+<div class="flex flex-col p-4 gap-2 h-full">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 px-2 py-4 mb-4">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-white" data-icon="architecture">architecture</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-slate-900 dark:text-white leading-none">StructureFlow</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mt-1">Precision Resume Builder</p>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 rounded-lg shadow-sm font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>My Resumes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-indigo-300 hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out rounded-lg font-manrope text-sm font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span>Templates</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/40">
+<div class="flex items-center gap-3 px-2">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-white" data-alt="Professional headshot of a smiling man in a business casual outfit against a clean neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeGXPJOJKOrX5yKu13aA8Me4RAK-dg2RhkSSSQCVPI57rOfYzLeixLncc-5auQPXAaso1oMovv0L15jmPVL7M437Woz3OcOtuFatpsP9ZpN-HTsLwqCDvpqyhjkWCwYAqWDXNfCAPqVDxLrLZUP8BOIRVAgF0kgACfaG3kdmVXEYeBC-rpKZif6_jrl3K7vV7A08BckoIE83NCeVOx3WUmcreiJr_IFh8PHPJzmbzPbikiXOvKXJlyu9lR3a-S3an1AR_xMQoijtkA"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Alex Morgan</p>
+<p class="text-xs text-slate-500 truncate">Professional Plan</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-slate-950 border-b border-slate-200/60 dark:border-slate-800/60 flex justify-between items-center px-6 h-16 w-full z-50">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400 font-manrope">StructureFlow</span>
+<span class="mx-2 text-outline-variant">/</span>
+<span class="font-manrope text-sm font-medium text-slate-600">Import PDF</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="flex items-center gap-2 pl-2 pr-1 py-1 rounded-full border border-outline-variant hover:bg-slate-50 transition-colors">
+<span class="text-sm font-medium px-2">Help</span>
+<div class="w-7 h-7 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="question_mark">question_mark</span>
+</div>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto custom-scroll bg-surface">
+<div class="max-w-[768px] mx-auto px-6 py-12">
+<!-- Stepped Progress Bar (Contextual for Resume Builder Flow) -->
+<div class="flex items-center gap-4 mb-12">
+<div class="flex flex-1 items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-sm font-bold shadow-md">1</div>
+<div class="h-1 flex-1 bg-primary-fixed-dim rounded-full">
+<div class="h-full w-full bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex flex-1 items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm font-bold">2</div>
+<div class="h-1 flex-1 bg-surface-container-high rounded-full"></div>
+</div>
+<div class="flex flex-1 items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm font-bold">3</div>
+<div class="h-1 flex-1 bg-surface-container-high rounded-full"></div>
+</div>
+</div>
+<!-- Page Header -->
+<header class="mb-section-margin text-center">
+<h2 class="font-h1 text-h1 text-on-background mb-3">Import your resume</h2>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-lg mx-auto">
+              Our AI engine will analyze your PDF and automatically map your experience, skills, and education into the builder.
+            </p>
+</header>
+<!-- Drop Zone Section -->
+<section class="space-y-6">
+<div class="relative group">
+<!-- Animated Background Glow -->
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-tertiary/20 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+<div class="relative border-2 border-dashed border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low hover:border-primary transition-all duration-300 rounded-xl p-12 text-center cursor-pointer group">
+<input accept="application/pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" type="file"/>
+<div class="flex flex-col items-center gap-4">
+<div class="w-16 h-16 bg-primary-fixed-dim text-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-4xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<div class="space-y-1">
+<p class="font-h2 text-lg text-on-surface">Click to upload or drag and drop</p>
+<p class="text-body-sm text-on-surface-variant">PDF (MAX. 5MB)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento-style Information Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+<div class="bg-surface-container rounded-lg p-5 border border-outline-variant/30 flex gap-4">
+<div class="text-primary mt-1">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">AI-Powered Parsing</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">We extract dates, roles, and descriptions with 98% accuracy to save you hours of typing.</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-5 border border-outline-variant/30 flex gap-4">
+<div class="text-tertiary mt-1">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Privacy Focused</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Your data is processed securely. We never share your personal details with third parties.</p>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="flex flex-col gap-4 mt-8">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-4 rounded-lg font-h2 text-base transition-all duration-200 shadow-lg shadow-primary/20 active:scale-[0.98] flex items-center justify-center gap-2">
+<span>Parse Resume</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full text-secondary hover:bg-secondary-container/30 py-3 rounded-lg font-body-base text-sm transition-colors active:scale-[0.98]">
+                Skip and start from scratch
+              </button>
+</div>
+</section>
+<!-- Tips Section -->
+<div class="mt-section-margin pt-8 border-t border-outline-variant/20">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-6">TIPS FOR BEST RESULTS</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" data-icon="check_circle">check_circle</span>
+<p class="text-body-sm text-on-surface-variant">Use standard PDF formats (avoid images or scanned documents).</p>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" data-icon="check_circle">check_circle</span>
+<p class="text-body-sm text-on-surface-variant">Ensure your contact information is clearly visible at the top.</p>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5" data-icon="check_circle">check_circle</span>
+<p class="text-body-sm text-on-surface-variant">Clear headings for sections like "Experience" and "Education" help the AI.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Nav (Suppressed per "Destination Rule" since this is a focused sub-page, but showing for shell context as requested) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200/60 h-16 flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-indigo-600">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-[10px] font-bold">My Resumes</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="text-[10px] font-bold">Templates</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#dae2ff",
+                      "inverse-surface": "#2f3035",
+                      "on-surface-variant": "#444651",
+                      "secondary-fixed-dim": "#bcc6e9",
+                      "inverse-on-surface": "#f0f0f7",
+                      "primary-container": "#5472bc",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#001947",
+                      "on-primary-container": "#fefcff",
+                      "on-surface": "#1a1b20",
+                      "surface": "#f9f9ff",
+                      "on-tertiary-container": "#fffbff",
+                      "on-tertiary-fixed": "#2c1600",
+                      "on-primary": "#ffffff",
+                      "surface-container-highest": "#e2e2e9",
+                      "tertiary-fixed": "#ffdcbd",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#693c00",
+                      "on-background": "#1a1b20",
+                      "on-secondary-fixed-variant": "#3c4663",
+                      "tertiary-container": "#a4671e",
+                      "tertiary": "#864f02",
+                      "outline-variant": "#c4c6d2",
+                      "surface-tint": "#3d5ca4",
+                      "surface-dim": "#d9d9e0",
+                      "surface-variant": "#e2e2e9",
+                      "outline": "#747782",
+                      "error": "#ba1a1a",
+                      "primary": "#3a59a1",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#b1c5ff",
+                      "surface-container-low": "#f3f3fa",
+                      "surface-container": "#ededf4",
+                      "surface-bright": "#f9f9ff",
+                      "on-secondary-container": "#545e7d",
+                      "primary-fixed-dim": "#b1c5ff",
+                      "on-primary-fixed-variant": "#22438a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e8e7ee",
+                      "secondary": "#545e7c",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#dae2ff",
+                      "tertiary-fixed-dim": "#ffb86e",
+                      "secondary-container": "#cfd9fd",
+                      "on-secondary-fixed": "#101a36",
+                      "background": "#f9f9ff",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base-unit": "4px",
+                      "section-margin": "48px",
+                      "input-padding-y": "10px",
+                      "input-padding-x": "12px",
+                      "container-max-width": "768px",
+                      "form-gap": "24px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "h2": ["Manrope"],
+                      "h1": ["Manrope"],
+                      "body-sm": ["Inter"],
+                      "body-base": ["Inter"],
+                      "input-text": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .header-font {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-slate-950 font-manrope text-sm tracking-tight docked full-width top-0 z-50 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 h-16 w-full fixed">
+<div class="flex items-center gap-4">
+<span class="text-xl font-black text-blue-600 dark:text-blue-400">StructureFlow</span>
+</div>
+<div class="flex-1 flex justify-end items-center gap-6">
+<div class="relative hidden md:block max-w-sm w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Search resumes..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors active:scale-95 duration-200 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors active:scale-95 duration-200 rounded-lg">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200 ml-2">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Professional headshot of a smiling man in business casual attire with soft office lighting and blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbrsIrVFHisyhGXQl-bKyvtPWg9WRb3KeUiWyyV1RY0KXSii9rpRR0Yg8dzTpaOZHtZi_dFNwwSTjkZTZyqyfwAeIIe32nLqvrYWt8PiABKQxoeNHd_LqyBAcI9KQv7JFsflG5Ky2k3XlgPxAsPFWdP7a8cFllO_wsp49xrykz0psM_FkUHE-0p6i2EIKulXA8KjuHq10BY-JQWZ33YrjtdpEHrtScKIokxpYDeDYjpgycRbcOcENQvm6xl0hHkqxw1yb_xmGQST0_"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<aside class="bg-slate-50 dark:bg-slate-900 font-manrope antialiased docked left-0 h-[calc(100vh-64px)] w-64 border-r border-slate-200 dark:border-slate-800 fixed hidden md:block overflow-y-auto">
+<div class="flex flex-col p-4 gap-2 h-full">
+<div class="mb-6 px-2">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">StructureFlow</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400">Resume Architect</p>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-blue-600 dark:text-blue-400 font-semibold bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>My Resumes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined">style</span>
+<span>Templates</span>
+</a>
+</nav>
+<div class="mt-auto pt-4">
+<button class="w-full bg-primary text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors active:scale-95 duration-150 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                        Create New Resume
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-6 md:p-12 min-h-[calc(100vh-64px)] bg-surface">
+<div class="max-w-[768px] mx-auto space-y-section-margin">
+<!-- Welcome Section -->
+<section class="space-y-2">
+<h1 class="font-h1 text-h1 text-on-surface">Welcome back, Alex</h1>
+<p class="font-body-base text-body-base text-secondary">Continue refining your professional identity today.</p>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-form-gap">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[28px]">description</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">RESUMES CREATED</p>
+<h3 class="font-h1 text-h1 text-primary">12</h3>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/30 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<p class="font-label-caps text-label-caps text-on-surface-variant">PROFILE COMPLETION</p>
+<span class="font-body-sm text-body-sm font-semibold text-primary">85%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Finish adding your skills to hit 100%</p>
+</div>
+</section>
+<!-- Quick Start Section -->
+<section class="space-y-6">
+<h2 class="font-h2 text-h2 text-on-surface">Quick Start</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-form-gap">
+<button class="bg-surface-container p-6 rounded-xl border border-outline-variant/30 hover:border-primary/50 transition-all text-left group">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<h4 class="font-body-base font-bold mb-1">AI Generator</h4>
+<p class="font-body-sm text-body-sm text-secondary">Start with an AI-generated draft</p>
+</button>
+<button class="bg-surface-container p-6 rounded-xl border border-outline-variant/30 hover:border-primary/50 transition-all text-left group">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary">upload_file</span>
+</div>
+<h4 class="font-body-base font-bold mb-1">Import PDF</h4>
+<p class="font-body-sm text-body-sm text-secondary">Enhance your existing resume</p>
+</button>
+<button class="bg-surface-container p-6 rounded-xl border border-outline-variant/30 hover:border-primary/50 transition-all text-left group">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mb-4 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+</div>
+<h4 class="font-body-base font-bold mb-1">Blank Canvas</h4>
+<p class="font-body-sm text-body-sm text-secondary">Build from scratch manually</p>
+</button>
+</div>
+</section>
+<!-- Recent Activity List -->
+<section class="space-y-6 pb-12">
+<div class="flex items-center justify-between">
+<h2 class="font-h2 text-h2 text-on-surface">Recent Activity</h2>
+<a class="text-primary font-semibold text-sm hover:underline" href="#">View All</a>
+</div>
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 divide-y divide-outline-variant/20 overflow-hidden">
+<!-- Activity Item 1 -->
+<div class="p-5 flex items-center justify-between hover:bg-surface-container-high/40 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 opacity-50 relative">
+<div class="absolute inset-2 space-y-1">
+<div class="h-1 w-full bg-slate-400 rounded-full"></div>
+<div class="h-1 w-3/4 bg-slate-400 rounded-full"></div>
+<div class="h-1 w-1/2 bg-slate-400 rounded-full"></div>
+</div>
+</div>
+</div>
+<div>
+<h5 class="font-body-base font-bold text-on-surface">Senior Product Designer V2</h5>
+<p class="font-body-sm text-body-sm text-secondary">Last edited 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[12px] font-semibold">Active</span>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="p-5 flex items-center justify-between hover:bg-surface-container-high/40 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 opacity-50 relative">
+<div class="absolute inset-2 space-y-1">
+<div class="h-1 w-full bg-slate-400 rounded-full"></div>
+<div class="h-1 w-full bg-slate-400 rounded-full"></div>
+</div>
+</div>
+</div>
+<div>
+<h5 class="font-body-base font-bold text-on-surface">Technical Project Lead</h5>
+<p class="font-body-sm text-body-sm text-secondary">Exported yesterday</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[12px] font-semibold">Saved</span>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="p-5 flex items-center justify-between hover:bg-surface-container-high/40 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-14 bg-surface-container-highest rounded-lg flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 opacity-50 relative">
+<div class="absolute inset-x-2 bottom-2 h-1/2 bg-slate-400/20 rounded"></div>
+</div>
+</div>
+<div>
+<h5 class="font-body-base font-bold text-on-surface">Creative Director Portfolio</h5>
+<p class="font-body-sm text-body-sm text-secondary">Last edited 3 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full text-[12px] font-semibold">Draft</span>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation (BottomNavBar suppression check: not a top-level transactional, but using for responsive convenience) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 h-16 flex items-center justify-around z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-semibold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">Resumes</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-[10px]">Create</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="text-[10px]">Templates</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</a>
+</nav>
+</body></html>
