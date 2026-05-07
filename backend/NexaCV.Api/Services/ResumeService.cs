@@ -1,3 +1,4 @@
+using System.Text.Json;
 using NexaCV.Api.DTOs.Resumes;
 using NexaCV.Api.Enums;
 using NexaCV.Api.Extensions;
@@ -36,6 +37,12 @@ public class ResumeService : IResumeService
         resume.AiAvailable = result.AiAvailable;
         resume.Status = ResumeStatus.Completed;
         resume.UpdatedAt = DateTime.UtcNow;
+        resume.JobTitleSuggestionsJson = result.JobTitleSuggestions is { Count: > 0 }
+            ? JsonSerializer.Serialize(result.JobTitleSuggestions)
+            : null;
+        resume.SkillSuggestionsJson = result.SkillSuggestions is { Count: > 0 }
+            ? JsonSerializer.Serialize(result.SkillSuggestions)
+            : null;
 
         await _resumes.UpdateAsync(resume);
 
@@ -62,6 +69,21 @@ public class ResumeService : IResumeService
         return resumes.Select(r => r.ToSummaryDto()).ToList();
     }
 
+    public async Task<ResumeSummaryDto> RenameAsync(Guid resumeId, Guid userId, string name)
+    {
+        var resume = await _resumes.GetWithTemplateAsync(resumeId)
+            ?? throw new KeyNotFoundException("Resume not found.");
+
+        if (resume.UserId != userId)
+            throw new ForbiddenException("Access denied.");
+
+        resume.Name = name.Trim();
+        resume.UpdatedAt = DateTime.UtcNow;
+        await _resumes.UpdateAsync(resume);
+
+        return resume.ToSummaryDto();
+    }
+
     public async Task<ResumeDetailDto> GetByIdAsync(Guid resumeId, Guid userId)
     {
         var resume = await _resumes.GetWithTemplateAsync(resumeId)
@@ -70,7 +92,14 @@ public class ResumeService : IResumeService
         if (resume.UserId != userId)
             throw new ForbiddenException("Access denied.");
 
-        return resume.ToDetailDto();
+        var jobTitles = resume.JobTitleSuggestionsJson is not null
+            ? JsonSerializer.Deserialize<IReadOnlyList<AiJobTitleSuggestion>>(resume.JobTitleSuggestionsJson)
+            : null;
+        var skills = resume.SkillSuggestionsJson is not null
+            ? JsonSerializer.Deserialize<IReadOnlyList<string>>(resume.SkillSuggestionsJson)
+            : null;
+
+        return resume.ToDetailDto(resume.AiAvailable, jobTitles, skills);
     }
 
     public async Task<ResumeDetailDto> UpdateFinalDataAsync(Guid resumeId, Guid userId, string finalData)
@@ -96,7 +125,14 @@ public class ResumeService : IResumeService
         });
         await _history.PruneAsync(resume.Id);
 
-        return resume.ToDetailDto();
+        var jobTitles = resume.JobTitleSuggestionsJson is not null
+            ? JsonSerializer.Deserialize<IReadOnlyList<AiJobTitleSuggestion>>(resume.JobTitleSuggestionsJson)
+            : null;
+        var skills = resume.SkillSuggestionsJson is not null
+            ? JsonSerializer.Deserialize<IReadOnlyList<string>>(resume.SkillSuggestionsJson)
+            : null;
+
+        return resume.ToDetailDto(resume.AiAvailable, jobTitles, skills);
     }
 
     public async Task DeleteAsync(Guid resumeId, Guid userId)

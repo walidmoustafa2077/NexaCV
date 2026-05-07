@@ -11,6 +11,7 @@ public class ResumeRepository : EfRepository<Resume>, IResumeRepository
     public async Task<List<Resume>> GetByUserIdAsync(Guid userId)
         => await _db.Resumes
             .Include(r => r.Template)
+            .Include(r => r.Downloads)
             .Where(r => r.UserId == userId)
             .ToListAsync();
 
