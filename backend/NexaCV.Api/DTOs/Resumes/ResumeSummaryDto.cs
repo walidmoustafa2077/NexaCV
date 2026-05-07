@@ -17,4 +17,13 @@ public class ResumeSummaryDto
 
     /// <summary>UTC timestamp when the resume was created.</summary>
     public DateTime CreatedAt { get; set; }
+
+    /// <summary>UTC timestamp of the last update.</summary>
+    public DateTime UpdatedAt { get; set; }
+
+    /// <summary>User-defined resume name. Null when not yet named.</summary>
+    public string? Name { get; set; }
+
+    /// <summary>Number of times this resume has been downloaded.</summary>
+    public int DownloadCount { get; set; }
 }

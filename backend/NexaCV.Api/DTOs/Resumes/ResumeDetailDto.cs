@@ -41,6 +41,9 @@ public class ResumeDetailDto
     /// <summary>UTC timestamp of the last mutation (update, regeneration, soft-delete).</summary>
     public DateTime UpdatedAt { get; set; }
 
+    /// <summary>User-defined resume name. Null when not yet named.</summary>
+    public string? Name { get; set; }
+
     /// <summary>
     /// AI-suggested job titles ranked by relevance (score 1–10).
     /// Populated only on creation. Not stored in the database.

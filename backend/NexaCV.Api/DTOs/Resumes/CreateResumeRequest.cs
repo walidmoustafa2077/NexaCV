@@ -47,9 +47,7 @@ public class CreateResumeRequestValidator : AbstractValidator<CreateResumeReques
 
             edu.RuleFor(e => e.Degree)
                 .NotEmpty().WithMessage("Degree / Qualification is required.");
-
-            edu.RuleFor(e => e.EndDate)
-                .NotEmpty().WithMessage("Graduation date is required.");
+            // EndDate is optional — null/empty means the student is currently enrolled.
         });
 
         // ── Experience ────────────────────────────────────────────────────────
