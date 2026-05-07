@@ -8,8 +8,11 @@ public class Resume
     public Guid UserId { get; set; }
     public int TemplateId { get; set; }
     public ResumeStatus Status { get; set; }
+    public string? Name { get; set; }
     public string? RawData { get; set; }
     public string? FinalData { get; set; }
+    public string? JobTitleSuggestionsJson { get; set; }
+    public string? SkillSuggestionsJson { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     public bool IsDeleted { get; set; }
