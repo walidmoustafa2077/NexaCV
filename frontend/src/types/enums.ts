@@ -1,0 +1,6 @@
+export type ResumeStatus = "DRAFT" | "COMPLETED" | "PAID";
+export type PaymentStatus = "PENDING" | "SUCCESS" | "FAILED";
+export type SummaryType = "Summary" | "Objective";
+export type DescriptionFormat = "Paragraph" | "Bulleted";
+export type SkillsFormat = "GRID" | "LIST";
+export type Currency = "USD" | "EGP" | "EUR" | "GBP" | "SAR" | "AED";
