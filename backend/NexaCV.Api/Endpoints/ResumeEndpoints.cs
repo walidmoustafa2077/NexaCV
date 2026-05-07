@@ -113,6 +113,27 @@ public static class ResumeEndpoints
         .ProducesProblem(401)
         .ProducesProblem(403);
 
+        group.MapPatch("/{id:guid}/name", async (
+            Guid id,
+            [Microsoft.AspNetCore.Mvc.FromBody] RenameResumeRequest req,
+            JwtService jwt,
+            IResumeService resumeService,
+            HttpContext ctx) =>
+        {
+            if (string.IsNullOrWhiteSpace(req.Name) || req.Name.Length > 100)
+                return Results.Problem("Name must be 1–100 characters.", statusCode: 422);
+            var userId = jwt.GetUserIdFromClaims(ctx.User);
+            var resume = await resumeService.RenameAsync(id, userId, req.Name);
+            return Results.Ok(resume);
+        })
+        .WithName("RenameResume")
+        .WithSummary("Rename a resume")
+        .WithDescription("Updates the display name of a resume. Name must be 1–100 characters.")
+        .Produces<ResumeSummaryDto>(200)
+        .ProducesProblem(401)
+        .ProducesProblem(403)
+        .ProducesProblem(422);
+
         group.MapPost("/{id:guid}/regenerate", async (
             Guid id,
             RegenerateRequest req,
