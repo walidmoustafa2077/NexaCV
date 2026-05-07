@@ -16,7 +16,7 @@
             "dateOfBirth": "1995-05-15",
             "linkedinUrl": "linkedin.com/in/johndoe"
         },
-        "summary": "AI-Polished: Results-driven Senior Software Engineer with 5+ years of expertise delivering high-availability backend systems and microservices. Proven ability to lead engineering teams, architect scalable .NET solutions, and drive measurable performance improvements in cloud-native environments.",
+        "summary": "Results-driven Senior Software Engineer with 5+ years of expertise delivering high-availability backend systems and microservices. Proven ability to lead engineering teams, architect scalable .NET solutions, and drive measurable performance improvements in cloud-native environments.",
         "experience": [
             {
                 "id": "exp_001",
@@ -24,7 +24,7 @@
                 "company": "TechFlow Systems",
                 "startDate": "2021-03",
                 "endDate": "2023-10",
-                "description": "AI-Polished: Spearheaded the migration of a monolithic REST API portfolio to ASP.NET Core microservices, improving system uptime from 98.2% to 99.9% and cutting average response latency by 40%. Mentored a team of four engineers and established code-review standards that reduced post-release defects by 30%."
+                "description": "• Spearheaded the migration of a monolithic REST API portfolio to ASP.NET Core microservices, improving system uptime from 98.2% to 99.9%.\n• Cut average response latency by 40% through targeted architectural refactoring and query optimisation.\n• Mentored a team of four engineers and established code-review standards that reduced post-release defects by 30%."
             },
             {
                 "id": "exp_002",
@@ -32,7 +32,7 @@
                 "company": "Nexus Digital",
                 "startDate": "2019-07",
                 "endDate": "2021-02",
-                "description": "AI-Polished: Designed and shipped 12 RESTful API endpoints consumed by 3 client applications, optimised critical SQL queries to reduce dashboard load time by 25%, and contributed to bi-weekly code reviews that improved overall codebase coverage to 85%."
+                "description": "• Designed and shipped 12 RESTful API endpoints consumed by 3 client applications.\n• Optimised critical SQL queries to reduce dashboard load time by 25%.\n• Contributed to bi-weekly code reviews that improved overall codebase test coverage to 85%."
             }
         ],
         "education": [
@@ -70,23 +70,4 @@
             "Docker"
         ]
     }
-}
-                "institution": "Cairo University",
-"startDate": "2018-09",
-"endDate": "2022-06"
-}
-],
-"skills": [
-{
-"id": "sk_1",
-"name": "C#",
-"level": "Intermediate"
-},
-{
-"id": "sk_2",
-"name": "ASP.NET Core",
-"level": "Intermediate"
-}
-]
-}
 }

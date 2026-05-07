@@ -1,6 +1,6 @@
 {
     "_comment": "HTTP response envelope from POST /api/ai/generate. FinalDataJson is the escaped JSON string stored in Resume.FinalData. JobTitleSuggestions and SkillSuggestions are ephemeral — shown in the UI but never written to the database.",
-    "finalDataJson": "{\"settings\":{\"summaryType\":\"Summary\",\"descriptionFormat\":\"Bulleted\"},\"content\":{\"personal\":{\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\"},\"summary\":\"AI-Polished: Results-driven Senior Software Engineer...\",\"experience\":[{\"id\":\"exp_001\",\"description\":\"AI-Polished: Spearheaded the migration...\"}]}}",
+    "finalDataJson": "{\"settings\":{\"summaryType\":\"Summary\",\"descriptionFormat\":\"Bulleted\"},\"content\":{\"personal\":{\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\"},\"summary\":\"Results-driven Senior Software Engineer with 5+ years of expertise delivering high-availability backend systems and microservices.\",\"experience\":[{\"id\":\"exp_001\",\"description\":\"\\u2022 Spearheaded the migration of a monolithic REST API portfolio to ASP.NET Core microservices, improving system uptime from 98.2% to 99.9%.\\n\\u2022 Cut average response latency by 40% through targeted optimisation.\"}]}}",
     "aiAvailable": true,
     "jobTitleSuggestions": [
         {
