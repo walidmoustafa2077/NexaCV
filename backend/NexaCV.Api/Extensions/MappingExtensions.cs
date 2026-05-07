@@ -48,7 +48,10 @@ public static class MappingExtensions
         Id = resume.Id,
         Status = resume.Status.ToString().ToUpperInvariant(),
         TemplateName = resume.Template.Name,
-        CreatedAt = resume.CreatedAt
+        CreatedAt = resume.CreatedAt,
+        UpdatedAt = resume.UpdatedAt,
+        Name = resume.Name,
+        DownloadCount = resume.Downloads?.Count ?? 0
     };
 
     // Resume → ResumeDetailDto (requires Template nav loaded)
@@ -67,6 +70,7 @@ public static class MappingExtensions
             AiAvailable = aiAvailable,
             CreatedAt = resume.CreatedAt,
             UpdatedAt = resume.UpdatedAt,
+            Name = resume.Name,
             JobTitleSuggestions = jobTitleSuggestions,
             SkillSuggestions = skillSuggestions
         };

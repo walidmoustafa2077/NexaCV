@@ -6,9 +6,28 @@ public class DataSeeder
 {
     public async Task SeedAsync(AppDbContext db)
     {
-        if (db.Templates.Any()) return;
-
         var utcNow = DateTime.UtcNow;
+
+        // Seed default user
+        if (!db.Users.Any())
+        {
+            var defaultUser = new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Test",
+                LastName = "User",
+                Username = "testuser",
+                Email = "walidmoustafa1215@gmail.com",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("nMxT..iwREcYJ2Y"),
+                CreatedAt = utcNow
+            };
+
+            db.Users.Add(defaultUser);
+            await db.SaveChangesAsync();
+        }
+
+        // Seed templates
+        if (db.Templates.Any()) return;
 
         db.Templates.AddRange(
             new Template
