@@ -68,6 +68,29 @@
             "SQL Server",
             "Azure",
             "Docker"
+        ],
+        "languages": [
+            { "name": "English", "level": "Fluent" },
+            { "name": "Arabic", "level": "Native" },
+            { "name": "French", "level": "Intermediate" }
+        ],
+        "projects": [
+            {
+                "id": "proj_001",
+                "name": "NexaCV Resume Builder",
+                "description": "• Built a full-stack AI-powered resume builder using ASP.NET Core and Next.js.\n• Integrated GPT-4 for resume content generation and rewriting.\n• Deployed to Azure with CI/CD pipelines reducing release time by 60%.",
+                "startDate": "2023-06",
+                "endDate": "",
+                "link": "github.com/johndoe/nexacv"
+            },
+            {
+                "id": "proj_002",
+                "name": "Distributed Task Scheduler",
+                "description": "• Designed a fault-tolerant distributed scheduler supporting 10,000+ concurrent jobs.\n• Reduced job failure rate from 8% to under 0.5% through idempotent execution strategies.",
+                "startDate": "2022-01",
+                "endDate": "2022-09",
+                "link": ""
+            }
         ]
     }
 }
