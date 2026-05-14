@@ -13,17 +13,20 @@ public class ResumeService : IResumeService
     private readonly IDownloadRepository _downloads;
     private readonly IResumeHistoryRepository _history;
     private readonly IAiService _ai;
+    private readonly ITemplateRendererService _renderer;
 
     public ResumeService(
         IResumeRepository resumes,
         IDownloadRepository downloads,
         IResumeHistoryRepository history,
-        IAiService ai)
+        IAiService ai,
+        ITemplateRendererService renderer)
     {
         _resumes = resumes;
         _downloads = downloads;
         _history = history;
         _ai = ai;
+        _renderer = renderer;
     }
 
     public async Task<ResumeDetailDto> CreateAsync(Guid userId, CreateResumeRequest req)
@@ -176,5 +179,21 @@ public class ResumeService : IResumeService
         });
 
         return resume;
+    }
+
+    public async Task<string> RenderHtmlAsync(Guid resumeId, Guid userId)
+    {
+        var resume = await _resumes.GetWithTemplateAsync(resumeId)
+            ?? throw new KeyNotFoundException("Resume not found.");
+
+        if (resume.UserId != userId)
+            throw new ForbiddenException("Access denied.");
+
+        var html = resume.Template.HtmlContent;
+        if (string.IsNullOrWhiteSpace(html))
+            return "<html><body><p>This template has no HTML content.</p></body></html>";
+
+        var data = resume.FinalData ?? resume.RawData ?? "{}";
+        return _renderer.Render(html, data);
     }
 }

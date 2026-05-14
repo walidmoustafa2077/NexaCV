@@ -12,4 +12,5 @@ public interface IResumeService
     Task<ResumeDetailDto> UpdateFinalDataAsync(Guid resumeId, Guid userId, string finalData);
     Task DeleteAsync(Guid resumeId, Guid userId);
     Task<Resume> GetForDownloadAsync(Guid resumeId, Guid userId, string format, string? ipAddress);
+    Task<string> RenderHtmlAsync(Guid resumeId, Guid userId);
 }

@@ -191,6 +191,28 @@ public static class ResumeEndpoints
         .ProducesProblem(400)
         .ProducesProblem(401)
         .ProducesProblem(403);
+
+        group.MapGet("/{id:guid}/render", async (
+            Guid id,
+            JwtService jwt,
+            IResumeService resumeService,
+            HttpContext ctx) =>
+        {
+            var userId = jwt.GetUserIdFromClaims(ctx.User);
+            var html = await resumeService.RenderHtmlAsync(id, userId);
+            return Results.Content(html, "text/html");
+        })
+        .WithName("RenderResumeHtml")
+        .WithSummary("Render a resume as a standalone HTML page")
+        .WithDescription(
+            "Returns the template HTML with all {{PLACEHOLDER}} tokens replaced by the resume's `finalData`. " +
+            "The response is `Content-Type: text/html` and can be loaded directly in a browser or " +
+            "piped to a headless PDF renderer. " +
+            "Returns **403** if the resume belongs to a different user.")
+        .Produces<string>(200, "text/html")
+        .ProducesProblem(401)
+        .ProducesProblem(403)
+        .ProducesProblem(404);
     }
 }
 
