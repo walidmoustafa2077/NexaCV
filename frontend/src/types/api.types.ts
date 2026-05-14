@@ -53,6 +53,8 @@ export interface TemplateDto {
     id: number;
     name: string;
     industryCategory: string;
+    /** Design style category returned by the backend: "Executive" | "Creative" | "ModernTech" */
+    styleCategory: string | null;
     basePriceUsd: number;
     supportsWord: boolean;
 }
@@ -63,6 +65,8 @@ export interface PersonalInfo {
     firstName: string;
     middleName?: string | null;
     lastName: string;
+    /** Current or desired job title rendered under the candidate's name. */
+    jobTitle?: string | null;
     email: string;
     phone: string;
     location: string;
@@ -70,6 +74,8 @@ export interface PersonalInfo {
     dateOfBirth?: string | null;
     linkedinUrl?: string | null;
     siteUrl?: string | null;
+    /** URL or base-64 data URI for the candidate's photo (used by photo-enabled templates). */
+    photoUrl?: string | null;
 }
 
 export interface ExperienceEntry {

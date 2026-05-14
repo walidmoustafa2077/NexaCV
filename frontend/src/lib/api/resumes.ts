@@ -51,3 +51,20 @@ export function regenerateSection(
         body: JSON.stringify(data),
     });
 }
+
+/**
+ * Returns a fully rendered HTML string of the resume with all template
+ * placeholders replaced by the resume's finalData.
+ * The response is text/html so we read it as raw text, not JSON.
+ */
+export async function renderResumeHtml(id: string): Promise<string> {
+    const { useAuthStore } = await import("@/store/authStore");
+    const token = useAuthStore.getState().token;
+    const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5166";
+
+    const res = await fetch(`${API_URL}/api/resumes/${id}/render`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    if (!res.ok) throw new Error(`Render failed: ${res.status}`);
+    return res.text();
+}
