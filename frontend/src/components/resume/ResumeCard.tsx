@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { getResume } from "@/lib/api/resumes";
 import { useWizardStore } from "@/store/wizardStore";
 import { useRenameResume } from "@/hooks/useResumes";
+import { ResumeHtmlPreview } from "@/components/resume/ResumeHtmlPreview";
 
 interface ResumeCardProps {
     resume: ResumeSummaryDto;
@@ -112,8 +113,11 @@ export function ResumeCard({ resume, onDelete, className }: ResumeCardProps) {
     return (
         <div className={cn("group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden", className)}>
             {/* Dark preview area */}
-            <div className="relative h-44 overflow-hidden">
-                <ResumePlaceholder />
+            <div className="relative h-44 overflow-hidden bg-slate-100">
+                {/* Actual template preview — pointer-events-none so hover overlay works */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <ResumeHtmlPreview resumeId={resume.id} className="rounded-none" />
+                </div>
 
                 {/* Three-dot menu */}
                 <div className="absolute top-3 right-3 z-20" ref={menuRef}>

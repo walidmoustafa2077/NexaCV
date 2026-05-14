@@ -10,6 +10,7 @@ import { queryKeys } from "@/lib/query/keys";
 import { ApiError, ValidationError } from "@/lib/api/client";
 import { WizardProgress } from "../1/page";
 import MaterialIcon from "@/components/shared/MaterialIcon";
+import { ResumeHtmlPreview } from "@/components/resume/ResumeHtmlPreview";
 import type {
     CreateResumeRequest,
     ResumeDetailDto,
@@ -48,6 +49,7 @@ function applyFinalDataToStore(finalData: RawData, updateFormData: (data: any) =
         dateOfBirth: personal.dateOfBirth ?? "",
         linkedinUrl: personal.linkedinUrl ?? "",
         siteUrl: personal.siteUrl ?? "",
+        photoUrl: personal.photoUrl ?? "",
         summary,
         experience: experience.map((e) => ({
             id: e.id,
@@ -210,36 +212,6 @@ function PostCreationView({
     onBackToEdit: () => void;
     onViewResume: () => void;
 }) {
-    // Read directly from the wizard store — always reflects the latest edits
-    const { formData } = useWizardStore();
-
-    const fullName = `${formData.firstName} ${formData.lastName}`.trim() || "Your Name";
-    const location = formData.location || "";
-    const email = formData.email || "";
-
-    const experience = formData.experience.map((e) => ({
-        id: e.id,
-        title: e.title,
-        company: e.company,
-        location: e.location || null,
-        startDate: e.startDate,
-        endDate: e.endDate || null,
-        description: e.description,
-    })) as ExperienceEntry[];
-
-    const education = formData.education.map((e) => ({
-        id: e.id,
-        institution: e.institution,
-        degree: e.degree,
-        fieldOfStudy: e.fieldOfStudy,
-        grade: e.grade || null,
-        startDate: e.startDate,
-        endDate: e.endDate,
-    })) as EducationEntry[];
-
-    const skills = formData.skills;
-    const summary = formData.summary;
-
     return (
         <div className="space-y-6">
             {/* Banner */}
@@ -256,90 +228,24 @@ function PostCreationView({
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8">
-                {/* Left: paper-style preview */}
+                {/* Left: real template preview with blur */}
                 <div className="flex-1 space-y-3">
                     <h2 className="font-h2 text-h2 text-on-surface">Resume Preview</h2>
-                    <div className="relative bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.08)] aspect-[1/1.414] p-10 select-none">
-                        {/* Resume content */}
-                        <div className="space-y-6 h-full overflow-hidden">
-                            {/* Header */}
-                            <div className="border-b-4 border-primary pb-5">
-                                <h3 className="text-xl font-bold text-slate-900 font-h1 uppercase tracking-wide">
-                                    {fullName}
-                                </h3>
-                                <p className="text-slate-600 font-body-sm mt-1 text-sm">
-                                    {[location, email].filter(Boolean).join(" | ")}
-                                </p>
-                            </div>
-
-                            {/* Summary */}
-                            {summary && (
-                                <div className="space-y-2">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Professional Summary
-                                    </h4>
-                                    <p className="text-slate-700 text-xs leading-relaxed line-clamp-3">{summary}</p>
-                                </div>
-                            )}
-
-                            {/* Experience */}
-                            {experience.length > 0 && (
-                                <div className="space-y-2">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Work Experience
-                                    </h4>
-                                    {experience.slice(0, 2).map((e) => (
-                                        <div key={e.id}>
-                                            <div className="flex justify-between font-bold text-slate-900 text-xs">
-                                                <span>{e.title}, {e.company}</span>
-                                                <span className="shrink-0 ml-2">{e.startDate} – {e.endDate ?? "Present"}</span>
-                                            </div>
-                                            {e.location && (
-                                                <p className="text-slate-500 text-[10px] italic">{e.location}</p>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* Education */}
-                            {education.length > 0 && (
-                                <div className="space-y-2">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Education
-                                    </h4>
-                                    {education.slice(0, 2).map((e) => (
-                                        <div key={e.id} className="flex justify-between text-xs font-bold text-slate-900">
-                                            <span>{e.degree} in {e.fieldOfStudy}, {e.institution}</span>
-                                            <span className="shrink-0 ml-2">{e.startDate} – {e.endDate ?? "Present"}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* Skills */}
-                            {skills.length > 0 && (
-                                <div className="space-y-1.5">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Skills
-                                    </h4>
-                                    <p className="text-xs text-slate-700">{skills.slice(0, 8).join(" • ")}</p>
-                                </div>
-                            )}
-                        </div>
+                    <div className="relative overflow-hidden rounded-xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.08)]">
+                        <ResumeHtmlPreview resumeId={resume.id} />
 
                         {/* Watermark */}
-                        <div
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-45deg] text-5xl font-black text-slate-900 opacity-[0.04] whitespace-nowrap pointer-events-none select-none"
-                        >
-                            PREVIEW ONLY • PREVIEW ONLY
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+                            <span className="rotate-[-45deg] text-5xl font-black text-black/[0.04] whitespace-nowrap">
+                                PREVIEW ONLY &bull; PREVIEW ONLY
+                            </span>
                         </div>
 
                         {/* Frosted overlay */}
-                        <div className="absolute inset-0 bg-white/35 backdrop-blur-[1px]" />
+                        <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px] pointer-events-none" />
 
-                        {/* Lock badge */}
-                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+                        {/* View button */}
+                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
                             <button
                                 onClick={onViewResume}
                                 className="bg-slate-900/90 text-white px-5 py-2.5 rounded-full flex items-center gap-2.5 backdrop-blur-md hover:bg-slate-900 transition-colors shadow-lg"
@@ -430,7 +336,9 @@ export default function Step6Page() {
             toast.success("AI Enhancement Complete", {
                 description: "Your resume has been polished. Review the sections below.",
             });
-            router.push("/create/steps/1");
+            // Stay on step 6 and show the blurred PostCreationView immediately.
+            // CreateResumeResponse extends ResumeDetailDto so it's directly assignable.
+            setRefreshedResume(data);
         },
         onError: (err: Error) => {
             let msg: string;
@@ -449,14 +357,17 @@ export default function Step6Page() {
     // Sync wizard edits to backend then refresh resume when returning to this page
     useEffect(() => {
         if (formData.createdResumeId && !refreshedResume) {
+            const id = formData.createdResumeId;
             setIsLoadingResume(true);
+            // Bust the render cache so the preview shows the freshly-synced data
+            queryClient.removeQueries({ queryKey: ["resume-render", id] });
             syncToBackend()
-                .then(() => getResume(formData.createdResumeId!))
+                .then(() => getResume(id))
                 .then(setRefreshedResume)
                 .catch(() => updateFormData({ createdResumeId: null }))
                 .finally(() => setIsLoadingResume(false));
         }
-    }, [formData.createdResumeId, refreshedResume, updateFormData, syncToBackend]);
+    }, [formData.createdResumeId, refreshedResume, updateFormData, syncToBackend, queryClient]);
 
     function buildRequest(): CreateResumeRequest | null {
         if (!formData.templateId) return null;
@@ -479,6 +390,7 @@ export default function Step6Page() {
                         dateOfBirth: formData.dateOfBirth || null,
                         linkedinUrl: formData.linkedinUrl || null,
                         siteUrl: formData.siteUrl || null,
+                        photoUrl: formData.photoUrl || null,
                     },
                     summary: formData.summary,
                     experience: formData.experience.map((e) => ({

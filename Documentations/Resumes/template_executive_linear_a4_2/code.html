@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Resume Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f9f9ff",
+                        "secondary-fixed": "#dae2ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e2e2e9",
+                        "surface-tint": "#3d5ca4",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed": "#ffdcbd",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "surface-dim": "#d9d9e0",
+                        "surface": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2f3035",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#444651",
+                        "on-error": "#ffffff",
+                        "primary-container": "#5472bc",
+                        "on-secondary-fixed": "#101a36",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "on-primary-fixed-variant": "#22438a",
+                        "tertiary-container": "#a4671e",
+                        "surface-container-low": "#f3f3fa",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "surface-container": "#ededf4",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-secondary-container": "#545e7d",
+                        "secondary-container": "#cfd9fd",
+                        "on-primary-container": "#fefcff",
+                        "inverse-primary": "#b1c5ff",
+                        "primary-fixed": "#dae2ff",
+                        "on-background": "#1a1b20",
+                        "inverse-on-surface": "#f0f0f7",
+                        "surface-variant": "#e2e2e9",
+                        "outline-variant": "#c4c6d2",
+                        "on-surface": "#1a1b20",
+                        "outline": "#747782",
+                        "surface-container-high": "#e8e7ee",
+                        "secondary": "#545e7c",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-primary-fixed": "#001947",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary": "#864f02",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "primary": "#3a59a1",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base-unit": "4px",
+                        "container-max-width": "768px",
+                        "input-padding-y": "10px",
+                        "section-margin": "48px",
+                        "input-padding-x": "12px",
+                        "form-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Manrope"],
+                        "input-text": ["Inter"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        /* A4 Preview Scaling for UI Display */
+        .a4-preview {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 1in;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        @media print {
+            body { background: white; }
+            .no-print { display: none !important; }
+            .a4-preview { 
+                width: 100%; 
+                height: 100%; 
+                margin: 0; 
+                padding: 1in; 
+                box-shadow: none; 
+            }
+        }
+        .resume-divider {
+            border: 0;
+            border-top: 1px solid #1a1b20;
+            margin: 12px 0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="no-print bg-surface-container-low dark:bg-surface-dim sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-container-max-width mx-auto">
+<div class="text-h2 font-h2 text-primary dark:text-primary-fixed-dim">StructureFlow</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary-container transition-colors" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary-container transition-colors" href="#">Templates</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary pb-1" href="#">My Resumes</a>
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary-container transition-colors" href="#">Account</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-body-sm active:opacity-80 active:scale-95 transition-all">
+                    Export PDF
+                </button>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-72px)] overflow-hidden">
+<!-- SideNavBar -->
+<aside class="no-print hidden lg:flex flex-col h-full p-4 border-r border-outline-variant bg-surface-container-lowest w-64 shrink-0">
+<div class="mb-8">
+<div class="flex items-center gap-3 px-2 py-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="font-bold text-body-sm text-on-surface">Resume Editor</h3>
+<p class="text-[10px] text-on-surface-variant">Modern Professional Template</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container rounded-lg font-bold active:scale-98 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="text-body-base">Personal Details</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">work</span>
+<span class="text-body-base">Work History</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">school</span>
+<span class="text-body-base">Education</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-body-base">Skills</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span class="text-body-base">Layout Settings</span>
+</div>
+</nav>
+<button class="mt-4 w-full py-2 border-2 border-dashed border-outline-variant text-on-surface-variant rounded-lg text-body-sm font-bold hover:bg-surface-container transition-colors">
+                Add New Section
+            </button>
+<div class="mt-auto pt-4 border-t border-outline-variant space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="text-body-base">Help Center</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-body-base">Sign Out</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto p-8 bg-surface-container">
+<div class="max-w-[1000px] mx-auto">
+<!-- A4 Resume Content -->
+<div class="a4-preview bg-white shadow-xl text-on-background">
+<!-- Header Section -->
+<div class="text-center mb-8">
+<h1 class="text-[24pt] font-bold uppercase tracking-tight leading-none mb-2">ALEXANDER STEWART</h1>
+<div class="text-[10pt] text-on-surface flex justify-center gap-4 flex-wrap">
+<span>555-0123</span>
+<span>|</span>
+<span>a.stewart@example.com</span>
+<span>|</span>
+<span>San Francisco, CA</span>
+<span>|</span>
+<span>linkedin.com/in/astewart</span>
+</div>
+</div>
+<!-- Professional Summary -->
+<section class="mb-6">
+<h2 class="text-[12pt] font-bold uppercase tracking-wider mb-1">Professional Summary</h2>
+<hr class="resume-divider"/>
+<p class="text-[10pt] leading-relaxed text-justify">
+                            Dedicated and results-oriented Project Manager with over 8 years of experience leading cross-functional teams in the technology sector. Proven track record of delivering complex software projects on time and under budget. Expertise in Agile methodologies, stakeholder management, and strategic planning. Highly skilled in optimizing workflows and implementing data-driven decision-making processes to enhance organizational efficiency.
+                        </p>
+</section>
+<!-- Experience -->
+<section class="mb-6">
+<h2 class="text-[12pt] font-bold uppercase tracking-wider mb-1">Experience</h2>
+<hr class="resume-divider"/>
+<div class="mb-4">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-[11pt] font-bold">Senior Project Manager | TechStream Solutions</h3>
+<span class="text-[10pt]">Jan 2020 – Present</span>
+</div>
+<ul class="list-disc list-outside ml-5 text-[10pt] leading-relaxed space-y-1">
+<li>Spearheaded a $2.5M digital transformation project for a Fortune 500 client, resulting in a 15% increase in operational efficiency.</li>
+<li>Directed a team of 15 developers, designers, and QA engineers using Scrum frameworks to deliver bi-weekly product updates.</li>
+<li>Reduced project overhead costs by 12% through the implementation of automated reporting tools and resource allocation strategies.</li>
+<li>Facilitated quarterly strategic planning sessions with executive leadership to align product roadmaps with business objectives.</li>
+</ul>
+</div>
+<div class="mb-4">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-[11pt] font-bold">Project Coordinator | Innovate Corp</h3>
+<span class="text-[10pt]">Jun 2016 – Dec 2019</span>
+</div>
+<ul class="list-disc list-outside ml-5 text-[10pt] leading-relaxed space-y-1">
+<li>Managed administrative aspects of multiple concurrent projects, ensuring documentation was current and compliant with ISO standards.</li>
+<li>Improved team communication workflows by introducing Slack and Jira integrations, decreasing internal email volume by 40%.</li>
+<li>Assisted in the successful launch of 4 mobile applications, managing timelines and resource dependencies across departments.</li>
+</ul>
+</div>
+</section>
+<!-- Education -->
+<section class="mb-6">
+<h2 class="text-[12pt] font-bold uppercase tracking-wider mb-1">Education</h2>
+<hr class="resume-divider"/>
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="text-[11pt] font-bold">M.S. in Management Information Systems | University of California, Berkeley</h3>
+<span class="text-[10pt]">2016</span>
+</div>
+<div class="flex justify-between items-baseline">
+<h3 class="text-[11pt] font-bold">B.S. in Business Administration | San Francisco State University</h3>
+<span class="text-[10pt]">2014</span>
+</div>
+</section>
+<!-- Skills -->
+<section>
+<h2 class="text-[12pt] font-bold uppercase tracking-wider mb-1">Skills</h2>
+<hr class="resume-divider"/>
+<div class="text-[10pt] leading-relaxed">
+<p><span class="font-bold">Project Management:</span> Agile, Scrum, Kanban, PMP Principles, Risk Management, Budgeting</p>
+<p><span class="font-bold">Software:</span> Jira, Confluence, Trello, Microsoft Project, Asana, Google Workspace</p>
+<p><span class="font-bold">Technical:</span> Python (Basic), SQL, Data Visualization (Tableau), AWS Fundamentals</p>
+<p><span class="font-bold">Languages:</span> English (Native), Spanish (Professional Working Proficiency)</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant px-4 py-2 z-50">
+<div class="flex justify-around items-center">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-[10px]">Templates</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">Resumes</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px]">Profile</span>
+</div>
+</div>
+</footer>
+</body></html>

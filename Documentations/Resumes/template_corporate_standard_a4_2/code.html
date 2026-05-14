@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Resume Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f9f9ff",
+                        "secondary-fixed": "#dae2ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e2e2e9",
+                        "surface-tint": "#3d5ca4",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed": "#ffdcbd",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "surface-dim": "#d9d9e0",
+                        "surface": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2f3035",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#444651",
+                        "on-error": "#ffffff",
+                        "primary-container": "#5472bc",
+                        "on-secondary-fixed": "#101a36",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "on-primary-fixed-variant": "#22438a",
+                        "tertiary-container": "#a4671e",
+                        "surface-container-low": "#f3f3fa",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "surface-container": "#ededf4",
+                        "on-tertiary-fixed": "#2c1600",
+                        "on-secondary-container": "#545e7d",
+                        "secondary-container": "#cfd9fd",
+                        "on-primary-container": "#fefcff",
+                        "inverse-primary": "#b1c5ff",
+                        "primary-fixed": "#dae2ff",
+                        "on-background": "#1a1b20",
+                        "inverse-on-surface": "#f0f0f7",
+                        "surface-variant": "#e2e2e9",
+                        "outline-variant": "#c4c6d2",
+                        "on-surface": "#1a1b20",
+                        "outline": "#747782",
+                        "surface-container-high": "#e8e7ee",
+                        "secondary": "#545e7c",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-primary-fixed": "#001947",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary": "#864f02",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "primary": "#3a59a1",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base-unit": "4px",
+                        "container-max-width": "768px",
+                        "input-padding-y": "10px",
+                        "section-margin": "48px",
+                        "input-padding-x": "12px",
+                        "form-gap": "24px"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Manrope"],
+                        "input-text": ["Inter"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "serif-display": ["Libre Baskerville", "serif"]
+                    },
+                    "fontSize": {
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .resume-header-allcaps {
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .a4-page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                height: auto;
+            }
+        }
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-base text-on-surface">
+<!-- TopAppBar -->
+<header class="no-print bg-surface-container-low dark:bg-surface-dim sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-container-max-width mx-auto">
+<div class="text-h2 font-h2 text-primary dark:text-primary-fixed-dim">StructureFlow</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary-container dark:hover:text-primary-fixed transition-colors" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary-container dark:hover:text-primary-fixed transition-colors" href="#">Templates</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary pb-1" href="#">My Resumes</a>
+<a class="text-on-surface-variant dark:text-outline-variant pb-1 hover:text-primary-container dark:hover:text-primary-fixed transition-colors" href="#">Account</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-outline cursor-pointer" data-icon="settings">settings</span>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-body-sm hover:opacity-90 active:scale-95 transition-all">Export PDF</button>
+</div>
+</div>
+</header>
+<div class="flex max-w-[1400px] mx-auto">
+<!-- SideNavBar -->
+<aside class="no-print hidden lg:flex flex-col h-screen w-64 sticky top-[72px] p-4 bg-surface-container-lowest border-r border-outline-variant dark:border-outline">
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="dashboard_customize">dashboard_customize</span>
+</div>
+<div>
+<h3 class="font-h2 text-body-base font-bold text-primary">Resume Editor</h3>
+<p class="text-[12px] text-on-surface-variant">Modern Professional</p>
+</div>
+</div>
+</div>
+<nav class="space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-base">Personal Details</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 bg-secondary-container dark:bg-secondary-fixed-variant text-on-secondary-container dark:text-on-secondary-fixed rounded-lg font-bold cursor-pointer">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-body-base">Work History</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-body-base">Education</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="font-body-base">Skills</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-body-base">Layout Settings</span>
+</div>
+</nav>
+<button class="mt-8 flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed border-outline-variant text-outline rounded-lg font-bold text-body-sm hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                Add New Section
+            </button>
+<div class="mt-auto pt-6 border-t border-outline-variant">
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-base">Help Center</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-base">Sign Out</span>
+</div>
+</div>
+</aside>
+<!-- Canvas / Editor Content -->
+<main class="flex-1 overflow-y-auto bg-surface-container">
+<!-- A4 Preview Wrapper -->
+<div class="a4-page font-body-base text-[#1a1b20]">
+<!-- Resume Content -->
+<div class="text-center mb-8 border-b-2 border-[#1a1b20] pb-6">
+<h1 class="font-serif-display text-4xl font-bold mb-2 uppercase">JONATHAN R. STRUCTURE</h1>
+<div class="flex justify-center items-center gap-4 text-body-sm">
+<span>123 Enterprise Way, San Francisco, CA 94105</span>
+<span class="text-outline-variant">|</span>
+<span>(555) 012-3456</span>
+<span class="text-outline-variant">|</span>
+<span class="font-medium underline">j.structure@email.com</span>
+</div>
+</div>
+<!-- Professional Summary -->
+<section class="mb-8">
+<h2 class="resume-header-allcaps font-bold text-lg mb-3 border-b border-outline-variant">Executive Summary</h2>
+<p class="text-body-base leading-relaxed text-justify">
+                        Results-driven Senior Operations Executive with 12+ years of experience streamlining complex organizational workflows and leading large-scale digital transformations. Expert in optimizing operational efficiency and implementing high-integrity data structures within enterprise environments. Proven track record of reducing overhead costs by 20% while maintaining 99.9% data accuracy across multi-national platforms.
+                    </p>
+</section>
+<!-- Core Competencies -->
+<section class="mb-8">
+<h2 class="resume-header-allcaps font-bold text-lg mb-3 border-b border-outline-variant">Core Competencies</h2>
+<div class="grid grid-cols-2 gap-x-12">
+<ul class="list-disc list-inside space-y-1">
+<li>Strategic Workflow Optimization</li>
+<li>Enterprise Architecture Design</li>
+<li>Data Integrity Management</li>
+<li>Change Management Leadership</li>
+</ul>
+<ul class="list-disc list-inside space-y-1">
+<li>Risk Assessment &amp; Mitigation</li>
+<li>SaaS Product Integration</li>
+<li>Cross-functional Team Building</li>
+<li>Financial Modeling &amp; Reporting</li>
+</ul>
+</div>
+</section>
+<!-- Professional Experience -->
+<section class="mb-8">
+<h2 class="resume-header-allcaps font-bold text-lg mb-4 border-b border-outline-variant">Professional Experience</h2>
+<div class="mb-6">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-lg">Senior Director of Operations</h3>
+<span class="text-body-sm font-medium italic">2018 — Present</span>
+</div>
+<div class="flex justify-between items-baseline mb-2">
+<span class="italic font-medium">StructureFlow Systems, Inc.</span>
+<span class="text-body-sm">San Francisco, CA</span>
+</div>
+<ul class="list-disc list-outside ml-5 space-y-2 text-body-sm leading-relaxed">
+<li>Spearheaded the redesign of core data entry protocols, resulting in a 40% reduction in processing time for client onboarding.</li>
+<li>Managing a diversified team of 45+ professionals across three continents, consistently achieving 115% of annual KPIs.</li>
+<li>Architected a proprietary automated validation system that eliminated manual errors in compliance reporting.</li>
+</ul>
+</div>
+<div class="mb-6">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-lg">Operations Manager</h3>
+<span class="text-body-sm font-medium italic">2014 — 2018</span>
+</div>
+<div class="flex justify-between items-baseline mb-2">
+<span class="italic font-medium">Global Nexus Logistics</span>
+<span class="text-body-sm">Chicago, IL</span>
+</div>
+<ul class="list-disc list-outside ml-5 space-y-2 text-body-sm leading-relaxed">
+<li>Implemented a Lean Six Sigma framework that identified and removed bottlenecks in the supply chain vertical.</li>
+<li>Reduced operational budget by $1.2M annually through strategic vendor renegotiation and process automation.</li>
+<li>Coordinated with the IT department to integrate legacy data into a modern cloud-based ERP system.</li>
+</ul>
+</div>
+</section>
+<!-- Education -->
+<section class="mb-8">
+<h2 class="resume-header-allcaps font-bold text-lg mb-3 border-b border-outline-variant">Education</h2>
+<div class="flex justify-between items-baseline mb-1">
+<div>
+<span class="font-bold">Master of Business Administration (MBA)</span>, <span class="italic">Kellogg School of Management</span>
+</div>
+<span class="text-body-sm italic">2014</span>
+</div>
+<div class="flex justify-between items-baseline">
+<div>
+<span class="font-bold">Bachelor of Science in Systems Engineering</span>, <span class="italic">University of Illinois</span>
+</div>
+<span class="text-body-sm italic">2010</span>
+</div>
+</section>
+<!-- Technical Proficiencies -->
+<section>
+<h2 class="resume-header-allcaps font-bold text-lg mb-3 border-b border-outline-variant">Technical Proficiencies</h2>
+<p class="text-body-sm">
+<span class="font-bold">Platforms:</span> Salesforce CRM, Oracle ERP, SAP Business One, Microsoft Azure Ecosystem.<br/>
+<span class="font-bold">Tools:</span> Advanced SQL, Tableau, Jira, Asana, Microsoft Office Suite (Expert).<br/>
+<span class="font-bold">Certifications:</span> Project Management Professional (PMP), Six Sigma Black Belt.
+                    </p>
+</section>
+</div>
+</main>
+</div>
+<!-- Floating Action Button - Only for Editor Context -->
+<button class="no-print fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

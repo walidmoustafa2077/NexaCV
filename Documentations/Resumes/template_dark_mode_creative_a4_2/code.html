@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Resume Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "on-primary-fixed": "#001947",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#3d5ca4",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d9d9e0",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#444651",
+                    "surface-container": "#ededf4",
+                    "primary-container": "#5472bc",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dae2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e9",
+                    "on-secondary-container": "#545e7d",
+                    "on-error": "#ffffff",
+                    "on-background": "#1a1b20",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "primary": "#3a59a1",
+                    "on-tertiary-fixed": "#2c1600",
+                    "tertiary": "#864f02",
+                    "on-secondary-fixed": "#101a36",
+                    "secondary": "#545e7c",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#cfd9fd",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c4c6d2",
+                    "on-primary-container": "#fefcff",
+                    "on-surface": "#1a1b20",
+                    "secondary-fixed": "#dae2ff",
+                    "inverse-primary": "#b1c5ff",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f9f9ff",
+                    "surface-container-high": "#e8e7ee",
+                    "surface-container-low": "#f3f3fa",
+                    "inverse-surface": "#2f3035",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f0f0f7",
+                    "surface-container-highest": "#e2e2e9",
+                    "on-primary-fixed-variant": "#22438a",
+                    "tertiary-container": "#a4671e",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "outline": "#747782"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "form-gap": "24px",
+                    "container-max-width": "768px",
+                    "input-padding-y": "10px",
+                    "input-padding-x": "12px",
+                    "base-unit": "4px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "input-text": ["Inter"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Manrope"]
+            },
+            "fontSize": {
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .a4-page { 
+                box-shadow: none !important; 
+                margin: 0 !important; 
+                width: 210mm; 
+                height: 297mm;
+            }
+        }
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            overflow: hidden;
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-base text-on-surface antialiased">
+<!-- Top Navigation Shell -->
+<header class="bg-slate-50 dark:bg-slate-950 font-manrope antialiased text-sm docked full-width top-0 border-b border-slate-200/60 dark:border-slate-800/60 flat no shadows flex justify-between items-center px-6 py-3 w-full no-print">
+<div class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1]">StructureFlow</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-3 py-1.5 active:scale-95 transition-transform duration-150">Back to Editor</button>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-lg font-semibold hover:opacity-90 active:scale-95 transition-all">Download PDF</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex flex-col items-center py-12 px-4 min-h-screen">
+<!-- Document Preview Container -->
+<div class="a4-page bg-white shadow-2xl rounded-sm flex">
+<!-- Left Column: Dark Navy (1/3) -->
+<aside class="w-1/3 bg-[#001947] text-white flex flex-col p-10 h-full">
+<!-- Profile Image / Brand Element -->
+<div class="mb-12">
+<div class="w-32 h-32 rounded-xl overflow-hidden mb-6 border-2 border-primary-fixed-dim/30">
+<img alt="Professional Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a person in a minimalist, high-integrity studio setting. The lighting is sophisticated, with soft shadows and a cool, modern color palette that emphasizes clarity and trust. The background is a clean, neutral surface that aligns with the StructureFlow periwinkle and slate blue brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOF5AbY79wTSztpZcL6ouKICeLVSeyiDD4rnNAN-2gCdXBZW6FsgbPIRvOhVmyUREs9MXBvzbh0o58lV55dXR0Zj-cMPE6Y1HRfmPm5knXloDlUIBlvkCCqeVG4rOjlE_yHqyOIcAqp7_TUJ6XHFfmlPSKVji1Of78wEoHvS_qpsZk_b86S6pHqoYUtb__mjLeqVKsCmjGUeDB4H0qjHAhJYyXm6dPFWJvqpPtycRNE4pp_A60cnZxvUt7rBbtrYJHQh9HLIVeBLcB"/>
+</div>
+</div>
+<!-- Personal Info Section -->
+<section class="mb-10">
+<h3 class="font-h1 text-label-caps text-secondary-fixed-dim uppercase tracking-widest mb-4">Personal Info</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-size: 18px;">mail</span>
+<span class="font-body-sm text-surface-variant">alex.rivera@flow.tech</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-size: 18px;">call</span>
+<span class="font-body-sm text-surface-variant">+1 (555) 234-8890</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-size: 18px;">location_on</span>
+<span class="font-body-sm text-surface-variant">San Francisco, CA</span>
+</div>
+</div>
+</section>
+<!-- Languages Section -->
+<section class="mb-10">
+<h3 class="font-h1 text-label-caps text-secondary-fixed-dim uppercase tracking-widest mb-4">Languages</h3>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between font-body-sm mb-1">
+<span>English</span>
+<span class="text-secondary-fixed-dim">Native</span>
+</div>
+<div class="h-1 bg-on-primary-fixed-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed-dim w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-body-sm mb-1">
+<span>Spanish</span>
+<span class="text-secondary-fixed-dim">Fluent</span>
+</div>
+<div class="h-1 bg-on-primary-fixed-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed-dim w-[90%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-body-sm mb-1">
+<span>German</span>
+<span class="text-secondary-fixed-dim">Conversational</span>
+</div>
+<div class="h-1 bg-on-primary-fixed-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed-dim w-[65%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Certifications Section -->
+<section>
+<h3 class="font-h1 text-label-caps text-secondary-fixed-dim uppercase tracking-widest mb-4">Certifications</h3>
+<div class="space-y-4">
+<div class="border-l-2 border-primary-fixed-dim/40 pl-4 py-1">
+<p class="font-body-sm font-semibold">AWS Solutions Architect</p>
+<p class="text-[12px] text-surface-variant opacity-80">Amazon Web Services • 2023</p>
+</div>
+<div class="border-l-2 border-primary-fixed-dim/40 pl-4 py-1">
+<p class="font-body-sm font-semibold">PMP Professional</p>
+<p class="text-[12px] text-surface-variant opacity-80">Project Management Inst. • 2022</p>
+</div>
+<div class="border-l-2 border-primary-fixed-dim/40 pl-4 py-1">
+<p class="font-body-sm font-semibold">Scrum Master Certified</p>
+<p class="text-[12px] text-surface-variant opacity-80">Scrum Alliance • 2021</p>
+</div>
+</div>
+</section>
+</aside>
+<!-- Right Column: White (2/3) -->
+<main class="w-2/3 bg-white p-12 h-full flex flex-col">
+<!-- Header Info -->
+<header class="mb-12">
+<h1 class="font-h1 text-[42px] leading-tight text-on-surface mb-2">Alex Rivera</h1>
+<h2 class="font-h2 text-primary tracking-wide">Senior Operations Strategist</h2>
+<div class="mt-6 h-px w-24 bg-primary-container"></div>
+</header>
+<!-- Work History Section -->
+<section class="flex-grow">
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-primary" data-weight="fill">work</span>
+<h3 class="font-h2 text-xl text-on-surface-variant uppercase tracking-wider">Work History</h3>
+</div>
+<div class="space-y-10">
+<!-- Experience Item 1 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-primary ring-4 ring-primary-container/20"></div>
+<div class="flex justify-between items-baseline mb-2">
+<h4 class="font-h2 text-lg text-on-surface">Director of Operations</h4>
+<span class="font-body-sm text-secondary font-semibold">2020 — Present</span>
+</div>
+<p class="font-body-sm text-primary mb-4 font-medium italic">Global Tech Dynamics | San Francisco</p>
+<ul class="space-y-2 list-disc list-outside ml-4 text-on-surface-variant font-body-sm leading-relaxed">
+<li>Architected a cross-functional workflow system that reduced project delivery lead times by 35% across 12 global departments.</li>
+<li>Managed a $4.2M annual operational budget, achieving a 12% reduction in overhead through strategic vendor renegotiation and process automation.</li>
+<li>Spearheaded the integration of AI-driven data entry tools, improving data integrity scores from 82% to 99.4% in the first fiscal year.</li>
+</ul>
+</div>
+<!-- Experience Item 2 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="flex justify-between items-baseline mb-2">
+<h4 class="font-h2 text-lg text-on-surface">Senior Project Manager</h4>
+<span class="font-body-sm text-secondary font-semibold">2017 — 2020</span>
+</div>
+<p class="font-body-sm text-primary mb-4 font-medium italic">Innova Systems | Seattle</p>
+<ul class="space-y-2 list-disc list-outside ml-4 text-on-surface-variant font-body-sm leading-relaxed">
+<li>Led a team of 15 engineers and designers to launch a SaaS platform serving 500k+ active monthly users.</li>
+<li>Implemented Agile/Scrum methodologies that increased team velocity by 20% within the first 6 months of adoption.</li>
+<li>Collaborated with C-suite stakeholders to define product roadmaps and align technical execution with long-term business goals.</li>
+</ul>
+</div>
+<!-- Experience Item 3 -->
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-outline-variant"></div>
+<div class="flex justify-between items-baseline mb-2">
+<h4 class="font-h2 text-lg text-on-surface">Operations Analyst</h4>
+<span class="font-body-sm text-secondary font-semibold">2014 — 2017</span>
+</div>
+<p class="font-body-sm text-primary mb-4 font-medium italic">Precision Logistics | Austin</p>
+<ul class="space-y-2 list-disc list-outside ml-4 text-on-surface-variant font-body-sm leading-relaxed">
+<li>Developed data models to optimize supply chain routes, resulting in a $200k annual savings in logistics costs.</li>
+<li>Created automated reporting dashboards in Tableau, providing real-time visibility into KPI performance for regional managers.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Footer / Technical Skills -->
+<footer class="mt-12 pt-8 border-t border-surface-container">
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-semibold">Operations Management</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-semibold">Agile Methodology</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-semibold">SaaS Scaling</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-semibold">Stakeholder Relations</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-semibold">Data Integrity</span>
+</div>
+</footer>
+</main>
+</div>
+<!-- FAB Action (Hidden in print) -->
+<button class="fixed bottom-8 right-8 bg-primary text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform no-print">
+<span class="material-symbols-outlined" style="font-size: 28px;">print</span>
+</button>
+</main>
+</body></html>

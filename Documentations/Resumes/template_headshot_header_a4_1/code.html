@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "on-primary-fixed": "#001947",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#3d5ca4",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d9d9e0",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#444651",
+                    "surface-container": "#ededf4",
+                    "primary-container": "#5472bc",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dae2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e9",
+                    "on-secondary-container": "#545e7d",
+                    "on-error": "#ffffff",
+                    "on-background": "#1a1b20",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "primary": "#3a59a1",
+                    "on-tertiary-fixed": "#2c1600",
+                    "tertiary": "#864f02",
+                    "on-secondary-fixed": "#101a36",
+                    "secondary": "#545e7c",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#cfd9fd",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c4c6d2",
+                    "on-primary-container": "#fefcff",
+                    "on-surface": "#1a1b20",
+                    "secondary-fixed": "#dae2ff",
+                    "inverse-primary": "#b1c5ff",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f9f9ff",
+                    "surface-container-high": "#e8e7ee",
+                    "surface-container-low": "#f3f3fa",
+                    "inverse-surface": "#2f3035",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f0f0f7",
+                    "surface-container-highest": "#e2e2e9",
+                    "on-primary-fixed-variant": "#22438a",
+                    "tertiary-container": "#a4671e",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "outline": "#747782"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "form-gap": "24px",
+                    "container-max-width": "768px",
+                    "input-padding-y": "10px",
+                    "input-padding-x": "12px",
+                    "base-unit": "4px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "input-text": ["Inter"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Manrope"]
+            },
+            "fontSize": {
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .a4-page { 
+                box-shadow: none !important; 
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+            }
+        }
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 2rem auto;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-base text-on-surface">
+<!-- Top Navigation Bar (Shared Component) -->
+<nav class="no-print bg-slate-50 dark:bg-slate-950 font-manrope antialiased text-sm docked full-width top-0 border-b border-slate-200/60 dark:border-slate-800/60 flex justify-between items-center px-6 py-3 w-full sticky z-50">
+<div class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1]">StructureFlow</div>
+<div class="flex gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-3 py-1.5 active:scale-95 transition-transform duration-150">Back to Editor</button>
+<button class="bg-[#5775bf] text-white px-4 py-1.5 rounded-md font-semibold active:scale-95 transition-transform duration-150 shadow-sm" onclick="window.print()">Download PDF</button>
+</div>
+</nav>
+<!-- Resume Container -->
+<main class="a4-page overflow-hidden flex flex-col">
+<!-- Header Section: Headshot Header Style -->
+<header class="flex w-full items-stretch h-[100mm]">
+<!-- Top-left Square Profile Photo -->
+<div class="w-[100mm] h-[100mm] bg-surface-container-highest overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover grayscale contrast-125" data-alt="A professional close-up studio portrait of a confident man in his early 30s wearing a clean, structured charcoal blazer over a white shirt. The background is a minimalist, soft-grey studio setting with gentle, directional high-key lighting. The image style is sharp and modern, echoing a corporate aesthetic with a sophisticated monochromatic color palette that conveys trust and high technical integrity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfDSfxAsF1HuAEfx_eUcCPYwPSaEF-6fNGBvaKULqYt06Irqih3sj0g12wSyBMJixaT96cYcntMifCS236wIeQojXXfp7Ihup6jpALSqUH45SjSnQOiRC54kAqJsouam_NklrJwiQQZHiDSHzT7Qgd3ml-vu6Oh0vLRul4_RIDbk6GgIqYqpsRgLXRSOIE9qgASxX87IqZvTt1IRXmvaOtNdPowP-tKz2NEiKrxe4ZEYq-NDolCvY76Xnfx7PvjU6YSxdwSJrz31_S"/>
+</div>
+<!-- Top-right Name and Job Title -->
+<div class="flex-1 flex flex-col justify-end p-12 text-right">
+<h1 class="font-h1 text-[48px] leading-tight text-primary mb-2">ALEXANDER<br/>SULLIVAN</h1>
+<p class="font-h2 text-secondary tracking-widest uppercase">Senior Systems Architect</p>
+<div class="mt-8 flex flex-col items-end gap-1 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-2">
+                        alex.sullivan@structureflow.io
+                        <span class="material-symbols-outlined text-primary">mail</span>
+</span>
+<span class="flex items-center gap-2">
+                        +1 (555) 012-3456
+                        <span class="material-symbols-outlined text-primary">call</span>
+</span>
+<span class="flex items-center gap-2">
+                        San Francisco, CA
+                        <span class="material-symbols-outlined text-primary">location_on</span>
+</span>
+</div>
+</div>
+</header>
+<!-- Divider -->
+<div class="w-full h-px bg-outline-variant opacity-30"></div>
+<!-- ATS-Friendly Single Column Body -->
+<section class="flex-1 p-12 max-w-[768px] mx-auto w-full space-y-section-margin">
+<!-- Professional Summary -->
+<div class="space-y-4">
+<h3 class="font-label-caps text-primary border-b border-primary-fixed-dim pb-1 w-fit pr-8">PROFESSIONAL SUMMARY</h3>
+<p class="font-body-base text-on-surface-variant leading-relaxed">
+                    Innovative Systems Architect with over 12 years of experience in designing high-integrity SaaS infrastructures. Expert in cloud-native deployments, distributed systems, and modernizing legacy data pipelines. Proven track record of reducing operational overhead by 40% while maintaining 99.99% uptime for enterprise-grade financial platforms.
+                </p>
+</div>
+<!-- Experience -->
+<div class="space-y-form-gap">
+<h3 class="font-label-caps text-primary border-b border-primary-fixed-dim pb-1 w-fit pr-8">EXPERIENCE</h3>
+<div class="space-y-2">
+<div class="flex justify-between items-baseline">
+<h4 class="font-h2 text-body-base font-bold text-on-surface">Lead Solutions Engineer — DataStream Inc.</h4>
+<span class="font-body-sm text-secondary">2018 — Present</span>
+</div>
+<ul class="list-disc list-inside font-body-sm text-on-surface-variant space-y-1 ml-2">
+<li>Directed the architecture of a multi-region Kubernetes cluster handling 5M+ daily transactions.</li>
+<li>Implemented an automated CI/CD pipeline using GitHub Actions, reducing deployment time from hours to minutes.</li>
+<li>Managed a cross-functional team of 15 engineers to deliver a proprietary real-time analytics dashboard.</li>
+</ul>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-baseline">
+<h4 class="font-h2 text-body-base font-bold text-on-surface">Senior Full-Stack Developer — CloudScale Systems</h4>
+<span class="font-body-sm text-secondary">2014 — 2018</span>
+</div>
+<ul class="list-disc list-inside font-body-sm text-on-surface-variant space-y-1 ml-2">
+<li>Developed responsive front-end components using React and Tailwind CSS for the flagship CRM product.</li>
+<li>Optimized PostgreSQL query performance, resulting in a 60% faster page load time for complex data views.</li>
+<li>Collaborated with design teams to ensure UI consistency across various web and mobile platforms.</li>
+</ul>
+</div>
+</div>
+<!-- Skills -->
+<div class="space-y-4">
+<h3 class="font-label-caps text-primary border-b border-primary-fixed-dim pb-1 w-fit pr-8">TECHNICAL SKILLS</h3>
+<div class="grid grid-cols-2 gap-x-12 gap-y-2 font-body-sm text-on-surface-variant">
+<div class="flex justify-between border-b border-surface-container py-1">
+<span class="font-semibold text-on-surface">Languages</span>
+<span>TypeScript, Python, Go, Rust</span>
+</div>
+<div class="flex justify-between border-b border-surface-container py-1">
+<span class="font-semibold text-on-surface">Cloud</span>
+<span>AWS, Azure, Google Cloud</span>
+</div>
+<div class="flex justify-between border-b border-surface-container py-1">
+<span class="font-semibold text-on-surface">DevOps</span>
+<span>Docker, Kubernetes, Terraform</span>
+</div>
+<div class="flex justify-between border-b border-surface-container py-1">
+<span class="font-semibold text-on-surface">Databases</span>
+<span>PostgreSQL, Redis, MongoDB</span>
+</div>
+</div>
+</div>
+<!-- Education -->
+<div class="space-y-4">
+<h3 class="font-label-caps text-primary border-b border-primary-fixed-dim pb-1 w-fit pr-8">EDUCATION</h3>
+<div class="flex justify-between items-baseline">
+<div>
+<h4 class="font-body-base font-bold text-on-surface">M.S. Computer Science</h4>
+<p class="font-body-sm text-on-surface-variant">Stanford University</p>
+</div>
+<span class="font-body-sm text-secondary">2012 — 2014</span>
+</div>
+</div>
+</section>
+<!-- Footer / Print Safe Margin -->
+<footer class="mt-auto h-12 flex items-center justify-center border-t border-surface-container">
+<p class="font-label-caps text-outline text-[10px]">DOCUMENT GENERATED VIA STRUCTUREFLOW — CONFIDENTIAL</p>
+</footer>
+</main>
+<!-- Floating Help Button (Suppressed on Print) -->
+<div class="fixed bottom-8 right-8 no-print">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</body></html>

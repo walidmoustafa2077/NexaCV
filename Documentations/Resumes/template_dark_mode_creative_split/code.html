@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dark Mode Creative Resume Template</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcbd",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "on-surface": "#1a1b20",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3fa",
+                        "tertiary-container": "#a4671e",
+                        "primary": "#3a59a1",
+                        "on-surface-variant": "#444651",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "on-primary-fixed-variant": "#22438a",
+                        "secondary": "#545e7c",
+                        "primary-fixed": "#dae2ff",
+                        "secondary-container": "#cfd9fd",
+                        "primary-container": "#5472bc",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-secondary-container": "#545e7d",
+                        "inverse-on-surface": "#f0f0f7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#864f02",
+                        "outline-variant": "#c4c6d2",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9ff",
+                        "on-secondary-fixed": "#101a36",
+                        "on-background": "#1a1b20",
+                        "background": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "surface-dim": "#d9d9e0",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-container-high": "#e8e7ee",
+                        "secondary-fixed": "#dae2ff",
+                        "surface-tint": "#3d5ca4",
+                        "surface-variant": "#e2e2e9",
+                        "outline": "#747782",
+                        "on-primary-fixed": "#001947",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "inverse-surface": "#2f3035",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b1c5ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fefcff",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container": "#ededf4",
+                        "on-tertiary-fixed": "#2c1600",
+                        "surface-container-highest": "#e2e2e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "input-padding-x": "12px",
+                        "container-max-width": "768px",
+                        "section-margin": "48px",
+                        "input-padding-y": "10px",
+                        "form-gap": "24px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "input-text": ["Inter"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base">
+<!-- Shared TopNavBar -->
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-gray-50 group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#eaecf0] px-10 py-3">
+<div class="flex items-center gap-4 text-[#111318]">
+<div class="size-4">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#111318] text-lg font-bold leading-tight tracking-[-0.015em]">Dark Mode Creative Template</h2>
+</div>
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#eaecf0] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<div class="text-[#111318]" data-icon="Download" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H72a8,8,0,0,1,0,16H32v64H224V136H184a8,8,0,0,1,0-16h40A16,16,0,0,1,240,136Zm-117.66-2.34a8,8,0,0,0,11.32,0l48-48a8,8,0,0,0-11.32-11.32L136,108.69V24a8,8,0,0,0-16,0v84.69L85.66,74.34A8,8,0,0,0,74.34,85.66ZM200,168a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z"></path>
+</svg>
+</div>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#eaecf0] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<div class="text-[#111318]" data-icon="Share" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M229.66,109.66l-48,48a8,8,0,0,1-11.32-11.32L204.69,112H165a88,88,0,0,0-85.23,66,8,8,0,0,1-15.5-4A103.94,103.94,0,0,1,165,96h39.71L170.34,61.66a8,8,0,0,1,11.32-11.32l48,48A8,8,0,0,1,229.66,109.66ZM192,208H40V88a8,8,0,0,0-16,0V208a16,16,0,0,0,16,16H192a8,8,0,0,0,0-16Z"></path>
+</svg>
+</div>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#eaecf0] text-[#111318] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<div class="text-[#111318]" data-icon="Gear" data-size="20px" data-weight="regular">
+<svg fill="currentColor" height="20px" viewbox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+<path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"></path>
+</svg>
+</div>
+</button>
+</div>
+</header>
+<main class="mt-8 shadow-2xl rounded-xl overflow-hidden flex flex-col md:flex-row min-h-[1100px]">
+<!-- Left Column: Dark Navy / Periwinkle -->
+<aside class="w-full md:w-1/3 bg-primary text-on-primary p-8 md:p-12 space-y-12">
+<div class="space-y-6">
+<div class="flex justify-center md:justify-start">
+<div class="h-32 w-32 rounded-full border-4 border-primary-container overflow-hidden shadow-lg bg-surface">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a creative director in their late 30s with a confident expression. They are wearing a modern charcoal turtleneck against a soft, out-of-focus architectural background with cool blue ambient lighting. The style is cinematic and high-contrast, perfectly matching a professional dark-mode UI aesthetic with clean lines and sophisticated lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5HoscA8kkbF0gZZch0mlbQiVNKLyOkWPKd_4c5FfBBzKwa4I1KFpZfiGN_5tIvMNiZIo1Dad_CnrscNP9BIS5IVFl0taQubKr37vo6SefILeMs_6I1XHAzDfMLQn8ykBZGYQFSzJDolRGsgVm6o-ZCMeQ6d1j0XZgDyLiYH3I2stK9bjFpPMgz45tVPoSo2rJrDe_80leCO2_DlrpnCV3N9spvGPfBPR3Hfxnq_OrCNYo7RGdmtoDDxmFEoVwSZxekSVBnImvHYDT"/>
+</div>
+</div>
+<div class="text-center md:text-left">
+<h1 class="font-h1 text-on-primary leading-tight">Alex Rivers</h1>
+<p class="text-primary-fixed-dim font-medium tracking-wide uppercase text-sm mt-2">Creative Director</p>
+</div>
+</div>
+<!-- Contact Components -->
+<div class="space-y-4 pt-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary-container p-2 rounded-lg" data-icon="phone" data-weight="fill">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">phone</span>
+</div>
+<span class="text-sm font-medium">+1 (555) 012-3456</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-primary-container p-2 rounded-lg" data-icon="mail" data-weight="fill">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">mail</span>
+</div>
+<span class="text-sm font-medium">alex.rivers@visionary.com</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-primary-container p-2 rounded-lg" data-icon="location_on" data-weight="fill">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<span class="text-sm font-medium">New York, NY</span>
+</div>
+</div>
+<!-- Education Section -->
+<section class="space-y-6">
+<div class="flex items-center gap-3 border-b border-primary-container pb-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<h2 class="font-h2 text-xl text-on-primary">Education</h2>
+</div>
+<div class="space-y-6">
+<div>
+<p class="font-bold text-base">Masters in Fine Arts</p>
+<p class="text-sm text-primary-fixed-dim">Rhode Island School of Design</p>
+<p class="text-xs mt-1 opacity-80">2013 - 2015</p>
+</div>
+<div>
+<p class="font-bold text-base">BFA Graphic Design</p>
+<p class="text-sm text-primary-fixed-dim">Yale School of Art</p>
+<p class="text-xs mt-1 opacity-80">2009 - 2013</p>
+</div>
+</div>
+</section>
+<!-- Languages Section -->
+<section class="space-y-6">
+<div class="flex items-center gap-3 border-b border-primary-container pb-2">
+<span class="material-symbols-outlined">translate</span>
+<h2 class="font-h2 text-xl text-on-primary">Languages</h2>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span>English</span>
+<span class="opacity-70">Native</span>
+</div>
+<div class="h-1.5 w-full bg-primary-container rounded-full overflow-hidden">
+<div class="h-full bg-white w-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span>French</span>
+<span class="opacity-70">Fluent</span>
+</div>
+<div class="h-1.5 w-full bg-primary-container rounded-full overflow-hidden">
+<div class="h-full bg-white w-4/5"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span>Japanese</span>
+<span class="opacity-70">Conversational</span>
+</div>
+<div class="h-1.5 w-full bg-primary-container rounded-full overflow-hidden">
+<div class="h-full bg-white w-2/5"></div>
+</div>
+</div>
+</div>
+</section>
+</aside>
+<!-- Right Column: White / Professional -->
+<div class="w-full md:w-2/3 bg-surface-container-lowest p-8 md:p-16">
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<div class="h-12 w-1.5 bg-primary rounded-full"></div>
+<h2 class="font-h1 text-on-surface">Professional Experience</h2>
+</div>
+<div class="space-y-12 relative before:absolute before:left-3 before:top-4 before:bottom-4 before:w-[2px] before:bg-surface-container">
+<!-- Job Item 1 -->
+<div class="relative pl-10 group">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-surface-container-lowest border-4 border-primary z-10"></div>
+<div class="space-y-2">
+<div class="flex flex-wrap justify-between items-baseline">
+<h3 class="text-xl font-bold text-on-surface">Senior Art Director</h3>
+<span class="px-3 py-1 bg-surface-container-low text-primary text-xs font-bold rounded-full uppercase tracking-wider">2020 - Present</span>
+</div>
+<p class="text-primary font-semibold">Visionary Agency | New York</p>
+<p class="text-on-surface-variant leading-relaxed">
+                                                Spearheading the creative direction for Fortune 500 digital transformation projects. Managed a cross-functional team of 15 designers and researchers to deliver high-integrity SaaS interfaces and brand identities.
+                                            </p>
+<ul class="list-disc list-inside text-sm text-on-surface-variant space-y-1 mt-3">
+<li>Increased design system adoption by 200% across product teams.</li>
+<li>Winner of the 2022 Digital Excellence Award for "Best Creative Campaign".</li>
+<li>Reduced prototype turnaround time by 40% through atomic design principles.</li>
+</ul>
+</div>
+</div>
+<!-- Job Item 2 -->
+<div class="relative pl-10 group">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-surface-container-lowest border-4 border-outline z-10 group-hover:border-primary transition-colors"></div>
+<div class="space-y-2">
+<div class="flex flex-wrap justify-between items-baseline">
+<h3 class="text-xl font-bold text-on-surface">Lead Designer</h3>
+<span class="px-3 py-1 bg-surface-container-low text-outline text-xs font-bold rounded-full uppercase tracking-wider">2017 - 2020</span>
+</div>
+<p class="text-primary font-semibold">Pixel Perfect | San Francisco</p>
+<p class="text-on-surface-variant leading-relaxed">
+                                                Owned the end-to-end design process for mobile and web applications. Focused on accessibility and strategic user flow optimization.
+                                            </p>
+</div>
+</div>
+<!-- Job Item 3 -->
+<div class="relative pl-10 group">
+<div class="absolute left-0 top-1.5 size-6 rounded-full bg-surface-container-lowest border-4 border-outline z-10 group-hover:border-primary transition-colors"></div>
+<div class="space-y-2">
+<div class="flex flex-wrap justify-between items-baseline">
+<h3 class="text-xl font-bold text-on-surface">Junior Designer</h3>
+<span class="px-3 py-1 bg-surface-container-low text-outline text-xs font-bold rounded-full uppercase tracking-wider">2015 - 2017</span>
+</div>
+<p class="text-primary font-semibold">Creative Co. | Remote</p>
+<p class="text-on-surface-variant leading-relaxed">
+                                                Assisted in the production of high-fidelity mockups, social media assets, and interactive display ads for global retailers.
+                                            </p>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-16 space-y-8">
+<div class="flex items-center gap-4">
+<div class="h-12 w-1.5 bg-secondary rounded-full"></div>
+<h2 class="font-h1 text-on-surface">Key Expertise</h2>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-primary text-white font-bold rounded-lg text-sm">Strategic Leadership</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg text-sm">UI/UX Architecture</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg text-sm">Brand Identity</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg text-sm">Design Systems</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg text-sm">Agile Methodology</span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg text-sm">Rapid Prototyping</span>
+</div>
+</section>
+</div>
+</main>
+<footer class="mt-12 mb-8 text-center border-t border-outline-variant pt-8">
+<p class="text-sm text-outline">Generated with StructureFlow • Dark Mode Creative Template v1.2</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</body></html>

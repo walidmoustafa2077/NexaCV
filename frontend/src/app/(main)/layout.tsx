@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import AppSidebar from "@/components/layout/AppSidebar";
@@ -9,14 +9,20 @@ import TopBar from "@/components/layout/TopBar";
 export default function MainLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
         if (!isAuthenticated) {
             router.replace("/login");
         }
-    }, [isAuthenticated, router]);
+    }, [mounted, isAuthenticated, router]);
 
-    if (!isAuthenticated) return null;
+    if (!mounted || !isAuthenticated) return null;
 
     return (
         <div className="flex min-h-screen bg-background">

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Resume Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-fixed-dim": "#bcc6e9",
+                "on-primary-fixed": "#001947",
+                "tertiary-fixed-dim": "#ffb86e",
+                "on-tertiary-fixed-variant": "#693c00",
+                "error-container": "#ffdad6",
+                "surface-tint": "#3d5ca4",
+                "on-secondary": "#ffffff",
+                "surface-dim": "#d9d9e0",
+                "error": "#ba1a1a",
+                "on-surface-variant": "#444651",
+                "surface-container": "#ededf4",
+                "primary-container": "#5472bc",
+                "surface-bright": "#f9f9ff",
+                "primary-fixed": "#dae2ff",
+                "on-primary": "#ffffff",
+                "surface-variant": "#e2e2e9",
+                "on-secondary-container": "#545e7d",
+                "on-error": "#ffffff",
+                "on-background": "#1a1b20",
+                "on-secondary-fixed-variant": "#3c4663",
+                "primary": "#3a59a1",
+                "on-tertiary-fixed": "#2c1600",
+                "tertiary": "#864f02",
+                "on-secondary-fixed": "#101a36",
+                "secondary": "#545e7c",
+                "tertiary-fixed": "#ffdcbd",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#cfd9fd",
+                "on-error-container": "#93000a",
+                "outline-variant": "#c4c6d2",
+                "on-primary-container": "#fefcff",
+                "on-surface": "#1a1b20",
+                "secondary-fixed": "#dae2ff",
+                "inverse-primary": "#b1c5ff",
+                "surface": "#f9f9ff",
+                "on-tertiary-container": "#fffbff",
+                "background": "#f9f9ff",
+                "surface-container-high": "#e8e7ee",
+                "surface-container-low": "#f3f3fa",
+                "inverse-surface": "#2f3035",
+                "on-tertiary": "#ffffff",
+                "inverse-on-surface": "#f0f0f7",
+                "surface-container-highest": "#e2e2e9",
+                "on-primary-fixed-variant": "#22438a",
+                "tertiary-container": "#a4671e",
+                "primary-fixed-dim": "#b1c5ff",
+                "outline": "#747782"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "form-gap": "24px",
+                "container-max-width": "768px",
+                "input-padding-y": "10px",
+                "input-padding-x": "12px",
+                "base-unit": "4px",
+                "section-margin": "48px"
+            },
+            "fontFamily": {
+                "input-text": ["Inter"],
+                "h1": ["Manrope"],
+                "body-sm": ["Inter"],
+                "body-base": ["Inter"],
+                "label-caps": ["Inter"],
+                "h2": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .resume-canvas {
+            width: 768px; /* Scaled for web view but maintaining A4 proportions */
+            min-height: 1086px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-base text-on-surface antialiased">
+<!-- TopNavBar Component -->
+<header class="bg-slate-50 dark:bg-slate-950 font-manrope antialiased text-sm docked full-width top-0 border-b border-slate-200/60 dark:border-slate-800/60 flat no shadows flex justify-between items-center px-6 py-3 w-full sticky z-50">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1]">StructureFlow</span>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors active:scale-95 transition-transform duration-150">
+                Back to Editor
+            </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-semibold shadow-sm hover:opacity-90 active:scale-95 transition-all">
+                Download PDF
+            </button>
+</div>
+</header>
+<main class="flex flex-col items-center py-12 px-4 gap-section-margin">
+<!-- Document Canvas -->
+<div class="resume-canvas bg-surface-container-lowest overflow-hidden flex flex-row">
+<!-- Left Column (30%) - Light Grey Background -->
+<aside class="w-[30%] bg-surface-container-low flex flex-col p-8 gap-8 border-r border-outline-variant/30">
+<!-- Profile Image Area -->
+<div class="flex flex-col items-center gap-4">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-sm">
+<img alt="Profile Portrait" class="w-full h-full object-cover" data-alt="A professional headshot of a focused young man with short dark hair, wearing a navy blue blazer over a crisp white shirt. The lighting is soft and studio-quality, emphasizing a professional and trustworthy demeanor. The background is a soft, blurred neutral office setting, maintaining a light-mode corporate aesthetic with subtle periwinkle tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqnSgmXo9jDVNdhXKiSfXS2fAeeImmfrrEhtgEJifQAIEvYcQRWSqg9zcae_j3iCAQPbCb022E3SQFxyR3klCyZK-wpocfJqIJ7Enhgz-_0gD0QDMqbk9-c9WZBb1HJI-MPTQoxMvVKNkjCKfXmBCk8qwoC6M61JYUIwXt-dalOa1tWXa70tUmdv1QFY1TvkGY_Beohy-DBv-v-xOuPkpppUd3tCI9lpmAUlZaBYlBlG9Lj4LZlbslBTzF6J4ab1fvV7AAM6meSJlB"/>
+</div>
+</div>
+<!-- Contact Section -->
+<div class="flex flex-col gap-4">
+<h3 class="font-label-caps text-label-caps text-secondary uppercase tracking-widest border-b border-outline-variant pb-1">Contact</h3>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="mail">mail</span>
+<span class="font-body-sm text-body-sm">hello@johndoe.com</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="call">call</span>
+<span class="font-body-sm text-body-sm">+1 555-0123</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="location_on">location_on</span>
+<span class="font-body-sm text-body-sm">San Francisco, CA</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="link">link</span>
+<span class="font-body-sm text-body-sm">linkedin.com/in/jdoe</span>
+</div>
+</div>
+</div>
+<!-- Skill Bars Section (Skill-Heavy) -->
+<div class="flex flex-col gap-6">
+<h3 class="font-label-caps text-label-caps text-secondary uppercase tracking-widest border-b border-outline-variant pb-1">Expertise</h3>
+<div class="flex flex-col gap-5">
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm font-semibold">User Experience</span>
+<span class="font-label-caps text-[10px] text-primary">95%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 95%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm font-semibold">Product Strategy</span>
+<span class="font-label-caps text-[10px] text-primary">88%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 88%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm font-semibold">Data Analytics</span>
+<span class="font-label-caps text-[10px] text-primary">82%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 82%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm font-semibold">Team Leadership</span>
+<span class="font-label-caps text-[10px] text-primary">90%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 90%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm font-semibold">Interface Design</span>
+<span class="font-label-caps text-[10px] text-primary">92%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Languages -->
+<div class="flex flex-col gap-4 mt-auto">
+<h3 class="font-label-caps text-label-caps text-secondary uppercase tracking-widest border-b border-outline-variant pb-1">Languages</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-lg font-body-sm text-body-sm font-medium">English</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-lg font-body-sm text-body-sm font-medium">German</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-lg font-body-sm text-body-sm font-medium">Spanish</span>
+</div>
+</div>
+</aside>
+<!-- Right Column (70%) - White Background -->
+<main class="w-[70%] bg-surface-container-lowest p-12 flex flex-col gap-section-margin">
+<!-- Name & Title -->
+<header class="flex flex-col gap-2">
+<h1 class="font-h1 text-h1 text-on-surface uppercase tracking-tight font-extrabold">Johnathan Doe</h1>
+<div class="flex items-center gap-3">
+<span class="h-px w-8 bg-primary"></span>
+<h2 class="font-h2 text-h2 text-primary font-medium">Senior Product Designer</h2>
+</div>
+</header>
+<!-- Profile Summary -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="person_search">person_search</span>
+<h3 class="font-h2 text-h2 text-on-surface">Professional Profile</h3>
+</div>
+<p class="font-body-base text-body-base text-on-surface-variant leading-relaxed">
+                        Innovative Product Designer with 10+ years of experience in creating user-centric digital ecosystems. Expert at translating complex data into intuitive interfaces and high-fidelity prototypes. Proven track record of leading cross-functional teams to deliver scalable SaaS solutions that drive user engagement and business growth.
+                    </p>
+</section>
+<!-- Experience Section -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="work_history">work_history</span>
+<h3 class="font-h2 text-h2 text-on-surface">Work Experience</h3>
+</div>
+<div class="flex flex-col gap-8">
+<!-- Job 1 -->
+<div class="relative pl-6 border-l-2 border-primary-fixed">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary ring-4 ring-surface-container-lowest"></div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-base text-body-base font-bold text-on-surface">Lead Experience Designer</h4>
+<span class="px-3 py-1 bg-surface-container text-secondary font-label-caps text-[10px] rounded-lg">2020 — PRESENT</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary mb-3 font-semibold">TechFlow Solutions Inc.</p>
+<ul class="flex flex-col gap-2 list-disc list-outside ml-4 font-body-sm text-body-sm text-on-surface-variant">
+<li>Spearheaded the redesign of the core enterprise dashboard, resulting in a 40% increase in daily active users.</li>
+<li>Established a comprehensive global design system used across 4 different product lines.</li>
+<li>Mentored a team of 12 junior designers and facilitated weekly design critique sessions.</li>
+</ul>
+</div>
+<!-- Job 2 -->
+<div class="relative pl-6 border-l-2 border-primary-fixed">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary-fixed ring-4 ring-surface-container-lowest"></div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-body-base text-body-base font-bold text-on-surface">Senior UI/UX Designer</h4>
+<span class="px-3 py-1 bg-surface-container text-secondary font-label-caps text-[10px] rounded-lg">2016 — 2020</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary mb-3 font-semibold">Creative Pulse Agency</p>
+<ul class="flex flex-col gap-2 list-disc list-outside ml-4 font-body-sm text-body-sm text-on-surface-variant">
+<li>Led high-impact design projects for Fortune 500 clients, focusing on mobile-first architecture.</li>
+<li>Collaborated directly with stakeholders to define product roadmaps and feature prioritization.</li>
+<li>Implemented rapid prototyping workflows that reduced development hand-off time by 25%.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Education Section -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="school">school</span>
+<h3 class="font-h2 text-h2 text-on-surface">Education</h3>
+</div>
+<div class="grid grid-cols-2 gap-form-gap">
+<div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<h4 class="font-body-base text-body-base font-bold text-on-surface">M.Sc. Human-Computer Interaction</h4>
+<p class="font-body-sm text-body-sm text-primary font-medium mt-1">Stanford University</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant mt-2 uppercase">Class of 2016</p>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<h4 class="font-body-base text-body-base font-bold text-on-surface">B.F.A. Communication Design</h4>
+<p class="font-body-sm text-body-sm text-primary font-medium mt-1">Parsons School of Design</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant mt-2 uppercase">Class of 2014</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer / Action Area -->
+<div class="w-full max-w-container-max-width flex justify-center gap-4">
+<p class="text-on-surface-variant text-body-sm opacity-60">Created with StructureFlow Resume Engine • 2024</p>
+</div>
+</main>
+</body></html>

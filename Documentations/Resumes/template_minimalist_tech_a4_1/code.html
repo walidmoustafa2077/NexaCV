@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;family=Roboto+Mono:wght@400;600&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed-dim": "#bcc6e9",
+              "on-primary-fixed": "#001947",
+              "tertiary-fixed-dim": "#ffb86e",
+              "on-tertiary-fixed-variant": "#693c00",
+              "error-container": "#ffdad6",
+              "surface-tint": "#3d5ca4",
+              "on-secondary": "#ffffff",
+              "surface-dim": "#d9d9e0",
+              "error": "#ba1a1a",
+              "on-surface-variant": "#444651",
+              "surface-container": "#ededf4",
+              "primary-container": "#5472bc",
+              "surface-bright": "#f9f9ff",
+              "primary-fixed": "#dae2ff",
+              "on-primary": "#ffffff",
+              "surface-variant": "#e2e2e9",
+              "on-secondary-container": "#545e7d",
+              "on-error": "#ffffff",
+              "on-background": "#1a1b20",
+              "on-secondary-fixed-variant": "#3c4663",
+              "primary": "#3a59a1",
+              "on-tertiary-fixed": "#2c1600",
+              "tertiary": "#864f02",
+              "on-secondary-fixed": "#101a36",
+              "secondary": "#545e7c",
+              "tertiary-fixed": "#ffdcbd",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#cfd9fd",
+              "on-error-container": "#93000a",
+              "outline-variant": "#c4c6d2",
+              "on-primary-container": "#fefcff",
+              "on-surface": "#1a1b20",
+              "secondary-fixed": "#dae2ff",
+              "inverse-primary": "#b1c5ff",
+              "surface": "#f9f9ff",
+              "on-tertiary-container": "#fffbff",
+              "background": "#f9f9ff",
+              "surface-container-high": "#e8e7ee",
+              "surface-container-low": "#f3f3fa",
+              "inverse-surface": "#2f3035",
+              "on-tertiary": "#ffffff",
+              "inverse-on-surface": "#f0f0f7",
+              "surface-container-highest": "#e2e2e9",
+              "on-primary-fixed-variant": "#22438a",
+              "tertiary-container": "#a4671e",
+              "primary-fixed-dim": "#b1c5ff",
+              "outline": "#747782"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "form-gap": "24px",
+              "container-max-width": "768px",
+              "input-padding-y": "10px",
+              "input-padding-x": "12px",
+              "base-unit": "4px",
+              "section-margin": "48px"
+            },
+            fontFamily: {
+              "roboto-mono": ["Roboto Mono", "monospace"],
+              "roboto": ["Roboto", "sans-serif"],
+              "input-text": ["Inter"],
+              "h1": ["Manrope"],
+              "body-sm": ["Inter"],
+              "body-base": ["Inter"],
+              "label-caps": ["Inter"],
+              "h2": ["Manrope"]
+            },
+            fontSize: {
+              "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+              "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+              "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; padding: 0 !important; }
+            .resume-canvas { box-shadow: none !important; border: none !important; margin: 0 !important; width: 100% !important; }
+        }
+        .resume-canvas {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: white;
+            margin: 2rem auto;
+            padding: 20mm;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .section-header {
+            border-bottom: 1px solid #e2e2e9;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-roboto text-on-surface antialiased min-h-screen">
+<!-- TopNavBar Component Integration -->
+<header class="no-print bg-slate-50 dark:bg-slate-950 font-manrope antialiased text-sm border-b border-slate-200/60 dark:border-slate-800/60 flat no shadows flex justify-between items-center px-6 py-3 w-full sticky top-0 z-50">
+<div class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1]">StructureFlow</div>
+<div class="flex items-center gap-6">
+<nav class="flex items-center gap-6">
+<a class="text-[#5775bf] font-semibold border-b-2 border-[#5775bf] pb-1" href="#">Resume Editor</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-2 py-1" href="#">Templates</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-2 py-1" href="#">History</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 px-3 py-1.5 rounded-md transition-all active:scale-95">Back to Editor</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-1.5 rounded-md font-semibold hover:bg-primary transition-all active:scale-95" onclick="window.print()">Download PDF</button>
+</div>
+</div>
+</header>
+<main class="py-12">
+<!-- Resume Canvas (A4 Aspect) -->
+<article class="resume-canvas border border-outline-variant">
+<!-- Header Section -->
+<header class="mb-section-margin">
+<h1 class="font-roboto-mono text-4xl font-bold tracking-tight text-on-surface mb-2 uppercase">ALEXANDER R. VANCE</h1>
+<p class="font-roboto-mono text-primary text-lg mb-6">Senior Full-Stack Engineer</p>
+<div class="grid grid-cols-2 gap-4 text-body-sm text-on-surface-variant font-roboto">
+<div class="flex flex-col gap-1">
+<span>San Francisco, California</span>
+<span>+1 (555) 012-3456</span>
+</div>
+<div class="flex flex-col gap-1 text-right">
+<span>alex.vance@structureflow.io</span>
+<span>github.com/alexvance-dev</span>
+<span>linkedin.com/in/alex-vance</span>
+</div>
+</div>
+</header>
+<!-- Professional Summary -->
+<section class="mb-section-margin">
+<div class="section-header">
+<h2 class="font-roboto-mono text-sm font-semibold tracking-widest text-primary uppercase">Profile</h2>
+</div>
+<p class="text-body-base leading-relaxed text-on-surface">
+                    Results-oriented Senior Engineer with over 8 years of experience building scalable distributed systems and high-integrity user interfaces. Expert in architectural design patterns and performance optimization. Committed to clean code, robust documentation, and mentoring cross-functional engineering teams in agile environments.
+                </p>
+</section>
+<!-- Experience -->
+<section class="mb-section-margin">
+<div class="section-header">
+<h2 class="font-roboto-mono text-sm font-semibold tracking-widest text-primary uppercase">Professional Experience</h2>
+</div>
+<!-- Role 1 -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-roboto font-bold text-lg text-on-surface">Lead Software Engineer</h3>
+<span class="font-roboto-mono text-xs text-outline italic">2020 — Present</span>
+</div>
+<p class="font-roboto-mono text-sm text-secondary mb-3">QuantumSystems Corp.</p>
+<ul class="list-none space-y-2 text-body-sm text-on-surface-variant">
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Directed the migration of monolithic architecture to microservices using Node.js and AWS, improving system uptime to 99.99%.</li>
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Spearheaded the development of a proprietary UI component library that reduced front-end development time by 40% across 5 product teams.</li>
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Optimized PostgreSQL query performance, resulting in a 60% reduction in database latency during peak traffic periods.</li>
+</ul>
+</div>
+<!-- Role 2 -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-roboto font-bold text-lg text-on-surface">Senior Full-Stack Developer</h3>
+<span class="font-roboto-mono text-xs text-outline italic">2017 — 2020</span>
+</div>
+<p class="font-roboto-mono text-sm text-secondary mb-3">Nexus Fintech Solutions</p>
+<ul class="list-none space-y-2 text-body-sm text-on-surface-variant">
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Architected and launched a real-time trading dashboard using React and WebSocket, handling 10k+ concurrent users.</li>
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Implemented automated CI/CD pipelines using GitHub Actions, reducing deployment errors by 25%.</li>
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Collaborated with security teams to ensure SOC2 compliance across all cloud infrastructure.</li>
+</ul>
+</div>
+<!-- Role 3 -->
+<div>
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-roboto font-bold text-lg text-on-surface">Software Developer</h3>
+<span class="font-roboto-mono text-xs text-outline italic">2015 — 2017</span>
+</div>
+<p class="font-roboto-mono text-sm text-secondary mb-3">CloudScale Labs</p>
+<ul class="list-none space-y-2 text-body-sm text-on-surface-variant">
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Developed responsive web applications for enterprise clients using Angular and TypeScript.</li>
+<li class="relative pl-4 before:content-['—'] before:absolute before:left-0 before:text-outline">Participated in code reviews and sprint planning within a high-velocity Scrum team.</li>
+</ul>
+</div>
+</section>
+<!-- Skills -->
+<section class="mb-section-margin">
+<div class="section-header">
+<h2 class="font-roboto-mono text-sm font-semibold tracking-widest text-primary uppercase">Technical Skills</h2>
+</div>
+<div class="space-y-4">
+<div>
+<span class="font-roboto-mono text-xs font-bold text-secondary uppercase block mb-1">Languages &amp; Frameworks</span>
+<p class="text-body-sm text-on-surface-variant">TypeScript, JavaScript (ES6+), Python, Go, React, Next.js, Node.js, Express, Tailwind CSS, Material UI, GraphQL, REST APIs.</p>
+</div>
+<div>
+<span class="font-roboto-mono text-xs font-bold text-secondary uppercase block mb-1">Infrastructure &amp; Tools</span>
+<p class="text-body-sm text-on-surface-variant">AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes, Terraform, Git, Jenkins, Redis, PostgreSQL, MongoDB, Prometheus, Grafana.</p>
+</div>
+<div>
+<span class="font-roboto-mono text-xs font-bold text-secondary uppercase block mb-1">Methodologies</span>
+<p class="text-body-sm text-on-surface-variant">Agile/Scrum, Test-Driven Development (TDD), CI/CD, Microservices, Domain-Driven Design (DDD), System Architecture.</p>
+</div>
+</div>
+</section>
+<!-- Education -->
+<section class="mb-8">
+<div class="section-header">
+<h2 class="font-roboto-mono text-sm font-semibold tracking-widest text-primary uppercase">Education</h2>
+</div>
+<div class="flex justify-between items-baseline">
+<div>
+<h3 class="font-roboto font-bold text-base text-on-surface">B.S. Computer Science</h3>
+<p class="font-roboto-mono text-sm text-secondary">University of California, Berkeley</p>
+</div>
+<span class="font-roboto-mono text-xs text-outline italic">2011 — 2015</span>
+</div>
+</section>
+</article>
+</main>
+<!-- Contextual FAB - suppressed on resume view per mandate, but added back as a "Print" button if needed outside the canvas -->
+<div class="no-print fixed bottom-8 right-8">
+<button class="bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform" onclick="window.print()">
+<span class="material-symbols-outlined">print</span>
+</button>
+</div>
+</body></html>

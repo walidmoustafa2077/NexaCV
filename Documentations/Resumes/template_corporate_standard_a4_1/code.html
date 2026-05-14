@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Lora:ital,wght@0,400..700;1,400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "on-primary-fixed": "#001947",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#3d5ca4",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d9d9e0",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#444651",
+                        "surface-container": "#ededf4",
+                        "primary-container": "#5472bc",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed": "#dae2ff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e2e2e9",
+                        "on-secondary-container": "#545e7d",
+                        "on-error": "#ffffff",
+                        "on-background": "#1a1b20",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "primary": "#3a59a1",
+                        "on-tertiary-fixed": "#2c1600",
+                        "tertiary": "#864f02",
+                        "on-secondary-fixed": "#101a36",
+                        "secondary": "#545e7c",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#cfd9fd",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c4c6d2",
+                        "on-primary-container": "#fefcff",
+                        "on-surface": "#1a1b20",
+                        "secondary-fixed": "#dae2ff",
+                        "inverse-primary": "#b1c5ff",
+                        "surface": "#f9f9ff",
+                        "on-tertiary-container": "#fffbff",
+                        "background": "#f9f9ff",
+                        "surface-container-high": "#e8e7ee",
+                        "surface-container-low": "#f3f3fa",
+                        "inverse-surface": "#2f3035",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f0f0f7",
+                        "surface-container-highest": "#e2e2e9",
+                        "on-primary-fixed-variant": "#22438a",
+                        "tertiary-container": "#a4671e",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "outline": "#747782"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "form-gap": "24px",
+                        "container-max-width": "768px",
+                        "input-padding-y": "10px",
+                        "input-padding-x": "12px",
+                        "base-unit": "4px",
+                        "section-margin": "48px"
+                    },
+                    fontFamily: {
+                        "input-text": ["Inter"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Manrope"],
+                        "serif-name": ["Lora"]
+                    },
+                    fontSize: {
+                        "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 1.25rem;
+            vertical-align: middle;
+        }
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+            .a4-page { 
+                margin: 0; 
+                box-shadow: none; 
+                width: 100%;
+                padding: 0;
+            }
+        }
+        .section-header {
+            letter-spacing: 0.125rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="bg-surface-container font-body-base text-on-surface antialiased p-8 md:p-12">
+<!-- Top Navigation Shell (Shared Component) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-slate-50 dark:bg-slate-950 border-b border-slate-200/60 dark:border-slate-800/60 px-6 py-3 flex justify-between items-center no-print">
+<div class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1] font-manrope">StructureFlow</div>
+<div class="flex gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-3 py-1.5 text-sm font-manrope active:scale-95 transition-transform duration-150">
+                Back to Editor
+            </button>
+<button class="bg-primary text-on-primary hover:opacity-90 rounded-md transition-all px-4 py-1.5 text-sm font-manrope font-semibold active:scale-95 transition-transform duration-150 shadow-sm">
+                Download PDF
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-[768px] mx-auto mt-16 bg-white shadow-xl min-h-[1123px] p-[2in] relative overflow-hidden a4-page print:shadow-none">
+<!-- Header / Identity -->
+<header class="text-center mb-12">
+<h1 class="font-serif-name text-5xl text-on-surface mb-4">Jonathan R. Structure</h1>
+<div class="flex justify-center items-center gap-4 text-on-surface-variant font-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+                    j.structure@flow.com
+                </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary" data-icon="call">call</span>
+                    +1 (555) 012-3456
+                </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+                    New York, NY
+                </span>
+</div>
+<div class="mt-4 flex justify-center gap-4 font-body-sm text-secondary">
+<span class="font-semibold">linkedin.com/in/jstructure</span>
+<span class="font-semibold">structureflow.io/portfolio</span>
+</div>
+</header>
+<!-- Professional Summary -->
+<section class="mb-section-margin">
+<h2 class="section-header font-h2 text-sm text-primary border-b-2 border-surface-variant pb-1 mb-4">Executive Summary</h2>
+<p class="font-body-base text-on-surface-variant leading-relaxed">
+                Strategic Operations Director with over 12 years of experience in optimizing corporate workflows and architectural data integrity. Proven track record of spearheading digital transformation initiatives for Fortune 500 companies, resulting in a 30% increase in operational efficiency. Expert in aligning complex technical structures with high-level business objectives to drive sustainable growth.
+            </p>
+</section>
+<!-- Core Competencies -->
+<section class="mb-section-margin">
+<h2 class="section-header font-h2 text-sm text-primary border-b-2 border-surface-variant pb-1 mb-4">Core Competencies</h2>
+<div class="grid grid-cols-2 gap-x-12 gap-y-2 font-body-base text-on-surface-variant">
+<ul class="list-disc list-inside space-y-1">
+<li>Strategic Workflow Optimization</li>
+<li>Enterprise Resource Planning</li>
+<li>Architectural Data Integrity</li>
+<li>Cross-functional Leadership</li>
+</ul>
+<ul class="list-disc list-inside space-y-1">
+<li>Agile Project Management</li>
+<li>Compliance &amp; Risk Governance</li>
+<li>Stakeholder Communications</li>
+<li>Full-Lifecycle System Design</li>
+</ul>
+</div>
+</section>
+<!-- Professional Experience -->
+<section class="mb-section-margin">
+<h2 class="section-header font-h2 text-sm text-primary border-b-2 border-surface-variant pb-1 mb-6">Professional Experience</h2>
+<!-- Job 1 -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-lg text-on-surface">Director of Systems Architecture</h3>
+<span class="font-body-sm font-semibold text-secondary">2018 – Present</span>
+</div>
+<div class="flex justify-between items-baseline mb-3">
+<span class="italic font-body-base text-secondary">Global Systems Corp | New York, NY</span>
+</div>
+<ul class="list-disc ml-5 space-y-2 font-body-base text-on-surface-variant">
+<li>Orchestrated the migration of legacy data structures to a modern SaaS environment, reducing operational latency by 45%.</li>
+<li>Managed a multi-disciplinary team of 25 engineers and designers to deliver high-integrity data entry solutions for international banking clients.</li>
+<li>Implemented automated compliance check protocols that eliminated 98% of manual entry errors within the first fiscal year.</li>
+<li>Developed the 'StructureFlow' internal framework, which became the corporate standard for all project documentation.</li>
+</ul>
+</div>
+<!-- Job 2 -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-lg text-on-surface">Senior Project Manager</h3>
+<span class="font-body-sm font-semibold text-secondary">2014 – 2018</span>
+</div>
+<div class="flex justify-between items-baseline mb-3">
+<span class="italic font-body-base text-secondary">TechStream Solutions | Austin, TX</span>
+</div>
+<ul class="list-disc ml-5 space-y-2 font-body-base text-on-surface-variant">
+<li>Led the end-to-end delivery of 12 enterprise-scale software deployments, consistently meeting deadlines and staying 15% under budget.</li>
+<li>Bridged the gap between technical teams and executive stakeholders, translating complex requirements into actionable roadmaps.</li>
+<li>Pioneered a "Design-First" approach to form building, improving user completion rates by 22% across B2B platforms.</li>
+</ul>
+</div>
+</section>
+<!-- Education -->
+<section class="mb-section-margin">
+<h2 class="section-header font-h2 text-sm text-primary border-b-2 border-surface-variant pb-1 mb-4">Education</h2>
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-base text-on-surface">Master of Science in Information Architecture</h3>
+<span class="font-body-sm font-semibold text-secondary">2014</span>
+</div>
+<div class="text-on-surface-variant italic font-body-base mb-4">University of Washington | Seattle, WA</div>
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-base text-on-surface">Bachelor of Business Administration</h3>
+<span class="font-body-sm font-semibold text-secondary">2012</span>
+</div>
+<div class="text-on-surface-variant italic font-body-base">University of Texas | Austin, TX</div>
+</section>
+<!-- Technical Tools -->
+<section>
+<h2 class="section-header font-h2 text-sm text-primary border-b-2 border-surface-variant pb-1 mb-4">Technical Proficiencies</h2>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded text-xs font-semibold">SQL &amp; Data Modeling</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded text-xs font-semibold">Atlassian Suite (Jira/Confluence)</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded text-xs font-semibold">ERP Integration</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded text-xs font-semibold">Tableau &amp; BI Tools</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded text-xs font-semibold">Figma for Enterprise</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded text-xs font-semibold">Cloud Infrastructure (AWS/Azure)</span>
+</div>
+</section>
+<!-- Subtle Watermark -->
+<footer class="absolute bottom-8 left-0 right-0 text-center opacity-30 font-body-sm text-[10px] tracking-widest no-print">
+            GENERATED VIA STRUCTUREFLOW ENTERPRISE SOLUTIONS
+        </footer>
+</main>
+<!-- Contextual FAB - Suppressed on transactional/details page as per mandate -->
+</body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Resume - StructureFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#bcc6e9",
+                      "on-primary-fixed": "#001947",
+                      "tertiary-fixed-dim": "#ffb86e",
+                      "on-tertiary-fixed-variant": "#693c00",
+                      "error-container": "#ffdad6",
+                      "surface-tint": "#3d5ca4",
+                      "on-secondary": "#ffffff",
+                      "surface-dim": "#d9d9e0",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#444651",
+                      "surface-container": "#ededf4",
+                      "primary-container": "#5472bc",
+                      "surface-bright": "#f9f9ff",
+                      "primary-fixed": "#dae2ff",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#e2e2e9",
+                      "on-secondary-container": "#545e7d",
+                      "on-error": "#ffffff",
+                      "on-background": "#1a1b20",
+                      "on-secondary-fixed-variant": "#3c4663",
+                      "primary": "#3a59a1",
+                      "on-tertiary-fixed": "#2c1600",
+                      "tertiary": "#864f02",
+                      "on-secondary-fixed": "#101a36",
+                      "secondary": "#545e7c",
+                      "tertiary-fixed": "#ffdcbd",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#cfd9fd",
+                      "on-error-container": "#93000a",
+                      "outline-variant": "#c4c6d2",
+                      "on-primary-container": "#fefcff",
+                      "on-surface": "#1a1b20",
+                      "secondary-fixed": "#dae2ff",
+                      "inverse-primary": "#b1c5ff",
+                      "surface": "#f9f9ff",
+                      "on-tertiary-container": "#fffbff",
+                      "background": "#f9f9ff",
+                      "surface-container-high": "#e8e7ee",
+                      "surface-container-low": "#f3f3fa",
+                      "inverse-surface": "#2f3035",
+                      "on-tertiary": "#ffffff",
+                      "inverse-on-surface": "#f0f0f7",
+                      "surface-container-highest": "#e2e2e9",
+                      "on-primary-fixed-variant": "#22438a",
+                      "tertiary-container": "#a4671e",
+                      "primary-fixed-dim": "#b1c5ff",
+                      "outline": "#747782"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "form-gap": "24px",
+                      "container-max-width": "768px",
+                      "input-padding-y": "10px",
+                      "input-padding-x": "12px",
+                      "base-unit": "4px",
+                      "section-margin": "48px"
+              },
+              "fontFamily": {
+                      "input-text": ["Inter"],
+                      "h1": ["Manrope"],
+                      "body-sm": ["Inter"],
+                      "body-base": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "h2": ["Manrope"]
+              },
+              "fontSize": {
+                      "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; padding: 0 !important; }
+            .resume-container { box-shadow: none !important; margin: 0 !important; width: 100% !important; border: none !important; }
+        }
+        .resume-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 1in;
+            background-color: #ffffff;
+            margin: 2rem auto;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .material-symbols-outlined {
+            vertical-align: middle;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-base text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="no-print bg-slate-50 dark:bg-slate-950 flex justify-between items-center px-6 py-3 w-full docked full-width top-0 border-b border-slate-200/60 dark:border-slate-800/60 flat no shadows font-manrope text-sm">
+<div class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1]">StructureFlow</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-3 py-2 active:scale-95 transition-transform duration-150">Back to Editor</button>
+<button class="bg-[#5775bf] text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all" onclick="window.print()">
+<span class="material-symbols-outlined">download</span>
+                Download PDF
+            </button>
+</div>
+</nav>
+<!-- Resume Container (Simulated A4) -->
+<main class="resume-page flex flex-col gap-section-margin relative">
+<!-- Header -->
+<header class="text-center">
+<h1 class="font-h1 text-[32px] font-bold text-on-surface mb-2">ALEXANDER STRATTON</h1>
+<div class="flex justify-center items-center gap-4 text-body-sm text-on-surface-variant font-input-text">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                    New York, NY
+                </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                    a.stratton@email.com
+                </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">phone</span>
+                    (555) 123-4567
+                </span>
+<span class="text-outline-variant">|</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">link</span>
+                    linkedin.com/in/astratton
+                </span>
+</div>
+</header>
+<!-- Professional Summary -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<h2 class="font-h2 text-h2 uppercase tracking-widest text-primary shrink-0">Professional Summary</h2>
+<div class="h-[1px] w-full bg-outline-variant"></div>
+</div>
+<p class="font-body-base text-on-surface text-justify leading-relaxed">
+                Strategic and results-driven Product Operations Manager with over 10 years of experience in streamlining complex data workflows and implementing scalable technical infrastructures. Expert in bridging the gap between engineering precision and executive strategy. Proven track record of reducing operational overhead by 30% through automated system architecture and modern UI/UX implementation.
+            </p>
+</section>
+<!-- Experience -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<h2 class="font-h2 text-h2 uppercase tracking-widest text-primary shrink-0">Experience</h2>
+<div class="h-[1px] w-full bg-outline-variant"></div>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Job 1 -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<h3 class="font-h2 text-lg font-bold">Lead Operations Architect | Nexus Dynamics</h3>
+<span class="font-label-caps text-on-surface-variant">Jan 2020 – Present</span>
+</div>
+<ul class="list-disc ml-5 flex flex-col gap-2 font-body-base text-on-surface">
+<li>Directed a cross-functional team of 15 to overhaul the primary data entry pipeline, resulting in a 40% increase in data integrity.</li>
+<li>Implemented a company-wide Design System that unified 12 disparate internal tools, improving developer velocity by 25%.</li>
+<li>Automated financial reporting workflows using Python and SQL, saving the executive team 15 hours of manual labor per week.</li>
+</ul>
+</div>
+<!-- Job 2 -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<h3 class="font-h2 text-lg font-bold">Senior Systems Analyst | Quantify Solutions</h3>
+<span class="font-label-caps text-on-surface-variant">June 2015 – Dec 2019</span>
+</div>
+<ul class="list-disc ml-5 flex flex-col gap-2 font-body-base text-on-surface">
+<li>Managed the migration of legacy database structures to modern cloud-based environments with zero downtime.</li>
+<li>Collaborated with UI/UX designers to create high-fidelity prototypes for client-facing dashboards.</li>
+<li>Reduced system latency by 50% through aggressive code optimization and cache strategy implementation.</li>
+</ul>
+</div>
+<!-- Job 3 -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-baseline">
+<h3 class="font-h2 text-lg font-bold">Operations Coordinator | BlueStream Tech</h3>
+<span class="font-label-caps text-on-surface-variant">May 2012 – May 2015</span>
+</div>
+<ul class="list-disc ml-5 flex flex-col gap-2 font-body-base text-on-surface">
+<li>Coordinated daily operational tasks for a startup environment, focusing on rapid scaling and resource allocation.</li>
+<li>Maintained high-integrity records for venture capital reporting and internal audits.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Education -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<h2 class="font-h2 text-h2 uppercase tracking-widest text-primary shrink-0">Education</h2>
+<div class="h-[1px] w-full bg-outline-variant"></div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-baseline">
+<div>
+<h3 class="font-h2 text-lg font-bold">Master of Science in Information Systems</h3>
+<p class="font-body-base text-on-surface">Columbia University, New York, NY</p>
+</div>
+<span class="font-label-caps text-on-surface-variant">Class of 2012</span>
+</div>
+<div class="flex justify-between items-baseline">
+<div>
+<h3 class="font-h2 text-lg font-bold">Bachelor of Science in Computer Science</h3>
+<p class="font-body-base text-on-surface">University of Washington, Seattle, WA</p>
+</div>
+<span class="font-label-caps text-on-surface-variant">Class of 2010</span>
+</div>
+</div>
+</section>
+<!-- Skills -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<h2 class="font-h2 text-h2 uppercase tracking-widest text-primary shrink-0">Skills</h2>
+<div class="h-[1px] w-full bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-2 gap-x-12 gap-y-4">
+<div class="flex flex-col gap-1">
+<p class="font-label-caps text-primary uppercase">Technical Architecture</p>
+<p class="font-body-base">System Design, Cloud Infrastructure (AWS/GCP), Database Normalization, API Integration</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-label-caps text-primary uppercase">Leadership &amp; Strategy</p>
+<p class="font-body-base">Agile Methodology, Stakeholder Management, Budgeting, Change Management</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-label-caps text-primary uppercase">Tools &amp; Frameworks</p>
+<p class="font-body-base">SQL, Python, Jira, Tableau, Figma, React, Tailwind CSS, Git Version Control</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-label-caps text-primary uppercase">Operational Excellence</p>
+<p class="font-body-base">Process Automation, Data Integrity Audits, Performance Benchmarking, Lean Six Sigma</p>
+</div>
+</div>
+</section>
+<!-- Branding Footer (Optional, subtle) -->
+<footer class="mt-auto pt-8 flex justify-between items-center text-label-caps text-outline border-t border-surface-variant no-print">
+<span>Generated via StructureFlow Professional Suite</span>
+<span>Ref: SF-2024-ALEX-001</span>
+</footer>
+</main>
+<!-- Floating UI Helper -->
+<div class="fixed bottom-8 right-8 flex flex-col gap-3 no-print">
+<button class="w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:scale-105 transition-transform" title="Page Settings">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-highest text-on-surface-variant shadow-lg flex items-center justify-center hover:scale-105 transition-transform" title="Print Preview">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</body></html>

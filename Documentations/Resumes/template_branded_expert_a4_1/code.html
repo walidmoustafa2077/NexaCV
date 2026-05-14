@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:ital,wght@0,400;0,600;1,400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "on-primary-fixed": "#001947",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#3d5ca4",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d9d9e0",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#444651",
+                    "surface-container": "#ededf4",
+                    "primary-container": "#5472bc",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#dae2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e2e2e9",
+                    "on-secondary-container": "#545e7d",
+                    "on-error": "#ffffff",
+                    "on-background": "#1a1b20",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "primary": "#3a59a1",
+                    "on-tertiary-fixed": "#2c1600",
+                    "tertiary": "#864f02",
+                    "on-secondary-fixed": "#101a36",
+                    "secondary": "#545e7c",
+                    "tertiary-fixed": "#ffdcbd",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#cfd9fd",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c4c6d2",
+                    "on-primary-container": "#fefcff",
+                    "on-surface": "#1a1b20",
+                    "secondary-fixed": "#dae2ff",
+                    "inverse-primary": "#b1c5ff",
+                    "surface": "#f9f9ff",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f9f9ff",
+                    "surface-container-high": "#e8e7ee",
+                    "surface-container-low": "#f3f3fa",
+                    "inverse-surface": "#2f3035",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f0f0f7",
+                    "surface-container-highest": "#e2e2e9",
+                    "on-primary-fixed-variant": "#22438a",
+                    "tertiary-container": "#a4671e",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "outline": "#747782"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "form-gap": "24px",
+                    "container-max-width": "768px",
+                    "input-padding-y": "10px",
+                    "input-padding-x": "12px",
+                    "base-unit": "4px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "input-text": ["Inter"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Manrope"]
+            },
+            "fontSize": {
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; }
+            .resume-canvas { 
+                box-shadow: none !important; 
+                margin: 0 !important; 
+                width: 100% !important;
+                padding: 0 !important;
+            }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-base text-on-surface antialiased min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 font-manrope antialiased text-sm docked full-width top-0 border-b border-slate-200/60 dark:border-slate-800/60 flat no shadows flex justify-between items-center px-6 py-3 w-full no-print">
+<div class="text-xl font-bold tracking-tight text-[#5775bf] dark:text-[#7991d1]">StructureFlow</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-md transition-colors px-3 py-2 active:scale-95 transition-transform duration-150">
+                Back to Editor
+            </button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-semibold hover:bg-primary-container transition-colors flex items-center gap-2 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">download</span>
+                Download PDF
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas (A4 Simulation) -->
+<main class="flex justify-center p-8">
+<div class="resume-canvas bg-surface-container-lowest w-[210mm] min-h-[297mm] p-[1.5cm] shadow-xl border border-outline-variant flex flex-col">
+<!-- Header Section -->
+<header class="flex gap-8 items-start mb-12">
+<!-- Profile Photo -->
+<div class="flex-shrink-0">
+<img alt="Jonathan Sterling" class="w-32 h-40 object-cover border-2 border-[#1a1b20]" data-alt="A professional studio headshot of a confident executive man in his late 30s wearing a dark charcoal suit and a crisp white shirt. The lighting is high-contrast with a clean, minimalist off-white background. The visual style is sophisticated and corporate, mirroring the periwinkle and slate blue aesthetic of a modern SaaS platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPyf8tiN2_kQSvg3ouLqm8JArK0nizTdLLzq6sLebCywI_JAmJZqHGDAQve_ECHJ8B1yPqiKOP2Jb2zX-naYhwSAVmuy2cXdo3TinMdi1h0RdnPgxM5kjPlgmlhkF7ItKJm7J6LYFEyThTxrd2U6wzvKG-ZfPVp_5nAghx8tPUlWlD1JvdYZPuJs5omEhzbdUpJ9NiEPdnIT1-UxhDHsGa0yt7kmspuAIoByazaTXRXEBoEcelXYpp5VMyEEwBH_tLY7lFHIarHANE"/>
+</div>
+<!-- Contact Details -->
+<div class="flex-grow">
+<h1 class="font-h1 text-[42px] leading-tight text-on-surface mb-2 uppercase tracking-tight">Jonathan Sterling</h1>
+<p class="font-h2 text-primary font-bold mb-6">Senior Systems Architect</p>
+<div class="grid grid-cols-2 gap-y-2 text-on-surface-variant font-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">mail</span>
+                            j.sterling@structureflow.io
+                        </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">phone_iphone</span>
+                            +1 (555) 234-8901
+                        </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                            San Francisco, CA
+                        </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">language</span>
+                            j-sterling.dev
+                        </div>
+</div>
+</div>
+</header>
+<!-- Professional Summary -->
+<section class="mb-10">
+<h2 class="font-h2 text-on-surface border-b-2 border-primary-container pb-1 mb-4 flex items-center gap-2 uppercase text-lg tracking-wider font-extrabold">
+<span class="material-symbols-outlined text-primary">person</span> Professional Profile
+                </h2>
+<p class="font-body-base text-on-surface-variant leading-relaxed">
+                    Accomplished Systems Architect with over 12 years of experience in designing high-integrity data infrastructure for enterprise-scale SaaS platforms. Expert in streamlining complex workflows and implementing robust, scalable backend solutions that prioritize data accuracy and user efficiency. Recognized for a meticulous approach to technical precision and a commitment to modern, user-centric design principles.
+                </p>
+</section>
+<!-- Work History (Strict Single Column) -->
+<section class="mb-10 flex-grow">
+<h2 class="font-h2 text-on-surface border-b-2 border-primary-container pb-1 mb-6 flex items-center gap-2 uppercase text-lg tracking-wider font-extrabold">
+<span class="material-symbols-outlined text-primary">work</span> Professional Experience
+                </h2>
+<div class="space-y-8">
+<!-- Job Item 1 -->
+<div class="relative pl-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-on-surface font-extrabold text-xl">Principal Architect</h3>
+<span class="font-body-base italic text-on-surface-variant">Jan 2020 — Present</span>
+</div>
+<div class="font-h2 text-primary font-bold mb-3">Global Tech Infrastructure Corp.</div>
+<ul class="list-none space-y-2 text-on-surface-variant font-body-base">
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Engineered a distributed data pipeline handling 4TB of daily transaction records with 99.99% uptime.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Led a cross-functional team of 15 engineers to migrate legacy monolith architecture to a modern microservices framework.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Implemented a proprietary data validation engine reducing entry errors by 34% across the enterprise suite.</span>
+</li>
+</ul>
+</div>
+<!-- Job Item 2 -->
+<div class="relative pl-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-on-surface font-extrabold text-xl">Senior Backend Engineer</h3>
+<span class="font-body-base italic text-on-surface-variant">Mar 2015 — Dec 2019</span>
+</div>
+<div class="font-h2 text-primary font-bold mb-3">Nexus Software Solutions</div>
+<ul class="list-none space-y-2 text-on-surface-variant font-body-base">
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Optimized database query performance resulting in a 50% reduction in API response latency for top-tier clients.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Developed automated testing protocols that identified critical security vulnerabilities prior to deployment.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Collaborated with UI/UX designers to translate complex data structures into intuitive user entry forms.</span>
+</li>
+</ul>
+</div>
+<!-- Job Item 3 -->
+<div class="relative pl-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-h2 text-on-surface font-extrabold text-xl">Full Stack Developer</h3>
+<span class="font-body-base italic text-on-surface-variant">Jun 2012 — Feb 2015</span>
+</div>
+<div class="font-h2 text-primary font-bold mb-3">CloudStream Systems</div>
+<ul class="list-none space-y-2 text-on-surface-variant font-body-base">
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Architected the core UI component library used across three major product lines.</span>
+</li>
+<li class="flex gap-3">
+<span class="text-primary mt-1">•</span>
+<span>Streamlined deployment workflows using Docker and Jenkins, decreasing release cycles by 2 weeks.</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Skills & Education Footer -->
+<footer class="mt-auto pt-8 border-t border-outline-variant grid grid-cols-2 gap-12">
+<div>
+<h2 class="font-label-caps text-secondary font-bold uppercase mb-4 tracking-widest">Core Competencies</h2>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-lg text-body-sm font-semibold border border-outline-variant">System Architecture</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-lg text-body-sm font-semibold border border-outline-variant">Data Integrity</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-lg text-body-sm font-semibold border border-outline-variant">Cloud Infrastructure</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-lg text-body-sm font-semibold border border-outline-variant">Python</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-lg text-body-sm font-semibold border border-outline-variant">PostgreSQL</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-lg text-body-sm font-semibold border border-outline-variant">TypeScript</span>
+</div>
+</div>
+<div>
+<h2 class="font-label-caps text-secondary font-bold uppercase mb-4 tracking-widest">Education</h2>
+<div>
+<div class="font-body-base font-bold text-on-surface">M.S. in Computer Science</div>
+<div class="font-body-sm italic text-on-surface-variant">Stanford University, 2012</div>
+</div>
+</div>
+</footer>
+</div>
+</main>
+<!-- FAB (Suppressed on Details/Settings as per Mandate, but relevant for "Creation/Edit" context of a template preview) -->
+<button class="fixed bottom-8 right-8 bg-primary text-on-primary p-4 rounded-full shadow-lg hover:bg-primary-container transition-all active:scale-95 no-print">
+<span class="material-symbols-outlined text-[32px]">edit</span>
+</button>
+</body></html>

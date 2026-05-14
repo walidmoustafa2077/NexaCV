@@ -24,8 +24,8 @@ function ResumesGridSkeleton() {
 
 function CreateNewCard() {
     return (
-        <Link href="/create/template">
-            <div className="group relative flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-2xl hover:border-primary/40 hover:bg-primary/5 transition-all cursor-pointer overflow-hidden h-[220px]">
+        <Link href="/create/template" className="block h-full">
+            <div className="group relative flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-2xl hover:border-primary/40 hover:bg-primary/5 transition-all cursor-pointer overflow-hidden h-full min-h-[220px]">
                 <div className="w-12 h-12 rounded-full border-2 border-dashed border-slate-300 group-hover:border-primary/50 flex items-center justify-center mb-3 transition-colors">
                     <MaterialIcon name="add" size={24} className="text-slate-400 group-hover:text-primary transition-colors" />
                 </div>

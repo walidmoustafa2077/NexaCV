@@ -7,13 +7,11 @@ import { useResumeDetail } from "@/hooks/useResumeDetail";
 import { checkout } from "@/lib/api/transactions";
 import MaterialIcon from "@/components/shared/MaterialIcon";
 import { ResumeStatusBadge } from "@/components/resume/ResumeStatusBadge";
+import { ResumeHtmlPreview } from "@/components/resume/ResumeHtmlPreview";
 import { Skeleton } from "@/components/shared/SkeletonCard";
 import { useWizardStore } from "@/store/wizardStore";
 import type {
     ResumeDetailDto,
-    ExperienceEntry,
-    EducationEntry,
-    CourseEntry,
 } from "@/types/api.types";
 
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
@@ -144,29 +142,7 @@ export default function ResumeDetailPage() {
     }
 
     const raw = resume.finalData?.content ?? resume.rawData?.content;
-
-    // Guard: after AI regeneration the backend may store a section as a raw
-    // JSON string instead of a parsed value — normalise everything defensively.
-    function tryParseArray<T>(val: unknown): T[] {
-        if (Array.isArray(val)) return val as T[];
-        if (typeof val === "string") {
-            try {
-                const parsed = JSON.parse(val);
-                if (Array.isArray(parsed)) return parsed as T[];
-            } catch { /* ignore */ }
-        }
-        return [];
-    }
-    const content = raw
-        ? {
-            ...raw,
-            experience: tryParseArray<ExperienceEntry>(raw.experience),
-            education: tryParseArray<EducationEntry>(raw.education),
-            courses: tryParseArray<CourseEntry>(raw.courses),
-            skills: tryParseArray<string>(raw.skills),
-        }
-        : null;
-    const personal = content?.personal;
+    const personal = raw?.personal;
 
     return (
         <div className="max-w-[1024px] mx-auto space-y-6">
@@ -199,110 +175,23 @@ export default function ResumeDetailPage() {
             </div>
 
             <div className="flex flex-col lg:flex-row gap-6">
-                {/* Left: paper-style preview */}
+                {/* Left: rendered HTML preview */}
                 <div className="flex-1 space-y-3">
-                    <h2 className="font-h2 text-h2 text-on-surface">Resume Preview</h2>
-                    <div className="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.08)] aspect-[1/1.414] p-10 select-none">
-                        <div className="space-y-5 h-full overflow-hidden">
-                            {/* Header */}
-                            <div className="border-b-4 border-primary pb-5">
-                                <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide">
-                                    {personal
-                                        ? `${personal.firstName}${personal.middleName ? " " + personal.middleName : ""} ${personal.lastName}`
-                                        : "—"}
-                                </h3>
-                                <p className="text-slate-600 mt-1 text-sm">
-                                    {[personal?.location, personal?.email, personal?.phone].filter(Boolean).join(" | ")}
-                                </p>
-                                {personal?.linkedinUrl && (
-                                    <p className="text-slate-500 text-xs mt-0.5">{personal.linkedinUrl}</p>
-                                )}
-                            </div>
-
-                            {/* Summary */}
-                            {content?.summary && (
-                                <div className="space-y-1.5">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Professional Summary
-                                    </h4>
-                                    <p className="text-slate-700 text-xs leading-relaxed">{content.summary}</p>
-                                </div>
-                            )}
-
-                            {/* Experience */}
-                            {!!content?.experience?.length && (
-                                <div className="space-y-2">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Work Experience
-                                    </h4>
-                                    {content.experience.map((e) => (
-                                        <div key={e.id}>
-                                            <div className="flex justify-between font-bold text-slate-900 text-xs">
-                                                <span>{e.title}{e.company ? `, ${e.company}` : ""}</span>
-                                                <span className="shrink-0 ml-2 font-normal text-slate-600">
-                                                    {e.startDate} – {e.endDate ?? "Present"}
-                                                </span>
-                                            </div>
-                                            {e.location && (
-                                                <p className="text-slate-500 text-[10px] italic">{e.location}</p>
-                                            )}
-                                            {e.description && (
-                                                <p className="text-slate-600 text-[10px] leading-relaxed mt-0.5 line-clamp-2">
-                                                    {e.description}
-                                                </p>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* Education */}
-                            {!!content?.education?.length && (
-                                <div className="space-y-2">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Education
-                                    </h4>
-                                    {content.education.map((e) => (
-                                        <div key={e.id} className="text-xs">
-                                            <div className="flex justify-between font-bold text-slate-900">
-                                                <span>{e.degree} in {e.fieldOfStudy}</span>
-                                                <span className="shrink-0 ml-2 font-normal text-slate-600">
-                                                    {e.startDate} – {e.endDate ?? "Present"}
-                                                </span>
-                                            </div>
-                                            <p className="text-slate-500 text-[10px]">
-                                                {e.institution}{e.grade ? ` • ${e.grade}` : ""}
-                                            </p>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* Skills */}
-                            {!!content?.skills?.length && (
-                                <div className="space-y-1.5">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Skills
-                                    </h4>
-                                    <p className="text-xs text-slate-700">{content.skills.join(" • ")}</p>
-                                </div>
-                            )}
-
-                            {/* Courses */}
-                            {!!content?.courses?.length && (
-                                <div className="space-y-1.5">
-                                    <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                                        Certifications
-                                    </h4>
-                                    {content.courses.map((c) => (
-                                        <p key={c.id} className="text-[10px] text-slate-700">
-                                            {c.name} — {c.provider}
-                                        </p>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                    <div className="flex items-center justify-between">
+                        <h2 className="font-h2 text-h2 text-on-surface">Resume Preview</h2>
+                        <a
+                            href={`/resumes/${resume.id}/preview`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                        >
+                            <MaterialIcon name="open_in_new" size={14} />
+                            Full Preview
+                        </a>
                     </div>
+                    <ResumeHtmlPreview
+                        resumeId={resume.id}
+                    />
                 </div>
 
                 {/* Right: action panel */}

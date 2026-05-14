@@ -180,7 +180,7 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                     certificateUrl: c.certificateUrl ?? "",
                 })),
                 skills,
-                photoUrl: "",
+                photoUrl: personal.photoUrl ?? "",
                 resumeName: resume.name ?? "",
                 createdResumeId: resume.id,
             },
@@ -209,6 +209,7 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                     dateOfBirth: formData.dateOfBirth || null,
                     linkedinUrl: formData.linkedinUrl || null,
                     siteUrl: formData.siteUrl || null,
+                    photoUrl: formData.photoUrl || null,
                 },
                 summary: formData.summary,
                 experience: formData.experience.map((e) => ({

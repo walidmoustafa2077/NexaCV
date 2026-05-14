@@ -254,7 +254,7 @@ export default function Step1Page() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Field label="Email Address" error={errors.email?.message} required>
                             <div className="relative">
-                                <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                                     <MaterialIcon name="mail" size={18} className="text-outline" />
                                 </span>
                                 <input
@@ -267,7 +267,7 @@ export default function Step1Page() {
                         </Field>
                         <Field label="Phone Number" error={errors.phone?.message} required>
                             <div className="relative">
-                                <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                                     <MaterialIcon name="call" size={18} className="text-outline" />
                                 </span>
                                 <input
@@ -303,7 +303,7 @@ export default function Step1Page() {
                         <h3 className="font-manrope font-semibold text-on-surface">Online Presence</h3>
                         <Field label="LinkedIn URL" error={errors.linkedinUrl?.message}>
                             <div className="relative">
-                                <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                                     <MaterialIcon name="link" size={18} className="text-outline" />
                                 </span>
                                 <input
@@ -316,7 +316,7 @@ export default function Step1Page() {
                         </Field>
                         <Field label="Portfolio / Website" error={errors.siteUrl?.message}>
                             <div className="relative">
-                                <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                                     <MaterialIcon name="language" size={18} className="text-outline" />
                                 </span>
                                 <input

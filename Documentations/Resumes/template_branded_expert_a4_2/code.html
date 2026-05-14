@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StructureFlow - Resume Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9ff",
+                    "secondary-fixed": "#dae2ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e2e2e9",
+                    "surface-tint": "#3d5ca4",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "tertiary-fixed": "#ffdcbd",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb86e",
+                    "surface-dim": "#d9d9e0",
+                    "surface": "#f9f9ff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2f3035",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#444651",
+                    "on-error": "#ffffff",
+                    "primary-container": "#5472bc",
+                    "on-secondary-fixed": "#101a36",
+                    "on-tertiary-fixed-variant": "#693c00",
+                    "on-primary-fixed-variant": "#22438a",
+                    "tertiary-container": "#a4671e",
+                    "surface-container-low": "#f3f3fa",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "surface-container": "#ededf4",
+                    "on-tertiary-fixed": "#2c1600",
+                    "on-secondary-container": "#545e7d",
+                    "secondary-container": "#cfd9fd",
+                    "on-primary-container": "#fefcff",
+                    "inverse-primary": "#b1c5ff",
+                    "primary-fixed": "#dae2ff",
+                    "on-background": "#1a1b20",
+                    "inverse-on-surface": "#f0f0f7",
+                    "surface-variant": "#e2e2e9",
+                    "outline-variant": "#c4c6d2",
+                    "on-surface": "#1a1b20",
+                    "outline": "#747782",
+                    "surface-container-high": "#e8e7ee",
+                    "secondary": "#545e7c",
+                    "on-secondary-fixed-variant": "#3c4663",
+                    "on-primary-fixed": "#001947",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary": "#864f02",
+                    "secondary-fixed-dim": "#bcc6e9",
+                    "primary": "#3a59a1",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base-unit": "4px",
+                    "container-max-width": "768px",
+                    "input-padding-y": "10px",
+                    "section-margin": "48px",
+                    "input-padding-x": "12px",
+                    "form-gap": "24px"
+            },
+            "fontFamily": {
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Manrope"],
+                    "input-text": ["Inter"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; }
+            .print-canvas { box-shadow: none !important; border: none !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low border-b border-outline-variant no-print">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-container-max-width mx-auto">
+<div class="font-h2 text-h2 text-primary">StructureFlow</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant pb-1 hover:text-primary-container transition-colors font-body-sm text-body-sm" href="#">Dashboard</a>
+<a class="text-on-surface-variant pb-1 hover:text-primary-container transition-colors font-body-sm text-body-sm" href="#">Templates</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-sm text-body-sm" href="#">My Resumes</a>
+<a class="text-on-surface-variant pb-1 hover:text-primary-container transition-colors font-body-sm text-body-sm" href="#">Account</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold hover:opacity-80 active:scale-95 transition-all text-body-sm">
+                    Export PDF
+                </button>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen overflow-hidden">
+<!-- Side Navigation Sidebar (Editor Controls) -->
+<aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container-lowest border-r border-outline-variant p-4 no-print">
+<div class="mb-8">
+<h3 class="font-h2 text-h2 text-primary mb-1">Resume Editor</h3>
+<p class="text-body-sm text-on-surface-variant">Modern Professional Template</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<button class="flex items-center gap-3 w-full p-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform active:scale-95">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-body-base">Personal Details</span>
+</button>
+<button class="flex items-center gap-3 w-full p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="text-body-base">Work History</span>
+</button>
+<button class="flex items-center gap-3 w-full p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-body-base">Education</span>
+</button>
+<button class="flex items-center gap-3 w-full p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="grade">grade</span>
+<span class="text-body-base">Skills</span>
+</button>
+<button class="flex items-center gap-3 w-full p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="text-body-base">Layout Settings</span>
+</button>
+</nav>
+<button class="mt-4 flex items-center justify-center gap-2 w-full py-2 border-2 border-primary border-dashed rounded-lg text-primary font-bold hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Add New Section
+            </button>
+<div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-1">
+<button class="flex items-center gap-3 w-full p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-body-base">Help Center</span>
+</button>
+<button class="flex items-center gap-3 w-full p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-body-base">Sign Out</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-surface-container-high p-8 flex flex-col items-center">
+<!-- A4 Print-Ready Content Wrapper -->
+<div class="print-canvas bg-white shadow-2xl w-full max-w-[210mm] min-h-[297mm] p-12 mx-auto mb-16 relative">
+<!-- Resume Header -->
+<div class="flex items-start gap-8 border-b-2 border-on-background pb-8 mb-10">
+<!-- Rectangular Profile Photo -->
+<div class="w-32 h-40 flex-shrink-0 overflow-hidden border-2 border-[#333333]">
+<img alt="Jonathan Sterling Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged man named Jonathan Sterling with a confident expression. He has short dark hair and is wearing a crisp white dress shirt and a navy blue blazer. The setting is a brightly lit, high-end corporate office with soft, natural morning light casting subtle shadows. The visual style is minimalist and high-contrast, perfectly suited for a modern light-mode resume aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALZhvbSGjDYpUiK4K9pguLcVq0TmFqoHelq6nuxI4XwH932TiEao7oeDiMkKjkrojE3GIwLKmjoDpLoqKyg34xos4a51U04cBXuTPP3_xGcNVg7dnE8UQ7Bs12uW2JOLntIyvrR-nA5Nxfp9RNx4yNgGNqorT2ZGFLpLjpeQZHDERvT8bxMgqCDy45-yyWEHpZIoFPuJioMxn9JAtAabB39x-AeB7OpWvrj8WD95PhQsc_IphmGR1mzRyACA38384VHosOkiO_eVMR"/>
+</div>
+<!-- Identity & Contact -->
+<div class="flex-1 pt-2">
+<h1 class="font-h1 text-h1 text-on-background tracking-tighter mb-4">JONATHAN STERLING</h1>
+<div class="grid grid-cols-2 gap-y-2 text-on-surface-variant text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="mail">mail</span>
+<span>j.sterling@structureflow.io</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span>
+<span>Chicago, Illinois</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="call">call</span>
+<span>+1 (555) 012-3456</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="language">language</span>
+<span>www.jsterling.design</span>
+</div>
+</div>
+<p class="mt-6 text-on-surface leading-relaxed text-body-base italic">
+                            Results-driven Product Lead with over 10 years of experience in architecting scalable SaaS platforms. Expertise in structured data workflows and minimalist UI/UX design.
+                        </p>
+</div>
+</div>
+<!-- Work History Section (Single Column) -->
+<section class="mb-10">
+<h2 class="font-h2 text-h2 text-on-background mb-6 flex items-center gap-2">
+<span class="w-8 h-[2px] bg-primary"></span>
+                        WORK HISTORY
+                    </h2>
+<div class="space-y-8">
+<!-- Job 1 -->
+<div class="relative pl-6 border-l border-outline-variant">
+<div class="absolute -left-[5px] top-1.5 w-[9px] h-[9px] rounded-full bg-primary"></div>
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-on-background text-body-base uppercase">StructureFlow Tech</h3>
+<span class="text-on-surface-variant italic text-body-sm">Jan 2021 – Present</span>
+</div>
+<p class="text-primary font-semibold mb-3">Senior Product Strategist</p>
+<ul class="list-disc list-outside ml-4 space-y-2 text-on-surface-variant text-body-sm">
+<li>Spearheaded the redesign of the core data-entry engine, resulting in a 40% increase in user completion rates.</li>
+<li>Defined brand visual tokens and spacing logic across the entire mobile and web ecosystem.</li>
+<li>Managed a cross-functional team of 15 designers and engineers using agile methodologies.</li>
+</ul>
+</div>
+<!-- Job 2 -->
+<div class="relative pl-6 border-l border-outline-variant">
+<div class="absolute -left-[5px] top-1.5 w-[9px] h-[9px] rounded-full bg-outline"></div>
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-on-background text-body-base uppercase">Nexus Systems</h3>
+<span class="text-on-surface-variant italic text-body-sm">Mar 2017 – Dec 2020</span>
+</div>
+<p class="text-primary font-semibold mb-3">UI/UX Design Manager</p>
+<ul class="list-disc list-outside ml-4 space-y-2 text-on-surface-variant text-body-sm">
+<li>Established a unified design system that reduced front-end development time by 25%.</li>
+<li>Architected the user journey for enterprise-level resource planning software.</li>
+<li>Conducted extensive user research and usability testing for high-stakes dashboard interfaces.</li>
+</ul>
+</div>
+<!-- Job 3 -->
+<div class="relative pl-6 border-l border-outline-variant">
+<div class="absolute -left-[5px] top-1.5 w-[9px] h-[9px] rounded-full bg-outline"></div>
+<div class="flex justify-between items-baseline mb-2">
+<h3 class="font-bold text-on-background text-body-base uppercase">Blueprint Labs</h3>
+<span class="text-on-surface-variant italic text-body-sm">June 2014 – Feb 2017</span>
+</div>
+<p class="text-primary font-semibold mb-3">Visual Designer</p>
+<ul class="list-disc list-outside ml-4 space-y-2 text-on-surface-variant text-body-sm">
+<li>Conceptualized and executed visual identities for multiple venture-backed startups.</li>
+<li>Developed high-fidelity prototypes for client presentations and pitch decks.</li>
+<li>Collaborated with engineering teams to ensure pixel-perfect implementation of layouts.</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Education & Skills (Grid for compact info) -->
+<div class="grid grid-cols-2 gap-12">
+<section>
+<h2 class="font-h2 text-h2 text-on-background mb-4 uppercase">Education</h2>
+<div class="space-y-4">
+<div>
+<h3 class="font-bold text-on-background text-body-sm">Rhode Island School of Design</h3>
+<p class="text-on-surface-variant italic text-body-sm">BFA in Graphic Design</p>
+<p class="text-on-surface-variant text-[12px]">Graduated 2014</p>
+</div>
+</div>
+</section>
+<section>
+<h2 class="font-h2 text-h2 text-on-background mb-4 uppercase">Expertise</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high rounded text-on-surface-variant text-[12px] font-semibold border border-outline-variant/30">PRODUCT STRATEGY</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-on-surface-variant text-[12px] font-semibold border border-outline-variant/30">SYSTEMS DESIGN</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-on-surface-variant text-[12px] font-semibold border border-outline-variant/30">USER INTERFACE</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-on-surface-variant text-[12px] font-semibold border border-outline-variant/30">FRONT-END ARCHITECTURE</span>
+<span class="px-3 py-1 bg-surface-container-high rounded text-on-surface-variant text-[12px] font-semibold border border-outline-variant/30">AGILE MGMT</span>
+</div>
+</section>
+</div>
+<!-- Footer Accent -->
+<div class="absolute bottom-12 left-12 right-12 flex justify-between items-center text-[10px] text-outline uppercase tracking-widest border-t border-outline-variant pt-4">
+<span>StructureFlow Professional Template</span>
+<span>Page 01 / 01</span>
+</div>
+</div>
+<!-- Contextual FAB - Restricted to Dashboard/Main flows, but shown here for UI demonstration -->
+<button class="no-print fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[28px]" data-icon="edit">edit</span>
+</button>
+</main>
+</div>
+</body></html>

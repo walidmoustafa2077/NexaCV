@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Skill-Focus Split Template</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcbd",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "on-surface": "#1a1b20",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3fa",
+                        "tertiary-container": "#a4671e",
+                        "primary": "#3a59a1",
+                        "on-surface-variant": "#444651",
+                        "secondary-fixed-dim": "#bcc6e9",
+                        "on-primary-fixed-variant": "#22438a",
+                        "secondary": "#545e7c",
+                        "primary-fixed": "#dae2ff",
+                        "secondary-container": "#cfd9fd",
+                        "primary-container": "#5472bc",
+                        "on-secondary-fixed-variant": "#3c4663",
+                        "on-secondary-container": "#545e7d",
+                        "inverse-on-surface": "#f0f0f7",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#864f02",
+                        "outline-variant": "#c4c6d2",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9ff",
+                        "on-secondary-fixed": "#101a36",
+                        "on-background": "#1a1b20",
+                        "background": "#f9f9ff",
+                        "surface-bright": "#f9f9ff",
+                        "surface-dim": "#d9d9e0",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-container-high": "#e8e7ee",
+                        "secondary-fixed": "#dae2ff",
+                        "surface-tint": "#3d5ca4",
+                        "surface-variant": "#e2e2e9",
+                        "outline": "#747782",
+                        "on-primary-fixed": "#001947",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "inverse-surface": "#2f3035",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b1c5ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fefcff",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container": "#ededf4",
+                        "on-tertiary-fixed": "#2c1600",
+                        "surface-container-highest": "#e2e2e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "input-padding-x": "12px",
+                        "container-max-width": "768px",
+                        "section-margin": "48px",
+                        "input-padding-y": "10px",
+                        "form-gap": "24px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "input-text": ["Inter"],
+                        "h1": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9ff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Shared Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-outline-variant px-10 py-3 bg-surface-container-lowest">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-lg font-bold leading-tight tracking-[-0.015em] font-h2">StructureFlow</h2>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-on-primary text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Download PDF</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-surface-container-high text-on-surface text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Save Template</span>
+</button>
+</div>
+</header>
+<!-- Main Content (Split Layout) -->
+<main class="flex-1 flex justify-center py-10 px-4">
+<div class="max-w-[1000px] w-full flex bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant">
+<!-- Left Column (30%) -->
+<aside class="w-[30%] bg-surface-container-low p-8 border-r border-outline-variant flex flex-col gap-8">
+<!-- Profile Section -->
+<div class="flex flex-col items-center text-center gap-4">
+<div class="size-32 rounded-full overflow-hidden border-4 border-surface-container-lowest bg-center bg-cover" data-alt="A professional portrait of a senior designer with a warm smile, set against a soft-focus office background. The lighting is bright and natural, reflecting a modern corporate aesthetic with a periwinkle and slate blue color story. The subject wears a charcoal grey blazer, emphasizing a high-integrity and technical precision persona." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTsTCW5pEZVv05jInaMb67D5RAF-qTEd-rtuU0OuAkT7qW68PwKBsj4ueYrACnbPm6Mc_LHHxj1drCX522Hi69yhmL8otTZQLFqUTuKT-Oq4kGEi7n3qROCxJizggKQSTCDTyGCmLsRAhvVoQAcbAOQf7d30lrEV9MJksFgH_-F3Ia0mYbC1tt8KAH6DLnsot06wyCEIJ8M3w4qozj4oIiBy_yGt3lFevj98nPXruZLC35fIa2N1W6h02scr1Ia--o7GSbeYbxTKMK")'>
+</div>
+<div>
+<h1 class="text-xl font-bold font-h1 text-on-surface">Alex Rivera</h1>
+<p class="text-secondary text-sm font-medium">Senior Product Designer</p>
+</div>
+</div>
+<!-- Contact Info -->
+<div class="flex flex-col gap-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label-caps">Contact</h3>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="mail">mail</span>
+<span class="text-sm text-on-surface-variant font-body-sm">alex.rivera@email.com</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="phone_iphone">phone_iphone</span>
+<span class="text-sm text-on-surface-variant font-body-sm">+1 555-0199</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="location_on">location_on</span>
+<span class="text-sm text-on-surface-variant font-body-sm">New York, NY</span>
+</div>
+</div>
+</div>
+<!-- Skills (Progress Bars) -->
+<div class="flex flex-col gap-6">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label-caps">Expertise</h3>
+<div class="flex flex-col gap-4">
+<!-- Skill Item -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-semibold text-on-surface">
+<span>Product Design</span>
+<span>95%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 95%;"></div>
+</div>
+</div>
+<!-- Skill Item -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-semibold text-on-surface">
+<span>Design Systems</span>
+<span>90%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 90%;"></div>
+</div>
+</div>
+<!-- Skill Item -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-semibold text-on-surface">
+<span>UI Development</span>
+<span>80%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 80%;"></div>
+</div>
+</div>
+<!-- Skill Item -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-semibold text-on-surface">
+<span>Strategy &amp; Ops</span>
+<span>75%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Languages -->
+<div class="flex flex-col gap-3 mt-auto">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label-caps">Languages</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium">English (Native)</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-medium">Spanish (Fluent)</span>
+</div>
+</div>
+</aside>
+<!-- Right Column (70%) -->
+<article class="w-[70%] bg-surface-container-lowest p-10 flex flex-col gap-10">
+<!-- Profile Summary -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<h2 class="text-xl font-bold font-h2 text-on-surface">Profile Summary</h2>
+</div>
+<p class="text-secondary leading-relaxed font-body-base">
+                            Accomplished Senior Product Designer with over 8 years of experience building scalable design systems and high-integrity SaaS platforms. Expert in bridging the gap between technical precision and human-centric design. Proven track record in leading cross-functional teams to deliver sophisticated UI solutions that balance aesthetic elegance with functional rigor.
+                        </p>
+</section>
+<!-- Work Experience -->
+<section class="flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="work">work</span>
+<h2 class="text-xl font-bold font-h2 text-on-surface">Work Experience</h2>
+</div>
+<!-- Timeline -->
+<div class="relative flex flex-col gap-8 ml-3">
+<!-- Vertical Line -->
+<div class="absolute left-0 top-2 bottom-2 w-px bg-outline-variant"></div>
+<!-- Experience Item 1 -->
+<div class="relative pl-8">
+<!-- Bullet -->
+<div class="absolute left-[-4px] top-1.5 size-2 rounded-full bg-primary ring-4 ring-surface-container-lowest"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-on-surface">Lead Product Designer</h3>
+<p class="text-primary font-semibold text-sm">TechFlow Solutions</p>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-surface-container rounded-lg text-secondary">2020 — PRESENT</span>
+</div>
+<ul class="list-disc list-inside text-secondary text-sm flex flex-col gap-2 font-body-sm">
+<li>Spearheaded the complete redesign of the core enterprise dashboard, resulting in a 35% increase in user productivity.</li>
+<li>Developed and maintained a comprehensive design system used by 50+ engineers across 3 continents.</li>
+<li>Mentored junior designers and established standard workflow protocols for cross-functional collaboration.</li>
+</ul>
+</div>
+<!-- Experience Item 2 -->
+<div class="relative pl-8">
+<!-- Bullet -->
+<div class="absolute left-[-4px] top-1.5 size-2 rounded-full bg-outline ring-4 ring-surface-container-lowest"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-on-surface">Senior UX Designer</h3>
+<p class="text-primary font-semibold text-sm">Nexus Digital Agency</p>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-surface-container rounded-lg text-secondary">2017 — 2020</span>
+</div>
+<ul class="list-disc list-inside text-secondary text-sm flex flex-col gap-2 font-body-sm">
+<li>Delivered end-to-end design solutions for Fortune 500 clients in the fintech and healthcare sectors.</li>
+<li>Facilitated stakeholder workshops and user research sessions to define product roadmaps.</li>
+<li>Implemented data-driven design iterations based on A/B testing and analytics insights.</li>
+</ul>
+</div>
+<!-- Experience Item 3 -->
+<div class="relative pl-8">
+<!-- Bullet -->
+<div class="absolute left-[-4px] top-1.5 size-2 rounded-full bg-outline ring-4 ring-surface-container-lowest"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-on-surface">UI Designer</h3>
+<p class="text-primary font-semibold text-sm">BrightStart Labs</p>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-surface-container rounded-lg text-secondary">2015 — 2017</span>
+</div>
+<p class="text-secondary text-sm font-body-sm leading-relaxed">
+                                    Focused on crafting pixel-perfect interfaces for mobile applications and early-stage startup MVPs. Collaborated closely with developers to ensure high-fidelity implementation of motion and interaction designs.
+                                </p>
+</div>
+</div>
+</section>
+<!-- Education -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-3 border-t border-outline-variant pt-10">
+<span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+<h2 class="text-xl font-bold font-h2 text-on-surface">Education</h2>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-base font-bold text-on-surface">BFA in Communication Design</h3>
+<p class="text-secondary text-sm">Pratt Institute, Brooklyn</p>
+</div>
+<span class="text-xs font-medium text-secondary">Class of 2015</span>
+</div>
+</section>
+</article>
+</div>
+</main>
+</div>
+</body></html>

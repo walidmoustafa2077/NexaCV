@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import { WizardSidebar } from "@/components/wizard/WizardSidebar";
@@ -9,12 +9,18 @@ import { WizardTopBar } from "@/components/wizard/WizardTopBar";
 export default function WizardLayout({ children }: { children: React.ReactNode }) {
     const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
     const router = useRouter();
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        if (!isAuthenticated) router.replace("/login");
-    }, [isAuthenticated, router]);
+        setMounted(true);
+    }, []);
 
-    if (!isAuthenticated) return null;
+    useEffect(() => {
+        if (!mounted) return;
+        if (!isAuthenticated) router.replace("/login");
+    }, [mounted, isAuthenticated, router]);
+
+    if (!mounted || !isAuthenticated) return null;
 
     return (
         <div className="min-h-screen bg-surface-container-low flex">

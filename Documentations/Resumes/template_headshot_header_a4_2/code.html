@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "background": "#f9f9ff",
+                  "secondary-fixed": "#dae2ff",
+                  "surface-container-lowest": "#ffffff",
+                  "surface-container-highest": "#e2e2e9",
+                  "surface-tint": "#3d5ca4",
+                  "on-primary": "#ffffff",
+                  "surface-bright": "#f9f9ff",
+                  "tertiary-fixed": "#ffdcbd",
+                  "on-error-container": "#93000a",
+                  "error": "#ba1a1a",
+                  "tertiary-fixed-dim": "#ffb86e",
+                  "surface-dim": "#d9d9e0",
+                  "surface": "#f9f9ff",
+                  "on-tertiary": "#ffffff",
+                  "inverse-surface": "#2f3035",
+                  "error-container": "#ffdad6",
+                  "on-surface-variant": "#444651",
+                  "on-error": "#ffffff",
+                  "primary-container": "#5472bc",
+                  "on-secondary-fixed": "#101a36",
+                  "on-tertiary-fixed-variant": "#693c00",
+                  "on-primary-fixed-variant": "#22438a",
+                  "tertiary-container": "#a4671e",
+                  "surface-container-low": "#f3f3fa",
+                  "primary-fixed-dim": "#b1c5ff",
+                  "surface-container": "#ededf4",
+                  "on-tertiary-fixed": "#2c1600",
+                  "on-secondary-container": "#545e7d",
+                  "secondary-container": "#cfd9fd",
+                  "on-primary-container": "#fefcff",
+                  "inverse-primary": "#b1c5ff",
+                  "primary-fixed": "#dae2ff",
+                  "on-background": "#1a1b20",
+                  "inverse-on-surface": "#f0f0f7",
+                  "surface-variant": "#e2e2e9",
+                  "outline-variant": "#c4c6d2",
+                  "on-surface": "#1a1b20",
+                  "outline": "#747782",
+                  "surface-container-high": "#e8e7ee",
+                  "secondary": "#545e7c",
+                  "on-secondary-fixed-variant": "#3c4663",
+                  "on-primary-fixed": "#001947",
+                  "on-tertiary-container": "#fffbff",
+                  "tertiary": "#864f02",
+                  "secondary-fixed-dim": "#bcc6e9",
+                  "primary": "#3a59a1",
+                  "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "base-unit": "4px",
+                  "container-max-width": "768px",
+                  "input-padding-y": "10px",
+                  "section-margin": "48px",
+                  "input-padding-x": "12px",
+                  "form-gap": "24px"
+          },
+          "fontFamily": {
+                  "body-base": ["Inter"],
+                  "label-caps": ["Inter"],
+                  "h2": ["Manrope"],
+                  "input-text": ["Inter"],
+                  "h1": ["Manrope"],
+                  "body-sm": ["Inter"]
+          },
+          "fontSize": {
+                  "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "input-text": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "h1": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    @media print {
+      body { background-color: white !important; }
+      .no-print { display: none !important; }
+      .a4-container { box-shadow: none !important; margin: 0 !important; width: 210mm !important; }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .a4-container {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 0;
+      margin: 20px auto;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .profile-photo {
+      width: 100mm;
+      height: 100mm;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-low font-body-base text-on-surface">
+<!-- Application Shell (TopAppBar Override for Focused Editor) -->
+<header class="no-print bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1200px] mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-h2 text-h2 text-primary">StructureFlow</span>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant uppercase tracking-widest">Resume Editor</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-primary hover:bg-primary-container/10 rounded-lg transition-colors font-body-sm text-body-sm">
+<span class="material-symbols-outlined">settings</span>
+          Layout Settings
+        </button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold hover:opacity-90 transition-all flex items-center gap-2" onclick="window.print()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+          Export PDF
+        </button>
+</div>
+</div>
+</header>
+<main class="flex min-h-screen">
+<!-- Side Navigation Shell (Suppressed on Print) -->
+<aside class="no-print w-64 bg-surface-container-lowest border-r border-outline-variant flex flex-col h-[calc(100vh-73px)] sticky top-[73px]">
+<div class="p-4 space-y-2">
+<div class="mb-6 px-2">
+<h3 class="text-on-surface font-h2 text-h2 mb-1">Resume Editor</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Modern Professional Template</p>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Personal Details</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">work</span>
+<span>Work History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Education</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span>Skills</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span>Layout Settings</span>
+</a>
+</nav>
+<div class="pt-8 px-2">
+<button class="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-outline-variant rounded-lg text-outline hover:text-primary hover:border-primary transition-all font-body-sm text-body-sm">
+<span class="material-symbols-outlined">add</span>
+            Add New Section
+          </button>
+</div>
+</div>
+<div class="mt-auto p-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">help</span>
+          Help Center
+        </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined">logout</span>
+          Sign Out
+        </a>
+</div>
+</aside>
+<!-- Document Canvas -->
+<div class="flex-1 flex justify-center py-10 overflow-y-auto">
+<div class="a4-container flex flex-col">
+<!-- HEADER SECTION (210mm Width) -->
+<header class="flex w-full h-[100mm]">
+<!-- Profile Photo (100mm Square) -->
+<div class="w-[100mm] h-[100mm] flex-shrink-0 bg-surface-variant">
+<img class="profile-photo" data-alt="A professional studio portrait of Alexander Sullivan, a man in his late 30s with a clean-shaven face and short dark hair. He wears a tailored navy blue blazer over a crisp white shirt, exuding confidence and approachability. The background is a soft, out-of-focus modern office interior with warm wooden accents. The lighting is bright and even, characteristic of a high-end corporate photography style with a light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPgeFzWjTN7tsoIipCcsV_Kj5bZ1JabSTDg-mddG0rssrKJFE5sXD4BNR1pgj3lGTW_iWgRTBxyjsjtZVjIVZBc9lrT3XjORyOZohWiYfy_YyvQ3VO7gilqlXYsG_pCJYsJcOiKVN-GKGnW-Cj1WtPYXsnh1ui4Z1NeXIABME2f2j4-zByEnnliGi6w4-wg-eKxaIvXtf39ghhDJBFzI1-9RP7QU6IAujqLpIKrI8d5gFduI1vIIG0aSmlDus5ruUvpiWzMo3h9IyW"/>
+</div>
+<!-- Name & Title (Top Right Cluster) -->
+<div class="flex-1 flex flex-col justify-center px-12 bg-surface-container-lowest">
+<h1 class="font-h1 text-[42px] leading-tight text-primary uppercase tracking-tight mb-2">
+              ALEXANDER<br/>SULLIVAN
+            </h1>
+<p class="font-h2 text-h2 text-secondary tracking-widest uppercase">
+              Senior Product Architect
+            </p>
+<div class="mt-8 space-y-2 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">mail</span>
+                alex.sullivan@structureflow.com
+              </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">call</span>
+                +1 (555) 012-3456
+              </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">location_on</span>
+                San Francisco, CA
+              </div>
+</div>
+</div>
+</header>
+<!-- Divider -->
+<div class="w-full h-px bg-surface-container-highest"></div>
+<!-- ATS-FRIENDLY BODY (Single Column) -->
+<div class="p-[20mm] flex-1">
+<!-- Summary Section -->
+<section class="mb-10">
+<h2 class="font-h2 text-h2 text-primary border-b border-surface-container-highest pb-2 mb-4 uppercase tracking-wider">Professional Profile</h2>
+<p class="font-body-base text-body-base text-on-surface leading-relaxed">
+              Strategic Product Architect with over 12 years of experience leading cross-functional teams in the development of scalable SaaS platforms. Expert in translating complex business requirements into elegant technical solutions while maintaining a relentless focus on user experience and data integrity. Proven track record of optimizing workflow efficiency for Fortune 500 companies.
+            </p>
+</section>
+<!-- Work Experience -->
+<section class="mb-10">
+<h2 class="font-h2 text-h2 text-primary border-b border-surface-container-highest pb-2 mb-6 uppercase tracking-wider">Experience</h2>
+<!-- Job 1 -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-[18px] text-on-surface">Director of Systems Architecture</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2019 — Present</span>
+</div>
+<p class="font-h2 text-body-base text-secondary mb-3">Global Tech Solutions, Inc.</p>
+<ul class="list-disc list-outside ml-5 space-y-2 font-body-base text-body-base text-on-surface">
+<li>Architected a proprietary data orchestration engine that reduced processing latency by 45% for high-volume enterprise clients.</li>
+<li>Led a distributed team of 25 engineers through three major platform migrations, finishing 15% under budget.</li>
+<li>Implemented standardized UI/UX frameworks across all product lines, resulting in a 20% increase in user retention.</li>
+</ul>
+</div>
+<!-- Job 2 -->
+<div class="mb-8">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-[18px] text-on-surface">Senior Solutions Engineer</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2014 — 2019</span>
+</div>
+<p class="font-h2 text-body-base text-secondary mb-3">Innovate Systems Group</p>
+<ul class="list-disc list-outside ml-5 space-y-2 font-body-base text-body-base text-on-surface">
+<li>Developed automated workflow tools that saved enterprise partners an average of 400 manual labor hours per month.</li>
+<li>Pioneered the transition to cloud-native microservices architecture, improving system uptime to 99.99%.</li>
+<li>Collaborated with product designers to create a high-integrity data entry portal used by 2M+ active daily users.</li>
+</ul>
+</div>
+</section>
+<!-- Skills Grid (Asymmetric Layout within Single Column) -->
+<section class="mb-10">
+<h2 class="font-h2 text-h2 text-primary border-b border-surface-container-highest pb-2 mb-6 uppercase tracking-wider">Core Competencies</h2>
+<div class="grid grid-cols-2 gap-x-12 gap-y-4">
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Technical Leadership</h4>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container px-3 py-1 rounded-full text-body-sm text-on-surface">System Design</span>
+<span class="bg-surface-container px-3 py-1 rounded-full text-body-sm text-on-surface">Agile Management</span>
+<span class="bg-surface-container px-3 py-1 rounded-full text-body-sm text-on-surface">Scalability</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Engineering</h4>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container px-3 py-1 rounded-full text-body-sm text-on-surface">React &amp; TypeScript</span>
+<span class="bg-surface-container px-3 py-1 rounded-full text-body-sm text-on-surface">Node.js</span>
+<span class="bg-surface-container px-3 py-1 rounded-full text-body-sm text-on-surface">Kubernetes</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Education -->
+<section>
+<h2 class="font-h2 text-h2 text-primary border-b border-surface-container-highest pb-2 mb-6 uppercase tracking-wider">Education</h2>
+<div class="flex justify-between items-baseline">
+<div>
+<h3 class="font-bold text-[18px] text-on-surface">M.S. in Computer Science</h3>
+<p class="font-h2 text-body-base text-secondary">Stanford University</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2012 — 2014</span>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<!-- Print Action FAB (Mobile/Web only) -->
+<button class="no-print fixed bottom-8 right-8 bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all md:hidden" onclick="window.print()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">print</span>
+</button>
+</body></html>
