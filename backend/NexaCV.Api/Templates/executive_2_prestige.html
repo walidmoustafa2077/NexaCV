@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{FULL_NAME}} — Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+        }
+
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            background: #f7f5f0;
+            color: #1c1c1c;
+            font-size: 9.5pt;
+            line-height: 1.6;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Hero Header ── */
+        .header-band {
+            background: linear-gradient(135deg, #1a2b4a 0%, #243a60 100%);
+            padding: 28px 28px 22px 28px;
+            color: #fff;
+        }
+
+        .header-band h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30pt;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            line-height: 1.1;
+            color: #fff;
+        }
+
+        .header-band .job-title {
+            font-size: 10pt;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #c9a84c;
+            margin-top: 5px;
+        }
+
+        .header-band .contact-row {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+            font-size: 8.5pt;
+            color: #c9d4e8;
+        }
+
+        .header-band .contact-row a {
+            color: #c9d4e8;
+            text-decoration: none;
+        }
+
+        .contact-icon {
+            color: #c9a84c;
+            margin-right: 4px;
+        }
+
+        /* ── Gold divider ── */
+        .gold-rule {
+            height: 3px;
+            background: linear-gradient(90deg, #c9a84c 0%, #e8c96a 50%, #c9a84c 100%);
+        }
+
+        /* ── Body ── */
+        .body-content {
+            padding: 20px 28px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 13pt;
+            font-weight: 600;
+            color: #1a2b4a;
+            border-bottom: 1.5px solid #c9a84c;
+            padding-bottom: 4px;
+            margin-bottom: 11px;
+        }
+
+        .summary-text {
+            font-size: 9.5pt;
+            color: #333;
+            line-height: 1.65;
+        }
+
+        /* ── Items ── */
+        .item {
+            margin-bottom: 13px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .item-title {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #1a2b4a;
+        }
+
+        .item-period {
+            font-size: 8.5pt;
+            color: #c9a84c;
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        .item-subtitle {
+            font-size: 9pt;
+            color: #6b7a99;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .item-body {
+            margin-top: 6px;
+            font-size: 9pt;
+            color: #333;
+        }
+
+        .item-body ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+
+        .item-body li {
+            margin-bottom: 2px;
+        }
+
+        /* ── Two-column skills ── */
+        .skills-2col {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 10px;
+        }
+
+        .skill-tag {
+            background: #f0ebdc;
+            color: #1a2b4a;
+            border: 1px solid #c9a84c;
+            border-radius: 3px;
+            padding: 2px 9px;
+            font-size: 8.5pt;
+            font-weight: 700;
+        }
+
+        /* ── Course ── */
+        .course-item {
+            margin-bottom: 7px;
+        }
+
+        .course-name {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: #1a2b4a;
+        }
+
+        .course-meta {
+            font-size: 8.5pt;
+            color: #888;
+        }
+
+        /* ── Language ── */
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 8.5pt;
+            color: #1c1c1c;
+        }
+
+        .lang-level {
+            font-size: 7.5pt;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <header class="header-band">
+            <h1>{{FULL_NAME}}</h1>
+            <div class="job-title">{{JOB_TITLE}}</div>
+            <div class="contact-row">
+                <span><i class="fa-solid fa-envelope contact-icon"></i>{{EMAIL}}</span>
+                <span><i class="fa-solid fa-phone contact-icon"></i>{{PHONE}}</span>
+                <span><i class="fa-solid fa-location-dot contact-icon"></i>{{LOCATION}}</span>
+                <!--IF:LINKEDIN--><span><i
+                        class="fa-brands fa-linkedin-in contact-icon"></i>{{LINKEDIN}}</span><!--/IF:LINKEDIN-->
+            </div>
+        </header>
+
+        <div class="gold-rule"></div>
+
+        <div class="body-content">
+
+            <section class="section">
+                <div class="section-title">Executive Profile</div>
+                <p class="summary-text">{{SUMMARY}}</p>
+            </section>
+
+            <section class="section">
+                <div class="section-title">Career History</div>
+                <!--REPEAT:EXPERIENCE-->
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{EXP_TITLE}}</span>
+                        <span class="item-period">{{EXP_PERIOD}}</span>
+                    </div>
+                    <div class="item-subtitle">{{EXP_COMPANY}}</div>
+                    <div class="item-body">{{EXP_DESCRIPTION}}</div>
+                </div>
+                <!--/REPEAT:EXPERIENCE-->
+            </section>
+
+            <!--SECTION:PROJECTS-->
+            <section class="section">
+                <div class="section-title">Projects</div>
+                <!--REPEAT:PROJECTS-->
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{PROJ_NAME}}</span>
+                        <span class="item-period">{{PROJ_PERIOD}}</span>
+                    </div>
+                    <!--IF:PROJ_LINK--><div class="item-subtitle">{{PROJ_LINK}}</div><!--/IF:PROJ_LINK-->
+                    <div class="item-body">{{PROJ_DESCRIPTION}}</div>
+                </div>
+                <!--/REPEAT:PROJECTS-->
+            </section>
+            <!--/SECTION:PROJECTS-->
+
+            <section class="section">
+                <div class="section-title">Education</div>
+                <!--REPEAT:EDUCATION-->
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{EDU_DEGREE}}, {{EDU_FIELD}}</span>
+                        <span class="item-period">{{EDU_PERIOD}}</span>
+                    </div>
+                    <div class="item-subtitle">{{EDU_INSTITUTION}} &nbsp;·&nbsp; {{EDU_GRADE}}</div>
+                </div>
+                <!--/REPEAT:EDUCATION-->
+            </section>
+
+            <section class="section">
+                <div class="section-title">Areas of Expertise</div>
+                <div class="skills-2col">
+                    <!--REPEAT:SKILLS-->
+                    <span class="skill-tag">{{SKILL}}</span>
+                    <!--/REPEAT:SKILLS-->
+                </div>
+            </section>
+
+            <!--SECTION:COURSES-->
+            <section class="section">
+                <div class="section-title">Professional Development</div>
+                <!--REPEAT:COURSES-->
+                <div class="course-item">
+                    <div class="course-name">{{COURSE_NAME}}</div>
+                    <div class="course-meta">{{COURSE_PROVIDER}} &nbsp;·&nbsp; {{COURSE_DATE}}</div>
+                </div>
+                <!--/REPEAT:COURSES-->
+            </section>
+            <!--/SECTION:COURSES-->
+
+            <!--SECTION:LANGUAGES-->
+            <section class="section">
+                <div class="section-title">Languages</div>
+                <!--REPEAT:LANGUAGES-->
+                <div class="lang-item">
+                    <span>{{LANG_NAME}}</span>
+                    <span class="lang-level">{{LANG_LEVEL}}</span>
+                </div>
+                <!--/REPEAT:LANGUAGES-->
+            </section>
+            <!--/SECTION:LANGUAGES-->
+
+        </div>
+    </div>
+</body>
+
+</html>

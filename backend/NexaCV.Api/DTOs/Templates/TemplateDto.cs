@@ -15,6 +15,10 @@ public class TemplateDto
     /// <example>Corporate</example>
     public string? IndustryCategory { get; set; }
 
+    /// <summary>Design style category: Executive, Creative, or ModernTech.</summary>
+    /// <example>Executive</example>
+    public string? StyleCategory { get; set; }
+
     /// <summary>Base price in US Dollars. Final price in the user's local currency is calculated at checkout.</summary>
     /// <example>3.00</example>
     public decimal BasePriceUsd { get; set; }

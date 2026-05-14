@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{FULL_NAME}} — Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+        }
+
+        body {
+            font-family: 'Space Grotesk', Arial, sans-serif;
+            background: #0f1117;
+            color: #e0e6f0;
+            font-size: 9pt;
+            line-height: 1.6;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: #0f1117;
+            padding: 20px;
+        }
+
+        /* ── Glass Header Card ── */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 22px 24px 18px;
+            margin-bottom: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-header::before {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header-name {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .header-name span {
+            color: #00d4ff;
+        }
+
+        .job-title {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 8.5pt;
+            color: #00d4ff;
+            letter-spacing: 0.05em;
+            margin-top: 5px;
+        }
+
+        .job-title::before {
+            content: "{ ";
+            opacity: 0.5;
+        }
+
+        .job-title::after {
+            content: " }";
+            opacity: 0.5;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .c-item {
+            font-size: 8pt;
+            color: #9ab0c8;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .c-dot {
+            color: #00d4ff;
+            font-size: 9pt;
+            width: 14px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* ── Layout ── */
+        .layout {
+            display: flex;
+            gap: 14px;
+        }
+
+        .col-left {
+            width: 68mm;
+            flex-shrink: 0;
+        }
+
+        .col-right {
+            flex: 1;
+        }
+
+        /* ── Glass Cards ── */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 7.5pt;
+            font-weight: 500;
+            color: #00d4ff;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-title::before {
+            content: "//";
+            opacity: 0.4;
+        }
+
+        .summary-text {
+            font-size: 8.5pt;
+            color: #b8cce0;
+            line-height: 1.65;
+        }
+
+        /* ── Items ── */
+        .item {
+            margin-bottom: 11px;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: #e0e6f0;
+        }
+
+        .item-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 7.5pt;
+            color: #00d4ff;
+            margin-top: 2px;
+        }
+
+        .item-subtitle {
+            font-size: 8pt;
+            color: #6e8aa8;
+            margin-top: 1px;
+        }
+
+        .item-body {
+            margin-top: 5px;
+            font-size: 8.5pt;
+            color: #9ab0c8;
+        }
+
+        .item-body ul {
+            margin: 0;
+            padding-left: 14px;
+        }
+
+        .item-body li {
+            margin-bottom: 2px;
+        }
+
+        /* ── Skill tags ── */
+        .skill-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .skill-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 7.5pt;
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-weight: 500;
+        }
+
+        /* ── Course ── */
+        .course-item {
+            margin-bottom: 7px;
+        }
+
+        .course-name {
+            font-size: 8.5pt;
+            font-weight: 500;
+            color: #e0e6f0;
+        }
+
+        .course-meta {
+            font-size: 7.5pt;
+            color: #6e8aa8;
+        }
+
+        /* ── Language ── */
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 8.5pt;
+            color: #9ab0c8;
+        }
+
+        .lang-level {
+            font-size: 7.5pt;
+            color: #6a8aaa;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="glass-header">
+            <div class="header-name">{{FULL_NAME}}</div>
+            <div class="job-title">{{JOB_TITLE}}</div>
+            <div class="contact-row">
+                <div class="c-item"><i class="fa-solid fa-envelope c-dot"></i>{{EMAIL}}</div>
+                <div class="c-item"><i class="fa-solid fa-phone c-dot"></i>{{PHONE}}</div>
+                <div class="c-item"><i class="fa-solid fa-location-dot c-dot"></i>{{LOCATION}}</div>
+                <!--IF:LINKEDIN-->
+                <div class="c-item"><i class="fa-brands fa-linkedin-in c-dot"></i>{{LINKEDIN}}</div><!--/IF:LINKEDIN-->
+            </div>
+        </div>
+
+        <div class="layout">
+
+            <div class="col-left">
+                <div class="glass-card">
+                    <div class="section-title">Skills</div>
+                    <div class="skill-grid">
+                        <!--REPEAT:SKILLS-->
+                        <span class="skill-tag">{{SKILL}}</span>
+                        <!--/REPEAT:SKILLS-->
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="section-title">Education</div>
+                    <!--REPEAT:EDUCATION-->
+                    <div class="item">
+                        <div class="item-title">{{EDU_DEGREE}}</div>
+                        <div class="item-meta">{{EDU_PERIOD}}</div>
+                        <div class="item-subtitle">{{EDU_INSTITUTION}}</div>
+                        <div class="item-subtitle">{{EDU_FIELD}} · {{EDU_GRADE}}</div>
+                    </div>
+                    <!--/REPEAT:EDUCATION-->
+                </div>
+
+                <!--SECTION:COURSES-->
+                <div class="glass-card">
+                    <div class="section-title">Certifications</div>
+                    <!--REPEAT:COURSES-->
+                    <div class="course-item">
+                        <div class="course-name">{{COURSE_NAME}}</div>
+                        <div class="course-meta">{{COURSE_PROVIDER}} · {{COURSE_DATE}}</div>
+                    </div>
+                    <!--/REPEAT:COURSES-->
+                </div>
+                <!--/SECTION:COURSES-->
+
+                <!--SECTION:LANGUAGES-->
+                <div class="glass-card">
+                    <div class="section-title">Languages</div>
+                    <!--REPEAT:LANGUAGES-->
+                    <div class="lang-item">
+                        <span>{{LANG_NAME}}</span>
+                        <span class="lang-level">{{LANG_LEVEL}}</span>
+                    </div>
+                    <!--/REPEAT:LANGUAGES-->
+                </div>
+                <!--/SECTION:LANGUAGES-->
+            </div>
+
+            <div class="col-right">
+                <div class="glass-card">
+                    <div class="section-title">About</div>
+                    <p class="summary-text">{{SUMMARY}}</p>
+                </div>
+
+                <div class="glass-card">
+                    <div class="section-title">Experience</div>
+                    <!--REPEAT:EXPERIENCE-->
+                    <div class="item">
+                        <div class="item-title">{{EXP_TITLE}}</div>
+                        <div class="item-meta">{{EXP_COMPANY}} · {{EXP_PERIOD}}</div>
+                        <div class="item-body">{{EXP_DESCRIPTION}}</div>
+                    </div>
+                    <!--/REPEAT:EXPERIENCE-->
+                </div>
+
+                <!--SECTION:PROJECTS-->
+                <div class="glass-card">
+                    <div class="section-title">Projects</div>
+                    <!--REPEAT:PROJECTS-->
+                    <div class="item">
+                        <div class="item-title">{{PROJ_NAME}}</div>
+                        <div class="item-meta">{{PROJ_PERIOD}}</div>
+                        <!--IF:PROJ_LINK-->
+                        <div class="item-subtitle">{{PROJ_LINK}}</div><!--/IF:PROJ_LINK-->
+                        <div class="item-body">{{PROJ_DESCRIPTION}}</div>
+                    </div>
+                    <!--/REPEAT:PROJECTS-->
+                </div>
+                <!--/SECTION:PROJECTS-->
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

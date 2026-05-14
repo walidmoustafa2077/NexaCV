@@ -26,4 +26,10 @@ public class TemplateService : ITemplateService
 
         return template.ToDto();
     }
+
+    public async Task<string?> GetHtmlContentAsync(int id)
+    {
+        var template = await _templates.GetByIntIdAsync(id);
+        return template?.HtmlContent;
+    }
 }

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{FULL_NAME}} — Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+        }
+
+        body {
+            font-family: 'Nunito Sans', 'Trebuchet MS', Arial, sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            font-size: 9pt;
+            line-height: 1.6;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            display: flex;
+            background: #fff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 72mm;
+            min-height: 297mm;
+            background: #1565c0;
+            padding: 28px 18px 24px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .sidebar-name {
+            font-size: 18pt;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .sidebar-jobtitle {
+            font-size: 8.5pt;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #90caf9;
+            margin-bottom: 20px;
+        }
+
+        /* ── Avatar placeholder ── */
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22pt;
+            color: rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .avatar img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .avatar:has(img) {
+            font-size: 0;
+        }
+
+        /* ── Sidebar sections ── */
+        .sb-section {
+            margin-bottom: 20px;
+        }
+
+        .sb-title {
+            font-size: 7pt;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #90caf9;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 4px;
+            margin-bottom: 9px;
+        }
+
+        .sb-contact-item {
+            font-size: 8pt;
+            color: #dce8f8;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .sb-icon {
+            font-size: 9pt;
+            color: #90caf9;
+            flex-shrink: 0;
+            width: 14px;
+            text-align: center;
+        }
+
+        /* ── Skill tags sidebar ── */
+        .sb-skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .sb-skill-tag {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 2px 9px;
+            font-size: 7.5pt;
+            font-weight: 600;
+        }
+
+        /* ── Language items sidebar ── */
+        .sb-lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 8pt;
+            color: #dce8f8;
+        }
+
+        .sb-lang-level {
+            font-size: 7pt;
+            color: rgba(255,255,255,0.55);
+            font-style: italic;
+        }
+
+        /* ── Main content ── */
+        .main {
+            flex: 1;
+            padding: 28px 22px 24px;
+            overflow: hidden;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 10pt;
+            font-weight: 800;
+            color: #1565c0;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border-bottom: 2px solid #1565c0;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+        }
+
+        .summary-text {
+            font-size: 9pt;
+            color: #2a2a3e;
+            line-height: 1.65;
+        }
+
+        /* ── Items ── */
+        .item {
+            margin-bottom: 12px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .item-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .item-period {
+            font-size: 7.5pt;
+            color: #1565c0;
+            font-weight: 700;
+            background: #e3f2fd;
+            padding: 1px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+            margin-left: 6px;
+        }
+
+        .item-subtitle {
+            font-size: 8pt;
+            color: #555;
+            font-style: italic;
+            margin-top: 1px;
+        }
+
+        .item-body {
+            margin-top: 5px;
+            font-size: 8.5pt;
+            color: #333;
+        }
+
+        .item-body ul {
+            margin: 0;
+            padding-left: 13px;
+        }
+
+        .item-body li {
+            margin-bottom: 2px;
+        }
+
+        /* ── Courses (main) ── */
+        .course-item {
+            margin-bottom: 5px;
+        }
+
+        .course-name {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .course-meta {
+            font-size: 8pt;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="avatar"><!--IF:PHOTO_URL--><img src="{{PHOTO_URL}}" alt=""><!--/IF:PHOTO_URL--><i
+                    class="fa-solid fa-user"></i></div>
+            <div class="sidebar-name">{{FULL_NAME}}</div>
+            <div class="sidebar-jobtitle">{{JOB_TITLE}}</div>
+
+            <div class="sb-section">
+                <div class="sb-title">Contact</div>
+                <div class="sb-contact-item">
+                    <i class="fa-solid fa-envelope sb-icon"></i>
+                    <span>{{EMAIL}}</span>
+                </div>
+                <div class="sb-contact-item">
+                    <i class="fa-solid fa-phone sb-icon"></i>
+                    <span>{{PHONE}}</span>
+                </div>
+                <div class="sb-contact-item">
+                    <i class="fa-solid fa-location-dot sb-icon"></i>
+                    <span>{{LOCATION}}</span>
+                </div>
+                <!--IF:LINKEDIN-->
+                <div class="sb-contact-item">
+                    <i class="fa-brands fa-linkedin-in sb-icon"></i>
+                    <span>{{LINKEDIN}}</span>
+                </div>
+                <!--/IF:LINKEDIN-->
+            </div>
+
+            <div class="sb-section">
+                <div class="sb-title">Skills</div>
+                <div class="sb-skill-list">
+                    <!--REPEAT:SKILLS-->
+                    <span class="sb-skill-tag">{{SKILL}}</span>
+                    <!--/REPEAT:SKILLS-->
+                </div>
+            </div>
+
+            <!--SECTION:LANGUAGES-->
+            <div class="sb-section">
+                <div class="sb-title">Languages</div>
+                <!--REPEAT:LANGUAGES-->
+                <div class="sb-lang-item">
+                    <span>{{LANG_NAME}}</span>
+                    <span class="sb-lang-level">{{LANG_LEVEL}}</span>
+                </div>
+                <!--/REPEAT:LANGUAGES-->
+            </div>
+            <!--/SECTION:LANGUAGES-->
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <section class="section">
+                <div class="section-title">About Me</div>
+                <p class="summary-text">{{SUMMARY}}</p>
+            </section>
+
+            <section class="section">
+                <div class="section-title">Experience</div>
+                <!--REPEAT:EXPERIENCE-->
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{EXP_TITLE}}</span>
+                        <span class="item-period">{{EXP_PERIOD}}</span>
+                    </div>
+                    <div class="item-subtitle">{{EXP_COMPANY}}</div>
+                    <div class="item-body">{{EXP_DESCRIPTION}}</div>
+                </div>
+                <!--/REPEAT:EXPERIENCE-->
+            </section>
+
+            <!--SECTION:PROJECTS-->
+            <section class="section">
+                <div class="section-title">Projects</div>
+                <!--REPEAT:PROJECTS-->
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{PROJ_NAME}}</span>
+                        <span class="item-period">{{PROJ_PERIOD}}</span>
+                    </div>
+                    <!--IF:PROJ_LINK--><div class="item-subtitle">{{PROJ_LINK}}</div><!--/IF:PROJ_LINK-->
+                    <div class="item-body">{{PROJ_DESCRIPTION}}</div>
+                </div>
+                <!--/REPEAT:PROJECTS-->
+            </section>
+            <!--/SECTION:PROJECTS-->
+
+            <section class="section">
+                <div class="section-title">Education</div>
+                <!--REPEAT:EDUCATION-->
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{EDU_DEGREE}}</span>
+                        <span class="item-period">{{EDU_PERIOD}}</span>
+                    </div>
+                    <div class="item-subtitle">{{EDU_INSTITUTION}} · {{EDU_FIELD}} · {{EDU_GRADE}}</div>
+                </div>
+                <!--/REPEAT:EDUCATION-->
+            </section>
+
+            <!--SECTION:COURSES-->
+            <section class="section">
+                <div class="section-title">Certifications</div>
+                <!--REPEAT:COURSES-->
+                <div class="course-item">
+                    <div class="course-name">{{COURSE_NAME}}</div>
+                    <div class="course-meta">{{COURSE_PROVIDER}} · {{COURSE_DATE}}</div>
+                </div>
+                <!--/REPEAT:COURSES-->
+            </section>
+            <!--/SECTION:COURSES-->
+
+        </main>
+    </div>
+</body>
+
+</html>

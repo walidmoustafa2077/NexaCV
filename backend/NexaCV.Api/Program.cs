@@ -160,6 +160,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<IResumeService, ResumeService>();
+builder.Services.AddScoped<ITemplateRendererService, TemplateRendererService>();
 builder.Services.AddScoped<IRegenerationService, RegenerationService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 

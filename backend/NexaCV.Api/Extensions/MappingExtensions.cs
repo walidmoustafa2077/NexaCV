@@ -38,6 +38,7 @@ public static class MappingExtensions
         Id = template.Id,
         Name = template.Name,
         IndustryCategory = template.IndustryCategory,
+        StyleCategory = template.StyleCategory,
         BasePriceUsd = template.BasePriceUsd,
         SupportsWord = template.SupportsWord
     };

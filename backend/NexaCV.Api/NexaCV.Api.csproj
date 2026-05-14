@@ -18,4 +18,11 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Copy all HTML resume templates to build output under Templates/ -->
+    <Content Include="Templates\*.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
