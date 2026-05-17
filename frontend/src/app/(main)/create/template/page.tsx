@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -9,11 +9,12 @@ import { getResume, getResumes } from "@/lib/api/resumes";
 import { queryKeys } from "@/lib/query/keys";
 import { useWizardStore } from "@/store/wizardStore";
 import MaterialIcon from "@/components/shared/MaterialIcon";
+import { renderTemplatePreview } from "@/lib/templatePreview";
 import type { TemplateDto } from "@/types/api.types";
 
 // ─── Category filters ─────────────────────────────────────────────────────────
 
-const CATEGORIES = ["All", "Executive", "Creative", "ModernTech"] as const;
+const CATEGORIES = ["All", "Executive", "Creative", "ModernTech", "Minimalist"] as const;
 type Category = (typeof CATEGORIES)[number];
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -21,6 +22,7 @@ const CATEGORY_LABELS: Record<string, string> = {
     Executive: "Executive",
     Creative: "Creative",
     ModernTech: "Modern Tech",
+    Minimalist: "Minimalist",
 };
 
 function matchesFilter(template: TemplateDto, filter: Category): boolean {
@@ -32,15 +34,20 @@ function matchesFilter(template: TemplateDto, filter: Category): boolean {
     return style === key || industry.includes(key) || style.includes(key);
 }
 
-// ─── Template thumbnail (real scaled iframe) ──────────────────────────────────
+// ─── Template thumbnail (client-side mock render) ─────────────────────────────
 
 const A4_W = 794;
 const A4_H = 1123;
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5166";
 
 function TemplateThumbnail({ template }: { template: TemplateDto }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const [scale, setScale] = useState(0.35);
+
+    // Pre-render once; memoised so it doesn't recalculate on every re-render
+    const srcdoc = useMemo(
+        () => (template.htmlContent ? renderTemplatePreview(template.htmlContent) : ""),
+        [template.htmlContent],
+    );
 
     useEffect(() => {
         const el = containerRef.current;
@@ -52,10 +59,19 @@ function TemplateThumbnail({ template }: { template: TemplateDto }) {
         return () => obs.disconnect();
     }, []);
 
+    if (!srcdoc) {
+        // No HTML content yet — show a neutral placeholder
+        return (
+            <div ref={containerRef} className="w-full h-full flex items-center justify-center bg-slate-100">
+                <span className="text-xs text-slate-400">No preview</span>
+            </div>
+        );
+    }
+
     return (
         <div ref={containerRef} className="w-full h-full overflow-hidden relative bg-slate-50">
             <iframe
-                src={`${API_URL}/api/templates/${template.id}/preview`}
+                srcDoc={srcdoc}
                 style={{
                     position: "absolute",
                     top: 0,
@@ -94,6 +110,7 @@ const STYLE_BADGE: Record<string, { label: string; className: string }> = {
     executive: { label: "Executive", className: "bg-amber-400/20 text-amber-700 border border-amber-400/40" },
     creative: { label: "Creative", className: "bg-sky-400/20 text-sky-700 border border-sky-400/40" },
     moderntech: { label: "Modern Tech", className: "bg-cyan-400/20 text-cyan-700 border border-cyan-400/40" },
+    minimalist: { label: "Minimalist", className: "bg-slate-200/60 text-slate-600 border border-slate-300" },
 };
 
 function getStyleBadge(template: TemplateDto) {
@@ -257,8 +274,8 @@ export default function TemplatePage() {
                             key={cat}
                             onClick={() => setActiveFilter(cat)}
                             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${activeFilter === cat
-                                    ? "bg-primary text-white shadow-sm"
-                                    : "bg-white border border-slate-200 text-slate-600 hover:border-primary/40 hover:text-primary"
+                                ? "bg-primary text-white shadow-sm"
+                                : "bg-white border border-slate-200 text-slate-600 hover:border-primary/40 hover:text-primary"
                                 }`}
                         >
                             {CATEGORY_LABELS[cat]}

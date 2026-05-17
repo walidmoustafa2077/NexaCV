@@ -115,7 +115,7 @@ export default function Step2Page() {
         <div className="px-8 py-10 max-w-[768px] mx-auto">
             <WizardProgress
                 step={2}
-                total={6}
+                total={8}
                 title="Education Background"
                 subtitle="List your academic achievements and qualifications to build a strong profile."
             />

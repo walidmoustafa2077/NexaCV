@@ -1,0 +1,260 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useWizardStore } from "@/store/wizardStore";
+import { WizardProgress } from "../1/page";
+import MaterialIcon from "@/components/shared/MaterialIcon";
+
+// ── Schema ────────────────────────────────────────────────────────────────────
+
+const entrySchema = z.object({
+    id: z.string(),
+    name: z.string().min(1, "Project name is required").max(200),
+    role: z.string().max(200).optional(),
+    description: z.string().max(1000).optional(),
+    link: z
+        .string()
+        .url("Must be a valid URL")
+        .or(z.literal(""))
+        .optional(),
+    technologies: z.string().max(500).optional(), // comma-separated
+});
+
+const step6Schema = z.object({
+    projects: z.array(entrySchema),
+});
+
+type Step6Values = z.infer<typeof step6Schema>;
+
+const inputCls =
+    "w-full h-11 px-4 border border-outline-variant rounded-lg bg-white font-input-text text-input-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all";
+
+function newEntry() {
+    return {
+        id: `proj_${crypto.randomUUID()}`,
+        name: "",
+        role: "",
+        description: "",
+        link: "",
+        technologies: "",
+    };
+}
+
+function techStringToArray(val: string | undefined): string[] {
+    if (!val) return [];
+    return val
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────────
+
+export default function Step6Page() {
+    const router = useRouter();
+    const { formData, updateFormData } = useWizardStore();
+
+    const {
+        register,
+        handleSubmit,
+        control,
+        watch,
+        formState: { errors },
+    } = useForm<Step6Values>({
+        resolver: zodResolver(step6Schema),
+        defaultValues: {
+            projects:
+                formData.projects.length > 0
+                    ? formData.projects.map((p) => ({
+                        id: p.id,
+                        name: p.name,
+                        role: p.role,
+                        description: p.description,
+                        link: p.link,
+                        technologies: p.technologies.join(", "),
+                    }))
+                    : [],
+        },
+    });
+
+    const { fields, append, remove } = useFieldArray({ control, name: "projects" });
+
+    // Auto-save to store on every change
+    useEffect(() => {
+        const sub = watch((values) => {
+            if (!values.projects) return;
+            updateFormData({
+                projects: values.projects
+                    .filter(Boolean)
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    .map((p: any) => ({
+                        id: p.id ?? "",
+                        name: p.name ?? "",
+                        role: p.role ?? "",
+                        description: p.description ?? "",
+                        link: p.link ?? "",
+                        technologies: techStringToArray(p.technologies),
+                    })),
+            });
+        });
+        return () => sub.unsubscribe();
+    }, [watch, updateFormData]);
+
+    function onSubmit(values: Step6Values) {
+        updateFormData({
+            projects: values.projects.map((p) => ({
+                id: p.id,
+                name: p.name,
+                role: p.role ?? "",
+                description: p.description ?? "",
+                link: p.link ?? "",
+                technologies: techStringToArray(p.technologies),
+            })),
+        });
+        router.push("/create/steps/7");
+    }
+
+    return (
+        <div className="px-8 py-10 max-w-[768px] mx-auto">
+            <WizardProgress
+                step={6}
+                total={8}
+                title="Projects"
+                subtitle="Showcase personal or professional projects that demonstrate your skills and impact."
+            />
+
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+                {fields.map((field, index) => (
+                    <div
+                        key={field.id}
+                        className="bg-white border border-outline-variant/30 rounded-xl p-7 shadow-sm relative"
+                    >
+                        <button
+                            type="button"
+                            onClick={() => remove(index)}
+                            className="absolute top-4 right-4 p-2 text-error hover:bg-error-container/20 rounded-full transition-all"
+                            aria-label="Remove project"
+                        >
+                            <MaterialIcon name="delete" size={20} />
+                        </button>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {/* Project Name */}
+                            <div className="md:col-span-2 flex flex-col gap-2">
+                                <label className="font-label-caps text-label-caps text-secondary uppercase">
+                                    Project Name <span className="text-error">*</span>
+                                </label>
+                                <input
+                                    {...register(`projects.${index}.name`)}
+                                    placeholder="e.g. E-Commerce Platform"
+                                    className={inputCls}
+                                />
+                                {errors.projects?.[index]?.name && (
+                                    <p className="text-xs text-error">{errors.projects[index].name?.message}</p>
+                                )}
+                            </div>
+
+                            {/* Role */}
+                            <div className="flex flex-col gap-2">
+                                <label className="font-label-caps text-label-caps text-secondary uppercase">
+                                    Your Role (optional)
+                                </label>
+                                <input
+                                    {...register(`projects.${index}.role`)}
+                                    placeholder="e.g. Lead Developer"
+                                    className={inputCls}
+                                />
+                            </div>
+
+                            {/* Link */}
+                            <div className="flex flex-col gap-2">
+                                <label className="font-label-caps text-label-caps text-secondary uppercase">
+                                    Project Link (optional)
+                                </label>
+                                <input
+                                    {...register(`projects.${index}.link`)}
+                                    placeholder="e.g. https://github.com/..."
+                                    className={inputCls}
+                                />
+                                {errors.projects?.[index]?.link && (
+                                    <p className="text-xs text-error">{errors.projects[index].link?.message}</p>
+                                )}
+                            </div>
+
+                            {/* Technologies */}
+                            <div className="md:col-span-2 flex flex-col gap-2">
+                                <label className="font-label-caps text-label-caps text-secondary uppercase">
+                                    Technologies Used (optional)
+                                </label>
+                                <input
+                                    {...register(`projects.${index}.technologies`)}
+                                    placeholder="e.g. React, Node.js, PostgreSQL (comma-separated)"
+                                    className={inputCls}
+                                />
+                            </div>
+
+                            {/* Description */}
+                            <div className="md:col-span-2 flex flex-col gap-2">
+                                <label className="font-label-caps text-label-caps text-secondary uppercase">
+                                    Description (optional)
+                                </label>
+                                <textarea
+                                    {...register(`projects.${index}.description`)}
+                                    rows={3}
+                                    placeholder="Describe what the project does, your contributions, and impact…"
+                                    className="w-full px-4 py-3 border border-outline-variant rounded-lg bg-white font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
+                                />
+                                {errors.projects?.[index]?.description && (
+                                    <p className="text-xs text-error">{errors.projects[index].description?.message}</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+
+                {/* Add button */}
+                <button
+                    type="button"
+                    onClick={() => append(newEntry())}
+                    className="w-full py-6 border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center gap-3 text-secondary hover:border-primary hover:text-primary hover:bg-primary/5 transition-all group"
+                >
+                    <MaterialIcon name="add_circle" size={22} className="group-hover:scale-110 transition-transform text-primary" />
+                    <span className="font-manrope font-semibold">
+                        {fields.length === 0 ? "Add a project" : "Add another project"}
+                    </span>
+                </button>
+
+                {/* Pro tip */}
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-secondary-container/30">
+                    <MaterialIcon name="lightbulb" size={20} className="text-secondary shrink-0 mt-0.5" />
+                    <p className="font-body-sm text-sm text-secondary">
+                        <strong>Pro Tip:</strong> Include projects directly relevant to the roles you&apos;re targeting. Quantify outcomes where possible (e.g. &ldquo;reduced load time by 40%&rdquo;).
+                    </p>
+                </div>
+
+                {/* Navigation */}
+                <div className="flex items-center justify-between border-t border-outline-variant/20 pt-6">
+                    <button
+                        type="button"
+                        onClick={() => router.push("/create/steps/5")}
+                        className="flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-secondary hover:bg-secondary-container transition-colors"
+                    >
+                        <MaterialIcon name="arrow_back" size={18} />
+                        Back
+                    </button>
+                    <button
+                        type="submit"
+                        className="flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-on-primary font-semibold hover:opacity-90 transition-opacity shadow-md"
+                    >
+                        Save &amp; Continue
+                        <MaterialIcon name="arrow_forward" size={18} />
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+}

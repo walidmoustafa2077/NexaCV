@@ -44,10 +44,6 @@ const courseEntrySchema = z.object({
 export const createResumeSchema = z.object({
     templateId: z.number().min(1, "Please select a template"),
     rawData: z.object({
-        settings: z.object({
-            summaryType: z.enum(["Summary", "Objective"]),
-            descriptionFormat: z.enum(["Paragraph", "Bulleted"]),
-        }),
         content: z.object({
             personal: personalInfoSchema,
             summary: z.string().min(1, "Summary is required"),

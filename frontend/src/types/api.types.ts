@@ -1,8 +1,6 @@
 import type {
     ResumeStatus,
     PaymentStatus,
-    SummaryType,
-    DescriptionFormat,
     Currency,
 } from "./enums";
 
@@ -53,10 +51,15 @@ export interface TemplateDto {
     id: number;
     name: string;
     industryCategory: string;
-    /** Design style category returned by the backend: "Executive" | "Creative" | "ModernTech" */
+    /** Design style category returned by the backend: "Executive" | "Creative" | "ModernTech" | "Minimalist" */
     styleCategory: string | null;
     basePriceUsd: number;
     supportsWord: boolean;
+    /**
+     * Raw HTML of the template with {{Placeholder}} tokens.
+     * Substitute client-side with mock or real data and render via srcdoc.
+     */
+    htmlContent: string | null;
 }
 
 // ─── Resume Raw Data ────────────────────────────────────────────────────────
@@ -106,9 +109,46 @@ export interface CourseEntry {
     certificateUrl?: string | null;
 }
 
-export interface ResumeSettings {
-    summaryType: SummaryType;
-    descriptionFormat: DescriptionFormat;
+export type SkillType = "Technical" | "Soft";
+
+export interface SkillEntry {
+    name: string;
+    type?: SkillType | null;
+    category?: string | null;
+}
+
+export interface RawData {
+    content: ResumeContent;
+}
+
+export type LanguageLevel = "Native" | "Fluent" | "Professional" | "Basic";
+
+export interface LanguageEntry {
+    language: string;
+    level?: LanguageLevel | null;
+}
+
+export interface ProjectEntry {
+    id: string;
+    name: string;
+    role?: string | null;
+    description?: string | null;
+    link?: string | null;
+    technologies?: string[] | null;
+}
+
+export interface OtherEntry {
+    label: string;
+    value: string;
+}
+
+export interface VolunteerEntry {
+    id?: string | null;
+    organization: string;
+    role: string;
+    startDate?: string | null;
+    endDate?: string | null;
+    description?: string | null;
 }
 
 export interface ResumeContent {
@@ -117,12 +157,14 @@ export interface ResumeContent {
     experience: ExperienceEntry[];
     education: EducationEntry[];
     courses?: CourseEntry[];
-    skills: string[];
-}
-
-export interface RawData {
-    settings: ResumeSettings;
-    content: ResumeContent;
+    projects?: ProjectEntry[] | null;
+    /** Skills list. Each entry has at minimum a `name`; `type` and `category` are optional AI enrichments. */
+    skills: SkillEntry[];
+    languages?: LanguageEntry[] | null;
+    volunteers?: VolunteerEntry[] | null;
+    hobbies?: string[] | null;
+    other?: OtherEntry[] | null;
+    achievements?: string[] | null;
 }
 
 // ─── Resume Requests ────────────────────────────────────────────────────────

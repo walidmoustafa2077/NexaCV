@@ -181,7 +181,7 @@ export default function Step1Page() {
         <div className="px-8 py-10 max-w-[768px] mx-auto">
             <WizardProgress
                 step={1}
-                total={6}
+                total={8}
                 title="Let's start with the basics"
                 subtitle="Provide your contact details so employers know how to reach you."
             />

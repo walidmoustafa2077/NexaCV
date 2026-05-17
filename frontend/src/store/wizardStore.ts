@@ -6,8 +6,6 @@ import { updateResume } from "@/lib/api/resumes";
 
 export interface WizardFormData {
     templateId: number | null;
-    summaryType: "Summary" | "Objective";
-    descriptionFormat: "Paragraph" | "Bulleted";
     // Personal
     firstName: string;
     middleName: string;
@@ -51,6 +49,38 @@ export interface WizardFormData {
     }>;
     // Skills
     skills: string[];
+    // Projects
+    projects: Array<{
+        id: string;
+        name: string;
+        role: string;
+        description: string;
+        link: string;
+        technologies: string[];
+    }>;
+    // Languages
+    languages: Array<{
+        language: string;
+        level: string;
+    }>;
+    // Volunteers
+    volunteers: Array<{
+        id: string;
+        organization: string;
+        role: string;
+        startDate: string;
+        endDate: string;
+        description: string;
+    }>;
+    // Hobbies
+    hobbies: string[];
+    // Other (custom key-value pairs)
+    other: Array<{
+        label: string;
+        value: string;
+    }>;
+    // Achievements (bullet-point list)
+    achievements: string[];
     // Profile photo (base64 data URL, local only)
     photoUrl: string;
     // Resume display name
@@ -61,8 +91,6 @@ export interface WizardFormData {
 
 const defaultFormData: WizardFormData = {
     templateId: null,
-    summaryType: "Summary",
-    descriptionFormat: "Bulleted",
     firstName: "",
     middleName: "",
     lastName: "",
@@ -78,13 +106,19 @@ const defaultFormData: WizardFormData = {
     education: [],
     courses: [],
     skills: [],
+    projects: [],
+    languages: [],
+    volunteers: [],
+    hobbies: [],
+    other: [],
+    achievements: [],
     photoUrl: "",
     resumeName: "",
     createdResumeId: null,
 };
 
 interface WizardState {
-    currentStep: number; // 1–6
+    currentStep: number; // 1–8
     formData: WizardFormData;
     jobTitleSuggestions: JobTitleSuggestion[];
     skillSuggestions: string[];
@@ -136,13 +170,11 @@ export const useWizardStore = create<WizardState>((set, get) => ({
     initFromResume: (resume) => {
         // Prefer finalData (AI-polished) over rawData
         const data = resume.finalData ?? resume.rawData;
-        const { personal, summary, experience, education, courses, skills } = data.content;
+        const { personal, summary, experience, education, courses, skills, projects, languages, volunteers, hobbies, other, achievements } = data.content;
         set({
             currentStep: 1,
             formData: {
                 templateId: resume.templateId,
-                summaryType: data.settings.summaryType,
-                descriptionFormat: data.settings.descriptionFormat,
                 firstName: personal.firstName,
                 middleName: personal.middleName ?? "",
                 lastName: personal.lastName,
@@ -179,7 +211,30 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                     date: c.date,
                     certificateUrl: c.certificateUrl ?? "",
                 })),
-                skills,
+                skills: (skills ?? []).map((s) => (typeof s === "string" ? s : s.name)),
+                projects: (projects ?? []).map((p) => ({
+                    id: p.id,
+                    name: p.name,
+                    role: p.role ?? "",
+                    description: p.description ?? "",
+                    link: p.link ?? "",
+                    technologies: p.technologies ?? [],
+                })),
+                languages: (languages ?? []).map((l) => ({
+                    language: l.language,
+                    level: l.level ?? "",
+                })),
+                volunteers: (volunteers ?? []).map((v) => ({
+                    id: v.id ?? "",
+                    organization: v.organization,
+                    role: v.role,
+                    startDate: v.startDate ?? "",
+                    endDate: v.endDate ?? "",
+                    description: v.description ?? "",
+                })),
+                hobbies: hobbies ?? [],
+                other: (other ?? []).map((o) => ({ label: o.label, value: o.value })),
+                achievements: (achievements ?? []) as string[],
                 photoUrl: personal.photoUrl ?? "",
                 resumeName: resume.name ?? "",
                 createdResumeId: resume.id,
@@ -193,10 +248,6 @@ export const useWizardStore = create<WizardState>((set, get) => ({
         const { formData } = get();
         if (!formData.createdResumeId) return;
         const finalData: RawData = {
-            settings: {
-                summaryType: formData.summaryType,
-                descriptionFormat: formData.descriptionFormat,
-            },
             content: {
                 personal: {
                     firstName: formData.firstName,
@@ -237,7 +288,38 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                     date: c.date,
                     certificateUrl: c.certificateUrl || null,
                 })),
-                skills: formData.skills,
+                skills: formData.skills.map((name) => ({ name })),
+                projects: formData.projects.length > 0
+                    ? formData.projects.map((p) => ({
+                        id: p.id,
+                        name: p.name,
+                        role: p.role || null,
+                        description: p.description || null,
+                        link: p.link || null,
+                        technologies: p.technologies.length > 0 ? p.technologies : null,
+                    }))
+                    : null,
+                languages: formData.languages.length > 0
+                    ? formData.languages.map((l) => ({
+                        language: l.language,
+                        level: (l.level as import('@/types/api.types').LanguageLevel) || null,
+                    }))
+                    : null,
+                volunteers: formData.volunteers.length > 0
+                    ? formData.volunteers.map((v) => ({
+                        id: v.id || null,
+                        organization: v.organization,
+                        role: v.role,
+                        startDate: v.startDate || null,
+                        endDate: v.endDate || null,
+                        description: v.description || null,
+                    }))
+                    : null,
+                hobbies: formData.hobbies.length > 0 ? formData.hobbies : null,
+                other: formData.other.length > 0
+                    ? formData.other.map((o) => ({ label: o.label, value: o.value }))
+                    : null,
+                achievements: formData.achievements.length > 0 ? formData.achievements : null,
             },
         };
         try {
@@ -252,7 +334,8 @@ export const useWizardStore = create<WizardState>((set, get) => ({
 
 /**
  * Returns true when the step has all its required fields filled.
- * Step 3 (Courses) is always optional — always returns true.
+ * Steps 3 (Courses), 5 (Projects), 7 (Languages), 8 (Extras) are optional — always return true.
+ * Step 9 (Review) is unlocked when steps 1, 2, 4, 6 are all complete.
  */
 export function checkStepComplete(step: number, formData: WizardFormData): boolean {
     switch (step) {
@@ -272,7 +355,7 @@ export function checkStepComplete(step: number, formData: WizardFormData): boole
                 )
             );
         case 3:
-            return true; // Optional step
+            return true; // Courses — optional step
         case 4:
             return (
                 formData.experience.length > 0 &&
@@ -281,7 +364,13 @@ export function checkStepComplete(step: number, formData: WizardFormData): boole
                 )
             );
         case 5:
-            return formData.summary.trim().length >= 10 && formData.skills.length >= 3;
+            return true; // Projects — optional step
+        case 6:
+            return formData.summary.trim().length >= 10 && formData.skills.length >= 1;
+        case 7:
+            return true; // Languages — optional step
+        case 8:
+            return true; // Extras (Volunteers, Hobbies, Other) — optional step
         default:
             return true;
     }

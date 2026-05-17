@@ -13,8 +13,11 @@ const steps = [
     { step: 2, label: "Education", icon: "school", href: "/create/steps/2" },
     { step: 3, label: "Courses", icon: "menu_book", href: "/create/steps/3" },
     { step: 4, label: "Work Experience", icon: "work", href: "/create/steps/4" },
-    { step: 5, label: "Summary & Skills", icon: "psychology", href: "/create/steps/5" },
-    { step: 6, label: "Review", icon: "fact_check", href: "/create/steps/6" },
+    { step: 5, label: "Projects", icon: "code", href: "/create/steps/5" },
+    { step: 6, label: "Summary & Skills", icon: "psychology", href: "/create/steps/6" },
+    { step: 7, label: "Languages", icon: "translate", href: "/create/steps/7" },
+    { step: 8, label: "Extras", icon: "volunteer_activism", href: "/create/steps/8" },
+    { step: 9, label: "Review", icon: "fact_check", href: "/create/steps/9" },
 ];
 
 export function WizardSidebar() {
@@ -22,28 +25,26 @@ export function WizardSidebar() {
     const router = useRouter();
     const { formData, visitedSteps, markVisited } = useWizardStore();
 
-    // Determine current step from path
     const currentStep = steps.find((s) => pathname.startsWith(s.href))?.step ?? 1;
 
-    // Mark the current step as visited whenever it changes
     useEffect(() => {
         markVisited(currentStep);
     }, [currentStep, markVisited]);
 
-    // Step 6 is unlocked only when all required fields in steps 1–5 are filled
-    const isStep6Unlocked = useWizardStore((state) => {
+    // Step 9 is unlocked only when required steps 1, 2, 4, 6 are complete
+    const isStep9Unlocked = useWizardStore((state) => {
         const fd = state.formData;
         return (
             checkStepComplete(1, fd) &&
             checkStepComplete(2, fd) &&
             checkStepComplete(4, fd) &&
-            checkStepComplete(5, fd)
+            checkStepComplete(6, fd)
         );
     });
 
-    function handleStep6Click() {
-        if (isStep6Unlocked) {
-            router.push("/create/steps/6");
+    function handleStep9Click() {
+        if (isStep9Unlocked) {
+            router.push("/create/steps/9");
         } else {
             toast.warning("Complete Required Fields", {
                 description:
@@ -66,14 +67,11 @@ export function WizardSidebar() {
                     const isActive = step === currentStep;
                     const isVisited = visitedSteps.includes(step);
                     const isComplete = checkStepComplete(step, formData);
-                    const isReviewStep = step === 6;
+                    const isReviewStep = step === 9;
 
-                    // Steps 1–5 are always navigable; step 6 requires all required fields
-                    const isClickable = isReviewStep ? isStep6Unlocked : true;
+                    const isClickable = isReviewStep ? isStep9Unlocked : true;
 
-                    // Show warning when visited but still has missing required fields (steps 1–5 only)
                     const showWarning = !isReviewStep && isVisited && !isComplete;
-                    // Show checkmark when visited and complete (but not the currently active step)
                     const showCheck = !isReviewStep && isVisited && isComplete && !isActive;
 
                     if (isReviewStep) {
@@ -81,7 +79,7 @@ export function WizardSidebar() {
                             <button
                                 key={step}
                                 type="button"
-                                onClick={handleStep6Click}
+                                onClick={handleStep9Click}
                                 className={cn(
                                     "flex items-center gap-3 px-6 py-3 font-manrope text-sm transition-all duration-200 w-full text-left",
                                     isActive
@@ -99,19 +97,10 @@ export function WizardSidebar() {
                                 />
                                 <span>{label}</span>
                                 {!isClickable && (
-                                    <MaterialIcon
-                                        name="lock"
-                                        size={14}
-                                        className="ml-auto text-slate-400 opacity-60"
-                                    />
+                                    <MaterialIcon name="lock" size={14} className="ml-auto text-slate-400 opacity-60" />
                                 )}
                                 {isClickable && !isActive && (
-                                    <MaterialIcon
-                                        name="check_circle"
-                                        size={14}
-                                        className="ml-auto text-emerald-500"
-                                        filled
-                                    />
+                                    <MaterialIcon name="check_circle" size={14} className="ml-auto text-emerald-500" filled />
                                 )}
                             </button>
                         );
@@ -128,27 +117,13 @@ export function WizardSidebar() {
                                     : "text-slate-500 hover:text-blue-500 hover:bg-slate-100",
                             )}
                         >
-                            <MaterialIcon
-                                name={icon}
-                                size={20}
-                                filled={isActive}
-                            />
+                            <MaterialIcon name={icon} size={20} filled={isActive} />
                             <span>{label}</span>
                             {showWarning && (
-                                <MaterialIcon
-                                    name="warning"
-                                    size={14}
-                                    className="ml-auto text-amber-500"
-                                    filled
-                                />
+                                <MaterialIcon name="warning" size={14} className="ml-auto text-amber-500" filled />
                             )}
                             {showCheck && (
-                                <MaterialIcon
-                                    name="check_circle"
-                                    size={14}
-                                    className="ml-auto text-emerald-500"
-                                    filled
-                                />
+                                <MaterialIcon name="check_circle" size={14} className="ml-auto text-emerald-500" filled />
                             )}
                         </Link>
                     );

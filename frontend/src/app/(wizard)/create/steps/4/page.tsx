@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -416,9 +416,9 @@ function ExperienceCard({
                             {[...titleSuggestions]
                                 .sort((a, b) => b.score - a.score)
                                 .slice(0, 5)
-                                .map((s) => (
+                                .map((s, i) => (
                                     <button
-                                        key={s.title}
+                                        key={s.title ?? i}
                                         type="button"
                                         onClick={() =>
                                             setValue(
@@ -664,7 +664,7 @@ export default function Step4Page() {
         <div className="px-8 py-10 max-w-[768px] mx-auto">
             <WizardProgress
                 step={4}
-                total={6}
+                total={8}
                 title="Work Experience"
                 subtitle={
                     formData.createdResumeId
@@ -685,7 +685,7 @@ export default function Step4Page() {
                         onRemove={() => remove(index)}
                         setValue={setValue}
                         resumeId={formData.createdResumeId}
-                        descriptionFormat={formData.descriptionFormat}
+                        descriptionFormat="Bulleted"
                         titleSuggestions={jobTitleSuggestions}
                     />
                 ))}
@@ -708,13 +708,13 @@ export default function Step4Page() {
                         className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-secondary font-semibold hover:text-on-surface transition-colors"
                     >
                         <MaterialIcon name="arrow_back" size={18} />
-                        Back to Courses
+                        Back
                     </button>
                     <button
                         type="submit"
                         className="flex items-center gap-2 px-8 py-2.5 rounded-lg bg-primary text-on-primary font-semibold hover:opacity-90 transition-opacity shadow-sm"
                     >
-                        Continue to Summary
+                        Continue to Projects
                         <MaterialIcon name="arrow_forward" size={18} />
                     </button>
                 </div>

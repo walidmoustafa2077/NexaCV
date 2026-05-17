@@ -4,3 +4,7 @@ export type SummaryType = "Summary" | "Objective";
 export type DescriptionFormat = "Paragraph" | "Bulleted";
 export type SkillsFormat = "GRID" | "LIST";
 export type Currency = "USD" | "EGP" | "EUR" | "GBP" | "SAR" | "AED";
+export type Tone = "Professional" | "Executive" | "Creative" | "Academic";
+export type AiFocus = "MetricsDriven" | "Technical" | "Leadership";
+export type NarrativeVoice = "FirstPerson" | "ThirdPerson";
+export type SkillsLayout = "Categorized" | "Flat" | "Mixed";

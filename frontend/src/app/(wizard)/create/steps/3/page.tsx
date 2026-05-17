@@ -102,7 +102,7 @@ export default function Step3Page() {
         <div className="px-8 py-10 max-w-[768px] mx-auto">
             <WizardProgress
                 step={3}
-                total={6}
+                total={8}
                 title="Certifications & Coursework"
                 subtitle="List your relevant professional development."
             />

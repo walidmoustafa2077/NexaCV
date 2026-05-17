@@ -12,8 +12,10 @@ const steps = [
     { step: 2, label: "Education" },
     { step: 3, label: "Courses" },
     { step: 4, label: "Work Experience" },
-    { step: 5, label: "Summary & Skills" },
-    { step: 6, label: "Review" },
+    { step: 5, label: "Projects" },
+    { step: 6, label: "Summary & Skills" },
+    { step: 7, label: "Languages" },
+    { step: 8, label: "Review" },
 ];
 
 export function WizardTopBar() {
@@ -116,7 +118,7 @@ export function WizardTopBar() {
                                     }`}
                             />
                         ))}
-                        <span className="text-xs text-slate-400 ml-1">{currentStep}/6</span>
+                        <span className="text-xs text-slate-400 ml-1">{currentStep}/8</span>
                     </div>
                 )}
 
