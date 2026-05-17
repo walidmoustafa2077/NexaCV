@@ -13,6 +13,8 @@ public class Template
     public DateTime CreatedAt { get; set; }
     /// <summary>Full HTML content of the template with {{PLACEHOLDER}} tokens.</summary>
     public string? HtmlContent { get; set; }
+    /// <summary>Serialized JSON of template capabilities (supported sections, layouts, limits).</summary>
+    public string? CapabilitiesJson { get; set; }
 
     public ICollection<Resume> Resumes { get; set; } = new List<Resume>();
 }

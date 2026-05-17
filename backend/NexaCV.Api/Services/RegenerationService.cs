@@ -40,10 +40,9 @@ public class RegenerationService : IRegenerationService
         if (count >= MaxRegenerationsPerSection)
             throw new TooManyRegenerationsException();
 
-        // Parse FinalData into the structured { settings, content } schema
+        // Parse FinalData — supports both legacy { settings, content } and new { content } shapes.
         var root = ParseFinalData(resume.FinalData);
-        var settings = root["settings"]?.AsObject() ?? new JsonObject();
-        var content = root["content"]?.AsObject() ?? new JsonObject();
+        var content = root["content"]?.AsObject() ?? root; // backward-compat: old docs have a "content" key
 
         // Extract resume context so the AI can produce coherent output
         var personal = content["personal"]?.AsObject();
@@ -53,10 +52,13 @@ public class RegenerationService : IRegenerationService
 
         var skillsNode = content["skills"];
         var skills = skillsNode is JsonArray arr
-            ? string.Join(", ", arr.Select(s => s?.GetValue<string>() ?? string.Empty).Where(s => s.Length > 0))
+            ? string.Join(", ", arr.Select(s =>
+                s is JsonValue sv && sv.TryGetValue<string>(out var sv2) ? sv2 :
+                s is JsonObject so ? so["name"]?.GetValue<string>() ?? string.Empty :
+                string.Empty).Where(s => s.Length > 0))
             : skillsNode?.GetValue<string>();
 
-        var currentDescriptionFormat = GetSettingString(settings["descriptionFormat"]);
+        // Settings are now template-defined; no CurrentDescriptionFormat from stored data.
         // Resolve content for the AI: direct key (e.g. "summary", "experience") OR an
         // entry ID inside an array section (e.g. "exp_002" inside content["experience"]).
         JsonObject? entryNode = content.ContainsKey(req.SectionIdentifier)
@@ -75,7 +77,7 @@ public class RegenerationService : IRegenerationService
             CurrentSectionContent: currentSectionContent,
             ResumeTitle: resumeTitle,
             Skills: string.IsNullOrWhiteSpace(skills) ? null : skills,
-            CurrentDescriptionFormat: currentDescriptionFormat);
+            CurrentDescriptionFormat: null);
 
         var result = await _ai.RegenerateAsync(aiContext);
 
@@ -83,23 +85,31 @@ public class RegenerationService : IRegenerationService
         // If the identifier matched an individual array entry (e.g. exp_002), update its
         // "description" field in-place so the rest of the array is preserved.
         if (entryNode != null)
-            entryNode["description"] = result.UpdatedContent;
-        else
-            content[req.SectionIdentifier] = JsonValue.Create(result.UpdatedContent);
-
-        // Apply structural format change if requested
-        if (!string.IsNullOrEmpty(req.TargetFormat))
         {
-            if (req.SectionIdentifier.Equals("skills", StringComparison.OrdinalIgnoreCase))
-                settings["skillsFormat"] = req.TargetFormat;
-            else
-                settings["descriptionFormat"] = req.TargetFormat;
+            entryNode["description"] = result.UpdatedContent;
+        }
+        else
+        {
+            // result.UpdatedContent may be a plain string (summary, description) OR a
+            // JSON-encoded array/object (e.g. skills returned as "[\"C#\",\"React\",...]").
+            // JsonValue.Create(string) throws "The node must be of type 'JsonValue'" when
+            // the string happens to be valid JSON that represents an array or object,
+            // so we try to parse it first and only fall back to a string JsonValue.
+            JsonNode? parsed = null;
+            if (result.UpdatedContent is not null)
+            {
+                try { parsed = JsonNode.Parse(result.UpdatedContent); }
+                catch { /* not valid JSON — treat as a plain string below */ }
+            }
+            content[req.SectionIdentifier] = parsed ?? JsonValue.Create(result.UpdatedContent);
         }
 
-        // Rebuild the FinalData and persist
-        root["settings"] = settings;
-        root["content"] = content;
-        resume.FinalData = root.ToJsonString();
+        // Rebuild FinalData as content-only (settings are template-defined).
+        // Detach content from its current parent before moving it into the new root,
+        // otherwise JsonNode throws "The node already has a parent".
+        root.Remove("content");
+        var updatedRoot = new JsonObject { ["content"] = content };
+        resume.FinalData = updatedRoot.ToJsonString();
         resume.UpdatedAt = DateTime.UtcNow;
         await _resumes.UpdateAsync(resume);
 
@@ -124,20 +134,7 @@ public class RegenerationService : IRegenerationService
         };
         await _regenerations.AddAsync(regen);
 
-        return regen.ToResponseDto(count + 1, result.UpdatedContent, result.AiAvailable);
-    }
-
-    /// <summary>
-    /// Reads a settings value that may have been stored as a string (correct) or as a numeric
-    /// enum integer (produced by the legacy serializer that lacked JsonStringEnumConverter).
-    /// Returns null for missing or non-primitive nodes.
-    /// </summary>
-    private static string? GetSettingString(JsonNode? node)
-    {
-        if (node is not JsonValue val) return null;
-        if (val.TryGetValue<string>(out var s)) return s;
-        // Numeric enum fallback — convert integer to its string representation
-        return node.ToJsonString();
+        return regen.ToResponseDto(count + 1, result.UpdatedContent ?? string.Empty, result.AiAvailable);
     }
 
     /// <summary>Safely parses a FinalData JSON string into a JsonObject. Returns an empty object on failure.</summary>

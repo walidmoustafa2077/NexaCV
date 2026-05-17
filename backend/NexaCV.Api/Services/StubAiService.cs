@@ -81,19 +81,9 @@ public class StubAiService(IHttpClientFactory httpClientFactory, IOptions<AiServ
         try { rawNode = JsonNode.Parse(rawDataJson) ?? new JsonObject(); }
         catch { rawNode = new JsonObject(); }
 
-        var rawSettings = rawNode["settings"];
+        // Settings are template-defined; finalData stores only content.
         var content = rawNode["content"]?.DeepClone() ?? new JsonObject();
-
-        var root = new JsonObject
-        {
-            ["settings"] = new JsonObject
-            {
-                ["summaryType"] = TryGetString(rawSettings?["summaryType"]) ?? "SUMMARY",
-                ["descriptionFormat"] = TryGetString(rawSettings?["descriptionFormat"]) ?? "BULLET",
-                ["skillsFormat"] = TryGetString(rawSettings?["skillsFormat"]) ?? "GRID"
-            },
-            ["content"] = content
-        };
+        var root = new JsonObject { ["content"] = content };
 
         return new AiGenerationResult(root.ToJsonString(), AiAvailable: false);
     }

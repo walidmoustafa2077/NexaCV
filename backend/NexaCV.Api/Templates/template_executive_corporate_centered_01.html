@@ -1,0 +1,596 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{FullName}} — Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* ============================================================
+       TEMPLATE: Executive Corporate — Traditional Centered
+       Category : Executive / Corporate (01 of 08)
+       Layout   : Single-column, centered header, top-down flow
+       Palette  : Navy #1a2744 · Deep Gold #c9a84c · Charcoal #2d2d2d
+       Fonts    : Playfair Display (headings) · Manrope (body)
+       ATS-safe : semantic HTML, no decorative text hiding
+    ============================================================ */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 9.5pt;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: #ffffff;
+            color: #2d2d2d;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 12mm 14mm;
+        }
+
+        /* ============================================================
+       HEADER — Centered
+    ============================================================ */
+        header {
+            text-align: center;
+            padding-bottom: 5mm;
+            margin-bottom: 5mm;
+            position: relative;
+        }
+
+        .header-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 28pt;
+            font-weight: 700;
+            color: #1a2744;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .header-title {
+            font-size: 9.5pt;
+            color: #c9a84c;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-top: 2mm;
+        }
+
+        /* Gold rule + navy rule divider */
+        .header-rule {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin: 3mm auto 3mm;
+            width: 100%;
+        }
+
+        .header-rule::before,
+        .header-rule::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #1a2744;
+        }
+
+        .header-rule-diamond {
+            width: 6px;
+            height: 6px;
+            background: #c9a84c;
+            transform: rotate(45deg);
+            margin: 0 3mm;
+            flex-shrink: 0;
+        }
+
+        .header-contact {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0;
+            font-size: 8pt;
+            color: #555;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5mm;
+        }
+
+        .contact-item i {
+            color: #1a2744;
+            font-size: 7.5pt;
+        }
+
+        .contact-sep {
+            color: #c9a84c;
+            font-size: 10pt;
+            font-weight: 300;
+            margin: 0 3mm;
+        }
+
+        /* ============================================================
+       SECTIONS
+       Spacing controlled by --lopt-section-spacing (Layout Optimizer).
+       The fallback value keeps the template usable without the optimizer.
+    ============================================================ */
+        section {
+            margin-bottom: var(--lopt-section-spacing, 5.5mm);
+        }
+
+        /* Section Heading — Underlined with gold accent rule */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1a2744;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 1.5px solid #1a2744;
+            padding-bottom: 1.5mm;
+            margin-bottom: 4mm;
+            position: relative;
+        }
+
+        .skill-category-title:empty {
+            display: none;
+        }
+
+        /* ============================================================
+       PROFESSIONAL SUMMARY
+    ============================================================ */
+        .summary-text {
+            font-size: 8.5pt;
+            color: #444;
+            line-height: var(--lopt-line-height, 1.75);
+            font-weight: 300;
+        }
+
+        /* ============================================================
+       EXPERIENCE
+    ============================================================ */
+        .exp-item {
+            margin-bottom: var(--lopt-item-spacing, 4.5mm);
+            padding-bottom: var(--lopt-item-spacing, 4.5mm);
+            border-bottom: 1px solid #eeeeee;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 4mm;
+            margin-bottom: 0.5mm;
+        }
+
+        .exp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 9.5pt;
+            font-weight: 600;
+            color: #1a2744;
+            flex: 1;
+        }
+
+        .exp-date {
+            font-size: 8pt;
+            color: #888;
+            font-weight: 400;
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .exp-company {
+            font-size: 8.5pt;
+            color: #c9a84c;
+            font-weight: 600;
+            margin-bottom: 2mm;
+        }
+
+        .exp-bullets {
+            list-style: none;
+        }
+
+        .exp-bullets li {
+            font-size: 8pt;
+            color: #444;
+            padding-left: 4mm;
+            margin-bottom: 1mm;
+            position: relative;
+            line-height: var(--lopt-line-height, 1.6);
+            font-weight: 300;
+        }
+
+        .exp-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #1a2744;
+            font-size: 9pt;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* ============================================================
+       EDUCATION
+    ============================================================ */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 4mm;
+            margin-bottom: var(--lopt-item-spacing, 3.5mm);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .edu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .edu-degree {
+            font-family: 'Playfair Display', serif;
+            font-size: 9.5pt;
+            font-weight: 600;
+            color: #1a2744;
+        }
+
+        .edu-institution {
+            font-size: 8.5pt;
+            color: #555;
+            margin-top: 0.5mm;
+            font-weight: 300;
+        }
+
+        .edu-date {
+            font-size: 8pt;
+            color: #888;
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+       CERTIFICATIONS & COURSES
+    ============================================================ */
+        .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--lopt-item-spacing, 2.5mm);
+        }
+
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 4mm;
+        }
+
+        .cert-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .cert-item {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .cert-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 9pt;
+            font-weight: 600;
+            color: #1a2744;
+            flex: 1;
+        }
+
+        .cert-issuer {
+            font-size: 8pt;
+            color: #c9a84c;
+            font-weight: 600;
+        }
+
+        .cert-year {
+            font-size: 8pt;
+            color: #888;
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+       CORE COMPETENCIES — Two-Column Category List
+    ============================================================ */
+        .skills-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm 10mm;
+        }
+
+        .skill-category {
+            /* one cell */
+        }
+
+        .skill-category-title {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #1a2744;
+            margin-bottom: 1mm;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .skill-category-items {
+            font-size: 8pt;
+            color: #555;
+            line-height: var(--lopt-line-height, 1.65);
+            font-weight: 300;
+        }
+
+        /* ============================================================
+       KEY ACHIEVEMENTS
+    ============================================================ */
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 3mm;
+            margin-bottom: var(--lopt-item-spacing, 2.5mm);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .achievement-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .achievement-item i {
+            color: #c9a84c;
+            font-size: 8pt;
+            margin-top: 1px;
+            flex-shrink: 0;
+            width: 12px;
+        }
+
+        .achievement-text {
+            font-size: 8pt;
+            color: #444;
+            line-height: var(--lopt-line-height, 1.55);
+            font-weight: 300;
+        }
+
+        /* ============================================================
+       PRINT
+    ============================================================ */
+        @media print {
+            html {
+                font-size: 9.5pt;
+            }
+
+            body {
+                width: 210mm;
+                margin: 0;
+                padding: 10mm 12mm;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================================================
+       HEADER — Centered, Serif Name, Gold Accents
+  ================================================ -->
+    <header>
+        <h1 class="header-name">{{FullName}}</h1>
+        <div class="header-title">{{TargetTitle}}</div>
+        <div class="header-rule">
+            <div class="header-rule-diamond"></div>
+        </div>
+        <div class="header-contact">
+            <span class="contact-item"><i class="fa-solid fa-envelope"></i>{{Email}}</span>
+            <span class="contact-sep">&nbsp;|&nbsp;</span>
+            <span class="contact-item"><i class="fa-solid fa-phone"></i>{{Phone}}</span>
+            <span class="contact-sep">&nbsp;|&nbsp;</span>
+            <span class="contact-item"><i
+                    class="fa-solid fa-location-dot"></i>{{Location}}</span><!-- IF:LinkedIn --><span
+                class="contact-sep">&nbsp;|&nbsp;</span><span class="contact-item"><i
+                    class="fa-brands fa-linkedin"></i>{{LinkedIn}}</span><!-- /IF:LinkedIn -->
+        </div>
+    </header>
+
+    <!-- ================================================
+       EXECUTIVE SUMMARY
+  ================================================ -->
+    <section>
+        <h2 class="section-title">Executive Summary</h2>
+        <p class="summary-text">{{Summary}}</p>
+    </section>
+
+    <!-- ================================================
+       PROFESSIONAL EXPERIENCE
+  ================================================ -->
+    <section>
+        <h2 class="section-title">Professional Experience</h2>
+
+        <!-- START EXPERIENCE -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3 class="exp-title">{{JobTitle}}</h3>
+                <span class="exp-date">{{StartDate}} – {{EndDate}}</span>
+            </div>
+            <div class="exp-company">{{CompanyLocation}}</div>
+            <ul class="exp-bullets">
+                <!-- START RESPONSIBILITIES -->
+                <li>{{Responsibility}}</li>
+                <!-- END RESPONSIBILITIES -->
+            </ul>
+        </div>
+        <!-- END EXPERIENCE -->
+
+    </section>
+
+    <!-- ================================================
+       KEY ACHIEVEMENTS
+  ================================================ -->
+    <!-- SKIP_IF_EMPTY:ACHIEVEMENTS -->
+    <section>
+        <h2 class="section-title">Key Achievements</h2>
+
+        <!-- START ACHIEVEMENTS -->
+        <div class="achievement-item">
+            <i class="fa-solid fa-trophy"></i>
+            <p class="achievement-text">{{Achievement}}</p>
+        </div>
+        <!-- END ACHIEVEMENTS -->
+
+    </section>
+    <!-- /SKIP_IF_EMPTY:ACHIEVEMENTS -->
+
+    <!-- ================================================
+       EDUCATION
+  ================================================ -->
+    <section>
+        <h2 class="section-title">Education</h2>
+
+        <!-- START EDUCATION -->
+        <div class="edu-item">
+            <div>
+                <div class="edu-degree">{{Degree}} &mdash; {{FieldOfStudy}}</div>
+                <div class="edu-institution">{{Institution}}, {{EducationLocation}}</div>
+            </div>
+            <span class="edu-date">{{GradYear}}</span>
+        </div>
+        <!-- END EDUCATION -->
+
+    </section>
+
+    <!-- ================================================
+       CERTIFICATIONS & COURSES
+  ================================================ -->
+    <!-- SKIP_IF_EMPTY:CERTIFICATIONS -->
+    <section>
+        <h2 class="section-title">Certifications &amp; Courses</h2>
+        <div class="cert-list">
+            <!-- START CERTIFICATIONS -->
+            <div class="cert-item">
+                <div>
+                    <div class="cert-name">{{CertName}}</div>
+                    <div class="cert-issuer">{{CertIssuer}}</div>
+                </div>
+                <span class="cert-year">{{CertYear}}</span>
+            </div>
+            <!-- END CERTIFICATIONS -->
+        </div>
+    </section>
+    <!-- /SKIP_IF_EMPTY:CERTIFICATIONS -->
+
+    <!-- ================================================
+       CORE COMPETENCIES — Two-Column Category List
+  ================================================ -->
+    <section>
+        <h2 class="section-title">Core Competencies</h2>
+        <div class="skills-two-col">
+
+            <!-- START SKILL_CATEGORIES -->
+            <div class="skill-category">
+                <div class="skill-category-title">{{CategoryName}}</div>
+                <div class="skill-category-items">{{CategorySkills}}</div>
+            </div>
+            <!-- END SKILL_CATEGORIES -->
+
+        </div>
+    </section>
+
+    <!-- SKIP_IF_EMPTY:PROJECTS -->
+    <section>
+        <h2 class="section-title">Projects</h2>
+        <!-- START PROJECTS -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3 class="exp-title">{{ProjectName}}</h3>
+                <span class="exp-date">{{ProjectDate}}</span>
+            </div>
+            <div class="exp-company">{{ProjectTechStack}}</div>
+            <!-- START PROJECT_BULLETS -->
+            <ul class="exp-bullets">
+                <li>{{ProjectBullet}}</li>
+            </ul>
+            <!-- END PROJECT_BULLETS -->
+        </div>
+        <!-- END PROJECTS -->
+    </section>
+    <!-- /SKIP_IF_EMPTY:PROJECTS -->
+
+    <!-- SKIP_IF_EMPTY:LANGUAGES -->
+    <section>
+        <h2 class="section-title">Languages</h2>
+        <div class="skills-two-col">
+            <!-- START LANGUAGES -->
+            <div class="skill-category">
+                <div class="skill-category-title">{{Language}}</div>
+                <div class="skill-category-items">{{LanguageLevel}}</div>
+            </div>
+            <!-- END LANGUAGES -->
+        </div>
+    </section>
+    <!-- /SKIP_IF_EMPTY:LANGUAGES -->
+
+    <!-- SKIP_IF_EMPTY:VOLUNTEERS -->
+    <section>
+        <h2 class="section-title">Volunteer Work</h2>
+        <!-- START VOLUNTEERS -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3 class="exp-title">{{VolunteerRole}}</h3>
+                <span class="exp-date">{{VolunteerDate}}</span>
+            </div>
+            <div class="exp-company">{{VolunteerOrganization}}</div>
+            <p style="font-size:8.5pt;color:#555;margin-top:1mm">{{VolunteerDescription}}</p>
+        </div>
+        <!-- END VOLUNTEERS -->
+    </section>
+    <!-- /SKIP_IF_EMPTY:VOLUNTEERS -->
+
+    <!-- SKIP_IF_EMPTY:OTHER -->
+    <section>
+        <h2 class="section-title">Additional Information</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:3mm 8mm">
+            <!-- START OTHER -->
+            <div style="font-size:8.5pt;color:#444"><strong>{{OtherLabel}}:</strong> {{OtherValue}}</div>
+            <!-- END OTHER -->
+        </div>
+    </section>
+    <!-- /SKIP_IF_EMPTY:OTHER -->
+
+</body>
+
+</html>

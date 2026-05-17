@@ -32,6 +32,11 @@ public static class MappingExtensions
         LastLogin = user.LastLogin
     };
 
+    private static readonly JsonSerializerOptions CaseInsensitiveOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
     // Template → TemplateDto
     public static TemplateDto ToDto(this Template template) => new()
     {
@@ -40,7 +45,11 @@ public static class MappingExtensions
         IndustryCategory = template.IndustryCategory,
         StyleCategory = template.StyleCategory,
         BasePriceUsd = template.BasePriceUsd,
-        SupportsWord = template.SupportsWord
+        SupportsWord = template.SupportsWord,
+        HtmlContent = template.HtmlContent,
+        Capabilities = template.CapabilitiesJson is not null
+            ? JsonSerializer.Deserialize<TemplateCapabilities>(template.CapabilitiesJson, CaseInsensitiveOptions)
+            : null
     };
 
     // Resume → ResumeSummaryDto (requires Template nav loaded)

@@ -26,4 +26,14 @@ public class TemplateDto
     /// <summary>Whether this template can be exported as a DOCX file in addition to PDF.</summary>
     /// <example>true</example>
     public bool SupportsWord { get; set; }
+
+    /// <summary>Template-specific capabilities: supported sections, layout options, and content limits.</summary>
+    public TemplateCapabilities? Capabilities { get; set; }
+
+    /// <summary>
+    /// Raw HTML of the template with <c>{{Placeholder}}</c> tokens intact.
+    /// Clients can substitute tokens client-side with sample or real resume data
+    /// and render the result in a sandboxed iframe via <c>srcdoc</c>.
+    /// </summary>
+    public string? HtmlContent { get; set; }
 }

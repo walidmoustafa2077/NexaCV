@@ -25,13 +25,25 @@ public class CreateResumeExampleOperationFilter : IOperationFilter
         ["templateId"] = new OpenApiInteger(1),
         ["rawData"] = new OpenApiObject
         {
+            ["schemaVersion"] = new OpenApiString("1.2"),
             ["settings"] = new OpenApiObject
             {
                 ["summaryType"] = new OpenApiString("Summary"),
-                ["descriptionFormat"] = new OpenApiString("Bulleted")
+                ["descriptionFormat"] = new OpenApiString("Bulleted"),
+                ["tone"] = new OpenApiString("Executive"),
+                ["aiFocus"] = new OpenApiString("MetricsDriven"),
+                ["narrativeVoice"] = new OpenApiString("ThirdPerson"),
+                ["skillsLayout"] = new OpenApiString("Mixed"),
+                ["constraints"] = new OpenApiObject
+                {
+                    ["summaryMaxWords"] = new OpenApiInteger(50),
+                    ["experienceItemMaxWords"] = new OpenApiInteger(100),
+                    ["projectMaxWords"] = new OpenApiInteger(75)
+                }
             },
             ["content"] = new OpenApiObject
             {
+                ["targetJobTitle"] = new OpenApiString("Senior Software Engineer"),
                 ["personal"] = new OpenApiObject
                 {
                     ["firstName"] = new OpenApiString("John"),
@@ -58,7 +70,8 @@ public class CreateResumeExampleOperationFilter : IOperationFilter
                         ["endDate"]     = new OpenApiString("2023-10"),
                         ["description"] = new OpenApiString(
                             "Led backend team to migrate legacy APIs to microservices. " +
-                            "System worked better and had less downtime.")
+                            "System worked better and had less downtime."),
+                        ["wordCount"]   = new OpenApiInteger(85)
                     },
                     new OpenApiObject
                     {
@@ -102,15 +115,75 @@ public class CreateResumeExampleOperationFilter : IOperationFilter
                         ["date"]     = new OpenApiString("2022-08")
                     }
                 },
+                ["projects"] = new OpenApiArray
+                {
+                    new OpenApiObject
+                    {
+                        ["id"]          = new OpenApiString("prj_001"),
+                        ["name"]        = new OpenApiString("NexaCV Engine"),
+                        ["role"]        = new OpenApiString("Lead Developer"),
+                        ["description"] = new OpenApiString("Developed a .NET 9 based resume generation platform."),
+                        ["link"]        = new OpenApiString("github.com/nexacv"),
+                        ["technologies"] = new OpenApiArray
+                        {
+                            new OpenApiString("C#"),
+                            new OpenApiString("React")
+                        },
+                        ["wordCount"] = new OpenApiInteger(45)
+                    }
+                },
                 ["skills"] = new OpenApiArray
                 {
-                    new OpenApiString("C#"),
-                    new OpenApiString(".NET 9"),
-                    new OpenApiString("ASP.NET Core"),
-                    new OpenApiString("React"),
-                    new OpenApiString("SQL Server"),
-                    new OpenApiString("Azure"),
-                    new OpenApiString("Docker")
+                    new OpenApiObject
+                    {
+                        ["name"]     = new OpenApiString("C#"),
+                        ["type"]     = new OpenApiString("Technical"),
+                        ["category"] = new OpenApiString("Backend")
+                    },
+                    new OpenApiObject
+                    {
+                        ["name"]     = new OpenApiString("Team Leadership"),
+                        ["type"]     = new OpenApiString("Soft"),
+                        ["category"] = new OpenApiString("Management")
+                    },
+                    new OpenApiObject
+                    {
+                        ["name"]     = new OpenApiString("System Architecture"),
+                        ["type"]     = new OpenApiString("Technical"),
+                        ["category"] = new OpenApiString("Design")
+                    }
+                },
+                ["languages"] = new OpenApiArray
+                {
+                    new OpenApiObject
+                    {
+                        ["language"] = new OpenApiString("Arabic"),
+                        ["level"]    = new OpenApiString("Native")
+                    },
+                    new OpenApiObject
+                    {
+                        ["language"] = new OpenApiString("English"),
+                        ["level"]    = new OpenApiString("Professional")
+                    }
+                },
+                ["hobbies"] = new OpenApiArray
+                {
+                    new OpenApiString("Photography"),
+                    new OpenApiString("Open Source"),
+                    new OpenApiString("Marathon Running")
+                },
+                ["other"] = new OpenApiArray
+                {
+                    new OpenApiObject
+                    {
+                        ["label"] = new OpenApiString("Military Status"),
+                        ["value"] = new OpenApiString("Completed")
+                    },
+                    new OpenApiObject
+                    {
+                        ["label"] = new OpenApiString("Driving License"),
+                        ["value"] = new OpenApiString("Valid")
+                    }
                 }
             }
         }

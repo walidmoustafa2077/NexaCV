@@ -19,8 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Copy all HTML resume templates to build output under Templates/ -->
+    <!-- Copy all HTML resume templates and the layout optimizer JS to build output under Templates/ -->
     <Content Include="Templates\*.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\*.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
