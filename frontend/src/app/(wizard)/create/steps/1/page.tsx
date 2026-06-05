@@ -50,6 +50,7 @@ const step1Schema = z.object({
     firstName: z.string().min(1, "First name is required").max(50),
     middleName: z.string().max(50).optional(),
     lastName: z.string().min(1, "Last name is required").max(50),
+    jobTitle: z.string().max(100).optional(),
     email: z.string().min(1, "Email is required").email("Invalid email"),
     phone: z.string().min(1, "Phone is required").max(30),
     location: z.string().min(1, "Location is required").max(100),
@@ -132,6 +133,7 @@ export default function Step1Page() {
             firstName: formData.firstName,
             middleName: formData.middleName || "",
             lastName: formData.lastName,
+            jobTitle: formData.jobTitle || "",
             email: formData.email,
             phone: formData.phone,
             location: formData.location,
@@ -149,6 +151,7 @@ export default function Step1Page() {
                 firstName: values.firstName ?? "",
                 middleName: values.middleName ?? "",
                 lastName: values.lastName ?? "",
+                jobTitle: values.jobTitle ?? "",
                 email: values.email ?? "",
                 phone: values.phone ?? "",
                 location: values.location ?? "",
@@ -166,6 +169,7 @@ export default function Step1Page() {
             firstName: values.firstName,
             middleName: values.middleName ?? "",
             lastName: values.lastName,
+            jobTitle: values.jobTitle ?? "",
             email: values.email,
             phone: values.phone,
             location: values.location,
@@ -248,6 +252,10 @@ export default function Step1Page() {
 
                     <Field label="Middle Name" error={errors.middleName?.message}>
                         <input {...register("middleName")} placeholder="Optional" className={inputCls} />
+                    </Field>
+
+                    <Field label="Job Title" error={errors.jobTitle?.message}>
+                        <input {...register("jobTitle")} placeholder="e.g. Senior Software Engineer" className={inputCls} />
                     </Field>
 
                     {/* Contact row */}

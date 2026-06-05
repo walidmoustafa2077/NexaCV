@@ -10,6 +10,7 @@ export interface WizardFormData {
     firstName: string;
     middleName: string;
     lastName: string;
+    jobTitle: string;
     email: string;
     phone: string;
     location: string;
@@ -47,8 +48,8 @@ export interface WizardFormData {
         date: string;
         certificateUrl: string;
     }>;
-    // Skills
-    skills: string[];
+    // Skills (grouped by optional category)
+    skills: Array<{ category: string; items: string[] }>;
     // Projects
     projects: Array<{
         id: string;
@@ -94,6 +95,7 @@ const defaultFormData: WizardFormData = {
     firstName: "",
     middleName: "",
     lastName: "",
+    jobTitle: "",
     email: "",
     phone: "",
     location: "",
@@ -105,7 +107,7 @@ const defaultFormData: WizardFormData = {
     experience: [],
     education: [],
     courses: [],
-    skills: [],
+    skills: [{ category: "", items: [] }],
     projects: [],
     languages: [],
     volunteers: [],
@@ -178,6 +180,7 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                 firstName: personal.firstName,
                 middleName: personal.middleName ?? "",
                 lastName: personal.lastName,
+                jobTitle: personal.jobTitle ?? "",
                 email: personal.email,
                 phone: personal.phone,
                 location: personal.location,
@@ -211,7 +214,18 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                     date: c.date,
                     certificateUrl: c.certificateUrl ?? "",
                 })),
-                skills: (skills ?? []).map((s) => (typeof s === "string" ? s : s.name)),
+                skills: (() => {
+                    const byCategory = new Map<string, string[]>();
+                    for (const s of skills ?? []) {
+                        const cat = (typeof s === "string" ? "" : (s.category ?? ""));
+                        const name = typeof s === "string" ? s : s.name;
+                        if (!byCategory.has(cat)) byCategory.set(cat, []);
+                        byCategory.get(cat)!.push(name);
+                    }
+                    return byCategory.size > 0
+                        ? Array.from(byCategory.entries()).map(([category, items]) => ({ category, items }))
+                        : [{ category: "", items: [] }];
+                })(),
                 projects: (projects ?? []).map((p) => ({
                     id: p.id,
                     name: p.name,
@@ -288,7 +302,9 @@ export const useWizardStore = create<WizardState>((set, get) => ({
                     date: c.date,
                     certificateUrl: c.certificateUrl || null,
                 })),
-                skills: formData.skills.map((name) => ({ name })),
+                skills: formData.skills.flatMap((group) =>
+                    group.items.map((name) => ({ name, category: group.category || null }))
+                ),
                 projects: formData.projects.length > 0
                     ? formData.projects.map((p) => ({
                         id: p.id,
@@ -366,7 +382,7 @@ export function checkStepComplete(step: number, formData: WizardFormData): boole
         case 5:
             return true; // Projects — optional step
         case 6:
-            return formData.summary.trim().length >= 10 && formData.skills.length >= 1;
+            return formData.summary.trim().length >= 10 && formData.skills.some((g) => g.items.length > 0);
         case 7:
             return true; // Languages — optional step
         case 8:

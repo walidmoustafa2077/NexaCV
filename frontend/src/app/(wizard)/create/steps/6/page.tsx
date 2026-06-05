@@ -16,7 +16,7 @@ import type { RegenerateRequest } from "@/types/api.types";
 
 const step6Schema = z.object({
     summary: z.string().min(10, "Summary is required (min 10 chars)").max(2000),
-    skills: z.array(z.string()),
+    skills: z.array(z.object({ category: z.string(), items: z.array(z.string()) })),
 });
 
 type Step6Values = z.infer<typeof step6Schema>;
@@ -151,40 +151,54 @@ function InlinePolishPanel({
     );
 }
 
-// ─── Skills input ─────────────────────────────────────────────────────────────
+// ─── Skill group card ─────────────────────────────────────────────────────────
 
-function SkillsInput({
-    skills,
-    suggestions,
+function SkillGroupCard({
+    group,
+    showCategoryRow = true,
     onChange,
-    error,
+    onRemove,
+    canRemove,
+    resumeId,
+    draggingSkill,
+    dropBeforeIdx,
+    isDropTarget,
+    onSkillDragStart,
+    onSkillDragEnd,
+    onSkillDragOver,
+    onGroupDragOver,
+    onGroupDrop,
 }: {
-    skills: string[];
-    suggestions: string[];
-    onChange: (skills: string[]) => void;
-    error?: string;
+    group: { category: string; items: string[] };
+    showCategoryRow?: boolean;
+    onChange: (group: { category: string; items: string[] }) => void;
+    onRemove: () => void;
+    canRemove: boolean;
+    resumeId?: string | null;
+    draggingSkill?: string | null;
+    dropBeforeIdx?: number | null;
+    isDropTarget?: boolean;
+    onSkillDragStart?: (skill: string, idx: number) => void;
+    onSkillDragEnd?: () => void;
+    onSkillDragOver?: (e: React.DragEvent, beforeIdx: number) => void;
+    onGroupDragOver?: (e: React.DragEvent) => void;
+    onGroupDrop?: () => void;
 }) {
     const [input, setInput] = useState("");
+    const [showPolish, setShowPolish] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
-
-    const filteredSuggestions = suggestions.filter(
-        (s) =>
-            !skills.includes(s) &&
-            s.toLowerCase().includes(input.toLowerCase()) &&
-            input.length > 0,
-    );
 
     function addSkill(skill: string) {
         const trimmed = skill.trim();
-        if (trimmed && !skills.includes(trimmed)) {
-            onChange([...skills, trimmed]);
+        if (trimmed && !group.items.includes(trimmed)) {
+            onChange({ ...group, items: [...group.items, trimmed] });
         }
         setInput("");
         inputRef.current?.focus();
     }
 
     function removeSkill(skill: string) {
-        onChange(skills.filter((s) => s !== skill));
+        onChange({ ...group, items: group.items.filter((s) => s !== skill) });
     }
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -192,14 +206,76 @@ function SkillsInput({
             e.preventDefault();
             addSkill(input);
         }
-        if (e.key === "Backspace" && !input && skills.length > 0) {
-            removeSkill(skills[skills.length - 1]);
+        if (e.key === "Backspace" && !input && group.items.length > 0) {
+            removeSkill(group.items[group.items.length - 1]);
         }
     }
 
+    function handlePolishApply(text: string) {
+        let items: string[] = [];
+        try {
+            const parsed = JSON.parse(text);
+            if (Array.isArray(parsed)) items = parsed.map(String).filter(Boolean);
+        } catch { /* not JSON */ }
+        if (items.length === 0) items = text.split(",").map((s) => s.trim()).filter(Boolean);
+        if (items.length > 0) onChange({ ...group, items });
+        setShowPolish(false);
+    }
+
     return (
-        <div className="space-y-3">
-            {/* Input */}
+        <div
+            className={`border rounded-xl p-4 space-y-3 transition-all ${
+                isDropTarget
+                    ? "border-primary/40 bg-primary/5 shadow-md"
+                    : "border-outline-variant/50 bg-surface-container-low/30"
+            }`}
+            onDragOver={(e) => { e.preventDefault(); onGroupDragOver?.(e); }}
+            onDrop={(e) => { e.preventDefault(); onGroupDrop?.(); }}
+        >
+            {/* Header row — always rendered when category row is shown or when actions exist */}
+            {(showCategoryRow || resumeId || canRemove) && (
+                <div className="flex items-center gap-2">
+                    {showCategoryRow && (
+                        <>
+                            <MaterialIcon name="label" size={16} className="text-secondary shrink-0" />
+                            <input
+                                type="text"
+                                value={group.category}
+                                onChange={(e) => onChange({ ...group, category: e.target.value })}
+                                placeholder="Category title (optional — e.g. Frontend, Backend, Tools)"
+                                className="flex-1 h-9 px-3 border border-outline-variant rounded-lg bg-white text-sm text-on-surface placeholder:text-secondary/50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                            />
+                        </>
+                    )}
+                    {resumeId && (
+                        <button
+                            type="button"
+                            onClick={() => setShowPolish((v) => !v)}
+                            className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition-colors ${!showCategoryRow ? "ml-auto" : ""} ${
+                                showPolish
+                                    ? "bg-primary text-on-primary"
+                                    : "text-primary border border-primary/30 hover:bg-primary-fixed/20"
+                            }`}
+                            aria-label="Polish this group with AI"
+                        >
+                            <MaterialIcon name="auto_awesome" size={12} filled={showPolish} />
+                            <span className="hidden sm:inline">{showPolish ? "Close AI" : "Polish"}</span>
+                        </button>
+                    )}
+                    {canRemove && (
+                        <button
+                            type="button"
+                            onClick={onRemove}
+                            className="p-1 text-secondary hover:text-error transition-colors rounded-lg hover:bg-error/10"
+                            aria-label="Remove category"
+                        >
+                            <MaterialIcon name="delete_outline" size={18} />
+                        </button>
+                    )}
+                </div>
+            )}
+
+            {/* Skill input */}
             <div className="relative">
                 <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                     <MaterialIcon name="search" size={18} className="text-outline" />
@@ -210,50 +286,261 @@ function SkillsInput({
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Type a skill and press Enter (e.g. React, SQL)"
-                    className="w-full h-11 pl-10 pr-4 border border-outline-variant rounded-lg bg-surface-container font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    className="w-full h-10 pl-10 pr-4 border border-outline-variant rounded-lg bg-surface-container font-input-text text-input-text focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                 />
-                {filteredSuggestions.length > 0 && (
+                {input.length > 0 && (
                     <div className="absolute top-full left-0 right-0 bg-white border border-outline-variant rounded-lg shadow-lg z-10 max-h-40 overflow-y-auto mt-1">
-                        {filteredSuggestions.map((s) => (
-                            <button
-                                key={s}
-                                type="button"
-                                onClick={() => addSkill(s)}
-                                className="w-full text-left px-4 py-2 text-sm hover:bg-surface-container-low text-on-surface transition-colors"
-                            >
-                                {s}
-                            </button>
-                        ))}
+                        {/* Live type-ahead from the skill input — show a "press Enter" hint */}
+                        <button
+                            type="button"
+                            onClick={() => addSkill(input)}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-surface-container-low text-on-surface transition-colors flex items-center gap-2"
+                        >
+                            <MaterialIcon name="add_circle" size={14} className="text-primary" />
+                            Add &ldquo;{input}&rdquo;
+                        </button>
                     </div>
                 )}
             </div>
 
-            {error && <p className="text-xs text-error">{error}</p>}
-
-            {/* Added skills */}
-            {skills.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                    {skills.map((skill) => (
-                        <span
-                            key={skill}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-fixed/30 text-on-surface rounded-lg text-sm font-medium"
+            {/* Added skills — drop zone + drag to reorder/move */}
+            <div
+                className={`flex flex-wrap items-center gap-2 min-h-[2.5rem] rounded-lg p-1 transition-all ${
+                    isDropTarget ? "ring-1 ring-primary/30 bg-primary/5" : ""
+                }`}
+                onDragOver={(e) => { e.preventDefault(); onGroupDragOver?.(e); }}
+                onDrop={(e) => { e.preventDefault(); onGroupDrop?.(); }}
+            >
+                {group.items.length === 0 && isDropTarget && (
+                    <span className="text-xs text-primary/70 italic mx-auto pointer-events-none">
+                        Drop skill here
+                    </span>
+                )}
+                {group.items.flatMap((skill, idx) => [
+                    ...(dropBeforeIdx === idx && draggingSkill != null && draggingSkill !== skill
+                        ? [<div key={`ins-${idx}`} className="self-center w-0.5 h-7 bg-primary rounded-full shrink-0" />]
+                        : []),
+                    <span
+                        key={`${idx}-${skill}`}
+                        draggable={!!onSkillDragStart}
+                        onDragStart={(e) => { e.stopPropagation(); onSkillDragStart?.(skill, idx); }}
+                        onDragEnd={onSkillDragEnd}
+                        onDragOver={(e) => { e.stopPropagation(); e.preventDefault(); onSkillDragOver?.(e, idx); }}
+                        onDrop={(e) => { e.stopPropagation(); e.preventDefault(); onGroupDrop?.(); }}
+                        className={`inline-flex items-center gap-1 px-2.5 py-1.5 bg-primary-fixed/30 text-on-surface rounded-lg text-sm font-medium select-none transition-all ${
+                            onSkillDragStart ? "cursor-grab active:cursor-grabbing" : ""
+                        } ${draggingSkill === skill ? "opacity-30 scale-95 ring-1 ring-primary/50" : ""}`}
+                    >
+                        {onSkillDragStart && (
+                            <MaterialIcon name="drag_indicator" size={14} className="text-secondary/40 shrink-0 pointer-events-none" />
+                        )}
+                        {skill}
+                        <button
+                            type="button"
+                            onClick={() => removeSkill(skill)}
+                            className="text-secondary hover:text-error transition-colors"
+                            aria-label={`Remove ${skill}`}
                         >
-                            {skill}
-                            <button
-                                type="button"
-                                onClick={() => removeSkill(skill)}
-                                className="text-secondary hover:text-error transition-colors"
-                                aria-label={`Remove ${skill}`}
-                            >
-                                <MaterialIcon name="close" size={14} />
-                            </button>
-                        </span>
-                    ))}
-                </div>
+                            <MaterialIcon name="close" size={14} />
+                        </button>
+                    </span>,
+                ])}
+                {dropBeforeIdx === group.items.length && draggingSkill != null && (
+                    <div className="self-center w-0.5 h-7 bg-primary rounded-full shrink-0" />
+                )}
+            </div>
+
+            {/* Polish with AI panel — scoped to this group */}
+            {showPolish && resumeId && (
+                <InlinePolishPanel
+                    sectionId="skills"
+                    resumeId={resumeId}
+                    quickPrompts={QUICK_PROMPTS_SKILLS}
+                    onApply={handlePolishApply}
+                    onClose={() => setShowPolish(false)}
+                />
+            )}
+        </div>
+    );
+}
+
+// ─── Skills groups input ───────────────────────────────────────────────────────
+
+function SkillsGroupsInput({
+    groups,
+    suggestions,
+    onChange,
+    error,
+    resumeId,
+}: {
+    groups: Array<{ category: string; items: string[] }>;
+    suggestions: string[];
+    onChange: (groups: Array<{ category: string; items: string[] }>) => void;
+    error?: string;
+    resumeId?: string | null;
+}) {
+    const [categorized, setCategorized] = useState(
+        () => groups.length > 1 || groups.some((g) => g.category !== ""),
+    );
+    const [targetGroupIdx, setTargetGroupIdx] = useState(0);
+
+    // Saved snapshot of categorized groups when toggling flat mode
+    const savedGroups = useRef<Array<{ category: string; items: string[] }> | null>(null);
+
+    // Drag & drop state
+    const [dragging, setDragging] = useState<{ skill: string; fromGroup: number; fromIdx: number } | null>(null);
+    const [dropTarget, setDropTarget] = useState<{ toGroup: number; beforeIdx: number } | null>(null);
+
+    const allAdded = new Set(groups.flatMap((g) => g.items));
+    const availableSuggestions = suggestions.filter((s) => !allAdded.has(s));
+
+    function updateGroup(index: number, updated: { category: string; items: string[] }) {
+        const next = [...groups];
+        next[index] = updated;
+        onChange(next);
+    }
+
+    function removeGroup(index: number) {
+        onChange(groups.filter((_, i) => i !== index));
+        setTargetGroupIdx((prev) => Math.min(prev, groups.length - 2));
+    }
+
+    function addGroup() {
+        onChange([...groups, { category: "", items: [] }]);
+    }
+
+    function toggleCategorized(enabled: boolean) {
+        setCategorized(enabled);
+        if (!enabled) {
+            // Save current categorized groups, then merge to a single flat list
+            savedGroups.current = groups;
+            onChange([{ category: "", items: groups.flatMap((g) => g.items) }]);
+            setTargetGroupIdx(0);
+        } else {
+            if (savedGroups.current) {
+                // Reconcile: restore previous categories, applying changes made in flat mode
+                const flatSet = new Set(groups[0]?.items ?? []);
+                const prevAll = new Set(savedGroups.current.flatMap((g) => g.items));
+                const restored = savedGroups.current
+                    .map((g) => ({ ...g, items: g.items.filter((s) => flatSet.has(s)) }))
+                    .filter((g) => g.items.length > 0 || g.category.trim() !== "");
+                // Append new skills (added while in flat mode) to the first group
+                const newItems = (groups[0]?.items ?? []).filter((s) => !prevAll.has(s));
+                if (newItems.length > 0) {
+                    if (restored.length === 0) {
+                        restored.push({ category: "", items: newItems });
+                    } else {
+                        restored[0] = { ...restored[0], items: [...restored[0].items, ...newItems] };
+                    }
+                }
+                onChange(restored.length > 0 ? restored : [{ category: "", items: [] }]);
+                savedGroups.current = null;
+            }
+        }
+    }
+
+    function addSuggestion(skill: string) {
+        const idx = Math.min(targetGroupIdx, groups.length - 1);
+        const next = [...groups];
+        if (!next[idx].items.includes(skill)) {
+            next[idx] = { ...next[idx], items: [...next[idx].items, skill] };
+        }
+        onChange(next);
+    }
+
+    // ── Drag & drop handlers ────────────────────────────────────────────────
+
+    function handleSkillDragStart(skill: string, fromGroup: number, fromIdx: number) {
+        setDragging({ skill, fromGroup, fromIdx });
+    }
+
+    function handleSkillDragEnd() {
+        setDragging(null);
+        setDropTarget(null);
+    }
+
+    function handleSkillDragOver(e: React.DragEvent, toGroup: number, beforeIdx: number) {
+        e.preventDefault();
+        setDropTarget({ toGroup, beforeIdx });
+    }
+
+    function handleGroupDragOver(e: React.DragEvent, toGroup: number) {
+        e.preventDefault();
+        // Only update if not already set by a chip's handler (chip stops propagation)
+        setDropTarget((prev) =>
+            prev?.toGroup === toGroup && prev.beforeIdx !== groups[toGroup].items.length
+                ? prev
+                : { toGroup, beforeIdx: groups[toGroup].items.length },
+        );
+    }
+
+    function handleGroupDrop(toGroup: number) {
+        if (!dragging || !dropTarget || dropTarget.toGroup !== toGroup) return;
+        const { skill, fromGroup, fromIdx } = dragging;
+        const next = groups.map((g) => ({ ...g, items: [...g.items] }));
+        next[fromGroup].items.splice(fromIdx, 1);
+        let insertIdx = dropTarget.beforeIdx;
+        if (fromGroup === toGroup && fromIdx < insertIdx) insertIdx--;
+        insertIdx = Math.max(0, Math.min(insertIdx, next[toGroup].items.length));
+        next[toGroup].items.splice(insertIdx, 0, skill);
+        onChange(next);
+        setDragging(null);
+        setDropTarget(null);
+    }
+
+    return (
+        <div className="space-y-3">
+            {/* Categorize toggle */}
+            <button
+                type="button"
+                onClick={() => toggleCategorized(!categorized)}
+                className="flex items-center gap-2 text-sm text-secondary hover:text-on-surface transition-colors"
+            >
+                <MaterialIcon
+                    name={categorized ? "check_box" : "check_box_outline_blank"}
+                    size={18}
+                    className={categorized ? "text-primary" : "text-outline"}
+                />
+                Group skills by category
+            </button>
+
+            {/* Group cards */}
+            {groups.map((group, i) => (
+                <SkillGroupCard
+                    key={i}
+                    group={group}
+                    showCategoryRow={categorized}
+                    onChange={(updated) => updateGroup(i, updated)}
+                    onRemove={() => removeGroup(i)}
+                    canRemove={categorized && groups.length > 1}
+                    resumeId={resumeId}
+                    draggingSkill={dragging?.skill ?? null}
+                    dropBeforeIdx={dropTarget?.toGroup === i ? dropTarget.beforeIdx : null}
+                    isDropTarget={dropTarget?.toGroup === i}
+                    onSkillDragStart={(skill, idx) => handleSkillDragStart(skill, i, idx)}
+                    onSkillDragEnd={handleSkillDragEnd}
+                    onSkillDragOver={(e, beforeIdx) => handleSkillDragOver(e, i, beforeIdx)}
+                    onGroupDragOver={(e) => handleGroupDragOver(e, i)}
+                    onGroupDrop={() => handleGroupDrop(i)}
+                />
+            ))}
+
+            {/* Add Category button — only in categorized mode */}
+            {categorized && (
+                <button
+                    type="button"
+                    onClick={addGroup}
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-primary border border-primary/30 rounded-lg hover:bg-primary-fixed/10 transition-colors font-medium"
+                >
+                    <MaterialIcon name="add" size={16} />
+                    Add Category
+                </button>
             )}
 
-            {/* AI Skill Suggestions panel */}
-            {suggestions.length > 0 && suggestions.some((s) => !skills.includes(s)) && (
+            {error && <p className="text-xs text-error">{error}</p>}
+
+            {/* Global AI Skill Suggestions panel */}
+            {availableSuggestions.length > 0 && (
                 <div className="rounded-xl border border-primary/20 overflow-hidden">
                     <div className="flex items-center gap-2 px-4 py-2.5 bg-primary/5 border-b border-primary/15">
                         <MaterialIcon name="auto_awesome" size={14} className="text-primary" filled />
@@ -261,23 +548,40 @@ function SkillsInput({
                             AI Skill Suggestions
                         </span>
                         <span className="ml-auto text-xs text-secondary">
-                            {suggestions.filter((s) => !skills.includes(s)).length} available
+                            {availableSuggestions.length} available
                         </span>
+                        {/* Group selector — only shown when there are multiple named groups */}
+                        {categorized && groups.length > 1 && (
+                            <select
+                                value={targetGroupIdx}
+                                onChange={(e) => setTargetGroupIdx(Number(e.target.value))}
+                                className="ml-2 h-7 px-2 text-xs border border-outline-variant rounded-lg bg-white text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                            >
+                                {groups.map((g, i) => (
+                                    <option key={i} value={i}>
+                                        {g.category.trim() || `Group ${i + 1}`}
+                                    </option>
+                                ))}
+                            </select>
+                        )}
                     </div>
+                    {categorized && groups.length > 1 && (
+                        <p className="px-4 pt-2 text-xs text-secondary">
+                            Adding to: <strong>{groups[Math.min(targetGroupIdx, groups.length - 1)].category || `Group ${Math.min(targetGroupIdx, groups.length - 1) + 1}`}</strong>
+                        </p>
+                    )}
                     <div className="px-4 py-3 flex flex-wrap gap-2 bg-white">
-                        {suggestions
-                            .filter((s) => !skills.includes(s))
-                            .map((s) => (
-                                <button
-                                    key={s}
-                                    type="button"
-                                    onClick={() => addSkill(s)}
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/5 border border-primary/25 rounded-lg text-xs font-medium text-primary hover:bg-primary hover:text-on-primary transition-colors"
-                                >
-                                    <MaterialIcon name="add" size={12} />
-                                    {s}
-                                </button>
-                            ))}
+                        {availableSuggestions.map((s) => (
+                            <button
+                                key={s}
+                                type="button"
+                                onClick={() => addSuggestion(s)}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/5 border border-primary/25 rounded-lg text-xs font-medium text-primary hover:bg-primary hover:text-on-primary transition-colors"
+                            >
+                                <MaterialIcon name="add" size={12} />
+                                {s}
+                            </button>
+                        ))}
                     </div>
                 </div>
             )}
@@ -285,14 +589,16 @@ function SkillsInput({
     );
 }
 
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Step6Page() {
     const router = useRouter();
     const { formData, updateFormData, skillSuggestions } = useWizardStore();
-    const [skills, setSkills] = useState<string[]>(formData.skills);
+    const [skillGroups, setSkillGroups] = useState<Array<{ category: string; items: string[] }>>(
+        formData.skills.length > 0 ? formData.skills : [{ category: "", items: [] }],
+    );
     const [showSummaryPolish, setShowSummaryPolish] = useState(false);
-    const [showSkillsPolish, setShowSkillsPolish] = useState(false);
 
     const resumeId = formData.createdResumeId;
 
@@ -306,14 +612,14 @@ export default function Step6Page() {
         resolver: zodResolver(step6Schema),
         defaultValues: {
             summary: formData.summary,
-            skills: formData.skills,
+            skills: formData.skills.length > 0 ? formData.skills : [{ category: "", items: [] }],
         },
     });
 
     // Keep RHF skills in sync with local state
     useEffect(() => {
-        setValue("skills", skills, { shouldValidate: true });
-    }, [skills, setValue]);
+        setValue("skills", skillGroups, { shouldValidate: true });
+    }, [skillGroups, setValue]);
 
     // Auto-save summary to store on every keystroke
     useEffect(() => {
@@ -327,11 +633,11 @@ export default function Step6Page() {
 
     // Auto-save skills to store whenever local state changes
     useEffect(() => {
-        updateFormData({ skills });
-    }, [skills, updateFormData]);
+        updateFormData({ skills: skillGroups });
+    }, [skillGroups, updateFormData]);
 
     function onSubmit(values: Step6Values) {
-        updateFormData({ summary: values.summary, skills });
+        updateFormData({ summary: values.summary, skills: skillGroups });
         router.push("/create/steps/7");
     }
 
@@ -364,7 +670,7 @@ export default function Step6Page() {
                             {resumeId && (
                                 <button
                                     type="button"
-                                    onClick={() => { setShowSummaryPolish((v) => !v); setShowSkillsPolish(false); }}
+                                    onClick={() => setShowSummaryPolish((v) => !v)}
                                     className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold shrink-0 transition-colors ${showSummaryPolish
                                         ? "bg-primary text-on-primary"
                                         : "text-primary border border-primary/30 hover:bg-primary-fixed/20"
@@ -412,56 +718,16 @@ export default function Step6Page() {
                     </div>
 
                     <div className="bg-white border border-outline-variant/30 rounded-xl p-6 shadow-sm space-y-4">
-                        {resumeId && (
-                            <div className="flex justify-end">
-                                <button
-                                    type="button"
-                                    onClick={() => { setShowSkillsPolish((v) => !v); setShowSummaryPolish(false); }}
-                                    className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold shrink-0 transition-colors ${showSkillsPolish
-                                        ? "bg-primary text-on-primary"
-                                        : "text-primary border border-primary/30 hover:bg-primary-fixed/20"
-                                        }`}
-                                >
-                                    <MaterialIcon name="auto_awesome" size={12} filled={showSkillsPolish} />
-                                    {showSkillsPolish ? "Close AI" : "Polish with AI"}
-                                </button>
-                            </div>
-                        )}
-                        <SkillsInput
-                            skills={skills}
+                        <SkillsGroupsInput
+                            groups={skillGroups}
                             suggestions={skillSuggestions}
                             onChange={(updated) => {
-                                setSkills(updated);
+                                setSkillGroups(updated);
                                 setValue("skills", updated, { shouldValidate: true });
                             }}
                             error={errors.skills?.message}
+                            resumeId={resumeId}
                         />
-                        {showSkillsPolish && resumeId && (
-                            <InlinePolishPanel
-                                sectionId="skills"
-                                resumeId={resumeId}
-                                quickPrompts={QUICK_PROMPTS_SKILLS}
-                                onApply={(text) => {
-                                    // AI may return a JSON array string or comma-separated list
-                                    try {
-                                        const parsed = JSON.parse(text);
-                                        if (Array.isArray(parsed)) {
-                                            const next = parsed.map(String).filter(Boolean);
-                                            setSkills(next);
-                                            setValue("skills", next, { shouldValidate: true });
-                                            return;
-                                        }
-                                    } catch { /* not JSON, treat as CSV */ }
-                                    // Fallback: split by comma
-                                    const next = text.split(",").map((s) => s.trim()).filter(Boolean);
-                                    if (next.length > 0) {
-                                        setSkills(next);
-                                        setValue("skills", next, { shouldValidate: true });
-                                    }
-                                }}
-                                onClose={() => setShowSkillsPolish(false)}
-                            />
-                        )}
                     </div>
                 </section>
 

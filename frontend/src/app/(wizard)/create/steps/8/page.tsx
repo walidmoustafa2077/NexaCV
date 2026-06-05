@@ -2,12 +2,13 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useWizardStore } from "@/store/wizardStore";
 import { WizardProgress } from "../1/page";
 import MaterialIcon from "@/components/shared/MaterialIcon";
+import { MonthYearPicker } from "@/components/shared/MonthYearPicker";
 
 // ── Schemas ───────────────────────────────────────────────────────────────────
 
@@ -293,10 +294,15 @@ export default function Step8Page() {
                                     <label className="font-label-caps text-label-caps text-secondary uppercase">
                                         Start Date (optional)
                                     </label>
-                                    <input
-                                        {...register(`volunteers.${index}.startDate`)}
-                                        placeholder="e.g. 2021-06"
-                                        className={inputCls}
+                                    <Controller
+                                        name={`volunteers.${index}.startDate`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <MonthYearPicker
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        )}
                                     />
                                 </div>
 
@@ -305,10 +311,15 @@ export default function Step8Page() {
                                     <label className="font-label-caps text-label-caps text-secondary uppercase">
                                         End Date (optional)
                                     </label>
-                                    <input
-                                        {...register(`volunteers.${index}.endDate`)}
-                                        placeholder="e.g. 2022-08 or Present"
-                                        className={inputCls}
+                                    <Controller
+                                        name={`volunteers.${index}.endDate`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <MonthYearPicker
+                                                value={field.value || ""}
+                                                onChange={field.onChange}
+                                            />
+                                        )}
                                     />
                                 </div>
                             </div>

@@ -34,7 +34,18 @@ function applyFinalDataToStore(finalData: RawData, updateFormData: (data: any) =
         experience: experience.map((e: ExperienceEntry) => ({ id: e.id, title: e.title, company: e.company, location: e.location ?? "", startDate: e.startDate, endDate: e.endDate ?? "", description: e.description })),
         education: education.map((e: EducationEntry) => ({ id: e.id, institution: e.institution, degree: e.degree, fieldOfStudy: e.fieldOfStudy, grade: e.grade ?? "", startDate: e.startDate, endDate: e.endDate })),
         courses: (courses ?? []).map((c: CourseEntry) => ({ id: c.id, name: c.name, provider: c.provider, date: c.date, certificateUrl: c.certificateUrl ?? "" })),
-        skills: (skills ?? []).map((s) => (typeof s === "string" ? s : s.name)),
+        skills: (() => {
+            const byCategory = new Map<string, string[]>();
+            for (const s of skills ?? []) {
+                const cat = typeof s === "string" ? "" : (s.category ?? "");
+                const name = typeof s === "string" ? s : s.name;
+                if (!byCategory.has(cat)) byCategory.set(cat, []);
+                byCategory.get(cat)!.push(name);
+            }
+            return byCategory.size > 0
+                ? Array.from(byCategory.entries()).map(([category, items]) => ({ category, items }))
+                : [{ category: "", items: [] }];
+        })(),
         projects: (projects ?? []).map((p) => ({ id: p.id, name: p.name, role: p.role ?? "", description: p.description ?? "", link: p.link ?? "", technologies: p.technologies ?? [] })),
         languages: (languages ?? []).map((l) => ({ language: l.language, level: l.level ?? "" })),
         volunteers: (volunteers ?? []).map((v: VolunteerEntry) => ({ id: v.id ?? "", organization: v.organization, role: v.role, startDate: v.startDate ?? "", endDate: v.endDate ?? "", description: v.description ?? "" })),
@@ -189,12 +200,14 @@ export default function Step9Page() {
             templateId: formData.templateId,
             rawData: {
                 content: {
-                    personal: { firstName: formData.firstName, middleName: formData.middleName || null, lastName: formData.lastName, email: formData.email, phone: formData.phone, location: formData.location, zipCode: formData.zipCode || null, dateOfBirth: formData.dateOfBirth || null, linkedinUrl: formData.linkedinUrl || null, siteUrl: formData.siteUrl || null, photoUrl: formData.photoUrl || null },
+                    personal: { firstName: formData.firstName, middleName: formData.middleName || null, lastName: formData.lastName, jobTitle: formData.jobTitle || null, email: formData.email, phone: formData.phone, location: formData.location, zipCode: formData.zipCode || null, dateOfBirth: formData.dateOfBirth || null, linkedinUrl: formData.linkedinUrl || null, siteUrl: formData.siteUrl || null, photoUrl: formData.photoUrl || null },
                     summary: formData.summary,
                     experience: formData.experience.map((e) => ({ id: e.id, title: e.title, company: e.company, location: e.location || null, startDate: e.startDate, endDate: e.endDate || null, description: e.description })),
                     education: formData.education.map((e) => ({ id: e.id, institution: e.institution, degree: e.degree, fieldOfStudy: e.fieldOfStudy, grade: e.grade || null, startDate: e.startDate, endDate: e.endDate })),
                     courses: formData.courses.map((c) => ({ id: c.id, name: c.name, provider: c.provider, date: c.date, certificateUrl: c.certificateUrl || null })),
-                    skills: formData.skills.map((name) => ({ name })),
+                    skills: formData.skills.flatMap((group) =>
+                        group.items.map((name) => ({ name, category: group.category || null }))
+                    ),
                     projects: formData.projects.length > 0 ? formData.projects.map((p) => ({ id: p.id, name: p.name, role: p.role || null, description: p.description || null, link: p.link || null, technologies: p.technologies.length > 0 ? p.technologies : null })) : undefined,
                     languages: formData.languages.length > 0 ? formData.languages.map((l) => ({ language: l.language, level: (l.level as LanguageLevel) || null })) : undefined,
                     volunteers: formData.volunteers.length > 0 ? formData.volunteers.map((v) => ({ id: v.id || null, organization: v.organization, role: v.role, startDate: v.startDate || null, endDate: v.endDate || null, description: v.description || null })) : undefined,
@@ -284,7 +297,7 @@ export default function Step9Page() {
                         </ReviewSection>
 
                         {/* Step 6 – Summary & Skills */}
-                        <ReviewSection title={`Summary & Skills (${formData.skills.length} skills)`} icon="psychology">
+                        <ReviewSection title={`Summary & Skills (${formData.skills.reduce((n, g) => n + g.items.length, 0)} skills)`} icon="psychology">
                             <div className="space-y-4">
                                 <div>
                                     <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">Professional Summary</p>
@@ -295,9 +308,14 @@ export default function Step9Page() {
                                 </div>
                                 <div>
                                     <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">Skills</p>
-                                    {formData.skills.length === 0
+                                    {formData.skills.every((g) => g.items.length === 0)
                                         ? <p className="text-sm text-secondary">No skills added.</p>
-                                        : <div className="flex flex-wrap gap-2">{formData.skills.map((s) => (<span key={s} className="px-2.5 py-1 bg-primary-fixed/30 text-on-surface rounded-lg text-xs font-medium">{s}</span>))}</div>
+                                        : <div className="space-y-3">{formData.skills.filter((g) => g.items.length > 0).map((group, i) => (
+                                            <div key={i}>
+                                                {group.category && <p className="text-xs font-semibold text-secondary uppercase tracking-wide mb-1.5">{group.category}</p>}
+                                                <div className="flex flex-wrap gap-2">{group.items.map((s) => (<span key={s} className="px-2.5 py-1 bg-primary-fixed/30 text-on-surface rounded-lg text-xs font-medium">{s}</span>))}</div>
+                                            </div>
+                                        ))}</div>
                                     }
                                 </div>
                             </div>

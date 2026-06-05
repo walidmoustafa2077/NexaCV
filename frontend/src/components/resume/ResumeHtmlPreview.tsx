@@ -22,8 +22,6 @@ export function ResumeHtmlPreview({ resumeId, className = "", style }: Props) {
     const containerRef = useRef<HTMLDivElement>(null);
     const [scale, setScale] = useState(0);
     const [pages, setPages] = useState(1);
-    // Tracks the last diagnostics filename saved so two iframes don't save twice
-    const savedDiagRef = useRef<string | null>(null);
 
     // Measure container width and recompute scale whenever it changes
     useEffect(() => {
@@ -38,37 +36,19 @@ export function ResumeHtmlPreview({ resumeId, className = "", style }: Props) {
         return () => obs.disconnect();
     }, []);
 
-    // Receive messages from the diagnostic script running inside the iframe(s)
+    // Receive page-count messages from the layout script running inside the iframe(s)
     useEffect(() => {
         const handler = (e: MessageEvent) => {
             if (e.data?.type === "nexacv-layout") {
                 setPages(Math.max(1, Number(e.data.pages) || 1));
-            }
-            if (e.data?.type === "nexacv-diagnostics" && e.data.log && e.data.filename) {
-                // Two iframes (page 1 + page 2) both run the script; only save once.
-                if (savedDiagRef.current === e.data.filename) return;
-                savedDiagRef.current = e.data.filename;
-
-                const blob = new Blob(
-                    [JSON.stringify(e.data.log, null, 2)],
-                    { type: "application/json" },
-                );
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = e.data.filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
             }
         };
         window.addEventListener("message", handler);
         return () => window.removeEventListener("message", handler);
     }, []);
 
-    // Reset to one page and clear saved diagnostics ref whenever a new resume loads
-    useEffect(() => { setPages(1); savedDiagRef.current = null; }, [resumeId]);
+    // Reset to one page whenever a new resume loads
+    useEffect(() => { setPages(1); }, [resumeId]);
 
     const { data: html, isLoading, isError, error } = useQuery({
         queryKey: ["resume-render", resumeId],
@@ -145,35 +125,37 @@ export function ResumeHtmlPreview({ resumeId, className = "", style }: Props) {
                 )}
             </div>
 
-            {/* ── Page 2 card — appears after optimizer reports pages≥2 ───── */}
-            {isReady && pages >= 2 && scaledPageH != null && (
-                <div
-                    className="absolute overflow-hidden rounded-xl bg-white"
-                    style={{ top: scaledPageH + PAGE_GAP, left: 0, right: 0, height: scaledPageH }}
-                >
-                    {/*
-                     * The second iframe renders the same HTML. We shift it up by exactly
-                     * one scaled page-height so the content that lives at document y=A4_H
-                     * appears at the top of this card's viewport.
-                     *
-                     * Math: top = -(A4_H * scale)
-                     *   Visual top-left stays at -(A4_H×s), visual height = 2×A4_H×s
-                     *   ⇒ visible window = document y ∈ [A4_H, 2×A4_H] ✓
-                     */}
-                    <iframe
-                        key={`${resumeId}-p2`}
-                        srcDoc={html}
-                        scrolling="no"
-                        style={{
-                            ...iframeBase,
-                            top: -(A4_H * scale),
-                            height: A4_H * 2,
-                        }}
-                        title="Resume Preview — Page 2"
-                        sandbox="allow-scripts"
-                    />
-                </div>
-            )}
+            {/* ── Additional page cards (2, 3, …) — one card per reported page ── */}
+            {isReady && scaledPageH != null && Array.from({ length: pages - 1 }, (_, i) => {
+                const idx = i + 1; // 1 = page 2, 2 = page 3, …
+                return (
+                    <div
+                        key={idx}
+                        className="absolute overflow-hidden rounded-xl bg-white"
+                        style={{ top: (scaledPageH + PAGE_GAP) * idx, left: 0, right: 0, height: scaledPageH }}
+                    >
+                        {/*
+                         * Each page-N iframe renders the full HTML but is shifted upward so
+                         * that document y = idx × A4_H aligns with the top of this card.
+                         *
+                         * top    = -(idx × A4_H × scale)   — shift iframe up by N pages
+                         * height = (idx + 1) × A4_H        — tall enough to reach page N
+                         */}
+                        <iframe
+                            key={`${resumeId}-p${idx + 1}`}
+                            srcDoc={html}
+                            scrolling="no"
+                            style={{
+                                ...iframeBase,
+                                top: -(idx * A4_H * scale),
+                                height: (idx + 1) * A4_H,
+                            }}
+                            title={`Resume Preview — Page ${idx + 1}`}
+                            sandbox="allow-scripts"
+                        />
+                    </div>
+                );
+            })}
         </div>
     );
 }
