@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using NexaCV.Tests.Helpers;
 
 namespace NexaCV.Tests.Utils;
 
@@ -23,10 +24,11 @@ public class StubAiServiceTests
         // Act
         var result = await _sut.GenerateAsync(rawData);
 
-        // Assert – Expected: AiAvailable=false (stub); FinalDataJson has settings + content
+        // Assert – Expected: AiAvailable=false (stub); FinalDataJson has a "content" key.
+        // Settings are template-defined and are NOT stored in FinalData.
         result.AiAvailable.Should().BeFalse();
-        result.FinalDataJson.Should().Contain("settings");
         result.FinalDataJson.Should().Contain("content");
+        result.FinalDataJson.Should().NotContain("settings");
     }
 
     /// <summary>
@@ -35,16 +37,16 @@ public class StubAiServiceTests
     /// <br/><b>Expected:</b> FinalDataJson contains "SUMMARY", "BULLET", and "GRID" tokens.
     /// </summary>
     [Fact]
-    public async Task GenerateAsync_IncludesDefaultSettings()
+    public async Task GenerateAsync_ReturnsContentOnlySchema()
     {
         // Arrange – Input: empty JSON object (minimal raw data)
         // Act
         var result = await _sut.GenerateAsync("{}");
 
-        // Assert – Expected: default settings keys present in output JSON
-        result.FinalDataJson.Should().Contain("SUMMARY");
-        result.FinalDataJson.Should().Contain("BULLET");
-        result.FinalDataJson.Should().Contain("GRID");
+        // Assert – Expected: FinalDataJson uses content-only schema.
+        // Settings (summary type, description format) are template-defined and not stored here.
+        result.FinalDataJson.Should().Contain("content");
+        result.FinalDataJson.Should().NotContain("settings");
     }
 
     /// <summary>
@@ -283,7 +285,8 @@ public class PaymentGatewayFactoryTests
     public void Resolve_WithWildcardGateway_ReturnsGateway()
     {
         // Arrange – Input: factory with a wildcard stub gateway; querying for "USD"
-        var factory = new PaymentGatewayFactory(new[] { new StubPaymentGateway() });
+        var stub = new StubPaymentGateway();
+        var factory = new PaymentGatewayFactory(new[] { stub }, new[] { stub });
 
         // Act
         var gateway = factory.Resolve("USD");
@@ -301,7 +304,7 @@ public class PaymentGatewayFactoryTests
     public void Resolve_WithNoMatchingGateway_ThrowsInvalidOperationException()
     {
         // Arrange – Input: factory with no registered gateways
-        var factory = new PaymentGatewayFactory(Array.Empty<IPaymentGateway>());
+        var factory = new PaymentGatewayFactory(Array.Empty<IPaymentSessionCreator>(), Array.Empty<IWebhookVerifier>());
 
         // Act
         Action act = () => factory.Resolve("UNSUPPORTED");
@@ -318,18 +321,20 @@ public class PaymentGatewayFactoryTests
     /// <br/><b>Expected:</b> Resolved gateway is of type StubPaymentGateway.
     /// </summary>
     [Fact]
-    public void ResolveByRequest_WithMatchingWebhookHeader_ReturnsGateway()
+    public void TryResolveWebhook_WithMatchingWebhookHeader_ReturnsResult()
     {
         // Arrange – Input: factory with stub gateway; request has X-Stub-Ref header
-        var factory = new PaymentGatewayFactory(new[] { new StubPaymentGateway() });
+        var stub = new StubPaymentGateway();
+        var factory = new PaymentGatewayFactory(new[] { stub }, new[] { stub });
         var context = new DefaultHttpContext();
         context.Request.Headers["X-Stub-Ref"] = "some-ref";
 
         // Act
-        var gateway = factory.ResolveByRequest(context.Request);
+        var result = factory.TryResolveWebhook(context.Request);
 
         // Assert – Expected: StubPaymentGateway identified via webhook signature
-        gateway.Should().BeOfType<StubPaymentGateway>();
+        result.Should().NotBeNull();
+        result!.Value.Verifier.Should().BeOfType<StubPaymentGateway>();
     }
 
     /// <summary>
@@ -339,17 +344,94 @@ public class PaymentGatewayFactoryTests
     /// <br/><b>Expected:</b> InvalidOperationException thrown (no gateway matched).
     /// </summary>
     [Fact]
-    public void ResolveByRequest_WithNoMatchingGateway_ThrowsInvalidOperationException()
+    public void TryResolveWebhook_WithNoMatchingGateway_ReturnsNull()
     {
         // Arrange – Input: factory with stub gateway; request has no X-Stub-Ref header
-        var factory = new PaymentGatewayFactory(new[] { new StubPaymentGateway() });
-        // No X-Stub-Ref header → VerifyWebhookSignature returns false
+        var stub = new StubPaymentGateway();
+        var factory = new PaymentGatewayFactory(new[] { stub }, new[] { stub });
+        // No X-Stub-Ref header → CanHandleRequest returns false
         var context = new DefaultHttpContext();
 
         // Act
-        Action act = () => factory.ResolveByRequest(context.Request);
+        var result = factory.TryResolveWebhook(context.Request);
 
-        // Assert – Expected: InvalidOperationException (no gateway claims this request)
-        act.Should().Throw<InvalidOperationException>();
+        // Assert – Expected: null when no gateway claims the request
+        result.Should().BeNull();
+    }
+}
+
+public class ClaimsPrincipalCurrentUserContextTests
+{
+    private readonly JwtService _jwt = JwtTestHelper.Create();
+
+    private static Mock<IHttpContextAccessor> MakeAccessor(System.Security.Claims.ClaimsPrincipal principal)
+    {
+        var ctx = new DefaultHttpContext { User = principal };
+        var accessor = new Mock<IHttpContextAccessor>();
+        accessor.Setup(a => a.HttpContext).Returns(ctx);
+        return accessor;
+    }
+
+    private static System.Security.Claims.ClaimsPrincipal PrincipalWithSub(Guid userId) =>
+        new(new System.Security.Claims.ClaimsIdentity(
+            new[] { new System.Security.Claims.Claim("sub", userId.ToString()) }));
+
+    private static System.Security.Claims.ClaimsPrincipal EmptyPrincipal() =>
+        new(new System.Security.Claims.ClaimsIdentity());
+
+    /// <summary>
+    /// Scenario: HTTP context has a valid "sub" claim containing a parseable Guid.
+    /// <br/><b>Input:</b> ClaimsPrincipal with a "sub" claim equal to a known userId.
+    /// <br/><b>Expected:</b> UserId returns that same Guid.
+    /// </summary>
+    [Fact]
+    public void UserId_WithValidSubClaim_ReturnsUserId()
+    {
+        // Arrange – Input: accessor with a valid sub claim
+        var userId = Guid.NewGuid();
+        var sut = new ClaimsPrincipalCurrentUserContext(
+            MakeAccessor(PrincipalWithSub(userId)).Object, _jwt);
+
+        // Act & Assert – Expected: UserId matches the claim value
+        sut.UserId.Should().Be(userId);
+    }
+
+    /// <summary>
+    /// Scenario: HTTP context has no "sub" claim (unauthenticated or invalid token).
+    /// <br/><b>Input:</b> ClaimsPrincipal with an empty ClaimsIdentity.
+    /// <br/><b>Expected:</b> UnauthorizedAccessException when UserId is accessed.
+    /// </summary>
+    [Fact]
+    public void UserId_WithMissingSubClaim_ThrowsUnauthorizedAccessException()
+    {
+        // Arrange – Input: accessor with empty claims (no sub claim)
+        var sut = new ClaimsPrincipalCurrentUserContext(
+            MakeAccessor(EmptyPrincipal()).Object, _jwt);
+
+        // Act & Assert – Expected: UnauthorizedAccessException on access
+        var act = () => sut.UserId;
+        act.Should().Throw<UnauthorizedAccessException>();
+    }
+
+    /// <summary>
+    /// Scenario: UserId is lazily evaluated — IHttpContextAccessor is not called
+    /// until UserId is first accessed.
+    /// <br/><b>Input:</b> accessor configured with a valid sub claim.
+    /// <br/><b>Expected:</b> HttpContext is accessed exactly once even when UserId is read twice.
+    /// </summary>
+    [Fact]
+    public void UserId_CalledTwice_AccessorHitOnlyOnce()
+    {
+        // Arrange – Input: accessor with valid sub claim
+        var userId = Guid.NewGuid();
+        var accessor = MakeAccessor(PrincipalWithSub(userId));
+        var sut = new ClaimsPrincipalCurrentUserContext(accessor.Object, _jwt);
+
+        // Act – read UserId twice
+        _ = sut.UserId;
+        _ = sut.UserId;
+
+        // Assert – Expected: HttpContext accessed once due to Lazy<Guid>
+        accessor.Verify(a => a.HttpContext, Times.Once);
     }
 }

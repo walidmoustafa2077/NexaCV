@@ -1,14 +1,17 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
 using NexaCV.Api.Settings;
 
 namespace NexaCV.Api.Services;
 
-public class StubAiService(IHttpClientFactory httpClientFactory, IOptions<AiServiceSettings> options) : IAiService
+public class StubAiService(IHttpClientFactory httpClientFactory, IOptions<AiServiceSettings> options)
+    : IResumeGenerationService, IResumeSectionRegenerationService
 {
     private readonly string _baseUrl = options.Value.BaseUrl.TrimEnd('/');
+    private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
     // ── Generate ──────────────────────────────────────────────
     /// <summary>
@@ -28,7 +31,7 @@ public class StubAiService(IHttpClientFactory httpClientFactory, IOptions<AiServ
                 var response = await client.PostAsJsonAsync($"{_baseUrl}/api/ai/generate", rawNode);
                 response.EnsureSuccessStatusCode();
 
-                var result = await response.Content.ReadFromJsonAsync<MockGenerateResponse>();
+                var result = await response.Content.ReadFromJsonAsync<MockGenerateResponse>(JsonOpts);
                 return new AiGenerationResult(
                     result?.FinalDataJson ?? rawDataJson,
                     AiAvailable: true,
@@ -62,7 +65,7 @@ public class StubAiService(IHttpClientFactory httpClientFactory, IOptions<AiServ
                 var response = await client.PostAsJsonAsync($"{_baseUrl}/api/ai/regenerate", context);
                 response.EnsureSuccessStatusCode();
 
-                var result = await response.Content.ReadFromJsonAsync<MockRegenerateResponse>();
+                var result = await response.Content.ReadFromJsonAsync<MockRegenerateResponse>(JsonOpts);
                 return new AiRegenerationResult(result?.UpdatedContent ?? context.UserPrompt, AiAvailable: true);
             }
             catch (HttpRequestException ex)
@@ -98,10 +101,12 @@ public class StubAiService(IHttpClientFactory httpClientFactory, IOptions<AiServ
 
     // ── Private DTOs for mock API responses ───────────────────
     private sealed record MockGenerateResponse(
-        string FinalDataJson,
-        bool AiAvailable,
-        List<AiJobTitleSuggestion>? JobTitleSuggestions,
-        List<string>? SkillSuggestions);
-    private sealed record MockRegenerateResponse(string UpdatedContent, bool AiAvailable);
+        [property: JsonPropertyName("finalDataJson")] string FinalDataJson,
+        [property: JsonPropertyName("aiAvailable")] bool AiAvailable,
+        [property: JsonPropertyName("jobTitleSuggestions")] List<AiJobTitleSuggestion>? JobTitleSuggestions,
+        [property: JsonPropertyName("skillSuggestions")] List<string>? SkillSuggestions);
+    private sealed record MockRegenerateResponse(
+        [property: JsonPropertyName("updatedContent")] string UpdatedContent,
+        [property: JsonPropertyName("aiAvailable")] bool AiAvailable);
 }
 

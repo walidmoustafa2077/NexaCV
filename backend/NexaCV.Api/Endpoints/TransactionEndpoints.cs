@@ -11,12 +11,10 @@ public static class TransactionEndpoints
 
         group.MapPost("/checkout", async (
             CheckoutRequest req,
-            JwtService jwt,
-            ITransactionService txService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            ITransactionService txService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var response = await txService.CheckoutAsync(req.ResumeId, userId, req.Currency);
+            var response = await txService.CheckoutAsync(req.ResumeId, currentUser.UserId, req.Currency);
             return Results.Ok(response);
         })
         .WithName("Checkout")
@@ -34,12 +32,10 @@ public static class TransactionEndpoints
 
         group.MapGet("/{id:guid}", async (
             Guid id,
-            JwtService jwt,
-            ITransactionService txService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            ITransactionService txService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var tx = await txService.GetByIdAsync(id, userId);
+            var tx = await txService.GetByIdAsync(id, currentUser.UserId);
             return Results.Ok(tx);
         })
         .WithName("GetTransactionById")

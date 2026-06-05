@@ -9,10 +9,9 @@ public static class UserEndpoints
     {
         var group = app.MapGroup("/api/users").WithTags("Users").RequireAuthorization();
 
-        group.MapGet("/me", async (JwtService jwt, IUserService userService, HttpContext ctx) =>
+        group.MapGet("/me", async (ICurrentUserContext currentUser, IUserService userService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var profile = await userService.GetProfileAsync(userId);
+            var profile = await userService.GetProfileAsync(currentUser.UserId);
             return Results.Ok(profile);
         })
         .WithName("GetMyProfile")
@@ -24,10 +23,9 @@ public static class UserEndpoints
         .Produces<UserProfileDto>(200)
         .ProducesProblem(401);
 
-        group.MapPut("/me", async (UpdateUserRequest req, JwtService jwt, IUserService userService, HttpContext ctx) =>
+        group.MapPut("/me", async (UpdateUserRequest req, ICurrentUserContext currentUser, IUserService userService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var profile = await userService.UpdateProfileAsync(userId, req);
+            var profile = await userService.UpdateProfileAsync(currentUser.UserId, req);
             return Results.Ok(profile);
         })
         .WithName("UpdateMyProfile")

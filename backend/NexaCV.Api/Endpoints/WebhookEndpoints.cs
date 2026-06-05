@@ -12,20 +12,14 @@ public static class WebhookEndpoints
             ITransactionService txService,
             HttpContext ctx) =>
         {
-            IPaymentGateway gateway;
-            try
-            {
-                gateway = gatewayFactory.ResolveByRequest(ctx.Request);
-            }
-            catch (InvalidOperationException)
-            {
+            // TryResolveWebhook probes CanHandleRequest (side-effect-free) before calling
+            // VerifyWebhookSignature exactly once on the matching gateway (LSP fix).
+            var resolved = gatewayFactory.TryResolveWebhook(ctx.Request);
+
+            if (resolved is null)
                 return Results.BadRequest(new { error = "No matching payment gateway for this webhook." });
-            }
 
-            if (!gateway.VerifyWebhookSignature(ctx.Request, out _, out var gatewayRefId))
-                return Results.BadRequest(new { error = "Invalid webhook signature." });
-
-            await txService.FulfillAsync(gatewayRefId);
+            await txService.FulfillAsync(resolved.Value.GatewayRefId);
 
             return Results.Ok();
         })

@@ -361,4 +361,59 @@ public class MappingExtensionsTests
         resume.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
         resume.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
     }
+
+    // ── Template.CapabilitiesJson → TemplateDto.Capabilities ─────────────────
+
+    /// <summary>
+    /// Scenario: Template with serialized CapabilitiesJson is mapped to a TemplateDto
+    /// with a populated Capabilities object.
+    /// <br/><b>Input:</b> Template { CapabilitiesJson = JSON with MaxExperienceItems=5, HasHobbySection=true }.
+    /// <br/><b>Expected:</b> TemplateDto.Capabilities is not null; MaxExperienceItems=5; HasHobbySection=true.
+    /// </summary>
+    [Fact]
+    public void ToDto_Template_WithCapabilitiesJson_DeserializesCapabilities()
+    {
+        // Arrange – Input: template with a serialized TemplateCapabilities JSON
+        var template = JwtTestHelper.MakeTemplate();
+        template.CapabilitiesJson = """
+            {
+              "maxExperienceItems": 5,
+              "hasHobbySection": true,
+              "hasProjectSection": false,
+              "hasLanguageSection": true,
+              "supportedSummaryTypes": ["SUMMARY"],
+              "supportedDescriptionFormats": ["BULLETED"],
+              "supportedSkillsLayouts": ["FLAT"]
+            }
+            """;
+
+        // Act
+        var dto = template.ToDto();
+
+        // Assert – Expected: Capabilities deserialized correctly
+        dto.Capabilities.Should().NotBeNull();
+        dto.Capabilities!.MaxExperienceItems.Should().Be(5);
+        dto.Capabilities.HasHobbySection.Should().BeTrue();
+        dto.Capabilities.HasProjectSection.Should().BeFalse();
+        dto.Capabilities.SupportedSummaryTypes.Should().ContainSingle().Which.Should().Be("SUMMARY");
+    }
+
+    /// <summary>
+    /// Scenario: Template without CapabilitiesJson maps to a TemplateDto with null Capabilities.
+    /// <br/><b>Input:</b> Template { CapabilitiesJson = null }.
+    /// <br/><b>Expected:</b> TemplateDto.Capabilities is null.
+    /// </summary>
+    [Fact]
+    public void ToDto_Template_WithNullCapabilitiesJson_CapabilitiesIsNull()
+    {
+        // Arrange – Input: template stub with no capabilities JSON
+        var template = JwtTestHelper.MakeTemplate();
+        template.CapabilitiesJson = null;
+
+        // Act
+        var dto = template.ToDto();
+
+        // Assert – Expected: Capabilities is null (no JSON to deserialize)
+        dto.Capabilities.Should().BeNull();
+    }
 }

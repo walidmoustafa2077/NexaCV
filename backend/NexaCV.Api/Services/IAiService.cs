@@ -1,7 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace NexaCV.Api.Services;
 
 /// <summary>A job title suggestion with a relevance score from 1 (low) to 10 (high).</summary>
-public record AiJobTitleSuggestion(string Title, int Score);
+public record AiJobTitleSuggestion(
+    [property: JsonPropertyName("title")] string Title,
+    [property: JsonPropertyName("score")] int Score);
 
 public record AiGenerationResult(
     string FinalDataJson,
@@ -26,8 +30,24 @@ public record AiRegenerateContext(
 
 public record AiRegenerationResult(string UpdatedContent, bool AiAvailable);
 
-public interface IAiService
+/// <summary>
+/// Responsible solely for generating a complete resume from raw wizard data.
+/// Segregated from <see cref="IResumeSectionRegenerationService"/> so that callers
+/// that only create resumes (e.g. <c>ResumeService</c>) do not depend on the
+/// regeneration contract (ISP).
+/// </summary>
+public interface IResumeGenerationService
 {
     Task<AiGenerationResult> GenerateAsync(string rawDataJson);
+}
+
+/// <summary>
+/// Responsible solely for regenerating a single section of an existing resume.
+/// Segregated from <see cref="IResumeGenerationService"/> so that callers that only
+/// regenerate sections (e.g. <c>RegenerationService</c>) do not depend on the
+/// full generation contract (ISP).
+/// </summary>
+public interface IResumeSectionRegenerationService
+{
     Task<AiRegenerationResult> RegenerateAsync(AiRegenerateContext context);
 }

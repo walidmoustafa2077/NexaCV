@@ -10,7 +10,7 @@ namespace NexaCV.Api.Services;
 /// with real data from the resume's finalData JSON.
 ///
 /// Token reference (scalars):
-///   {{FullName}}, {{FirstName}}, {{LastName}}, {{TargetTitle}},
+///   {{FullName}}, {{FirstName}}, {{MiddleName}}, {{LastName}}, {{TargetTitle}},
 ///   {{Email}}, {{Phone}}, {{Location}}, {{LinkedIn}}, {{Website}}, {{GitHub}}, {{Initials}},
 ///   {{Summary}}
 ///
@@ -45,6 +45,7 @@ public class TemplateRendererService : ITemplateRendererService
 
         // ── Scalar tokens ─────────────────────────────────────────────────────
         var firstName = Str(personal, "firstName");
+        var middleName = Str(personal, "middleName");
         var lastName = Str(personal, "lastName");
         var jobTitle = Str(personal, "jobTitle");
         if (string.IsNullOrEmpty(jobTitle)) jobTitle = Str(content, "targetJobTitle");
@@ -53,10 +54,17 @@ public class TemplateRendererService : ITemplateRendererService
                      + (lastName.Length > 0 ? lastName[0].ToString() : "");
         var siteUrl = Str(personal, "siteUrl");
 
+        // Build FullName with middle name if present
+        var fullNameParts = new[] { firstName, middleName, lastName }
+            .Where(p => !string.IsNullOrWhiteSpace(p))
+            .ToList();
+        var fullName = string.Join(" ", fullNameParts);
+
         var scalars = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            ["FullName"] = H($"{firstName} {lastName}".Trim()),
+            ["FullName"] = H(fullName),
             ["FirstName"] = H(firstName),
+            ["MiddleName"] = H(middleName),
             ["LastName"] = H(lastName),
             ["TargetTitle"] = H(jobTitle),
             ["Email"] = H(Str(personal, "email")),

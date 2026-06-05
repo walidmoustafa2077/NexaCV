@@ -58,10 +58,9 @@ public static class AuthEndpoints
         .ProducesProblem(401)
         .ProducesProblem(422);
 
-        group.MapPost("/logout", async (JwtService jwt, IAuthService authService, HttpContext ctx) =>
+        group.MapPost("/logout", async (ICurrentUserContext currentUser, IAuthService authService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            await authService.LogoutAsync(userId);
+            await authService.LogoutAsync(currentUser.UserId);
             return Results.NoContent();
         })
         .RequireAuthorization()

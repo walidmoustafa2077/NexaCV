@@ -146,18 +146,18 @@ public class CreateResumeRequestValidatorTests
     }
 
     /// <summary>
-    /// Scenario: Graduation date (EndDate) cannot be empty in an education entry.
-    /// <br/><b>Expected:</b> Validation error on the EndDate field.
+    /// Scenario: Graduation date (EndDate) is optional — a null EndDate means the
+    /// student is currently enrolled and must not produce a validation error.
+    /// <br/><b>Expected:</b> No validation error for the EndDate field.
     /// </summary>
     [Fact]
-    public void Education_GraduationDate_Empty_FailsValidation()
+    public void Education_GraduationDate_Empty_PassesValidation()
     {
         var req = ValidRequest();
         req.RawData.Content.Education[0].EndDate = null;
 
         var result = _validator.TestValidate(req);
-        result.ShouldHaveAnyValidationError();
-        result.Errors.Should().Contain(e => e.PropertyName.Contains("EndDate"));
+        result.Errors.Should().NotContain(e => e.PropertyName.Contains("EndDate"));
     }
 
     // ── Experience ────────────────────────────────────────────────────────────
@@ -229,11 +229,6 @@ public class CreateResumeRequestValidatorTests
         TemplateId = 1,
         RawData = new RawResumeData
         {
-            Settings = new RawResumeSettings
-            {
-                SummaryType = NexaCV.Api.Enums.SummaryType.Summary,
-                DescriptionFormat = NexaCV.Api.Enums.DescriptionFormat.Bulleted
-            },
             Content = new RawResumeContent
             {
                 Personal = new PersonalInfo

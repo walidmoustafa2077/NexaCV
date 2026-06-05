@@ -7,9 +7,11 @@ public class ResumeServiceTests
     private readonly Mock<IResumeRepository> _resumes = new();
     private readonly Mock<IDownloadRepository> _downloads = new();
     private readonly Mock<IResumeHistoryRepository> _history = new();
-    private readonly Mock<IAiService> _ai = new();
+    private readonly Mock<IResumeGenerationService> _ai = new();
+    private readonly Mock<ITemplateRendererService> _renderer = new();
+    private readonly Mock<ITemplateRepository> _templates = new();
 
-    private ResumeService CreateSut() => new(_resumes.Object, _downloads.Object, _history.Object, _ai.Object);
+    private ResumeService CreateSut() => new(_resumes.Object, _downloads.Object, _history.Object, _ai.Object, _renderer.Object, _templates.Object);
 
     private static void SetupHistory(Mock<IResumeHistoryRepository> history)
     {
@@ -45,6 +47,7 @@ public class ResumeServiceTests
         };
 
         _resumes.Setup(r => r.AddAsync(It.IsAny<Resume>())).Returns(Task.CompletedTask);
+        _templates.Setup(t => t.GetByIntIdAsync(template.Id)).ReturnsAsync(template);
         _ai.Setup(a => a.GenerateAsync(It.IsAny<string>()))
            .ReturnsAsync(new AiGenerationResult("{\"settings\":{},\"content\":{}}", AiAvailable: false));
         _resumes.Setup(r => r.UpdateAsync(It.IsAny<Resume>())).Returns(Task.CompletedTask);

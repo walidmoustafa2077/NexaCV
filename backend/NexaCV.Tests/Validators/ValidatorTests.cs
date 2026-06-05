@@ -295,3 +295,139 @@ public class LoginRequestValidatorTests
         _validator.TestValidate(req).ShouldHaveValidationErrorFor(x => x.Password);
     }
 }
+
+public class RegenerateRequestValidatorTests
+{
+    private readonly RegenerateRequestValidator _validator = new();
+
+    /// <summary>
+    /// Scenario: a fully valid regenerate request must pass all validation rules.
+    /// <br/><b>Input:</b> RegenerateRequest { SectionIdentifier="summary", UserPrompt="Be concise" }.
+    /// <br/><b>Expected:</b> No validation errors.
+    /// </summary>
+    [Fact]
+    public void ValidRequest_PassesValidation()
+    {
+        // Arrange – Input: all required fields provided
+        var req = new RegenerateRequest { SectionIdentifier = "summary", UserPrompt = "Be concise" };
+
+        // Act & Assert – Expected: no validation errors
+        _validator.TestValidate(req).ShouldNotHaveAnyValidationErrors();
+    }
+
+    /// <summary>
+    /// Scenario: SectionIdentifier cannot be empty.
+    /// <br/><b>Input:</b> RegenerateRequest { SectionIdentifier="", UserPrompt="Be concise" }.
+    /// <br/><b>Expected:</b> Validation error for SectionIdentifier.
+    /// </summary>
+    [Fact]
+    public void SectionIdentifier_Empty_FailsValidation()
+    {
+        // Arrange – Input: empty SectionIdentifier
+        var req = new RegenerateRequest { SectionIdentifier = string.Empty, UserPrompt = "Be concise" };
+
+        // Act & Assert – Expected: error on SectionIdentifier
+        _validator.TestValidate(req).ShouldHaveValidationErrorFor(x => x.SectionIdentifier);
+    }
+
+    /// <summary>
+    /// Scenario: UserPrompt cannot be empty.
+    /// <br/><b>Input:</b> RegenerateRequest { SectionIdentifier="summary", UserPrompt="" }.
+    /// <br/><b>Expected:</b> Validation error for UserPrompt.
+    /// </summary>
+    [Fact]
+    public void UserPrompt_Empty_FailsValidation()
+    {
+        // Arrange – Input: empty UserPrompt
+        var req = new RegenerateRequest { SectionIdentifier = "summary", UserPrompt = string.Empty };
+
+        // Act & Assert – Expected: error on UserPrompt
+        _validator.TestValidate(req).ShouldHaveValidationErrorFor(x => x.UserPrompt);
+    }
+
+    /// <summary>
+    /// Scenario: optional fields (TargetFormat, NewTitleSuggestion) may be null without error.
+    /// <br/><b>Input:</b> RegenerateRequest with both optional fields null.
+    /// <br/><b>Expected:</b> No validation errors.
+    /// </summary>
+    [Fact]
+    public void OptionalFields_Null_PassesValidation()
+    {
+        // Arrange – Input: required fields set, optional fields omitted
+        var req = new RegenerateRequest
+        {
+            SectionIdentifier = "experience",
+            UserPrompt = "Make it results-oriented",
+            TargetFormat = null,
+            NewTitleSuggestion = null
+        };
+
+        // Act & Assert – Expected: no errors (optional fields are truly optional)
+        _validator.TestValidate(req).ShouldNotHaveAnyValidationErrors();
+    }
+}
+
+public class RenameResumeRequestValidatorTests
+{
+    private readonly RenameResumeRequestValidator _validator = new();
+
+    /// <summary>
+    /// Scenario: a valid name within the limit must pass all rules.
+    /// <br/><b>Input:</b> RenameResumeRequest { Name="My Software Engineer Resume" }.
+    /// <br/><b>Expected:</b> No validation errors.
+    /// </summary>
+    [Fact]
+    public void ValidRequest_PassesValidation()
+    {
+        // Arrange – Input: valid name
+        var req = new RenameResumeRequest { Name = "My Software Engineer Resume" };
+
+        // Act & Assert – Expected: no validation errors
+        _validator.TestValidate(req).ShouldNotHaveAnyValidationErrors();
+    }
+
+    /// <summary>
+    /// Scenario: Name cannot be empty.
+    /// <br/><b>Input:</b> RenameResumeRequest { Name="" }.
+    /// <br/><b>Expected:</b> Validation error for Name.
+    /// </summary>
+    [Fact]
+    public void Name_Empty_FailsValidation()
+    {
+        // Arrange – Input: empty Name
+        var req = new RenameResumeRequest { Name = string.Empty };
+
+        // Act & Assert – Expected: error on Name
+        _validator.TestValidate(req).ShouldHaveValidationErrorFor(x => x.Name);
+    }
+
+    /// <summary>
+    /// Scenario: Name at exactly the maximum length (100 chars) must pass.
+    /// <br/><b>Input:</b> RenameResumeRequest { Name = 100 'A' characters }.
+    /// <br/><b>Expected:</b> No validation errors.
+    /// </summary>
+    [Fact]
+    public void Name_ExactlyMaxLength_PassesValidation()
+    {
+        // Arrange – Input: Name at the boundary (100 chars)
+        var req = new RenameResumeRequest { Name = new string('A', 100) };
+
+        // Act & Assert – Expected: no errors at boundary length
+        _validator.TestValidate(req).ShouldNotHaveAnyValidationErrors();
+    }
+
+    /// <summary>
+    /// Scenario: Name exceeding 100 characters must fail.
+    /// <br/><b>Input:</b> RenameResumeRequest { Name = 101 'A' characters }.
+    /// <br/><b>Expected:</b> Validation error for Name.
+    /// </summary>
+    [Fact]
+    public void Name_TooLong_FailsValidation()
+    {
+        // Arrange – Input: Name one character over the limit
+        var req = new RenameResumeRequest { Name = new string('A', 101) };
+
+        // Act & Assert – Expected: error on Name (max length exceeded)
+        _validator.TestValidate(req).ShouldHaveValidationErrorFor(x => x.Name);
+    }
+}

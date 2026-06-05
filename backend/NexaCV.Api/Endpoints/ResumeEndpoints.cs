@@ -13,13 +13,11 @@ public static class ResumeEndpoints
         group.MapPost("/", async (
             CreateResumeRequest req,
             IValidator<CreateResumeRequest> validator,
-            JwtService jwt,
-            IResumeService resumeService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            IResumeService resumeService) =>
         {
             await validator.ValidateAndThrowAsync(req);
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var result = await resumeService.CreateAsync(userId, req);
+            var result = await resumeService.CreateAsync(currentUser.UserId, req);
             return Results.Created($"/api/resumes/{result.Id}", result);
         })
         .WithName("CreateResume")
@@ -34,10 +32,9 @@ public static class ResumeEndpoints
         .ProducesProblem(404)
         .ProducesProblem(422);
 
-        group.MapGet("/", async (JwtService jwt, IResumeService resumeService, HttpContext ctx) =>
+        group.MapGet("/", async (ICurrentUserContext currentUser, IResumeService resumeService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var resumes = await resumeService.GetAllByUserAsync(userId);
+            var resumes = await resumeService.GetAllByUserAsync(currentUser.UserId);
             return Results.Ok(resumes);
         })
         .WithName("GetMyResumes")
@@ -51,12 +48,10 @@ public static class ResumeEndpoints
 
         group.MapGet("/{id:guid}", async (
             Guid id,
-            JwtService jwt,
-            IResumeService resumeService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            IResumeService resumeService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var resume = await resumeService.GetByIdAsync(id, userId);
+            var resume = await resumeService.GetByIdAsync(id, currentUser.UserId);
             return Results.Ok(resume);
         })
         .WithName("GetResumeById")
@@ -73,12 +68,10 @@ public static class ResumeEndpoints
         group.MapPut("/{id:guid}", async (
             Guid id,
             UpdateFinalDataRequest req,
-            JwtService jwt,
-            IResumeService resumeService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            IResumeService resumeService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var resume = await resumeService.UpdateFinalDataAsync(id, userId, req.FinalData.GetRawText());
+            var resume = await resumeService.UpdateFinalDataAsync(id, currentUser.UserId, req.FinalData.GetRawText());
             return Results.Ok(resume);
         })
         .WithName("UpdateResumeFinalData")
@@ -93,12 +86,10 @@ public static class ResumeEndpoints
 
         group.MapDelete("/{id:guid}", async (
             Guid id,
-            JwtService jwt,
-            IResumeService resumeService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            IResumeService resumeService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            await resumeService.DeleteAsync(id, userId);
+            await resumeService.DeleteAsync(id, currentUser.UserId);
             return Results.NoContent();
         })
         .WithName("DeleteResume")
@@ -116,14 +107,12 @@ public static class ResumeEndpoints
         group.MapPatch("/{id:guid}/name", async (
             Guid id,
             [Microsoft.AspNetCore.Mvc.FromBody] RenameResumeRequest req,
-            JwtService jwt,
-            IResumeService resumeService,
-            HttpContext ctx) =>
+            IValidator<RenameResumeRequest> validator,
+            ICurrentUserContext currentUser,
+            IResumeService resumeService) =>
         {
-            if (string.IsNullOrWhiteSpace(req.Name) || req.Name.Length > 100)
-                return Results.Problem("Name must be 1–100 characters.", statusCode: 422);
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var resume = await resumeService.RenameAsync(id, userId, req.Name);
+            await validator.ValidateAndThrowAsync(req);
+            var resume = await resumeService.RenameAsync(id, currentUser.UserId, req.Name);
             return Results.Ok(resume);
         })
         .WithName("RenameResume")
@@ -138,13 +127,11 @@ public static class ResumeEndpoints
             Guid id,
             RegenerateRequest req,
             IValidator<RegenerateRequest> validator,
-            JwtService jwt,
-            IRegenerationService regenService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            IRegenerationService regenService) =>
         {
             await validator.ValidateAndThrowAsync(req);
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var result = await regenService.RegenerateAsync(id, userId, req);
+            var result = await regenService.RegenerateAsync(id, currentUser.UserId, req);
             return Results.Ok(result);
         })
         .WithName("RegenerateSection")
@@ -164,16 +151,15 @@ public static class ResumeEndpoints
         group.MapGet("/{id:guid}/download", async (
             Guid id,
             string? format,
-            JwtService jwt,
+            ICurrentUserContext currentUser,
             IResumeService resumeService,
             HttpContext ctx) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
             var fmt = format ?? "pdf";
             var ip = ctx.Connection.RemoteIpAddress?.ToString();
 
             // Validate ownership and paid status — records download attempt
-            _ = await resumeService.GetForDownloadAsync(id, userId, fmt, ip);
+            _ = await resumeService.GetForDownloadAsync(id, currentUser.UserId, fmt, ip);
 
             // PDF/DOCX rendering deferred
             return Results.StatusCode(501);
@@ -194,12 +180,10 @@ public static class ResumeEndpoints
 
         group.MapGet("/{id:guid}/render", async (
             Guid id,
-            JwtService jwt,
-            IResumeService resumeService,
-            HttpContext ctx) =>
+            ICurrentUserContext currentUser,
+            IResumeService resumeService) =>
         {
-            var userId = jwt.GetUserIdFromClaims(ctx.User);
-            var html = await resumeService.RenderHtmlAsync(id, userId);
+            var html = await resumeService.RenderHtmlAsync(id, currentUser.UserId);
             return Results.Content(html, "text/html");
         })
         .WithName("RenderResumeHtml")

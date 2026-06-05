@@ -7,6 +7,11 @@ public class StubPaymentGateway : IPaymentGateway
     public string GatewayName => "Stub";
     public string SupportedCurrency => "*";
 
+    /// <inheritdoc/>
+    /// <remarks>Identifies stub webhook requests by the presence of the <c>X-Stub-Ref</c> header.</remarks>
+    public bool CanHandleRequest(HttpRequest request)
+        => request.Headers.ContainsKey("X-Stub-Ref");
+
     public Task<PaymentSessionResult> CreateSessionAsync(PaymentRequest request)
     {
         var url = $"https://stub.payment/session/{request.TransactionId}";

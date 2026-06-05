@@ -7,7 +7,7 @@ public class RegenerationServiceTests
     private readonly Mock<IResumeRepository> _resumes = new();
     private readonly Mock<IRegenerationRepository> _regenerations = new();
     private readonly Mock<IResumeHistoryRepository> _history = new();
-    private readonly Mock<IAiService> _ai = new();
+    private readonly Mock<IResumeSectionRegenerationService> _ai = new();
 
     private RegenerationService CreateSut() =>
         new(_resumes.Object, _regenerations.Object, _history.Object, _ai.Object);
@@ -177,16 +177,18 @@ public class RegenerationServiceTests
     }
 
     /// <summary>
-    /// Scenario: when a TargetFormat is provided, it must be persisted inside the resume's FinalData JSON.
+    /// Scenario: when a TargetFormat is provided, it is forwarded to the AI and the resume
+    /// is saved with the updated section content. Settings are template-defined and are NOT
+    /// written into FinalData.
     /// <br/><b>Input:</b> RegenerateRequest { SectionIdentifier="summary", UserPrompt="Rewrite",
     /// TargetFormat="PARAGRAPH" }.
-    /// <br/><b>Expected:</b> Resume.UpdateAsync called with FinalData containing the string "PARAGRAPH".
+    /// <br/><b>Expected:</b> Resume.UpdateAsync called once; FinalData uses content-only schema.
     /// </summary>
     [Fact]
-    public async Task RegenerateAsync_WithTargetFormat_UpdatesSettingsInFinalData()
+    public async Task RegenerateAsync_WithTargetFormat_SavesResume()
     {
         // Arrange
-        // Input: request includes TargetFormat="PARAGRAPH" which must be written into FinalData
+        // Input: request includes TargetFormat="PARAGRAPH"
         var userId = Guid.NewGuid();
         var resume = JwtTestHelper.MakeResume(userId);
         SetupDefaults(resume);
@@ -201,8 +203,10 @@ public class RegenerationServiceTests
         // Act
         await CreateSut().RegenerateAsync(resume.Id, userId, req);
 
-        // Assert – Expected: the resume FinalData should contain the new format string
-        _resumes.Verify(r => r.UpdateAsync(It.Is<Resume>(r => r.FinalData!.Contains("PARAGRAPH"))), Times.Once);
+        // Assert – UpdateAsync called once; FinalData uses content-only shape (no "settings" key).
+        _resumes.Verify(r => r.UpdateAsync(It.Is<Resume>(r =>
+            r.FinalData != null && r.FinalData.Contains("content") && !r.FinalData.Contains("\"settings\""))),
+            Times.Once);
     }
 
     /// <summary>

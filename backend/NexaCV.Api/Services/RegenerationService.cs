@@ -13,13 +13,13 @@ public class RegenerationService : IRegenerationService
     private readonly IResumeRepository _resumes;
     private readonly IRegenerationRepository _regenerations;
     private readonly IResumeHistoryRepository _history;
-    private readonly IAiService _ai;
+    private readonly IResumeSectionRegenerationService _ai;
 
     public RegenerationService(
         IResumeRepository resumes,
         IRegenerationRepository regenerations,
         IResumeHistoryRepository history,
-        IAiService ai)
+        IResumeSectionRegenerationService ai)
     {
         _resumes = resumes;
         _regenerations = regenerations;

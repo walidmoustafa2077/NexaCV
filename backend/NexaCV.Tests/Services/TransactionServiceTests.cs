@@ -8,7 +8,7 @@ public class TransactionServiceTests
     private readonly Mock<ITransactionRepository> _transactions = new();
     private readonly Mock<IRegenerationRepository> _regenerations = new();
     private readonly Mock<ICurrencyService> _currency = new();
-    private readonly PaymentGatewayFactory _gatewayFactory = new(new[] { new StubPaymentGateway() });
+    private readonly PaymentGatewayFactory _gatewayFactory = new(new[] { new StubPaymentGateway() }, new[] { new StubPaymentGateway() });
 
     private TransactionService CreateSut() =>
         new(_resumes.Object, _transactions.Object, _regenerations.Object, _currency.Object, _gatewayFactory);

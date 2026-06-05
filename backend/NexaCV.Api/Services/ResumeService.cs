@@ -12,25 +12,31 @@ public class ResumeService : IResumeService
     private readonly IResumeRepository _resumes;
     private readonly IDownloadRepository _downloads;
     private readonly IResumeHistoryRepository _history;
-    private readonly IAiService _ai;
+    private readonly IResumeGenerationService _ai;
     private readonly ITemplateRendererService _renderer;
+    private readonly ITemplateRepository _templates;
 
     public ResumeService(
         IResumeRepository resumes,
         IDownloadRepository downloads,
         IResumeHistoryRepository history,
-        IAiService ai,
-        ITemplateRendererService renderer)
+        IResumeGenerationService ai,
+        ITemplateRendererService renderer,
+        ITemplateRepository templates)
     {
         _resumes = resumes;
         _downloads = downloads;
         _history = history;
         _ai = ai;
         _renderer = renderer;
+        _templates = templates;
     }
 
     public async Task<ResumeDetailDto> CreateAsync(Guid userId, CreateResumeRequest req)
     {
+        _ = await _templates.GetByIntIdAsync(req.TemplateId)
+            ?? throw new KeyNotFoundException($"Template with id {req.TemplateId} not found.");
+
         var resume = req.ToResume(userId);
         await _resumes.AddAsync(resume);
 
