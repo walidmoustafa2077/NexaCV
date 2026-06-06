@@ -14,6 +14,7 @@ import MaterialIcon from "@/components/shared/MaterialIcon";
 const LANGUAGE_LEVELS = [
     "Native",
     "Fluent",
+    "Professional",
     "Advanced",
     "Intermediate",
     "Basic",

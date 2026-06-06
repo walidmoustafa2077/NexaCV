@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useWizardStore } from "@/store/wizardStore";
 import MaterialIcon from "@/components/shared/MaterialIcon";
+import ImageCropModal from "@/components/shared/ImageCropModal";
 
 // ─── Shared wizard header/progress ───────────────────────────────────────────
 
@@ -107,15 +108,40 @@ export default function Step1Page() {
     const { formData, updateFormData } = useWizardStore();
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const file = e.target.files?.[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-            updateFormData({ photoUrl: reader.result as string });
-        };
-        reader.readAsDataURL(file);
-    }
+    // ── Crop modal state ─────────────────────────────────────────
+    const [cropModalOpen, setCropModalOpen] = useState(false);
+    const [rawImageSrc, setRawImageSrc] = useState<string>("");
+
+    const handlePhotoChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                setRawImageSrc(reader.result as string);
+                setCropModalOpen(true);
+            };
+            reader.readAsDataURL(file);
+            // Reset file input so re-selecting the same file re-fires onChange
+            e.target.value = "";
+        },
+        [],
+    );
+
+    const handleCropComplete = useCallback(
+        (base64: string) => {
+            updateFormData({ photoUrl: base64 });
+            setCropModalOpen(false);
+            setRawImageSrc("");
+        },
+        [updateFormData],
+    );
+
+    const handleCloseCrop = useCallback(() => {
+        setCropModalOpen(false);
+        setRawImageSrc("");
+        if (fileInputRef.current) fileInputRef.current.value = "";
+    }, []);
 
     function removePhoto() {
         updateFormData({ photoUrl: "" });
@@ -204,7 +230,7 @@ export default function Step1Page() {
                         <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="relative w-20 h-20 rounded-xl border-2 border-dashed border-outline-variant bg-surface-container-low hover:border-primary hover:bg-primary/5 transition-all flex-shrink-0 overflow-hidden group"
+                            className="relative w-20 h-20 rounded-full border-2 border-solid border-outline-variant bg-surface-container-low hover:border-primary hover:bg-primary/5 transition-all flex-shrink-0 overflow-hidden group"
                         >
                             {formData.photoUrl ? (
                                 // eslint-disable-next-line @next/next/no-img-element
@@ -383,6 +409,14 @@ export default function Step1Page() {
                     </button>
                 </div>
             </form>
+
+            {/* Profile photo cropper modal */}
+            <ImageCropModal
+                imageSrc={rawImageSrc}
+                open={cropModalOpen}
+                onCropComplete={handleCropComplete}
+                onClose={handleCloseCrop}
+            />
         </div>
     );
 }

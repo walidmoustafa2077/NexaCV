@@ -11,6 +11,7 @@ public class DataSeeder
   private static readonly (string File, string Name, string Style, string Industry, decimal Price, bool Word)[] TemplateMetadata =
   [
       ("template_executive_corporate_centered_01.html", "Executive — Centered Classic", "Executive", "Corporate", 12.99m, true),
+      ("template_branded_expert_a4_1.html", "Branded Expert — Periwinkle A4", "Executive", "Corporate", 14.99m, true),
     ];
 
   public async Task SeedAsync(AppDbContext db)

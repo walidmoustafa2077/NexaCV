@@ -185,9 +185,21 @@ public static class ServiceExtensions
     {
         services.Configure<AiServiceSettings>(config.GetSection("AiService"));
         services.AddHttpClient();
-        services.AddScoped<StubAiService>();
-        services.AddScoped<IResumeGenerationService>(sp => sp.GetRequiredService<StubAiService>());
-        services.AddScoped<IResumeSectionRegenerationService>(sp => sp.GetRequiredService<StubAiService>());
+
+        var apiKey = config["AiService:ApiKey"];
+        if (!string.IsNullOrWhiteSpace(apiKey))
+        {
+            services.AddScoped<GeminiAiService>();
+            services.AddScoped<IResumeGenerationService>(sp => sp.GetRequiredService<GeminiAiService>());
+            services.AddScoped<IResumeSectionRegenerationService>(sp => sp.GetRequiredService<GeminiAiService>());
+        }
+        else
+        {
+            services.AddScoped<StubAiService>();
+            services.AddScoped<IResumeGenerationService>(sp => sp.GetRequiredService<StubAiService>());
+            services.AddScoped<IResumeSectionRegenerationService>(sp => sp.GetRequiredService<StubAiService>());
+        }
+
         return services;
     }
 

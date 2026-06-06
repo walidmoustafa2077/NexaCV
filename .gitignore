@@ -43,6 +43,7 @@ _ReSharper*/
 *.key
 *.pfx
 secrets.json
+appsettings.*.json
 
 # ============================================================
 # Node.js / Next.js (Frontend)

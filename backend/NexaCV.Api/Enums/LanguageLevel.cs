@@ -5,5 +5,7 @@ public enum LanguageLevel
     Native,
     Fluent,
     Professional,
+    Advanced,
+    Intermediate,
     Basic
 }

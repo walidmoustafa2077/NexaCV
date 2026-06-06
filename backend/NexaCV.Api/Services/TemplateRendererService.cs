@@ -12,7 +12,7 @@ namespace NexaCV.Api.Services;
 /// Token reference (scalars):
 ///   {{FullName}}, {{FirstName}}, {{MiddleName}}, {{LastName}}, {{TargetTitle}},
 ///   {{Email}}, {{Phone}}, {{Location}}, {{LinkedIn}}, {{Website}}, {{GitHub}}, {{Initials}},
-///   {{Summary}}
+///   {{Summary}}, {{PhotoUrl}}
 ///
 /// Loop sections (and inner tokens):
 ///   EXPERIENCE        → {{JobTitle}}, {{CompanyName}}, {{StartDate}}, {{EndDate}}
@@ -75,6 +75,7 @@ public class TemplateRendererService : ITemplateRendererService
             ["GitHub"] = H(siteUrl),
             ["Initials"] = H(initials),
             ["Summary"] = H(Str(content, "summary")),
+            ["PhotoUrl"] = Str(personal, "photoUrl"),
         };
 
         var html = htmlTemplate;
