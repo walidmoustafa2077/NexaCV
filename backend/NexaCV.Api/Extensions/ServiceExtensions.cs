@@ -20,7 +20,16 @@ namespace NexaCV.Api.Extensions;
 /// </summary>
 public static class ServiceExtensions
 {
-    /// <summary>Registers JWT bearer authentication and settings.</summary>
+    /// <summary>
+    /// Registers JWT bearer authentication and settings.
+    ///
+    /// Token Validation Architecture:
+    ///   Tokens are ISSUED by the standalone NexaCV.Identity service.
+    ///   This API validates them using the shared Jwt:Secret (symmetric key) and
+    ///   matching Jwt:Issuer / Jwt:Audience values from configuration.
+    ///   For production, replace the shared secret with asymmetric RSA keys
+    ///   and expose a JWKS endpoint on the Identity service.
+    /// </summary>
     public static IServiceCollection AddJwtAuthentication(
         this IServiceCollection services,
         IConfiguration config)
@@ -41,7 +50,9 @@ public static class ServiceExtensions
                     ValidIssuer = jwtSettings.Issuer,
                     ValidAudience = jwtSettings.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtSettings.Secret))
+                        Encoding.UTF8.GetBytes(jwtSettings.Secret)),
+                    // Tight clock-skew: tokens expire at 15 min, allow 1 min of drift.
+                    ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
 
@@ -145,12 +156,10 @@ public static class ServiceExtensions
     /// <summary>Registers all repository implementations against their typed interfaces.</summary>
     public static IServiceCollection AddAppRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IResumeRepository, ResumeRepository>();
         services.AddScoped<IRegenerationRepository, RegenerationRepository>();
         services.AddScoped<IResumeHistoryRepository, ResumeHistoryRepository>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
-        services.AddScoped<IUserMovementRepository, UserMovementRepository>();
         services.AddScoped<ITemplateRepository, TemplateRepository>();
         services.AddScoped<IDownloadRepository, DownloadRepository>();
         return services;
@@ -160,10 +169,9 @@ public static class ServiceExtensions
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddHttpContextAccessor();
-        services.AddSingleton<JwtService>();
         services.AddScoped<ICurrentUserContext, ClaimsPrincipalCurrentUserContext>();
-        services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IActivityLogger, ActivityLogger>();
+        services.AddScoped<IProfileService, ProfileService>();
         services.AddScoped<ITemplateService, TemplateService>();
         services.AddScoped<IResumeService, ResumeService>();
         services.AddScoped<ITemplateRendererService, TemplateRendererService>();

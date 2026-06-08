@@ -15,6 +15,7 @@ public class ResumeService : IResumeService
     private readonly IResumeGenerationService _ai;
     private readonly ITemplateRendererService _renderer;
     private readonly ITemplateRepository _templates;
+    private readonly IActivityLogger _activityLogger;
 
     public ResumeService(
         IResumeRepository resumes,
@@ -22,7 +23,8 @@ public class ResumeService : IResumeService
         IResumeHistoryRepository history,
         IResumeGenerationService ai,
         ITemplateRendererService renderer,
-        ITemplateRepository templates)
+        ITemplateRepository templates,
+        IActivityLogger activityLogger)
     {
         _resumes = resumes;
         _downloads = downloads;
@@ -30,6 +32,7 @@ public class ResumeService : IResumeService
         _ai = ai;
         _renderer = renderer;
         _templates = templates;
+        _activityLogger = activityLogger;
     }
 
     public async Task<ResumeDetailDto> CreateAsync(Guid userId, CreateResumeRequest req)
@@ -68,6 +71,8 @@ public class ResumeService : IResumeService
         // Re-fetch with Template navigation loaded for mapping
         var withTemplate = await _resumes.GetWithTemplateAsync(resume.Id)
             ?? resume;
+
+        await _activityLogger.LogAsync(userId, BusinessActionType.ResumeCreated);
 
         return withTemplate.ToDetailDto(result.AiAvailable, result.JobTitleSuggestions, result.SkillSuggestions);
     }
@@ -134,6 +139,8 @@ public class ResumeService : IResumeService
         });
         await _history.PruneAsync(resume.Id);
 
+        await _activityLogger.LogAsync(userId, BusinessActionType.ResumeUpdated);
+
         var jobTitles = resume.JobTitleSuggestionsJson is not null
             ? JsonSerializer.Deserialize<IReadOnlyList<AiJobTitleSuggestion>>(resume.JobTitleSuggestionsJson)
             : null;
@@ -159,6 +166,8 @@ public class ResumeService : IResumeService
         resume.UpdatedAt = DateTime.UtcNow;
 
         await _resumes.UpdateAsync(resume);
+
+        await _activityLogger.LogAsync(userId, BusinessActionType.ResumeDeleted);
     }
 
     public async Task<Resume> GetForDownloadAsync(Guid resumeId, Guid userId, string format, string? ipAddress)
@@ -183,6 +192,8 @@ public class ResumeService : IResumeService
             DownloadedAt = DateTime.UtcNow,
             IpAddress = ipAddress
         });
+
+        await _activityLogger.LogAsync(userId, BusinessActionType.ResumeDownloaded, ipAddress);
 
         return resume;
     }

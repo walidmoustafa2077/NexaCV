@@ -12,6 +12,12 @@ public class DataSeeder
   [
       ("template_executive_corporate_centered_01.html", "Executive — Centered Classic", "Executive", "Corporate", 12.99m, true),
       ("template_branded_expert_a4_1.html", "Branded Expert — Periwinkle A4", "Executive", "Corporate", 14.99m, true),
+      ("template_clean_tech_minimalist_03.html", "Clean Tech — Modern Minimalist", "ModernTech", "Technology", 11.99m, true),
+      ("template_editorial_serif_creative_04.html", "Editorial Serif — Creative Professional", "Creative", "Creative", 13.99m, false),
+      ("template_traditional_legal_finance_05.html", "Traditional Legal & Finance", "Executive", "Legal", 14.99m, true),
+      ("template_dark_accent_executive_06.html", "Dark Accent — Executive", "Executive", "Executive", 13.99m, true),
+      ("template_warm_contemporary_craft_07.html", "Warm Contemporary — Craft & Design", "Creative", "Design", 12.99m, false),
+      ("template_minimalist_academic_swiss_08.html", "Minimalist Academic — Swiss", "Minimalist", "Academic", 11.99m, false),
     ];
 
   public async Task SeedAsync(AppDbContext db)
@@ -64,21 +70,25 @@ public class DataSeeder
     db.Templates.AddRange(templates);
     await db.SaveChangesAsync();
 
-    // ── Default user ───────────────────────────────────────────────────────
-    if (!db.Users.Any())
+    // ── Default user profile ───────────────────────────────────────────────
+    // Fixed GUID matching the seed user in NexaCV.Identity's IdentitySeeder.
+    // This profile corresponds to `walidmoustafa1215@gmail.com` / `testuser`.
+    var seedUserId = Guid.Parse("A1B2C3D4-E5F6-7890-ABCD-EF1234567890");
+
+    if (!await db.Profiles.AnyAsync())
     {
-      var defaultUser = new User
+      var seedProfile = new NexaCvUserProfile
       {
-        Id = Guid.NewGuid(),
-        FirstName = "Test",
-        LastName = "User",
+        UserId = seedUserId,
+        FirstName = "Walid",
+        LastName = "Mostafa",
         Username = "testuser",
         Email = "walidmoustafa1215@gmail.com",
-        PasswordHash = BCrypt.Net.BCrypt.HashPassword("nMxT..iwREcYJ2Y"),
+        DateOfBirth = new DateOnly(1995, 6, 15),
         CreatedAt = utcNow
       };
 
-      db.Users.Add(defaultUser);
+      db.Profiles.Add(seedProfile);
       await db.SaveChangesAsync();
 
       // ── Seed resume for default user ───────────────────────────────────
@@ -173,7 +183,7 @@ public class DataSeeder
       var seededResume = new Resume
       {
         Id = Guid.NewGuid(),
-        UserId = defaultUser.Id,
+        UserId = seedUserId,
         TemplateId = seededTemplate.Id,
         Status = ResumeStatus.Completed,
         Name = "Senior Backend Engineer — Walid Mostafa",
@@ -349,7 +359,7 @@ public class DataSeeder
       var seededResume2 = new Resume
       {
         Id = Guid.NewGuid(),
-        UserId = defaultUser.Id,
+        UserId = seedUserId,
         TemplateId = seededTemplate.Id,
         Status = ResumeStatus.Completed,
         Name = "Full-Stack Engineer — Sara Hassan",
@@ -495,7 +505,7 @@ public class DataSeeder
       var seededResume3 = new Resume
       {
         Id = Guid.NewGuid(),
-        UserId = defaultUser.Id,
+        UserId = seedUserId,
         TemplateId = seededTemplate.Id,
         Status = ResumeStatus.Completed,
         Name = ".NET Software Engineer — Walid Mostafa",
@@ -696,7 +706,7 @@ public class DataSeeder
       var seededResume4 = new Resume
       {
         Id = Guid.NewGuid(),
-        UserId = defaultUser.Id,
+        UserId = seedUserId,
         TemplateId = seededTemplate.Id,
         Status = ResumeStatus.Completed,
         Name = "Senior Product Manager — Ahmed Khalil",
@@ -898,7 +908,7 @@ public class DataSeeder
       var seededResume5 = new Resume
       {
         Id = Guid.NewGuid(),
-        UserId = defaultUser.Id,
+        UserId = seedUserId,
         TemplateId = seededTemplate.Id,
         Status = ResumeStatus.Completed,
         Name = "Design Lead — Noor Ahmed",
@@ -1099,7 +1109,7 @@ public class DataSeeder
       var seededResume6 = new Resume
       {
         Id = Guid.NewGuid(),
-        UserId = defaultUser.Id,
+        UserId = seedUserId,
         TemplateId = seededTemplate.Id,
         Status = ResumeStatus.Completed,
         Name = "QA Automation Engineer — Mona Ibrahim",

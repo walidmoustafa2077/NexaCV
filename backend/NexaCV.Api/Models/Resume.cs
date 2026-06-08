@@ -18,7 +18,7 @@ public class Resume
     public bool IsDeleted { get; set; }
     public bool AiAvailable { get; set; }
 
-    public User User { get; set; } = null!;
+    public NexaCvUserProfile User { get; set; } = null!;
     public Template Template { get; set; } = null!;
     public ICollection<Regeneration> Regenerations { get; set; } = new List<Regeneration>();
     public Transaction? Transaction { get; set; }

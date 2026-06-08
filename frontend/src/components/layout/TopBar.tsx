@@ -5,13 +5,13 @@ import { useRouter, usePathname } from "next/navigation";
 import MaterialIcon from "@/components/shared/MaterialIcon";
 import { useAuthStore } from "@/store/authStore";
 import { useUser } from "@/hooks/useUser";
-import { logout } from "@/lib/api/auth";
+import { revokeToken } from "@/lib/api/auth";
 import { toast } from "sonner";
 
 export default function TopBar() {
     const pathname = usePathname();
     const router = useRouter();
-    const { clearAuth } = useAuthStore();
+    const { clearAuth, refreshToken } = useAuthStore();
     const { data: user } = useUser();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -28,7 +28,9 @@ export default function TopBar() {
 
     async function handleLogout() {
         setDropdownOpen(false);
-        try { await logout(); } catch { /* best-effort */ }
+        try {
+            if (refreshToken) await revokeToken({ refreshToken });
+        } catch { /* best-effort */ }
         clearAuth();
         router.push("/login");
         toast.success("You have been logged out.");
@@ -57,7 +59,7 @@ export default function TopBar() {
                 ? "Search templates..."
                 : "Search...";
 
-    const initials = user
+    const initials = user && user.firstName && user.lastName
         ? `${user.firstName[0]}${user.lastName[0]}`.toUpperCase()
         : "U";
 

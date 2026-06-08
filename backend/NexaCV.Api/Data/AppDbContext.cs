@@ -8,8 +8,8 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<User> Users => Set<User>();
-    public DbSet<UserMovement> UserMovements => Set<UserMovement>();
+    public DbSet<NexaCvUserProfile> Profiles => Set<NexaCvUserProfile>();
+    public DbSet<ActivityLog> ActivityLogs => Set<ActivityLog>();
     public DbSet<Template> Templates => Set<Template>();
     public DbSet<Resume> Resumes => Set<Resume>();
     public DbSet<Regeneration> Regenerations => Set<Regeneration>();
@@ -21,11 +21,31 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Enum → string conversions
-        modelBuilder.Entity<UserMovement>()
-            .Property(u => u.ActionType)
+        // ── NexaCvUserProfile ─────────────────────────────────────
+        modelBuilder.Entity<NexaCvUserProfile>(e =>
+        {
+            e.HasKey(p => p.UserId);
+            e.Property(p => p.UserId).ValueGeneratedNever(); // assigned from JWT claims
+
+            e.HasMany(p => p.Resumes)
+             .WithOne(r => r.User)
+             .HasForeignKey(r => r.UserId);
+
+            e.HasMany(p => p.Transactions)
+             .WithOne(t => t.User)
+             .HasForeignKey(t => t.UserId);
+
+            e.HasMany(p => p.ActivityLogs)
+             .WithOne(a => a.User)
+             .HasForeignKey(a => a.UserId);
+        });
+
+        // ── ActivityLog ───────────────────────────────────────────
+        modelBuilder.Entity<ActivityLog>()
+            .Property(a => a.ActionType)
             .HasConversion<string>();
 
+        // ── Enum → string conversions ─────────────────────────────
         modelBuilder.Entity<Resume>()
             .Property(r => r.Status)
             .HasConversion<string>();
@@ -34,12 +54,12 @@ public class AppDbContext : DbContext
             .Property(t => t.PaymentStatus)
             .HasConversion<string>();
 
-        // Template PK auto-increment
+        // ── Template PK auto-increment ────────────────────────────
         modelBuilder.Entity<Template>()
             .Property(t => t.Id)
             .ValueGeneratedOnAdd();
 
-        // Global soft-delete filter on Resume
+        // ── Global soft-delete filter on Resume ───────────────────
         modelBuilder.Entity<Resume>()
             .HasQueryFilter(r => !r.IsDeleted);
 
@@ -52,13 +72,5 @@ public class AppDbContext : DbContext
             .HasQueryFilter(h => !h.Resume.IsDeleted);
         modelBuilder.Entity<Transaction>()
             .HasQueryFilter(t => !t.Resume.IsDeleted);
-
-        // --- Commented out for PostgreSQL swap ---
-        // modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-        // modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
-        // modelBuilder.Entity<Resume>().HasIndex(r => r.UserId);
-        // modelBuilder.Entity<Regeneration>().HasIndex(r => new { r.ResumeId, r.SectionIdentifier });
-        // modelBuilder.Entity<Resume>().Property(r => r.RawData).HasColumnType("jsonb");
-        // modelBuilder.Entity<Resume>().Property(r => r.FinalData).HasColumnType("jsonb");
     }
 }

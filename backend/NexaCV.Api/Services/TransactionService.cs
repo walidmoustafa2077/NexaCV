@@ -14,19 +14,22 @@ public class TransactionService : ITransactionService
     private readonly IRegenerationRepository _regenerations;
     private readonly ICurrencyService _currency;
     private readonly PaymentGatewayFactory _gatewayFactory;
+    private readonly IActivityLogger _activityLogger;
 
     public TransactionService(
         IResumeRepository resumes,
         ITransactionRepository transactions,
         IRegenerationRepository regenerations,
         ICurrencyService currency,
-        PaymentGatewayFactory gatewayFactory)
+        PaymentGatewayFactory gatewayFactory,
+        IActivityLogger activityLogger)
     {
         _resumes = resumes;
         _transactions = transactions;
         _regenerations = regenerations;
         _currency = currency;
         _gatewayFactory = gatewayFactory;
+        _activityLogger = activityLogger;
     }
 
     public async Task<CheckoutResponse> CheckoutAsync(Guid resumeId, Guid userId, string currency)
@@ -109,5 +112,7 @@ public class TransactionService : ITransactionService
         resume.Status = ResumeStatus.Paid;
         resume.UpdatedAt = DateTime.UtcNow;
         await _resumes.UpdateAsync(resume);
+
+        await _activityLogger.LogAsync(tx.UserId, BusinessActionType.TransactionCompleted);
     }
 }

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{FullName}} — Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* ============================================================
+       TEMPLATE: Editorial Serif / Creative Professional — 04 of 08
+       Category : Agency Lead / Executive / Creative
+       Layout   : Single-column, asymmetric left-offset section headers
+       Palette  : Deep Forest #1b4332 · Terracotta #9e2a2b · Warm Cream #faf9f6
+       Fonts    : Playfair Display (serif headings) · DM Sans (sans-serif body)
+       ATS-safe : semantic HTML, no decorative text hiding
+    ============================================================ */
+
+        :root {
+            /* --- Page --- */
+            --page-width: 210mm;
+            --page-height: 297mm;
+            --page-padding-v: 12mm;
+            --page-padding-h: 14mm;
+
+            /* --- Palette (Forest / Terracotta / Cream) --- */
+            --color-primary: #1b4332;
+            --color-primary-container: #2d6a4f;
+            --color-primary-light: #d8f3dc;
+            --color-accent: #9e2a2b;
+            --color-accent-light: #c75b5c;
+            --color-text: #1a1a1a;
+            --color-text-body: #3a3a3a;
+            --color-text-muted: #5c5c5c;
+            --color-text-light: #8a8a8a;
+            --color-border: #e6ddd0;
+            --color-border-light: #f0eae0;
+            --color-bg: #faf9f6;
+            --color-bg-surface: #f5f2ec;
+            --color-bg-tag: #e8e0d4;
+            --color-bg-screen: #e8e8e8;
+            --color-gold: #c9a84c;
+
+            /* --- Typography --- */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-size-base: 9.5pt;
+            --font-size-name: 30pt;
+            --font-size-subtitle: 11pt;
+            --font-size-section: 10.5pt;
+            --font-size-body: 8.5pt;
+            --font-size-small: 8pt;
+            --font-size-tiny: 7.5pt;
+            --font-size-cert: 9pt;
+            --font-size-icon: 8pt;
+            --font-size-bullet-marker: 9pt;
+            --font-size-sep: 10pt;
+
+            /* --- Line heights --- */
+            --line-height-name: 1.1;
+            --line-height-body: 1.65;
+            --line-height-summary: 1.75;
+            --line-height-bullet: 1.6;
+            --line-height-achievement: 1.55;
+            --line-height-bullet-marker: 1.4;
+
+            /* --- Letter spacing --- */
+            --letter-spacing-name: 0.5px;
+            --letter-spacing-subtitle: 1px;
+            --letter-spacing-section: 2px;
+
+            /* --- Spacing (optimizer-controllable) --- */
+            --space-section: 5.5mm;
+            --space-item: 4.5mm;
+            --space-item-edu: 3.5mm;
+            --space-item-cert: 2.5mm;
+            --space-item-achievement: 2.5mm;
+
+            /* --- Header --- */
+            --header-pb: 6mm;
+            --header-mb: 6mm;
+            --header-rule-margin: 3mm;
+            --header-title-mt: 2mm;
+            --header-diamond-size: 6px;
+            --header-diamond-margin: 3mm;
+            --header-contact-gap: 3mm;
+
+            /* --- Section title --- */
+            --section-title-border-width: 1.5px;
+            --section-title-pb: 1.5mm;
+            --section-title-mb: 4mm;
+
+            /* --- Experience --- */
+            --exp-header-gap: 4mm;
+            --exp-header-mb: 0.5mm;
+            --exp-company-mb: 2mm;
+            --exp-bullet-pl: 4mm;
+            --exp-bullet-mb: 1mm;
+
+            /* --- Education --- */
+            --edu-gap: 4mm;
+            --edu-institution-mt: 0.5mm;
+
+            /* --- Certifications --- */
+            --cert-gap: 4mm;
+
+            /* --- Skills --- */
+            --skills-col-gap: 3mm 10mm;
+            --skill-title-mb: 1mm;
+
+            /* --- Achievements --- */
+            --achievement-gap: 3mm;
+            --achievement-icon-mt: 2px;
+            --achievement-icon-width: 14px;
+
+            /* --- Contact (Header) --- */
+            --contact-item-gap: 2mm;
+            --contact-sep-margin: 3mm;
+
+            /* --- Volunteer / Other --- */
+            --vol-description-mt: 1mm;
+            --other-list-gap: 3mm 8mm;
+
+            /* --- Borders & shadows --- */
+            --border-exp-item: 1px solid var(--color-border-light);
+            --shadow-page-screen: 0 4px 24px rgba(0,0,0,.18);
+            --shadow-page-screen-margin: 24px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: var(--font-size-base); }
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* ============================================================
+       LAYOUT OPTIMIZER — .nexa-page container
+    ============================================================ */
+        .nexa-page {
+            width: var(--page-width);
+            height: var(--page-height);
+            overflow: hidden;
+            padding: var(--page-padding-v) var(--page-padding-h);
+            box-sizing: border-box;
+            position: relative;
+            background: var(--color-bg);
+        }
+        .nexa-page-content { display: block; width: 100%; }
+
+        /* ============================================================
+       HEADER — Centered serif with gold divider rules
+    ============================================================ */
+        header {
+            text-align: center;
+            padding-bottom: var(--header-pb);
+            margin-bottom: var(--header-mb);
+            position: relative;
+        }
+
+        .header-name {
+            font-family: var(--font-heading);
+            font-size: var(--font-size-name);
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: var(--letter-spacing-name);
+            line-height: var(--line-height-name);
+        }
+
+        .header-title {
+            font-size: var(--font-size-subtitle);
+            color: var(--color-accent);
+            font-weight: 400;
+            font-style: italic;
+            margin-top: var(--header-title-mt);
+            font-family: var(--font-heading);
+        }
+
+        .header-rule {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin: var(--header-rule-margin) auto;
+            width: 70%;
+        }
+
+        .header-rule::before,
+        .header-rule::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-gold);
+        }
+
+        .header-rule-diamond {
+            width: var(--header-diamond-size);
+            height: var(--header-diamond-size);
+            background: var(--color-gold);
+            transform: rotate(45deg);
+            margin: 0 var(--header-diamond-margin);
+            flex-shrink: 0;
+        }
+
+        .header-contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--header-contact-gap);
+            font-size: var(--font-size-small);
+            color: var(--color-text-muted);
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5mm;
+        }
+
+        .contact-item i {
+            color: var(--color-accent);
+            font-size: var(--font-size-tiny);
+        }
+
+        .contact-sep {
+            color: var(--color-gold);
+            font-size: var(--font-size-sep);
+            font-weight: 300;
+        }
+
+        /* ============================================================
+       SECTION TITLES — Asymmetric left-offset with gold rule
+    ============================================================ */
+        section {
+            margin-bottom: var(--space-section);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: var(--font-size-section);
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-section);
+            padding: 0 0 var(--section-title-pb) 5mm;
+            margin-bottom: var(--section-title-mb);
+            border-bottom: var(--section-title-border-width) solid var(--color-gold);
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            bottom: 2px;
+            width: 2.5px;
+            background: var(--color-accent);
+        }
+
+        .skill-category-title:empty { display: none; }
+
+        /* ============================================================
+       PROFESSIONAL SUMMARY
+    ============================================================ */
+        .summary-text {
+            font-size: var(--font-size-body);
+            color: var(--color-text-body);
+            line-height: var(--line-height-summary);
+            font-weight: 400;
+        }
+
+        /* ============================================================
+       EXPERIENCE
+    ============================================================ */
+        .exp-item {
+            margin-bottom: var(--space-item);
+            padding-bottom: var(--space-item);
+            border-bottom: var(--border-exp-item);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--exp-header-gap);
+            margin-bottom: var(--exp-header-mb);
+        }
+
+        .exp-title {
+            font-family: var(--font-heading);
+            font-size: var(--font-size-subtitle);
+            font-weight: 600;
+            color: var(--color-primary);
+            flex: 1;
+        }
+
+        .exp-date {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+            font-weight: 400;
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .exp-company {
+            font-size: var(--font-size-body);
+            color: var(--color-accent);
+            font-weight: 500;
+            margin-bottom: var(--exp-company-mb);
+        }
+
+        .exp-bullets { list-style: none; }
+
+        .exp-bullets li {
+            font-size: var(--font-size-small);
+            color: var(--color-text-body);
+            padding-left: var(--exp-bullet-pl);
+            margin-bottom: var(--exp-bullet-mb);
+            position: relative;
+            line-height: var(--line-height-bullet);
+            font-weight: 400;
+        }
+
+        .exp-bullets li::before {
+            content: '\2014';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-size: var(--font-size-bullet-marker);
+            line-height: var(--line-height-bullet-marker);
+        }
+
+        /* ============================================================
+       EDUCATION
+    ============================================================ */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--edu-gap);
+            margin-bottom: var(--space-item-edu);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .edu-item:last-child { margin-bottom: 0; }
+
+        .edu-degree {
+            font-family: var(--font-heading);
+            font-size: var(--font-size-subtitle);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .edu-institution {
+            font-size: var(--font-size-body);
+            color: var(--color-text-muted);
+            margin-top: var(--edu-institution-mt);
+            font-weight: 400;
+        }
+
+        .edu-date {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+       CERTIFICATIONS & COURSES
+    ============================================================ */
+        .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-item-cert);
+        }
+
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: var(--cert-gap);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .cert-item:last-child { margin-bottom: 0; }
+
+        .cert-name {
+            font-family: var(--font-heading);
+            font-size: var(--font-size-cert);
+            font-weight: 600;
+            color: var(--color-text);
+            flex: 1;
+        }
+
+        .cert-issuer {
+            font-size: var(--font-size-small);
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        .cert-year {
+            font-size: var(--font-size-small);
+            color: var(--color-text-light);
+            font-style: italic;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+       CORE COMPETENCIES
+    ============================================================ */
+        .skills-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--skills-col-gap);
+        }
+
+        .skill-category-title {
+            font-size: var(--font-size-body);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--skill-title-mb);
+            font-family: var(--font-heading);
+        }
+
+        .skill-category-items {
+            font-size: var(--font-size-small);
+            color: var(--color-text-muted);
+            line-height: var(--line-height-body);
+            font-weight: 400;
+        }
+
+        /* ============================================================
+       KEY ACHIEVEMENTS
+    ============================================================ */
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--achievement-gap);
+            margin-bottom: var(--space-item-achievement);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .achievement-item:last-child { margin-bottom: 0; }
+
+        .achievement-item i {
+            color: var(--color-gold);
+            font-size: var(--font-size-icon);
+            margin-top: var(--achievement-icon-mt);
+            flex-shrink: 0;
+            width: var(--achievement-icon-width);
+            text-align: center;
+        }
+
+        .achievement-text {
+            font-size: var(--font-size-small);
+            color: var(--color-text-body);
+            line-height: var(--line-height-achievement);
+            font-weight: 400;
+        }
+
+        /* ============================================================
+       VOLUNTEER WORK
+    ============================================================ */
+        .vol-description {
+            font-size: var(--font-size-body);
+            color: var(--color-text-muted);
+            margin-top: var(--vol-description-mt);
+        }
+
+        /* ============================================================
+       ADDITIONAL INFORMATION
+    ============================================================ */
+        .other-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--other-list-gap);
+        }
+
+        .other-item {
+            font-size: var(--font-size-body);
+            color: var(--color-text-body);
+        }
+
+        /* ============================================================
+       PRINT
+    ============================================================ */
+        @media print {
+            html { font-size: var(--font-size-base); }
+            html, body {
+                width: var(--page-width) !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .nexa-page {
+                page-break-after: always;
+                break-after: page;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .nexa-page:last-child {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            @page { size: A4; margin: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nexa-page">
+        <div class="nexa-page-content">
+
+            <!-- ================================================
+       HEADER — Serif, centered, gold divider
+    ================================================ -->
+            <header>
+                <h1 class="header-name">{{FullName}}</h1>
+                <div class="header-title">{{TargetTitle}}</div>
+                <div class="header-rule">
+                    <div class="header-rule-diamond"></div>
+                </div>
+                <div class="header-contact">
+                    <span class="contact-item"><i class="fa-solid fa-envelope"></i>{{Email}}</span>
+                    <span class="contact-sep">|</span>
+                    <span class="contact-item"><i class="fa-solid fa-phone"></i>{{Phone}}</span>
+                    <span class="contact-sep">|</span>
+                    <span class="contact-item"><i class="fa-solid fa-location-dot"></i>{{Location}}</span>
+                    <!-- IF:LinkedIn -->
+                    <span class="contact-sep">|</span>
+                    <span class="contact-item"><i class="fa-brands fa-linkedin"></i>{{LinkedIn}}</span>
+                    <!-- /IF:LinkedIn -->
+                </div>
+            </header>
+
+            <!-- ================================================
+       PROFESSIONAL SUMMARY
+    ================================================ -->
+            <section>
+                <h2 class="section-title">Professional Profile</h2>
+                <p class="summary-text">{{Summary}}</p>
+            </section>
+
+            <!-- ================================================
+       PROFESSIONAL EXPERIENCE
+    ================================================ -->
+            <section data-splittable="true">
+                <h2 class="section-title">Experience</h2>
+
+                <!-- START EXPERIENCE -->
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3 class="exp-title">{{JobTitle}}</h3>
+                        <span class="exp-date">{{StartDate}} – {{EndDate}}</span>
+                    </div>
+                    <div class="exp-company">{{CompanyLocation}}</div>
+                    <ul class="exp-bullets">
+                        <!-- START RESPONSIBILITIES -->
+                        <li>{{Responsibility}}</li>
+                        <!-- END RESPONSIBILITIES -->
+                    </ul>
+                </div>
+                <!-- END EXPERIENCE -->
+
+            </section>
+
+            <!-- ================================================
+       KEY ACHIEVEMENTS
+    ================================================ -->
+            <!-- SKIP_IF_EMPTY:ACHIEVEMENTS -->
+            <section>
+                <h2 class="section-title">Key Achievements</h2>
+
+                <!-- START ACHIEVEMENTS -->
+                <div class="achievement-item">
+                    <i class="fa-solid fa-trophy"></i>
+                    <p class="achievement-text">{{Achievement}}</p>
+                </div>
+                <!-- END ACHIEVEMENTS -->
+
+            </section>
+            <!-- /SKIP_IF_EMPTY:ACHIEVEMENTS -->
+
+            <!-- ================================================
+       EDUCATION
+    ================================================ -->
+            <section>
+                <h2 class="section-title">Education</h2>
+
+                <!-- START EDUCATION -->
+                <div class="edu-item">
+                    <div>
+                        <div class="edu-degree">{{Degree}} &mdash; {{FieldOfStudy}}</div>
+                        <div class="edu-institution">{{Institution}}, {{EducationLocation}}</div>
+                    </div>
+                    <span class="edu-date">{{GradYear}}</span>
+                </div>
+                <!-- END EDUCATION -->
+
+            </section>
+
+            <!-- ================================================
+       CERTIFICATIONS & COURSES
+    ================================================ -->
+            <!-- SKIP_IF_EMPTY:CERTIFICATIONS -->
+            <section>
+                <h2 class="section-title">Certifications</h2>
+                <div class="cert-list">
+                    <!-- START CERTIFICATIONS -->
+                    <div class="cert-item">
+                        <div>
+                            <div class="cert-name">{{CertName}}</div>
+                            <div class="cert-issuer">{{CertIssuer}}</div>
+                        </div>
+                        <span class="cert-year">{{CertYear}}</span>
+                    </div>
+                    <!-- END CERTIFICATIONS -->
+                </div>
+            </section>
+            <!-- /SKIP_IF_EMPTY:CERTIFICATIONS -->
+
+            <!-- ================================================
+       CORE COMPETENCIES
+    ================================================ -->
+            <section>
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="skills-two-col">
+
+                    <!-- START SKILL_CATEGORIES -->
+                    <div class="skill-category">
+                        <div class="skill-category-title">{{CategoryName}}</div>
+                        <div class="skill-category-items">{{CategorySkills}}</div>
+                    </div>
+                    <!-- END SKILL_CATEGORIES -->
+
+                </div>
+            </section>
+
+            <!-- ================================================
+       PROJECTS
+    ================================================ -->
+            <!-- SKIP_IF_EMPTY:PROJECTS -->
+            <section data-splittable="true">
+                <h2 class="section-title">Projects</h2>
+
+                <!-- START PROJECTS -->
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3 class="exp-title">{{ProjectName}}</h3>
+                        <span class="exp-date">{{ProjectDate}}</span>
+                    </div>
+                    <div class="exp-company">{{ProjectTechStack}}</div>
+                    <!-- START PROJECT_BULLETS -->
+                    <ul class="exp-bullets">
+                        <li>{{ProjectBullet}}</li>
+                    </ul>
+                    <!-- END PROJECT_BULLETS -->
+                </div>
+                <!-- END PROJECTS -->
+
+            </section>
+            <!-- /SKIP_IF_EMPTY:PROJECTS -->
+
+            <!-- ================================================
+       LANGUAGES
+    ================================================ -->
+            <!-- SKIP_IF_EMPTY:LANGUAGES -->
+            <section>
+                <h2 class="section-title">Languages</h2>
+                <div class="skills-two-col">
+                    <!-- START LANGUAGES -->
+                    <div class="skill-category">
+                        <div class="skill-category-title">{{Language}}</div>
+                        <div class="skill-category-items">{{LanguageLevel}}</div>
+                    </div>
+                    <!-- END LANGUAGES -->
+                </div>
+            </section>
+            <!-- /SKIP_IF_EMPTY:LANGUAGES -->
+
+            <!-- ================================================
+       VOLUNTEER WORK
+    ================================================ -->
+            <!-- SKIP_IF_EMPTY:VOLUNTEERS -->
+            <section data-splittable="true">
+                <h2 class="section-title">Volunteer Work</h2>
+
+                <!-- START VOLUNTEERS -->
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <h3 class="exp-title">{{VolunteerRole}}</h3>
+                        <span class="exp-date">{{VolunteerDate}}</span>
+                    </div>
+                    <div class="exp-company">{{VolunteerOrganization}}</div>
+                    <p class="vol-description">{{VolunteerDescription}}</p>
+                </div>
+                <!-- END VOLUNTEERS -->
+
+            </section>
+            <!-- /SKIP_IF_EMPTY:VOLUNTEERS -->
+
+            <!-- ================================================
+       ADDITIONAL INFORMATION
+    ================================================ -->
+            <!-- SKIP_IF_EMPTY:OTHER -->
+            <section>
+                <h2 class="section-title">Additional Information</h2>
+                <div class="other-list">
+                    <!-- START OTHER -->
+                    <div class="other-item"><strong>{{OtherLabel}}:</strong> {{OtherValue}}</div>
+                    <!-- END OTHER -->
+                </div>
+            </section>
+            <!-- /SKIP_IF_EMPTY:OTHER -->
+
+        </div>
+    </div>
+
+    <!-- ================================================
+       LAYOUT OPTIMIZER — Auto-paginate & fine-tune spacing
+    ================================================ -->
+    <script src="resumeLayoutOptimizer.js"></script>
+
+</body>
+
+</html>

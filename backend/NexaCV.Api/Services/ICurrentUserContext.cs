@@ -1,7 +1,7 @@
 namespace NexaCV.Api.Services;
 
 /// <summary>
-/// Abstracts the current authenticated user's identity away from the concrete <c>JwtService</c>.
+/// Abstracts the current authenticated user's identity away from the concrete JWT claims principal.
 /// Endpoints depend on this interface rather than the JWT implementation class (DIP).
 /// </summary>
 public interface ICurrentUserContext

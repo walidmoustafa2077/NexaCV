@@ -18,6 +18,6 @@ public class Transaction
     public DateTime CreatedAt { get; set; }
     public DateTime? CompletedAt { get; set; }
 
-    public User User { get; set; } = null!;
+    public NexaCvUserProfile User { get; set; } = null!;
     public Resume Resume { get; set; } = null!;
 }

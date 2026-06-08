@@ -70,7 +70,7 @@ const MOCK: Record<string, string> = {
     Interest: "Open Source",
 
     // Additional tokens for branded expert template
-    PhotoUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='250' viewBox='0 0 200 250'%3E%3Crect width='200' height='250' fill='%23e2e2e9'/%3E%3Ccircle cx='100' cy='90' r='45' fill='%233a59a1'/%3E%3Cpath d='M30 250 Q100 180 170 250Z' fill='%233a59a1'/%3E%3C/svg%3E",
+    PhotoUrl: "/uifaces-human-avatar.jpg",
     VolunteerRole: "Tech Mentor",
     VolunteerDate: "2019 – Present",
     VolunteerOrganization: "CodeFirst Youth",
@@ -130,8 +130,17 @@ function substituteTokens(html: string, data: Record<string, string> = MOCK): st
  * Takes a raw template HTML string (with `{{Placeholder}}` tokens and
  * `<!-- START/END SECTION -->` loop markers) and returns a fully rendered
  * HTML string using the built-in mock resume data.
+ *
+ * Also strips `<script src="resumeLayoutOptimizer.js">` tags — the backend
+ * injects this script inline during full rendering, but in the client-side
+ * preview it would cause a 404 since the file isn't served by Next.js.
  */
 export function renderTemplatePreview(rawHtml: string): string {
-    const withLoops = collapseLoops(rawHtml);
-    return substituteTokens(withLoops);
+    let html = collapseLoops(rawHtml);
+    // Remove script tags that reference the backend-only layout optimizer
+    html = html.replace(
+        /<script[^>]*src=["']resumeLayoutOptimizer\.js["'][^>]*><\/script>\s*/gi,
+        '',
+    );
+    return substituteTokens(html);
 }

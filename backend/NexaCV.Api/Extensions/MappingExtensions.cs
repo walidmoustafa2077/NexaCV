@@ -1,10 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using NexaCV.Api.DTOs.Auth;
+using NexaCV.Api.DTOs.Profile;
 using NexaCV.Api.DTOs.Resumes;
 using NexaCV.Api.DTOs.Templates;
 using NexaCV.Api.DTOs.Transactions;
-using NexaCV.Api.DTOs.Users;
 using NexaCV.Api.Enums;
 using NexaCV.Api.Models;
 using NexaCV.Api.Services;
@@ -20,16 +19,19 @@ public static class MappingExtensions
         Converters = { new JsonStringEnumConverter() }
     };
 
-    // User → UserProfileDto
-    public static UserProfileDto ToProfileDto(this User user) => new()
+    // NexaCvUserProfile → ProfileDto
+    public static ProfileDto ToProfileDto(this NexaCvUserProfile profile) => new()
     {
-        Id = user.Id,
-        FirstName = user.FirstName,
-        LastName = user.LastName,
-        Username = user.Username,
-        Email = user.Email,
-        CreatedAt = user.CreatedAt,
-        LastLogin = user.LastLogin
+        UserId = profile.UserId,
+        FirstName = profile.FirstName,
+        LastName = profile.LastName,
+        Username = profile.Username,
+        Email = profile.Email,
+        DateOfBirth = profile.DateOfBirth,
+        Bio = profile.Bio,
+        IsPremiumUser = profile.IsPremiumUser,
+        CreatedAt = profile.CreatedAt,
+        LastLogin = profile.LastLogin
     };
 
     private static readonly JsonSerializerOptions CaseInsensitiveOptions = new()
@@ -129,19 +131,6 @@ public static class MappingExtensions
         PaymentStatus = tx.PaymentStatus.ToString().ToUpperInvariant(),
         CreatedAt = tx.CreatedAt,
         CompletedAt = tx.CompletedAt
-    };
-
-    // RegisterRequest → User
-    public static User ToUser(this RegisterRequest req, string passwordHash) => new()
-    {
-        Id = Guid.NewGuid(),
-        FirstName = req.FirstName,
-        LastName = req.LastName,
-        Username = req.Username,
-        Email = req.Email,
-        PasswordHash = passwordHash,
-        DateOfBirth = req.DateOfBirth,
-        CreatedAt = DateTime.UtcNow
     };
 
     // CreateResumeRequest → Resume

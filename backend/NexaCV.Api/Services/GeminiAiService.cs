@@ -79,7 +79,7 @@ public sealed class GeminiAiService(
         {
             var formatInstruction = context.TargetFormat?.ToLowerInvariant() switch
             {
-                "Bulleted" => "Format the output as bullet points, starting each point with a dash (-).",
+                "bulleted" => "Format the output as bullet points, starting each point with a dash (-).",
                 "paragraph" => "Format the output as a single flowing paragraph.",
                 _ => ""
             };

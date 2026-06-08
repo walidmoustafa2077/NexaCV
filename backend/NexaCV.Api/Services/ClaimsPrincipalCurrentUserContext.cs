@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.Http;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace NexaCV.Api.Services;
 
@@ -12,11 +13,21 @@ public class ClaimsPrincipalCurrentUserContext : ICurrentUserContext
 {
     private readonly Lazy<Guid> _userId;
 
-    public ClaimsPrincipalCurrentUserContext(IHttpContextAccessor accessor, JwtService jwt)
+    public ClaimsPrincipalCurrentUserContext(IHttpContextAccessor accessor)
     {
-        _userId = new Lazy<Guid>(
-            () => jwt.GetUserIdFromClaims(accessor.HttpContext!.User));
+        _userId = new Lazy<Guid>(() => GetUserIdFromClaims(accessor.HttpContext!.User));
     }
 
     public Guid UserId => _userId.Value;
+
+    private static Guid GetUserIdFromClaims(ClaimsPrincipal principal)
+    {
+        var sub = principal.FindFirstValue(JwtRegisteredClaimNames.Sub)
+                  ?? principal.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (sub is null || !Guid.TryParse(sub, out var userId))
+            throw new UnauthorizedAccessException("Invalid or missing user identity claim.");
+
+        return userId;
+    }
 }

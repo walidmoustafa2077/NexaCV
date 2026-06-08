@@ -3,14 +3,13 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { getTemplates } from "@/lib/api/templates";
 import { getResume, getResumes } from "@/lib/api/resumes";
 import { queryKeys } from "@/lib/query/keys";
 import { useWizardStore } from "@/store/wizardStore";
 import MaterialIcon from "@/components/shared/MaterialIcon";
 import { renderTemplatePreview } from "@/lib/templatePreview";
-import type { TemplateDto } from "@/types/api.types";
+import type { ResumeDetailDto, TemplateDto } from "@/types/api.types";
 
 // ─── Category filters ─────────────────────────────────────────────────────────
 
@@ -183,6 +182,9 @@ export default function TemplatePage() {
     const { updateFormData, reset, initFromResume } = useWizardStore();
     const [activeFilter, setActiveFilter] = useState<Category>("All");
     const [isNavigating, setIsNavigating] = useState(false);
+    const [pendingTemplateId, setPendingTemplateId] = useState<number | null>(null);
+    const [showFreshStartModal, setShowFreshStartModal] = useState(false);
+    const [lastResumeDetail, setLastResumeDetail] = useState<ResumeDetailDto | null>(null);
 
     const { data: templates, isLoading } = useQuery({
         queryKey: queryKeys.templates(),
@@ -192,8 +194,8 @@ export default function TemplatePage() {
     async function handleSelect(templateId: number) {
         if (isNavigating) return;
         setIsNavigating(true);
+        setPendingTemplateId(templateId);
         try {
-            // Fetch the user's resumes to find the most recently created one
             const resumes = await getResumes();
             const sorted = [...resumes].sort(
                 (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
@@ -201,35 +203,40 @@ export default function TemplatePage() {
             const lastResume = sorted[0];
 
             if (lastResume) {
-                // Fetch full detail and pre-populate the wizard
                 const detail = await getResume(lastResume.id);
-                initFromResume(detail);
-                // Override: new resume — clear identity fields, set the chosen template
-                updateFormData({ templateId, createdResumeId: null, resumeName: "" });
-                toast.info("Pre-filled from your last resume", {
-                    description: "Your previous information was loaded. Edit anything you like.",
-                    action: {
-                        label: "Start fresh",
-                        onClick: () => {
-                            reset();
-                            updateFormData({ templateId });
-                        },
-                    },
-                    duration: 8000,
-                });
+                setLastResumeDetail(detail);
+                setShowFreshStartModal(true);
             } else {
                 reset();
                 updateFormData({ templateId });
+                router.push("/create/steps/1");
             }
-            router.push("/create/steps/1");
         } catch {
-            // If fetching previous resumes fails, fall back to a clean wizard
             reset();
             updateFormData({ templateId });
             router.push("/create/steps/1");
         } finally {
             setIsNavigating(false);
         }
+    }
+
+    function handleStartFresh() {
+        setShowFreshStartModal(false);
+        reset();
+        updateFormData({ templateId: pendingTemplateId });
+        router.push("/create/steps/1");
+    }
+
+    function handleContinueFromLast() {
+        setShowFreshStartModal(false);
+        if (lastResumeDetail) {
+            initFromResume(lastResumeDetail);
+            updateFormData({ templateId: pendingTemplateId, createdResumeId: null, resumeName: "" });
+        } else {
+            reset();
+            updateFormData({ templateId: pendingTemplateId });
+        }
+        router.push("/create/steps/1");
     }
 
     const filtered = (templates ?? []).filter((t) => matchesFilter(t, activeFilter));
@@ -259,6 +266,58 @@ export default function TemplatePage() {
                     </div>
                 </div>
             )}
+
+            {/* Fresh-start confirmation modal */}
+            {showFreshStartModal && (
+                <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-in zoom-in-95 duration-200">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                                <MaterialIcon name="auto_awesome" size={20} className="text-amber-600" />
+                            </div>
+                            <div>
+                                <h2 className="text-lg font-bold text-slate-900">You have an existing resume</h2>
+                                <p className="text-sm text-slate-500">Choose how to start</p>
+                            </div>
+                        </div>
+                        <p className="text-sm text-slate-600 mb-6">
+                            Would you like to pre-fill the form with your last resume&apos;s information,
+                            or start completely fresh?
+                        </p>
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={handleContinueFromLast}
+                                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:border-primary/40 transition-all text-left group"
+                            >
+                                <MaterialIcon name="file_copy" size={20} className="text-primary shrink-0" />
+                                <div>
+                                    <span className="font-semibold text-sm text-slate-800 group-hover:text-primary transition-colors">
+                                        Continue from last resume
+                                    </span>
+                                    <p className="text-xs text-slate-500 mt-0.5">
+                                        Pre-fill with your previous information — edit as needed
+                                    </p>
+                                </div>
+                            </button>
+                            <button
+                                onClick={handleStartFresh}
+                                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all text-left group"
+                            >
+                                <MaterialIcon name="refresh" size={20} className="text-slate-500 shrink-0" />
+                                <div>
+                                    <span className="font-semibold text-sm text-slate-800 group-hover:text-primary transition-colors">
+                                        Start fresh
+                                    </span>
+                                    <p className="text-xs text-slate-500 mt-0.5">
+                                        Clear all fields and begin from scratch
+                                    </p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                 <div>

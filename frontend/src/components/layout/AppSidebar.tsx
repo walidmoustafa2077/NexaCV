@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import MaterialIcon from "@/components/shared/MaterialIcon";
 import { useAuthStore } from "@/store/authStore";
-import { logout } from "@/lib/api/auth";
+import { revokeToken } from "@/lib/api/auth";
 import { toast } from "sonner";
 
 const navItems = [
@@ -21,7 +21,8 @@ export default function AppSidebar() {
 
     async function handleLogout() {
         try {
-            await logout();
+            const token = useAuthStore.getState().refreshToken;
+            if (token) await revokeToken({ refreshToken: token });
         } catch {
             // Best-effort logout — always clear local state
         }

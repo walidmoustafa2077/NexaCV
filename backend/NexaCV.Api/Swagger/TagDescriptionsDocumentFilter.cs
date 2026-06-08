@@ -10,16 +10,9 @@ public class TagDescriptionsDocumentFilter : IDocumentFilter
 {
     private static readonly Dictionary<string, string> TagDescriptions = new()
     {
-        ["Auth"] =
-            "Handles user registration, login and logout. " +
-            "Register returns a JWT on success. " +
-            "Login validates credentials, updates `lastLogin`, logs the movement, and returns a JWT. " +
-            "Logout logs a LOGOUT movement — no token blacklisting (stateless JWT).",
-
-        ["Users"] =
+        ["Profile"] =
             "Manage the profile of the currently authenticated user. " +
-            "All routes require a valid `Bearer` token. " +
-            "Changing a password additionally logs a `PASSWORD_UPDATED` movement.",
+            "All routes require a valid `Bearer` token.",
 
         ["Templates"] =
             "Read-only catalogue of resume templates available for purchase. " +
