@@ -6,9 +6,10 @@ import { setTokenProvider } from "@/lib/api/client";
 
 interface AuthState {
     token: string | null;
+    refreshToken: string | null;
     userId: string | null;
     isAuthenticated: boolean;
-    setAuth: (token: string, userId: string) => void;
+    setAuth: (accessToken: string, refreshToken: string, userId: string) => void;
     clearAuth: () => void;
 }
 
@@ -16,15 +17,16 @@ export const useAuthStore = create<AuthState>()(
     persist(
         (set) => ({
             token: null,
+            refreshToken: null,
             userId: null,
             isAuthenticated: false,
 
-            setAuth: (token, userId) => {
-                set({ token, userId, isAuthenticated: true });
+            setAuth: (accessToken, refreshToken, userId) => {
+                set({ token: accessToken, refreshToken, userId, isAuthenticated: true });
             },
 
             clearAuth: () => {
-                set({ token: null, userId: null, isAuthenticated: false });
+                set({ token: null, refreshToken: null, userId: null, isAuthenticated: false });
             },
         }),
         {
@@ -32,6 +34,7 @@ export const useAuthStore = create<AuthState>()(
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 token: state.token,
+                refreshToken: state.refreshToken,
                 userId: state.userId,
                 isAuthenticated: state.isAuthenticated,
             }),

@@ -32,7 +32,7 @@ export default function LoginForm() {
     async function onSubmit(values: LoginFormValues) {
         try {
             const res = await login(values);
-            setAuth(res.token, res.userId);
+            setAuth(res.accessToken, res.refreshToken, res.userId);
             router.push("/dashboard");
         } catch (err) {
             if (err instanceof ValidationError) {
@@ -48,26 +48,26 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
-            {/* Email */}
+            {/* Email or Username */}
             <div className="flex flex-col gap-1.5">
                 <Label
-                    htmlFor="email"
+                    htmlFor="emailOrUsername"
                     className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider"
                 >
-                    Email Address
+                    Email or Username
                 </Label>
                 <Input
-                    id="email"
-                    type="email"
-                    placeholder="name@company.com"
-                    autoComplete="email"
+                    id="emailOrUsername"
+                    type="text"
+                    placeholder="name@company.com or username"
+                    autoComplete="username"
                     className="bg-surface-container-lowest"
-                    aria-invalid={!!errors.email}
-                    {...register("email")}
+                    aria-invalid={!!errors.emailOrUsername}
+                    {...register("emailOrUsername")}
                 />
-                {errors.email && (
+                {errors.emailOrUsername && (
                     <p className="text-xs text-error" role="alert">
-                        {errors.email.message}
+                        {errors.emailOrUsername.message}
                     </p>
                 )}
             </div>

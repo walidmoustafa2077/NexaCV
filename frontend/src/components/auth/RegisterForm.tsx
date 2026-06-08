@@ -52,18 +52,14 @@ export default function RegisterForm() {
 
     async function onSubmit(values: RegisterFormValues) {
         try {
-            const res = await registerUser({
-                ...values,
-                dateOfBirth: values.dateOfBirth || undefined,
-            });
-            setAuth(res.token, res.userId);
+            const res = await registerUser(values);
+            setAuth(res.accessToken, res.refreshToken, res.userId);
             router.push("/create/template");
         } catch (err) {
             if (err instanceof ValidationError) {
                 err.details?.forEach((d) => {
                     const field = d.field.split(".").pop()?.toLowerCase();
                     if (field === "email") setError("email", { message: d.message });
-                    else if (field === "username") setError("username", { message: d.message });
                     else if (field === "password") setError("password", { message: d.message });
                     else toast.error(d.message);
                 });
@@ -110,27 +106,6 @@ export default function RegisterForm() {
                 </div>
             </div>
 
-            {/* Username */}
-            <div className="flex flex-col gap-1.5">
-                <Label htmlFor="username" className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                    Username
-                </Label>
-                <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
-                        <MaterialIcon name="alternate_email" size={18} className="text-outline leading-none" />
-                    </span>
-                    <Input
-                        id="username"
-                        placeholder="johndoe"
-                        autoComplete="username"
-                        className="bg-surface-container-lowest pl-9"
-                        aria-invalid={!!errors.username}
-                        {...register("username")}
-                    />
-                </div>
-                {errors.username && <p className="text-xs text-error" role="alert">{errors.username.message}</p>}
-            </div>
-
             {/* Email */}
             <div className="flex flex-col gap-1.5">
                 <Label htmlFor="reg-email" className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
@@ -151,6 +126,28 @@ export default function RegisterForm() {
                     />
                 </div>
                 {errors.email && <p className="text-xs text-error" role="alert">{errors.email.message}</p>}
+            </div>
+
+            {/* Username */}
+            <div className="flex flex-col gap-1.5">
+                <Label htmlFor="username" className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
+                    Username
+                </Label>
+                <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+                        <MaterialIcon name="person" size={18} className="text-outline leading-none" />
+                    </span>
+                    <Input
+                        id="username"
+                        type="text"
+                        placeholder="john_doe"
+                        autoComplete="username"
+                        className="bg-surface-container-lowest pl-9"
+                        aria-invalid={!!errors.username}
+                        {...register("username")}
+                    />
+                </div>
+                {errors.username && <p className="text-xs text-error" role="alert">{errors.username.message}</p>}
             </div>
 
             {/* Password */}
@@ -210,20 +207,6 @@ export default function RegisterForm() {
                     </div>
                 )}
                 {errors.password && <p className="text-xs text-error" role="alert">{errors.password.message}</p>}
-            </div>
-
-            {/* Date of Birth (optional) */}
-            <div className="flex flex-col gap-1.5">
-                <Label htmlFor="dateOfBirth" className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">
-                    Date of Birth <span className="normal-case font-normal opacity-60">(optional)</span>
-                </Label>
-                <Input
-                    id="dateOfBirth"
-                    type="date"
-                    autoComplete="bday"
-                    className="bg-surface-container-lowest"
-                    {...register("dateOfBirth")}
-                />
             </div>
 
             <Button

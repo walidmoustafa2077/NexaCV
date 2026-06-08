@@ -9,21 +9,31 @@ import type {
 export interface RegisterRequest {
     firstName: string;
     lastName: string;
-    username: string;
     email: string;
+    username: string;
     password: string;
-    dateOfBirth?: string; // YYYY-MM-DD
+    dateOfBirth?: string | null;
 }
 
 export interface LoginRequest {
-    email: string;
+    emailOrUsername: string;
     password: string;
 }
 
 export interface AuthResponse {
     userId: string;
-    token: string;
-    expiresIn: number;
+    accessToken: string;
+    accessTokenExpiresAt: string;
+    refreshToken: string;
+    refreshTokenExpiresAt: string;
+}
+
+export interface TokenRequest {
+    refreshToken: string;
+}
+
+export interface RevokeTokenRequest {
+    refreshToken: string;
 }
 
 // ─── Users ─────────────────────────────────────────────────────────────────
