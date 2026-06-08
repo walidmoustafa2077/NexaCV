@@ -63,8 +63,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // ── Map Endpoints ─────────────────────────────────────────────
-AuthEndpoints.Map(app);
-UserEndpoints.Map(app);
+ProfileEndpoints.Map(app);
 TemplateEndpoints.Map(app);
 ResumeEndpoints.Map(app);
 TransactionEndpoints.Map(app);
